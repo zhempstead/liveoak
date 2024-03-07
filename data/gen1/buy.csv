@@ -1,0 +1,23 @@
+GAME,POKEMON_OR_ITEM
+CORE,Abra
+CORE,Porygon
+CORE,Fire Stone
+CORE,Leaf Stone
+CORE,Thunder Stone
+CORE,Water Stone
+"RED,BLUE",Clefairy
+"RED,BLUE",Dratini
+"RED,YELLOW",Scyther
+"BLUE,YELLOW",Pinsir
+RED,Nidorina
+BLUE,Nidorino
+YELLOW,Vulpix
+YELLOW,Wigglytuff
+STADIUM,Bulbasaur
+STADIUM,Charmander
+STADIUM,Squirtle
+STADIUM,Hitmonlee
+STADIUM,Hitmonchan
+STADIUM,Eevee
+STADIUM,Omanyte
+STADIUM,Kabuto

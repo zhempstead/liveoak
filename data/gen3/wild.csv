@@ -1,0 +1,260 @@
+SPECIES,RUBY,SAPPHIRE,EMERALD,FIRERED,LEAFGREEN
+Caterpie,,,,inf,inf
+Metapod,,,,inf,inf
+Weedle,,,,inf,inf
+Kakuna,,,,inf,inf
+Pidgey,,,,inf,inf
+Pidgeotto,,,,inf,inf
+Rattata,,,,inf,inf
+Raticate,,,,inf,inf
+Spearow,,,,inf,inf
+Fearow,,,,inf,inf
+Ekans,,,,inf,
+Arbok,,,,inf,
+Pikachu,inf,inf,inf,inf,inf
+Sandshrew,inf,inf,inf,,inf
+Sandslash,,,,,inf
+Nidoran F,,,,inf,inf
+Nidorina,,,,inf,inf
+Nidoran M,,,,inf,inf
+Nidorino,,,,inf,inf
+Clefairy,,,,inf,inf
+Vulpix,inf,inf,inf,,inf
+Jigglypuff,inf,inf,inf,inf,inf
+Zubat,inf,inf,inf,inf,inf
+Golbat,inf,inf,inf,inf,inf
+Oddish,inf,inf,inf,inf,
+Gloom,inf,inf,inf,inf,
+Paras,,,,inf,inf
+Parasect,,,,inf,inf
+Venonat,,,,inf,inf
+Venomoth,,,,inf,inf
+Diglett,,,,inf,inf
+Dugtrio,,,,inf,inf
+Meowth,,,,inf,inf
+Persian,,,,inf,inf
+Psyduck,inf,inf,inf,inf,
+Golduck,inf,inf,inf,inf,
+Mankey,,,,inf,inf
+Primeape,,,,inf,inf
+Growlithe,,,,inf,
+Poliwag,,,,inf,inf
+Poliwhirl,,,,inf,inf
+Abra,inf,inf,inf,inf,inf
+Kadabra,,,,inf,inf
+Machop,inf,inf,inf,inf,inf
+Machoke,,,,inf,inf
+Bellsprout,,,,,inf
+Weepinbell,,,,,inf
+Tentacool,inf,inf,inf,inf,inf
+Tentacruel,inf,inf,inf,inf,inf
+Geodude,inf,inf,inf,inf,inf
+Graveler,inf,inf,inf,inf,inf
+Ponyta,,,,inf,inf
+Rapidash,,,,inf,inf
+Slowpoke,,,,,inf
+Slowbro,,,,,inf
+Magnemite,inf,inf,inf,inf,inf
+Magneton,inf,inf,inf,inf,inf
+Doduo,inf,inf,inf,inf,inf
+Dodrio,inf,inf,inf,,
+Seel,,,,inf,inf
+Dewgong,,,,inf,inf
+Grimer,inf,inf,inf,inf,inf
+Muk,,,,,inf
+Shellder,,,,inf,
+Gastly,,,,inf,inf
+Haunter,,,,inf,inf
+Onix,,,,inf,inf
+Drowzee,,,,inf,inf
+Hypno,,,,inf,inf
+Krabby,,,,inf,inf
+Kingler,,,,,inf
+Voltorb,inf,inf,inf,inf,inf
+Electrode,inf,inf,inf,inf,inf
+Exeggcute,,,,inf,inf
+Cubone,,,,inf,inf
+Marowak,,,,inf,inf
+Koffing,inf,inf,inf,inf,inf
+Weezing,,,,inf,
+Rhyhorn,inf,inf,inf,inf,inf
+Chansey,,,,inf,inf
+Tangela,,,,inf,inf
+Kangaskhan,,,,inf,inf
+Horsea,inf,inf,inf,inf,inf
+Seadra,,,,inf,
+Goldeen,inf,inf,inf,inf,inf
+Seaking,inf,inf,inf,inf,inf
+Staryu,inf,inf,inf,,inf
+Scyther,,,,inf,
+Electabuzz,,,,inf,
+Magmar,,,,,inf
+Pinsir,inf,inf,inf,,inf
+Tauros,,,,inf,inf
+Magikarp,inf,inf,inf,inf,inf
+Gyarados,inf,inf,inf,inf,inf
+Lapras,,,,inf,inf
+Ditto,,,inf,inf,inf
+Snorlax,,,,2,2
+Articuno,,,,1,1
+Zapdos,,,,1,1
+Moltres,,,,1,1
+Dratini,,,,inf,inf
+Dragonair,,,,inf,inf
+Mewtwo,,,,1,1
+Mew,,,1[Old Sea Map],,
+Sentret,,,,inf,inf
+Hoothoot,,,inf,,
+Ledyba,,,inf,inf,inf
+Spinarak,,,inf,inf,inf
+Chinchou,inf,inf,inf,,
+Natu,inf,inf,inf,inf,inf
+Xatu,inf,inf,inf,,
+Mareep,,,inf,,
+Marill,inf,inf,inf,,inf
+Sudowoodo,,,1,,
+Hoppip,,,,inf,inf
+Aipom,,,inf,,
+Sunkern,,,inf,,
+Yanma,,,,inf,inf
+Wooper,,,inf,inf,
+Quagsire,,,inf,,
+Murkrow,,,,inf,
+Misdreavus,,,,,inf
+Unown,,,,inf,inf
+Wobbuffet,inf,inf,inf,inf,inf
+Girafarig,inf,inf,inf,,
+Pineco,,,inf,,
+Dunsparce,,,,inf,inf
+Gligar,,,inf,,
+Snubbull,,,inf,,
+Qwilfish,,,,inf,
+Shuckle,,,inf,,
+Heracross,inf,inf,inf,inf,inf
+Sneasel,,,,,inf
+Teddiursa,,,inf,,
+Slugma,inf,inf,inf,inf,inf
+Magcargo,,,,inf,inf
+Swinub,,,,inf,inf
+Corsola,inf,inf,inf,,
+Remoraid,,,inf,,inf
+Octillery,,,inf,,
+Delibird,,,,inf,
+Mantine,,,,,inf
+Skarmory,inf,inf,inf,inf,
+Houndour,,,inf,,
+Phanpy,inf,inf,inf,inf,inf
+Stantler,,,inf,,
+Smeargle,,,inf,,
+Miltank,,,inf,,
+Raikou,,,,1[CHOICE_SQUIRTLE],1[CHOICE_SQUIRTLE]
+Entei,,,,1[CHOICE_BULBASAUR],1[CHOICE_BULBASAUR]
+Suicune,,,,1[CHOICE_CHARMANDER],1[CHOICE_CHARMANDER]
+Larvitar,,,,inf,inf
+Lugia,,,1[Mystic Ticket],1[Mystic Ticket],1[Mystic Ticket]
+Ho-Oh,,,1[Mystic Ticket],1[Mystic Ticket],1[Mystic Ticket]
+Poochyena,inf,inf,inf,,
+Mightyena,,,inf,,
+Zigzagoon,inf,inf,inf,,
+Linoone,inf,inf,inf,,
+Wurmple,inf,inf,inf,,
+Silcoon,inf,inf,inf,,
+Cascoon,inf,inf,inf,,
+Lotad,,inf,inf,,
+Lombre,,inf,inf,,
+Seedot,inf,inf[EMERALD],inf,,
+Nuzleaf,inf,inf[EMERALD],inf,,
+Taillow,inf,inf,inf,,
+Swellow,inf,inf,inf,,
+Wingull,inf,inf,inf,,
+Pelipper,inf,inf,inf,,
+Ralts,inf,inf,inf,,
+Surskit,inf,inf,inf[RUBY];inf[SAPPHIRE],,
+Shroomish,inf,inf,inf,,
+Slakoth,inf,inf,inf,,
+Nincada,inf,inf,inf,,
+Whismur,inf,inf,inf,,
+Loudred,inf,inf,inf,,
+Makuhita,inf,inf,inf,,
+Hariyama,inf,inf,inf,,
+Nosepass,inf,inf,inf,,
+Skitty,inf,inf,inf,,
+Sableye,,inf,inf,,
+Mawile,inf,,inf,,
+Aron,inf,inf,inf,,
+Lairon,inf,inf,inf,,
+Meditite,inf,inf,,,
+Medicham,inf,inf,,,
+Electrike,inf,inf,inf,,
+Manectric,inf,inf,inf,,
+Plusle,inf,inf,inf,,
+Minun,inf,inf,inf,,
+Volbeat,inf,inf,inf,,
+Illumise,inf,inf,inf,,
+Roselia,inf,inf,,,
+Gulpin,inf,inf,inf,,
+Carvanha,inf,inf,inf,,
+Sharpedo,inf,inf,inf,,
+Wailmer,inf,inf,inf,,
+Wailord,inf,inf,inf,,
+Numel,inf,inf,inf,,
+Torkoal,inf,inf,inf,,
+Spoink,inf,inf,inf,,
+Spinda,inf,inf,inf,,
+Trapinch,inf,inf,inf,,
+Cacnea,inf,inf,inf,,
+Swablu,inf,inf,inf,,
+Altaria,inf,inf,inf,,
+Zangoose,inf,,,,
+Seviper,,inf,inf,,
+Lunatone,,inf,,,
+Solrock,inf,,inf,,
+Barboach,inf,inf,inf,,
+Whiscash,inf,inf,inf,,
+Corphish,inf,inf,inf,,
+Baltoy,inf,inf,inf,,
+Claydol,inf,inf,inf,,
+Feebas,inf,inf,inf,,
+Kecleon,inf,inf,inf,,
+Shuppet,inf,inf,inf,,
+Banette,,inf,inf,,
+Duskull,inf,inf,inf,,
+Dusclops,inf,,,,
+Tropius,inf,inf,inf,,
+Chimecho,inf,inf,inf,,
+Absol,inf,inf,inf,,
+Wynaut,inf,inf,inf,,
+Snorunt,inf,inf,inf,,
+Spheal,inf,inf,inf,,
+Clamperl,inf,inf,inf,,
+Relicanth,inf,inf,inf,,
+Luvdisc,inf,inf,inf,,
+Bagon,inf,inf,inf,,
+Regirock,"1[Wailord,Relicanth]","1[Wailord,Relicanth]","1[Wailord,Relicanth]",,
+Regice,"1[Wailord,Relicanth]","1[Wailord,Relicanth]","1[Wailord,Relicanth]",,
+Registeel,"1[Wailord,Relicanth]","1[Wailord,Relicanth]","1[Wailord,Relicanth]",,
+Latias,1[Eon Ticket],1,"1[CHOICE_RED];1[CHOICE_BLUE, Eon Ticket]",,
+Latios,1,1[Eon Ticket],"1[CHOICE_BLUE];1[CHOICE_RED, Eon Ticket]",,
+Kyogre,,1,1,,
+Groudon,1,,1,,
+Rayquaza,1,1,1,,
+Deoxys,0,0,1[Aurora Ticket],1[Aurora Ticket],1[Aurora Ticket]
+Blue Shard,2,2,2,,
+Claw Fossil,,,1,,
+Dragon Scale,,,,1,1
+Everstone,1,1,1,,
+Fire Stone,1,1,1,2,2
+Green Shard,2,2,2,,
+King's Rock,,,,1,1
+Lax Incense,1,1,1,1,1
+Leaf Stone,1,1,1,2,2
+Metal Coat,,,,1,1
+Moon Stone,1,1,1,4,4
+Red Shard,2,2,2,,
+Root Fossil,,,1,,
+Sea Incense,1,1,1,1,1
+Sun Stone,,,,1,1
+Thunder Stone,1,1,1,2,2
+Upgrade,,,,1,1
+Water Stone,1,1,1,2,2
+Yellow Shard,2,2,2,,
