@@ -74,22 +74,29 @@ class Generation():
             setattr(self, datum, df)
 
         self.trade_evos = {}
-        self.item_trade_evos = {}
         self.trade_evos_by_item = {}
+        self.gendered_trade_evos = {}
+        self.gendered_trade_evos_by_item = {}
         if self.evolve is not None and self.trade is not None:
             for _, row in self.evolve.iterrows():
                 if not row.TRADE:
                     continue
+                if row.FROM not in self.trade_evos:
+                    self.trade_evos[row.FROM] = {}
+                self.trade_evos[row.FROM][row.ITEM] = row.TO
+                if row.ITEM not in self.trade_evos_by_item:
+                    self.trade_evos_by_item[row.ITEM] = {}
+                self.trade_evos_by_item[row.ITEM][row.FROM] = row.TO
                 suffixes = self.gender_suffixes(row.FROM)
                 for suffix in suffixes:
                     frm = row.FROM + suffix
                     to = row.TO + suffix
-                    if frm not in self.trade_evos:
-                        self.trade_evos[frm] = {}
-                    self.trade_evos[frm][row.ITEM] = to
-                    if row.ITEM not in self.trade_evos_by_item:
-                        self.trade_evos_by_item[row.ITEM] = {}
-                    self.trade_evos_by_item[row.ITEM][frm] = to
+                    if frm not in self.gendered_trade_evos:
+                        self.gendered_trade_evos[frm] = {}
+                    self.gendered_trade_evos[frm][row.ITEM] = to
+                    if row.ITEM not in self.gendered_trade_evos_by_item:
+                        self.gendered_trade_evos_by_item[row.ITEM] = {}
+                    self.gendered_trade_evos_by_item[row.ITEM][frm] = to
 
     def gender_suffixes(self, pokemon):
         '''Return the list of possible gender suffixes.
@@ -126,6 +133,8 @@ class Cartridge():
 
         self.dex = {species: False for species in self.generation.pokemon_list.index}
         self.env = set()
+
+        self.has_gender = self.game.gen >= 2 and "NO_BREED" not in self.game.props
 
         # Initialized later - indicates what other cartriges this one can communicate with
         self.transfers = {
@@ -170,26 +179,34 @@ class Cartridge():
             self.rules = Rules([])
             return
 
+        if self.has_gender:
+            def gendered(p):
+                '''Add gender to anything without'''
+                return [p + s for s in self.generation.gender_suffixes(p)]
+            trade_evos = self.generation.gendered_trade_evos
+        else:
+            def gendered(p):
+                '''Strip gender from anything with gender'''
+                if p.endswith("_MALE"):
+                    return [p[:-5]]
+                elif p.endswith("_FEMALE"):
+                    return [p[:-7]]
+                return [p]
+            trade_evos = self.generation.trade_evos
+
         rules = []
 
         if self.generation.breed is not None and "NO_BREED" not in self.game.props:
             for _, row in self.generation.breed.iterrows():
-                p_suffixes = self.generation.gender_suffixes(row.PARENT)
-                c_suffixes = self.generation.gender_suffixes(row.CHILD)
-
-                for psuff in p_suffixes:
-                    for csuff in c_suffixes:
-                        if psuff == "_FEMALE":
-                            rules.append(Rule.breed(row.PARENT + psuff, row.CHILD + csuff, False, row.get("ITEM")))
-                        else:
-                            rules.append(Rule.breed(row.PARENT + psuff, row.CHILD + csuff, True, row.get("ITEM")))
+                for p in gendered(row.PARENT):
+                    for c in gendered(row.CHILD):
+                        rules.append(Rule.breed(p, c, not p.endswith("_FEMALE"), row.get("ITEM")))
 
         if self.generation.buy is not None:
             for _, row in self.generation.buy.iterrows():
                 if self.game.name in row.GAME:
-                    suffixes = self.generation.gender_suffixes(row.POKEMON_OR_ITEM)
-                    for suffix in suffixes:  
-                        rules.append(Rule.buy(row.POKEMON_OR_ITEM + suffix, row.get("EXCHANGE")))
+                    for p_or_i in gendered(row.POKEMON_OR_ITEM):
+                        rules.append(Rule.buy(p_or_i, row.get("EXCHANGE")))
 
         if self.generation.evolve is not None and "NO_EVOLVE" not in self.game.props:
             for _, row in self.generation.evolve.iterrows():
@@ -199,7 +216,8 @@ class Cartridge():
                 if row.get("TRADE"):
                     continue
                 to = row.TO.split(',')
-                for suffix in self.generation.gender_suffixes(row.FROM):
+                suffixes = self.generation.gender_suffixes(row.FROM) if self.has_gender else ['']
+                for suffix in suffixes:
                     to_w_suffix = [t + suffix for t in to]
                     rules.append(Rule.evolve(row.FROM + suffix, to_w_suffix, row.ITEM))
  
@@ -207,14 +225,14 @@ class Cartridge():
             for _, row in self.generation.fossil.iterrows():
                 if self.game.name not in row.GAME:
                     continue
-                for suffix in self.generation.gender_suffixes(row.POKEMON):
-                    rules.append(Rule.fossil(row.ITEM, row.POKEMON + suffix))
+                for p in gendered(row.POKEMON):
+                    rules.append(Rule.fossil(row.ITEM, p))
 
         if self.generation.gift is not None:
             for idx, row in self.generation.gift.iterrows():
                 if self.game.name not in row.GAME:
                     continue
-                choices, reqs = parse_gift_entry(row.POKEMON_OR_ITEM, self.generation)
+                choices, reqs = parse_gift_entry(row.POKEMON_OR_ITEM, self.generation, gendered)
                 missing_game_req = False
                 reqs_with_suffixes = []
                 for req in reqs:
@@ -223,11 +241,11 @@ class Cartridge():
                             missing_game_req = True
                             break
                     else:
-                        req_suffixes = self.generation.gender_suffixes(req)
-                        if len(req_suffixes) == 1:
-                            new_req = req + req_suffixes[0]
+                        reqg = gendered(req)
+                        if len(reqg) == 1:
+                            new_req = reqg[0]
                         else:
-                            new_req = tuple(req + suffix for suffix in req_suffixes)
+                            new_req = tuple(reqg)
                         reqs_with_suffixes.append(new_req)
                 if missing_game_req:
                     continue
@@ -244,40 +262,38 @@ class Cartridge():
                 if self.game.name not in row.GAME:
                     continue
                 for pokemon in self.generation.pickup_pokemon["SPECIES"]:
-                    for suffix in self.generation.gender_suffixes(pokemon):
-                        rules.append(Rule.pickup(row.ITEM, pokemon + suffix))
+                    for p in gendered(pokemon):
+                        rules.append(Rule.pickup(row.ITEM, p))
 
         if self.generation.trade is not None:
             for idx, row in self.generation.trade.iterrows():
                 if self.game.name not in row.GAME:
                     continue
-                give_suffixes = self.generation.gender_suffixes(row.GIVE)
-                get_suffixes = self.generation.gender_suffixes(row.GET)
+                gives = gendered(row.GIVE)
+                gets = gendered(row.GET)
                 choice_id = None
-                if len(give_suffixes) == 1:
-                    give = row.GIVE + give_suffixes[0]
+                if len(gives) == 1:
+                    give = gives[0]
                 else:
-                    give = tuple(row.GIVE + suffix for suffix in give_suffixes)
-                if len(get_suffixes) > 1:
+                    give = tuple(gives)
+                if len(gets) > 1:
                     choice_id = f"CHOICE_TRADE_GENDER_{row.GET}_{idx}"
                     rules.append(Rule.choice(choice_id, [], repeats=1))
-                for get_suffix in get_suffixes:
-                    get = row.GET + suffix
+                for get in gets:
                     item = row.get("ITEM")
                     evolution = None
-                    if get in self.generation.trade_evos:
-                        
-                        if item and item in self.generation.trade_evos[get]:
-                            evolution = self.generation.trade_evos[get][item]
+                    if get in trade_evos:
+                        if item and item in trade_evos[get]:
+                            evolution = trade_evos[get][item]
                             item = False
-                        elif False in self.generation.trade_evos[get] and (
+                        elif False in trade_evos[get] and (
                                 row.get("ITEM") != "Everstone" or
                                 # Held item loss glitch - Everstone is lost/ignored
                                 self.generation.id == 3 or
                                 # Everstone doesn't stop Kadabra from evolving since gen 4
                                 (self.generation.id >= 4 and row.GET == "Kadabra")
                         ):
-                            evolution = self.generation.trade_evos[get][False]
+                            evolution = trade_evos[get][False]
                     rules.append(Rule.ingame_trade(give, get, item, evolution, choice_id))
 
 
@@ -296,41 +312,41 @@ class Cartridge():
                 items = [None]
                 if pokemon_or_item in wild_items:
                     items = wild_items[pokemon_or_item]
-                suffixes = self.generation.gender_suffixes(pokemon_or_item)
+                p_or_is = gendered(pokemon_or_item)
                     
                 for idx, (count, reqs) in enumerate(parse_wild_entry(row[self.game.name])):
                     if count == 0:
                         continue
                     missing_game_req = False
-                    reqs_with_suffixes = []
+                    gendered_reqs = []
                     for req in reqs:
                         if req in GAMES:
                             if req not in [c.game.name for c in self.transfers["CONNECT"]]:
                                 missing_game_req = True
                                 break
                         else:
-                            req_suffixes = self.generation.gender_suffixes(req)
-                            if len(req_suffixes) == 1:
-                                new_req = req + req_suffixes[0]
+                            reqg = gendered(req)
+                            if len(reqg) == 1:
+                                new_req = reqg[0]
                             else:
-                                new_req = tuple(req + suffix for suffix in req_suffixes)
-                            reqs_with_suffixes.append(new_req)
+                                new_req = tuple(reqg)
+                            gendered_reqs.append(new_req)
                     if missing_game_req:
                         continue
 
-                    if count != math.inf and len(items) * len(suffixes) > 1:
+                    if count != math.inf and len(items) * len(p_or_is) > 1:
                         choice_id = f"CHOICE_WILD_{pokemon_or_item}_{idx}"
-                        rules.append(Rule.choice(choice_id, reqs_with_suffixes, repeats=count))
-                        for suffix in suffixes:
+                        rules.append(Rule.choice(choice_id, gendered_reqs, repeats=count))
+                        for p_or_i in p_or_is:
                             for item in items:
-                                out = [pokemon_or_item + suffix]
+                                out = [p_or_i]
                                 if item:
                                     out.append(item)
                                 rules.append(Rule.choose(choice_id, out))
                     else:
-                        for suffix in suffixes:
+                        for p_or_i in p_or_is:
                             for item in items:
-                                rules.append(Rule.wild(pokemon_or_item + suffix, reqs_with_suffixes, count, item))
+                                rules.append(Rule.wild(p_or_i, gendered_reqs, count, item))
 
         self.rules = Rules(rules)
 
@@ -339,6 +355,13 @@ class Cartridge():
         if prev_count == math.inf:
             return
         self.state[pokemon_or_item] = self.state.get(pokemon_or_item, 0) + count
+
+        if self.has_gender:
+            trade_evos = self.generation.gendered_trade_evos
+            trade_evos_by_item = self.generation.gendered_trade_evos_by_item
+        else:
+            trade_evos = self.generation.trade_evos
+            trade_evos_by_item = self.generation.trade_evos_by_item
 
         species, _, _ = pokemon_or_item.partition('_')
         if species in self.dex:
@@ -358,8 +381,8 @@ class Cartridge():
             for cart in self.transfers["TRADE"]:
                 if species in cart.generation.tradeable_pokemon:
                     cart.dex[species] = True
-                trade_evos = self.generation.trade_evos.get(pokemon, {})
-                simple_trade_evo = trade_evos.get(False)
+                te = trade_evos.get(pokemon, {})
+                simple_trade_evo = te.get(False)
                 if simple_trade_evo is None or (
                         self.state.get("Everstone", 0) >= 1 and \
                         # Held item loss glitch - Everstone is lost/ignored
@@ -369,7 +392,7 @@ class Cartridge():
                 ):
                     if species in cart.generation.tradeable_pokemon:
                         cart.acquire(pokemon, count=math.inf)
-                for item, trade_evo in trade_evos.items():
+                for item, trade_evo in te.items():
                     if (not item or self.state.get(item, 0) >= 1):
                         trade_evo_species, _, _ = trade_evo.partition('_')
                         if trade_evo_species in cart.generation.tradeable_pokemon:
@@ -381,7 +404,7 @@ class Cartridge():
                 if item in cart.generation.tradeable_items:
                     cart.acquire(item, count=math.inf)
             for cart in self.transfers["TRADE"]:
-                for pokemon, trade_evo in self.generation.trade_evos_by_item.get(item, {}).items():
+                for pokemon, trade_evo in trade_evos_by_item.get(item, {}).items():
                     if self.state.get(pokemon, 0) >= 1 and \
                             pokemon in self.generation.tradeable_pokemon and \
                             pokemon in cart.generation.tradeable_pokemon and \
@@ -394,7 +417,7 @@ class Cartridge():
                     cart.acquire(item, count=math.inf)
                 # Held item loss glitch - Everstone is lost/ignored in gen 3
                 if item == "Everstone" and self.generation.id != 3:
-                    for pokemon, trade_evo in self.generation.trade_evos_by_item.get(False, {}).items():
+                    for pokemon, trade_evo in trade_evos_by_item.get(False, {}).items():
                         # Everstone doesn't stop Kadabra from evolving since gen 4
                         if pokemon == "Kadabra" and self.generation.id >= 4:
                             continue
@@ -421,14 +444,12 @@ class Cartridge():
                     if not any([self.state.get(sub_c, 0) >= 1 for sub_c in c]):
                         return False
                 elif choice is None:
-                    import pdb; pdb.set_trace()
                     raise ValueError(f"No choice for consumed '{c}'")
                 else:
                     if not self.state.get(c[consumed_choices[idx]], 0) >= 1:
                         return False
             else:
                 if choice is not None:
-                    import pdb; pdb.set_trace()
                     raise ValueError(f"Choice for non-tuple consumed '{c}'")
                 if not self.state.get(c, 0) >= 1:
                     return False
@@ -721,6 +742,10 @@ class Collection():
         if "NO_DEX" in self.main_cartridge.game.props:
             raise ValueError(f"Can't use {self.main_cartridge.game.name} as main game")
         self.cartridges = cartridges
+        if any([c.has_gender for c in self.cartridges]):
+            for c in self.cartridges:
+                c.has_gender = True
+
         self.hardware = hardware
         self.games = set([c.game for c in self.cartridges])
         self.pokemon_list = self.main_cartridge.generation.pokemon_list
@@ -983,35 +1008,31 @@ class Collection():
         for pokemon in varying:
             found_group = False
             for idx, group in enumerate(groups):
-                if dexes[[pokemon, group[0][0]]].corr().round(8)[pokemon][group[0][0]] == 0:
+                if dexes[[pokemon, group[0]]].corr().round(8)[pokemon][group[0]] == 0:
                     continue
                 found_group = True
                 pokemon_by_group_idx[pokemon] = idx
-                found_cluster = False
-                for cluster in group:
-                    if all(dexes[pokemon] == dexes[cluster[0]]):
-                        found_cluster = True
-                        cluster.append(pokemon)
-                        break
-                if not found_cluster:
-                    group.append([pokemon])
+                group.append(pokemon)
                 break
             if not found_group:
                 pokemon_by_group_idx[pokemon] = len(groups)
-                groups.append([[pokemon]])
+                groups.append([pokemon])
         
-        for idx, group in enumerate(groups):
-            cluster_count = len(group)
-            clusters_per_playthrough = int(dexes[group[0][0]].mean() * cluster_count)
-            for cluster in group:
-                this_count = int(dexes[cluster[0]].mean() * cluster_count)
-                if this_count != clusters_per_playthrough:
-                    import pdb; pdb.set_trace()
-                    raise ValueError("Confused")
-            groups[idx] = (clusters_per_playthrough, groups[idx])
+        group_combos = []
+        for idx, pokemon in enumerate(groups):
+            combos = set()
+            for _, row in dexes[pokemon].iterrows():
+                combos.add(tuple(row))
+            subsets = set()
+            for combo in combos:
+                if is_subset(combo, combos):
+                    subsets.add(combo)
+            combos = combos - subsets
+            group_combos.append(combos)
 
         self.dexes = dexes
         self.groups = groups
+        self.group_combos = group_combos
         self.pokemon_by_group_idx = pokemon_by_group_idx
 
     def obtainable(self):
@@ -1044,31 +1065,35 @@ class Collection():
                 
     def _group_out(self, group_idx, obtainable):
         out = []
-        obtainable_count, group = self.groups[group_idx]
+        group = self.groups[group_idx]
+        combos = self.group_combos[group_idx]
+        clusters = []
         if obtainable:
-            count = obtainable_count
+            for combo in combos:
+                clusters.append([group[idx] for idx in range(len(group)) if combo[idx]])
         else:
-            count = len(group) - obtainable_count
-        choice_pokemon = []
-        max_choice_len = 0
-        for clusters in combinations(group, count):
-            cluster_pokemon = []
-            for cluster in clusters:
-                cluster_pokemon += cluster
-            cluster_pokemon = [f"{(self.pokemon_list.loc[p, 'index']):03}. {p}" for p in cluster_pokemon]
-            cluster_pokemon = sorted(cluster_pokemon)
-            max_len = max([len(p) for p in cluster_pokemon])
-            cluster_pokemon = [p + " "*(max_len - len(p)) for p in cluster_pokemon]
-            choice_pokemon.append(cluster_pokemon)
-            max_choice_len = max(max_choice_len, len(cluster_pokemon))
+            for combo in combos:
+                clusters.append([group[idx] for idx in range(len(group)) if not combo[idx]])
+        if all([not cluster for cluster in clusters]):
+            return []
+
+        out_clusters = []
+        for cluster in clusters:
+            out_cluster = sorted([f"{(self.pokemon_list.loc[p, 'index']):03}. {p}" for p in cluster])
+            max_len = max([len(p) for p in out_cluster])
+            out_cluster = [p + " "*(max_len - len(p)) for p in out_cluster]
+            out_clusters.append(out_cluster)
+        out_clusters = sorted(out_clusters)
+
+        max_choice_len = max([len(cluster) for cluster in out_clusters])
         rows = []
         for idx in range(max_choice_len):
             row = []
-            for cluster_pokemon in choice_pokemon:
-                if idx < len(cluster_pokemon):
-                    row.append(cluster_pokemon[idx])
+            for cluster in out_clusters:
+                if idx < len(cluster):
+                    row.append(cluster[idx])
                 else:
-                    row.append("-" + " "*(len(cluster_pokemon[0]) - 1))
+                    row.append("-" + " "*(len(cluster[0]) - 1))
             rows.append(" / ".join(row))
         return rows
         
@@ -1201,7 +1226,7 @@ def parse_game(games, game_list):
         raise ValueError(f"Invalid game(s) {bad}")
     return games
 
-def parse_gift_entry(entry, gen):
+def parse_gift_entry(entry, gen, gender_func):
     entry, _, reqs = entry.partition('[')
     reqs = reqs or []
     if reqs:
@@ -1215,12 +1240,9 @@ def parse_gift_entry(entry, gen):
 
     choices_w_gender = []
     for choice_group in choices:
-        suffixes = [gen.gender_suffixes(choice) for choice in choice_group]
-        for suffix_group in product(*suffixes):
-            choice_group_w_gender = []
-            for idx in range(len(choice_group)):
-                choice_group_w_gender.append(choice_group[idx] + suffix_group[idx])
-            choices_w_gender.append(choice_group_w_gender)
+        gendered = [gender_func(choice) for choice in choice_group]
+        for group in product(*gendered):
+            choices_w_gender.append(group)
     return choices_w_gender, reqs
 
 def parse_wild_entry(entry):
@@ -1236,6 +1258,20 @@ def parse_wild_entry(entry):
         entry = float(entry)
         out.append((entry, reqs))
     return out
+
+def is_subset(tup, tup_set):
+    '''
+    tup is a tuple of Booleans, and tup_set is a set of tuples of Booleans.
+
+    Return True if there exists a tuple in tup_set whose True values are a strict superset of the True values in tup.
+    '''
+    tup_count = sum(tup)
+    for tup2 in tup_set:
+        if sum(tup2) <= tup_count:
+            continue
+        if all([(not tup[idx]) or (tup[idx] and tup2[idx]) for idx in range(len(tup))]):
+            return True
+    return False
 
 def main(args):
     pd.set_option('future.no_silent_downcasting', True)
@@ -1259,8 +1295,8 @@ def main(args):
     print("\n".join(collection.missing()))
     print("\n---\n")
     print(f"TOTAL: {len(obtainable)}")
-    cart = collection.main_cartridge
-    import pdb; pdb.set_trace()
+    #cart = collection.main_cartridge
+    #import pdb; pdb.set_trace()
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
