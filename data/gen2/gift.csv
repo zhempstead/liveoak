@@ -1,21 +1,21 @@
-GAME,POKEMON_OR_ITEM
-CORE,Chikorita;Cyndaquil;Totodile
-CORE,Moon Stone
-CORE,Togepi
-CORE,Everstone
-CORE,Spearow
-CORE,Eevee
-CORE,Shuckle
-CORE,Thunder Stone[Pichu]
-CORE,Water Stone[Staryu]
-CORE,Leaf Stone[Oddish]
-CORE,Everstone[Lickitung]
-CORE,Tyrogue
-CORE,Upgrade
-CORE,MG_Fire Stone;MG_Leaf Stone;MG_Thunder Stone;MG_Water Stone
-"GOLD,CRYSTAL",Fire Stone[Growlithe]
-SILVER,Fire Stone[Vulpix]
-CRYSTAL,Pichu;Cleffa;Igglybuff;Tyrogue;Smoochum;Elekid;Magby
-CRYSTAL,Dratini
-STADIUM2,Farfetch'd
-STADIUM2,Gligar
+GAME,POKEMON_OR_ITEM,REQUIRED
+CORE,Chikorita;Cyndaquil;Totodile,
+CORE,Moon Stone,
+CORE,Togepi,
+CORE,Everstone,
+CORE,Spearow,
+CORE,Eevee,
+CORE,Shuckle,
+CORE,Thunder Stone,Pichu
+CORE,Water Stone,Staryu
+CORE,Leaf Stone,Oddish
+CORE,Everstone,Lickitung
+CORE,Tyrogue,
+CORE,Upgrade,
+CORE,$MG_Fire Stone;$MG_Leaf Stone;$MG_Thunder Stone;$MG_Water Stone,
+"GOLD,CRYSTAL",Fire Stone,Growlithe
+SILVER,Fire Stone,Vulpix
+CRYSTAL,Pichu;Cleffa;Igglybuff;Tyrogue;Smoochum;Elekid;Magby,
+CRYSTAL,Dratini,
+STADIUM2,Farfetch'd,
+STADIUM2,Gligar,

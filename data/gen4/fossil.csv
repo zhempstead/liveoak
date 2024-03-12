@@ -1,0 +1,11 @@
+GAME,ITEM,POKEMON,REQUIRED
+CORE,Armor Fossil,Shieldon,
+CORE,Claw Fossil,Anorith,
+CORE,Dome Fossil,Kabuto,
+CORE,Helix Fossil,Omanyte,
+CORE,Old Amber,Aerodactyl,
+CORE,Root Fossil,Lileep,
+CORE,Skull Fossil,Cranidos,
+"DIAMOND,PEARL,PLATINUM",Odd Keystone,Spiritomb,DIAMOND
+"DIAMOND,PEARL,PLATINUM",Odd Keystone,Spiritomb,PEARL
+"DIAMOND,PEARL,PLATINUM",Odd Keystone,Spiritomb,PLATINUM

@@ -1,0 +1,405 @@
+SPECIES,DIAMOND,PEARL,PLATINUM,HEARTGOLD,SOULSILVER
+Caterpie,inf[FIRERED],inf[FIRERED],inf[FIRERED],inf,inf
+Metapod,inf[FIRERED],inf[FIRERED],inf[FIRERED],inf,inf
+Butterfree,,,,inf,inf
+Weedle,inf[LEAFGREEN],inf[LEAFGREEN],inf[LEAFGREEN],inf,inf
+Kakuna,inf[LEAFGREEN],inf[LEAFGREEN],inf[LEAFGREEN],inf,inf
+Beedrill,,,,inf,inf
+Pidgey,inf,inf,inf,inf,inf
+Pidgeotto,,,,inf,inf
+Rattata,inf,inf,inf,inf,inf
+Raticate,inf,inf,inf,inf,inf
+Spearow,inf,inf,inf,inf,inf
+Fearow,inf,inf,inf,inf,inf
+Ekans,inf[FIRERED],inf[FIRERED],inf[FIRERED],inf,inf
+Arbok,inf[FIRERED],inf[FIRERED],inf[FIRERED],inf,inf
+Pikachu,inf,inf,inf,inf,inf
+Sandshrew,inf[LEAFGREEN],inf[LEAFGREEN],inf[LEAFGREEN],inf,inf
+Sandslash,inf[LEAFGREEN],inf[LEAFGREEN],inf[LEAFGREEN],inf,inf
+Nidoran F,inf,inf,inf,inf,inf
+Nidorina,inf,inf,inf,inf,inf
+Nidoran M,inf,inf,inf,inf,inf
+Nidorino,inf,inf,inf,inf,inf
+Clefairy,inf,inf,inf,inf,inf
+Vulpix,inf[LEAFGREEN],inf[LEAFGREEN],inf[LEAFGREEN],,inf
+Jigglypuff,inf,inf,inf,inf,inf
+Zubat,inf,inf,inf,inf,inf
+Golbat,inf,inf,inf,inf,inf
+Oddish,inf,inf,inf,inf,inf
+Gloom,inf,inf,inf,inf,inf
+Paras,inf,inf,inf,inf,inf
+Parasect,,,,inf,inf
+Venonat,inf,inf,inf,inf,inf
+Venomoth,inf,inf,inf,inf,inf
+Diglett,inf,inf,inf,inf,inf
+Dugtrio,inf,inf,inf,inf,inf
+Meowth,inf,inf,inf,,inf
+Persian,,,,,inf
+Psyduck,inf,inf,inf,inf,inf
+Golduck,inf,inf,inf,inf,inf
+Mankey,inf,inf,inf,inf,
+Primeape,inf,inf,inf,inf,
+Growlithe,inf[FIRERED],inf[FIRERED],inf[FIRERED],inf,
+Poliwag,inf,inf,inf,inf,inf
+Poliwhirl,inf,inf,inf,inf,inf
+Abra,inf,inf,inf,inf,inf
+Kadabra,inf,inf,inf,inf,inf
+Machop,inf,inf,inf,inf,inf
+Machoke,inf,inf,inf,inf,inf
+Bellsprout,inf,inf,inf,inf,inf
+Weepinbell,inf,inf,inf,inf,inf
+Tentacool,inf,inf,inf,inf,inf
+Tentacruel,inf,inf,inf,inf,inf
+Geodude,inf,inf,inf,inf,inf
+Graveler,inf,inf,inf,inf,inf
+Ponyta,inf,inf,inf,inf,inf
+Rapidash,,,,inf,inf
+Slowpoke,,inf,inf,inf,inf
+Slowbro,,,,inf,inf
+Magnemite,inf,inf,inf,inf,inf
+Magneton,,,inf,inf,inf
+Farfetch'd,inf,inf,inf,inf,inf
+Doduo,inf,inf,inf,inf,inf
+Dodrio,,,,inf,inf
+Seel,inf,,,inf,inf
+Dewgong,inf,,inf,inf,inf
+Grimer,inf,inf,inf,inf,inf
+Muk,,,,inf,inf
+Shellder,inf,inf,inf,inf,inf
+Gastly,inf,inf,inf,inf,inf
+Haunter,inf,inf,inf,inf,inf
+Gengar,inf[RUBY];inf[SAPPHIRE];inf[EMERALD];inf[FIRERED];inf[LEAFGREEN],inf[RUBY];inf[SAPPHIRE];inf[EMERALD];inf[FIRERED];inf[LEAFGREEN],inf[RUBY];inf[SAPPHIRE];inf[EMERALD];inf[FIRERED];inf[LEAFGREEN],,
+Onix,inf,inf,inf,inf,inf
+Drowzee,inf,inf,inf,inf,inf
+Hypno,,,,inf,inf
+Krabby,inf,inf,inf,inf,inf
+Kingler,,,,inf,inf
+Voltorb,inf,inf,inf,inf,inf
+Electrode,,,,inf,inf
+Exeggcute,inf,inf,inf,inf,inf
+Cubone,inf,inf,inf,inf,inf
+Marowak,,,,inf,inf
+Lickitung,inf,inf,inf,inf,inf
+Koffing,,,inf,inf,inf
+Weezing,inf,inf,inf,inf,inf
+Rhyhorn,inf,inf,inf,inf,inf
+Rhydon,inf,inf,inf,inf,inf
+Chansey,inf,inf,inf,inf,inf
+Tangela,,,inf,inf,inf
+Kangaskhan,inf,inf,inf,inf,inf
+Horsea,inf,inf,inf,inf,inf
+Seadra,inf,inf,inf,inf,inf
+Goldeen,inf,inf,inf,inf,inf
+Seaking,inf,inf,inf,inf,inf
+Staryu,inf,inf,inf,inf,inf
+Mr. Mime,inf,,inf,inf,inf
+Scyther,inf,,inf,inf,inf
+Jynx,,,inf,inf,inf
+Electabuzz,,,inf,inf,inf
+Magmar,,,inf,inf,inf
+Pinsir,,inf,inf,inf,inf
+Tauros,inf,inf,inf,inf,inf
+Magikarp,inf,inf,inf,inf,inf
+Gyarados,inf,inf,inf,inf,inf
+Lapras,inf,inf,inf,inf,inf
+Ditto,inf,inf,inf,inf,inf
+Eevee,inf,inf,inf,,
+Porygon,inf,inf,,,
+Snorlax,,,,1,1
+Articuno,,,1,1,1
+Zapdos,,,1,1,1
+Moltres,,,1,1,1
+Dratini,inf,inf,inf,inf,inf
+Dragonair,inf,inf,inf,inf,inf
+Mewtwo,,,,1,1
+Sentret,inf,inf,inf,inf,inf
+Furret,,,,inf,inf
+Hoothoot,inf,inf,inf,inf,inf
+Noctowl,inf,inf,inf,inf,inf
+Ledyba,,,,,inf
+Ledian,inf,inf,inf,,inf
+Spinarak,,,,inf,
+Ariados,inf,inf,inf,inf,
+Chinchou,inf,inf,inf,inf,inf
+Lanturn,inf,inf,,inf,inf
+Pichu,inf,inf,inf,,
+Cleffa,inf,inf,inf,,
+Cleffa_FEMALE,,,,"inf[POKEWALKER,$RT_AMITY_MEADOW]","inf[POKEWALKER,$RT_AMITY_MEADOW]"
+Igglybuff,inf,inf,inf,,
+Igglybuff_MALE,,,,"inf[POKEWALKER,$RT_AMITY_MEADOW]","inf[POKEWALKER,$RT_AMITY_MEADOW]"
+Togepi,inf,inf,inf,,
+Natu,inf,inf,inf,inf,inf
+Mareep,inf,inf,inf,inf,inf
+Flaaffy,inf,inf,inf,inf,inf
+Marill,inf,inf,inf,inf,inf
+Azumarill,,,inf,,
+Sudowoodo,,inf,inf,1,1
+Hoppip,inf,inf,inf,inf,inf
+Skiploom,inf,inf,,inf,inf
+Jumpluff,,,,inf,inf
+Aipom,inf,inf,inf,inf,inf
+Sunkern,inf,inf,inf,inf,inf
+Yanma,inf,inf,inf,inf,inf
+Wooper,inf,inf,inf,inf,inf
+Quagsire,inf,inf,inf,inf,inf
+Murkrow,inf,,,inf,inf
+Misdreavus,,inf,,inf,inf
+Unown,inf,inf,inf,inf,inf
+Wobbuffet,inf,inf,inf,inf,inf
+Girafarig,inf,inf,inf,inf,inf
+Pineco,inf[EMERALD],inf[EMERALD],inf[EMERALD],inf,inf
+Dunsparce,inf,inf,inf,inf,inf
+Gligar,inf[EMERALD],inf[EMERALD],inf,inf,
+Steelix,inf,inf,inf,inf,inf
+Snubbull,inf,inf,inf,inf,inf
+Qwilfish,inf,inf,inf,inf,inf
+Shuckle,inf[EMERALD],inf[EMERALD],inf[EMERALD],inf,inf
+Heracross,inf,inf,inf,inf,inf
+Sneasel,inf,inf,inf,inf,inf
+Teddiursa,inf[EMERALD],inf[EMERALD],inf[EMERALD],,inf
+Ursaring,inf[EMERALD],inf[EMERALD],inf[EMERALD],,inf
+Slugma,inf,inf,inf,inf,inf
+Magcargo,inf,inf,inf,,
+Swinub,inf,inf,inf,inf,inf
+Piloswine,,,inf,,
+Corsola,inf,inf,inf,inf,inf
+Remoraid,inf,inf,inf,inf,inf
+Octillery,inf,inf,inf,,
+Octillery_FEMALE,,,,"inf[POKEWALKER,$GTS]","inf[POKEWALKER,$GTS]"
+Delibird,inf,inf,inf,,inf
+Mantine,,,,inf,
+Skarmory,inf,inf,inf,,inf
+Houndour,,,inf,inf,inf
+Houndoom,,inf,,inf,inf
+Phanpy,inf,inf,inf,inf,
+Donphan,,,,inf,
+Stantler,,inf,inf,inf,inf
+Smeargle,inf,inf,inf,inf,inf
+Tyrogue,inf,inf,inf,,
+Smoochum,inf,inf,inf,inf[POKEWALKER],inf[POKEWALKER]
+Elekid,inf[FIRERED],inf[FIRERED],,,
+Elekid_MALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Magby,inf[LEAFGREEN],inf[LEAFGREEN],,,
+Magby_MALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Miltank,inf,inf,inf,inf,inf
+Raikou,,,,1,1
+Entei,,,,1,1
+Suicune,,,,1,1
+Larvitar,inf,,inf,inf,inf
+Pupitar,,,,inf,inf
+Lugia,,,,1,1
+Ho-Oh,,,,1,1
+Poochyena,,,inf,inf,inf
+Mightyena,inf,,,,
+Zigzagoon,inf,inf,inf,inf,inf
+Linoone,inf,inf,inf,inf,inf
+Wurmple,inf,inf,inf,inf,inf
+Silcoon,inf,,inf,inf,inf
+Beautifly,inf,inf,inf,inf,inf
+Cascoon,,inf,inf,inf,inf
+Dustox,,inf,inf,inf,inf
+Lotad,inf[SAPPHIRE],inf[SAPPHIRE],inf[SAPPHIRE],inf,inf
+Lombre,inf[SAPPHIRE],inf[SAPPHIRE],inf[SAPPHIRE],inf,inf
+Seedot,inf[RUBY],inf[RUBY],inf[RUBY],inf,inf
+Nuzleaf,inf[RUBY],inf[RUBY],inf[RUBY],inf,inf
+Taillow,,,,inf,inf
+Swellow,inf,inf,inf,,
+Wingull,inf,inf,inf,inf,inf
+Pelipper,inf,inf,inf,,
+Ralts,inf,inf,inf,inf,inf
+Kirlia,inf,inf,inf,,
+Surskit,inf,inf,inf,inf,inf
+Masquerain,,,inf,inf,inf
+Shroomish,inf,inf,inf,inf,inf
+Breloom,,,,inf,inf
+Slakoth,inf,inf,inf,inf,inf
+Vigoroth,,,,inf,inf
+Nincada,inf,inf,inf,inf,inf
+Whismur,,,,inf,inf
+Loudred,inf,inf,inf,,
+Makuhita,inf,inf,inf,inf,inf
+Azurill,inf,inf,inf,inf,inf
+Nosepass,inf,inf,inf,inf,inf
+Skitty,inf,inf,inf,,
+Skitty_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Sableye,inf[SAPPHIRE],inf[SAPPHIRE],inf[SAPPHIRE],inf,
+Sableye_FEMALE,,,,"inf[POKEWALKER,$RT_RALLY]","inf[POKEWALKER,$RT_RALLY]"
+Mawile,inf[RUBY],inf[RUBY],inf[RUBY],,inf
+Aron,inf,,inf,inf,inf
+Lairon,,,,inf,inf
+Meditite,inf,inf,inf,inf,inf
+Medicham,inf,inf,inf,inf,inf
+Electrike,inf,inf,inf,inf,inf
+Manectric,,,,inf,inf
+Plusle,inf,inf,inf,inf,inf
+Minun,inf,inf,inf,inf,inf
+Volbeat,inf,inf,inf,inf,inf
+Illumise,inf,inf,inf,inf,inf
+Roselia,inf,inf,inf,inf,inf
+Gulpin,inf,inf,inf,,inf
+Carvanha,inf,inf,inf,,
+Carvanha_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Sharpedo,inf,inf,,,
+Wailmer,inf,inf,inf,,
+Wailmer_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Wailord,inf,inf,inf,,
+Numel,inf,inf,inf,inf,inf
+Camerupt,inf,inf,inf,,
+Torkoal,inf,inf,inf,inf,inf
+Spoink,inf,inf,inf,inf,inf
+Spinda,inf,inf,inf,inf,inf
+Trapinch,inf,inf,,inf,inf
+Vibrava,inf,inf,,inf,inf
+Cacnea,inf,inf,inf,inf,inf
+Cacturne,inf,inf,inf,inf,inf
+Swablu,inf,inf,inf,inf,inf
+Zangoose,inf[RUBY],inf[RUBY],inf[RUBY],inf,inf
+Seviper,inf[SAPPHIRE],inf[SAPPHIRE],inf[SAPPHIRE],inf,inf
+Lunatone,inf[SAPPHIRE],inf[SAPPHIRE],inf[SAPPHIRE],inf,inf
+Solrock,inf[RUBY],inf[RUBY],inf[RUBY],inf,inf
+Barboach,inf,inf,inf,inf,inf
+Whiscash,inf,inf,inf,inf,inf
+Corphish,inf,inf,inf,inf,inf
+Crawdaunt,inf,inf,inf,,
+Baltoy,inf,inf,inf,inf,
+Feebas,inf,inf,inf,,
+Feebas_MALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Castform,inf,inf,inf,,
+Castform_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Kecleon,inf,,inf,,
+Kecleon_MALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Shuppet,,,,inf,inf
+Banette,inf,inf,inf,inf,inf
+Duskull,inf,inf,inf,inf,inf
+Dusclops,inf,inf,inf,inf,inf
+Tropius,,,inf,,
+Tropius_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Chimecho,inf,inf,inf,inf,inf
+Absol,inf,inf,inf,inf,inf
+Snorunt,inf,inf,inf,,
+Snorunt_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Spheal,,inf,,inf,inf
+Sealeo,,inf,inf,inf,inf
+Clamperl,inf,inf,,inf,inf
+Relicanth,inf,inf,inf,inf,inf
+Luvdisc,inf,inf,inf,inf,inf
+Bagon,,inf,inf,inf,inf
+Shelgon,,,,inf,inf
+Beldum,inf,inf,inf,inf,inf
+Metang,,,,inf,inf
+Regirock,,,1[Regigigas_FATEFUL],,
+Regice,,,1[Regigigas_FATEFUL],,
+Registeel,,,1[Regigigas_FATEFUL],,
+Latias,,,,1,1[Enigma Stone]
+Latios,,,,1[Enigma Stone],1
+Kyogre_HG,,,,1[Blue Orb],
+Groudon_SS,,,,,1[Red Orb]
+Rayquaza,,,,1[Jade Orb],1[Jade Orb]
+Starly,inf,inf,inf,inf,inf
+Staravia,inf,inf,inf,,
+Bidoof,inf,inf,inf,inf,inf
+Bibarel,inf,inf,inf,,
+Bibarel_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Kricketot,inf,inf,inf,inf,inf
+Kricketune,inf,inf,inf,inf,inf
+Shinx,inf,inf,inf,inf,inf
+Luxio,inf,inf,inf,inf,inf
+Budew,inf,inf,inf,inf,inf
+Burmy,inf,inf,inf,inf,inf
+Combee,inf,inf,inf,inf,inf
+Pachirisu,inf,inf,inf,inf,inf
+Buizel,inf,inf,inf,inf,inf
+Floatzel,inf,inf,inf,inf,inf
+Cherubi,inf,inf,inf,inf,inf
+Shellos,inf,inf,inf,,
+Shellos_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Gastrodon,inf,inf,inf,,
+Drifloon,inf,inf,inf,,
+Buneary,inf,inf,inf,inf,inf
+Glameow,,inf,,,
+Purugly,,inf,,,
+Chingling,inf,inf,inf,inf,inf
+Stunky,inf,,,,
+Skuntank,inf,,,,
+Bronzor,inf,inf,inf,inf,inf
+Bronzong,inf,inf,inf,inf,inf
+Bonsly,inf,inf,inf,,
+Bonsly_MALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Mime Jr.,inf,inf,inf,,
+Mime Jr._MALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Happiny,inf,inf,inf,"inf[POKEWALKER,$RT_AMITY_MEADOW]","inf[POKEWALKER,$RT_AMITY_MEADOW]"
+Chatot,inf,inf,inf,inf,inf
+Spiritomb_MALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Gible,inf,inf,inf,inf,inf
+Gabite,,,inf,,
+Munchlax,inf,inf,inf,,
+Munchlax_MALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Riolu,,,,inf,inf
+Hippopotas,inf,inf,inf,inf,inf
+Hippowdon,inf,inf,inf,,
+Skorupi,inf,inf,inf,inf,inf
+Drapion,inf,inf,inf,,
+Croagunk,inf,inf,inf,inf,inf
+Toxicroak,inf,inf,inf,,
+Carnivine,inf,inf,inf,inf,inf
+Finneon,inf,inf,inf,,
+Finneon_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Lumineon,inf,inf,inf,,
+Mantyke,inf,inf,inf,,
+Snover,inf,inf,inf,,
+Snover_MALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Abomasnow,inf,inf,inf,,
+Rotom,1,1,1,,
+Uxie,1,1,1,,
+Mesprit,1,1,1,,
+Azelf,1,1,1,,
+Dialga,1,,1,,
+Palkia,,1,1,,
+Heatran,1,1,1,,
+Regigigas,"1[Regirock,Regice,Registeel]","1[Regirock,Regice,Registeel]","1[Regirock,Regice,Registeel]",,
+Giratina,1,1,1,,
+Cresselia,1,1,1,,
+Darkrai,1[Member Card],1[Member Card],1[Member Card],,
+Shaymin,1[Oak's Letter],1[Oak's Letter],1[Oak's Letter],,
+Arceus,1[Azure Flute],1[Azure Flute],1[Azure Flute],,
+Armor Fossil,,inf,inf[$TRAINERID_EVEN],,
+Claw Fossil,inf,inf,inf,inf,
+Dawn Stone,2,2,3,1,1
+Deep Sea Scale,,,,1,1
+Deep Sea Tooth,,,,1,1
+Dome Fossil,inf,inf,inf,,inf
+Dragon Scale,,,,1,1
+Dubious Disc,1,1,2,1,1
+Dusk Stone,2,2,3,1,1
+Electirizer,,,1,1,1
+Everstone,inf,inf,inf,,
+Fire Stone,inf,inf,inf,inf[POKEWALKER],inf[POKEWALKER]
+Full Incense,1,1,1,1,1
+Helix Fossil,inf,inf,inf,inf,
+King's Rock,,,1,,
+Lax Incense,1,1,1,1,1
+Leaf Stone,inf,inf,inf,1,1
+Luck Incense,1,1,1,1,1
+Magmarizer,,,1,1,1
+Metal Coat,,,1,1,1
+Moon Stone,inf,inf,inf,inf,inf
+Odd Incense,1,1,1,1,1
+Odd Keystone,inf,inf,inf,,
+Old Amber,inf,inf,inf,inf,inf
+Oval Stone,inf,inf,inf,"1;inf[POKEWALKER,$RT_AMITY_MEADOW]","1;inf[POKEWALKER,$RT_AMITY_MEADOW]"
+Protector,1,1,2,1,1
+Pure Incense,1,1,1,1,1
+Razor Claw,2,2,3,,
+Razor Fang,1,1,2,,
+Reaper Cloth,inf,inf,inf,1,1
+Rock Incense,1,1,1,1,1
+Root Fossil,inf,inf,inf,,inf
+Rose Incense,1,1,1,1,1
+Sea Incense,1,1,1,1,1
+Shiny Stone,2,2,3,1,1
+Skull Fossil,inf,,inf[$TRAINERID_ODD],,
+Sun Stone,inf,inf,inf,inf[POKEWALKER],inf[POKEWALKER]
+Thunder Stone,inf,inf,inf,,
+Upgrade,,,2,,
+Water Stone,inf,inf,inf,1,1
+Wave Incense,1,1,1,1,1
