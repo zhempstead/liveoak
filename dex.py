@@ -119,7 +119,18 @@ GAMES = {g.name: g for g in [
     Game("HEARTGOLD", 4, "DS", True),
     Game("SOULSILVER", 4, "DS", True),
     Game("POKEWALKER", 4, None, False, frozenset({"NO_DEX"})),
+    Game("RANCH", 4, "Wii", False, frozenset({"NO_BREED", "NO_EVOLVE", "SOFTWARE"})),
+    Game("BATTLEREVOLUTION", 4, "Wii", False, frozenset({"NO_DEX"})),
+    Game("RANGER", 4, "DS", False, frozenset({"NO_DEX"})),
+    Game("SHADOWOFALMIA", 4, "DS", False, frozenset({"NO_DEX"})),
+    Game("GUARDIANSIGNS", 4, "DS", False, frozenset({"NO_DEX"})),
 ]}
+
+CONSOLES_WITH_SOFTWARE = [
+    "Wii",
+
+    "3DS",
+]
 
 class Generation():
     DATA = ["breed", "buy", "environment", "evolve", "fossil", "gift", "pickup_item", "pickup_pokemon", "trade", "wild", "wild_item"]
@@ -171,9 +182,10 @@ class Generation():
 class Cartridge():
     counter = {}
 
-    def __init__(self, game, generation, gameid=None):
+    def __init__(self, game, generation, gameid=None, console=None):
         self.game = game
         self.generation = generation
+        self.console = console # Software games only
         self.id = gameid
         if self.id is None:      
             self.id = f"{self.game.name}_{Cartridge.counter.get(self.game.name, 1)}"
@@ -207,7 +219,7 @@ class Cartridge():
 
     def copy(self):
         memo = {}
-        c = Cartridge(self.game, self.generation, self.id)
+        c = Cartridge(self.game, self.generation, gameid=self.id)
         for species, pokemon in self.pokemon.items():
             c.pokemon[species] = pokemon.copy()
         c.items = self.items.copy()
@@ -253,7 +265,7 @@ class Cartridge():
                         if len(c) > 1:
                             raise ValueError(f"Invalid child entry {c}")
                         item = Item(row.ITEM) if "ITEM" in row and row.ITEM else None
-                        rules.append(Rule.breed(pg, c[0], gender == Gender.FEMALE, item))
+                        rules.append(Rule.breed(pg, c[0], gender != Gender.FEMALE, item))
                     
         if self.generation.buy is not None:
             for _, row in self.generation.buy.iterrows():
@@ -351,10 +363,16 @@ class Cartridge():
             for idx, row in self.generation.trade.iterrows():
                 if self.game.name not in row.GAME:
                     continue
+                if row.get("REQUIRED"):
+                    reqs, valid = self.parse_input(row.REQUIRED)
+                    if reqs:
+                        raise ValueError(f"Non-game req(s) {reqs} not supported for in-game trade")
+                    if not valid:
+                        continue
                 if row.GIVE == "ANY":
                     give = None
                 else:
-                    give = self.parse_pokemon_input(row.GIVE)
+                    give = self.parse_pokemon_input(row.GIVE) 
                 gets = self.parse_output(row.GET)
                 choice_id = None
                 if len(gets) > 1:
@@ -566,19 +584,20 @@ class Cartridge():
                 new_combos = list(product(new_consumed, new_required))
                 choice_rule = None
                 if len(new_combos) > 1 and rule.repeats != math.inf:
-                    choice_rule = Rule.choice(rule_name, [], repeats=rule.repeats)
+                    choice_rule = Rule.choice("choice:" + rule_name, [], repeats=rule.repeats)
                     to_add.append(choice_rule)
 
                 for idx, (consumed, required) in enumerate(product(new_consumed, new_required)):
                     output = rule.output
                     if choice_rule is None:
                         repeats = rule.repeats
+                    else:
+                        consumed = list(consumed) + [GameChoice("choice:" + rule_name)]
+                        repeats = math.inf
+                    if len(new_combos) == 1:
                         new_name = rule_name
                     else:
-                        consumed = list(consumed) + [GameChoice(rule.name)]
-                        repeats = math.inf
                         new_name = f"{rule_name}_{idx}"
-                    
                     if rule.keep_props:
                         props = None
                         for c in consumed:
@@ -1097,8 +1116,15 @@ class Collection():
             G = nx.DiGraph()
             for cart in self.cartridges:
                 G.add_node(cart.id)
+                for kind, cart2s in cart.transfers.items():
+                    if kind == "CONNECT":
+                        continue
+                    for cart2 in cart2s:
+                        G.add_edge(cart.id, cart2.id)
+            for cart in self.cartridges:
                 for cart2 in cart.transfers["CONNECT"]:
-                    G.add_edge(cart.id, cart2.id)
+                    if not G.has_edge(cart.id, cart2.id):
+                        G.add_edge(cart2.id, cart.id)
             for cart in self.cartridges:
                 if cart == self.main_cartridge:
                     continue
@@ -1138,6 +1164,9 @@ class Collection():
         # GEN IV
         elif game.console == "DS":
             if self.hardware.get("DS", 0) + self.hardware.get("DSi", 0) + self.hardware.get("3DS", 0) >= 1:
+                return True
+        elif game.console == "Wii":
+            if self.hardware.get("Wii", 0) + self.hardware.get("WiiU", 0) >= 1:
                 return True
 
         return False
@@ -1323,22 +1352,19 @@ class Collection():
                     if game2.gen == 3 and game2.core:
                         if gba_gcn:
                             cart1.transfer(cart2, "TRADE")
-                elif game1.name == "BONUSDISC":
-                    if game2.name in ["RUBY", "SAPPHIRE"]:
-                        cart1.transfer(cart2, "CONNECT")
                 elif game1.gen == 4 and game1.core:
-                    if game2.gen == 3 and game2.core:
-                        if gba_ds:
-                            cart1.transfer(cart2, "CONNECT")
-                    elif game2.gen == 4 and game2.core:
+                    if game2.gen == 4 and game2.core:
                         if ds_trade:
                             cart1.transfer(cart2, "TRADE")
-                    elif game2.name ==  "POKEWALKER":
+                    elif game2.name == "POKEWALKER":
                         if game1.name in ["HEARTGOLD", "SOULSILVER"]:
                             cart1.transfer(cart2, "CONNECT")
-                elif game1.name == "POKEWALKER":
-                    if game2.name in ["HEARTGOLD", "SOULSILVER"]:
-                        cart1.transfer(cart2, "CONNECT")
+                    elif game2.name == "RANCH":
+                        if game1.name in ["DIAMOND", "PEARL"]:
+                            cart1.transfer(cart2, "CONNECT")
+                    elif game2.name in ["BATTLEREVOLUTION", "RANGER", "SHADOWOFALMIA", "GUARDIANSIGNS"]:
+                        if ds_trade:
+                            cart1.transfer(cart2, "CONNECT")
 
     def calc_dexes(self):
         for cart in self.cartridges:
@@ -1537,11 +1563,13 @@ class Rule():
 
     def __deepcopy__(self, memo):
         return Rule(
-            deepcopy(self.name, memo),
-            deepcopy(self.consumed, memo),
-            deepcopy(self.required, memo),
-            deepcopy(self.output, memo),
-            deepcopy(self.repeats, memo),
+            self.name,
+            tuple(self.consumed),
+            tuple(self.required),
+            tuple(self.output),
+            self.repeats,
+            self.keep_props,
+            None if self.dex is None else tuple(self.dex)
         )
 
     @staticmethod
@@ -1648,15 +1676,31 @@ def main(args):
     all_games = [[]]
     all_hardware = [{}]
     num_collections = 1
+    hardware_with_software = {}
     for item in args.game_or_hardware:
         if item == '.':
             num_collections += 1
             all_games.append([])
             all_hardware.append({})
         if item in GAMES:
-            all_games[-1].append(GAMES[item])
+            if "SOFTWARE" in GAMES[item].props:
+                raise ValueError(f"Game {item} is software only")
+            all_games[-1].append((GAMES[item], None))
         else:
-            all_hardware[-1][item] = all_hardware[-1].get(item, 0) + 1
+            h, _, gs = item.partition('[')
+            all_hardware[-1][h] = all_hardware[-1].get(item, 0) + 1
+            if gs:
+                idx = hardware_with_software.get(h, 0) + 1
+                hardware_with_software[h] = idx
+                for game_name in gs[:-1].split(','):
+                    if game_name not in GAMES:
+                        raise ValueError(f"Unrecognized game {game_name}")
+                    game = GAMES[game_name]
+                    if game.console != h:
+                        raise ValueError(f"Game {game_name} goes with {game.console}, not {h}")
+                    if h not in CONSOLES_WITH_SOFTWARE:
+                        raise ValueError(f"Console {h} doesn't support software games")
+                    all_games[-1].append((game, f"{h}_{idx}"))
 
     if num_collections == 1:
         games = all_games[0]
@@ -1669,6 +1713,8 @@ def main(args):
         print("\n".join(collection.missing()))
         print("\n---\n")
         print(f"TOTAL: {len(obtainable)}")
+        cart = collection.main_cartridge
+        import pdb; pdb.set_trace()
     elif num_collections == 2:
         raise ValueError("Games/hardware before the first '.' are universal, so there should be 0 or 2+ instances of '.'")
     else:
@@ -1682,10 +1728,13 @@ def main(args):
         obtainables = [c.obtainable() for c in collections]
         missings = [c.missing() for c in collections]
 
-        obtainable_lines = []
-        for obtainable in obtainables:
-            lines = [line for line in obtainable if not all(line in o for o in obtainables)]
-            obtainable_lines.append(lines)
+        if args.all:
+            obtainable_lines = obtainables
+        else:
+            obtainable_lines = []
+            for obtainable in obtainables:
+                lines = [line for line in obtainable if not all(line in o for o in obtainables)]
+                obtainable_lines.append(lines)
 
         if args.compact:
             max_rows = max([len(lines) for lines in obtainable_lines])
@@ -1725,8 +1774,8 @@ def main(args):
         print(' | '.join(lens))
 
 def calc_dexes(games, hardware):
-    generations = {gen: Generation(gen) for gen in set([g.gen for g in games])}
-    cartridges = [Cartridge(g, generations[g.gen]) for g in games]
+    generations = {gen: Generation(gen) for gen in set([g.gen for g, _ in games])}
+    cartridges = [Cartridge(g, generations[g.gen], console=c) for g, c in games]
     collection = Collection(cartridges, hardware)
 
     for cart in cartridges:
@@ -1738,6 +1787,7 @@ def calc_dexes(games, hardware):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('game_or_hardware', nargs='+', default=[])
+    parser.add_argument('--all', '-a', action='store_true')
     parser.add_argument('--compact', '-c', action='store_true')
     args = parser.parse_args()
     main(args)

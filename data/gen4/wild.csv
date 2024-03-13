@@ -360,8 +360,9 @@ Regigigas,"1[Regirock,Regice,Registeel]","1[Regirock,Regice,Registeel]","1[Regir
 Giratina,1,1,1,,
 Cresselia,1,1,1,,
 Darkrai,1[Member Card],1[Member Card],1[Member Card],,
-Shaymin,1[Oak's Letter],1[Oak's Letter],1[Oak's Letter],,
-Arceus,1[Azure Flute],1[Azure Flute],1[Azure Flute],,
+Shaymin,1[Oak's Letter],1[Oak's Letter],,,
+Shaymin_FATEFUL,,,1[Oak's Letter],,
+Arceus_HALLOFORIGIN,1[Azure Flute],1[Azure Flute],1[Azure Flute],,
 Armor Fossil,,inf,inf[$TRAINERID_EVEN],,
 Claw Fossil,inf,inf,inf,inf,
 Dawn Stone,2,2,3,1,1
