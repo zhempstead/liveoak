@@ -311,9 +311,11 @@ Pachirisu,inf,inf,inf,inf,inf
 Buizel,inf,inf,inf,inf,inf
 Floatzel,inf,inf,inf,inf,inf
 Cherubi,inf,inf,inf,inf,inf
-Shellos,inf,inf,inf,,
-Shellos_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
-Gastrodon,inf,inf,inf,,
+Shellos_WEST,inf,inf,inf,,
+Shellos_WEST_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Shellos_EAST,inf,inf,inf,,
+Gastrodon_WEST,inf,inf,inf,,
+Gastrodon_EAST,inf,inf,inf,,
 Drifloon,inf,inf,inf,,
 Buneary,inf,inf,inf,inf,inf
 Glameow,,inf,,,
