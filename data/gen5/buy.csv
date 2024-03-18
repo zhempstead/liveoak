@@ -1,0 +1,54 @@
+GAME,POKEMON_OR_ITEM,REQUIRED
+CORE,Armor Fossil,
+CORE,Claw Fossil,
+CORE,Deep Sea Scale,
+CORE,Deep Sea Tooth,
+CORE,Dome Fossil,
+CORE,Dragon Scale,
+CORE,Dubious Disc,
+CORE,Electirizer,
+CORE,Full Incense,
+CORE,Helix Fossil,
+CORE,King's Rock,
+CORE,Lax Incense,
+CORE,Luck Incense,
+CORE,Magmarizer,
+CORE,Metal Coat,
+CORE,Odd Incense,
+CORE,Old Amber,
+CORE,Protector,
+CORE,Pure Incense,
+CORE,Rage Candy Bar,
+CORE,Razor Claw,
+CORE,Razor Fang,
+CORE,Reaper Cloth,
+CORE,Rock Incense,
+CORE,Root Fossil,
+CORE,Rose Incense,
+CORE,Sea Incense,
+CORE,Skull Fossil,
+CORE,Upgrade,
+CORE,Wave Incense,
+"BLACK2,WHITE2",Cover Fossil,
+"BLACK2,WHITE2",Dawn Stone,
+"BLACK2,WHITE2",Dusk Stone,
+"BLACK2,WHITE2",Everstone,
+"BLACK2,WHITE2",Fire Stone,
+"BLACK2,WHITE2",Leaf Stone,
+"BLACK2,WHITE2",Moon Stone,
+"BLACK2,WHITE2",Plume Fossil,
+"BLACK2,WHITE2",Prism Scale,
+"BLACK2,WHITE2",Shiny Stone,
+"BLACK2,WHITE2",Sun Stone,
+"BLACK2,WHITE2",Thunder Stone,
+"BLACK2,WHITE2",Water Stone,
+BLACK,Dawn Stone,$BC_GRACE
+BLACK,Dusk Stone,$BC_HERMAN
+BLACK,Fire Stone,$BC_VINCENT
+BLACK,Leaf Stone,$BC_KARENNA
+BLACK,Moon Stone,$BC_ROSA
+BLACK,Oval Stone,$BC_CARLOS
+BLACK,Shiny Stone,$BC_MOLLY
+BLACK,Sun Stone,$BC_LENA
+BLACK,Thunder Stone,$BC_KEN
+BLACK,Water Stone,$BC_RALPH

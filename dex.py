@@ -4,7 +4,7 @@ import argparse
 from copy import deepcopy
 from dataclasses import dataclass, replace
 from enum import Enum
-from itertools import combinations, product
+from itertools import combinations, product, zip_longest
 import math
 from pathlib import Path
 from typing import Optional
@@ -119,17 +119,29 @@ GAMES = {g.name: g for g in [
     Game("HEARTGOLD", 4, "DS", True),
     Game("SOULSILVER", 4, "DS", True),
     Game("POKEWALKER", 4, None, False, frozenset({"NO_DEX"})),
-    Game("RANCH", 4, "Wii", False, frozenset({"NO_BREED", "NO_EVOLVE", "SOFTWARE"})),
+    Game("RANCH", 4, "Wii", False, frozenset({"NO_DEX", "SOFTWARE"})),
     Game("BATTLEREVOLUTION", 4, "Wii", False, frozenset({"NO_DEX"})),
     Game("RANGER", 4, "DS", False, frozenset({"NO_DEX"})),
-    Game("SHADOWOFALMIA", 4, "DS", False, frozenset({"NO_DEX"})),
+    Game("SHADOWSOFALMIA", 4, "DS", False, frozenset({"NO_DEX"})),
     Game("GUARDIANSIGNS", 4, "DS", False, frozenset({"NO_DEX"})),
+
+    Game("BLACK", 5, "DS", True),
+    Game("WHITE", 5, "DS", True),
+    Game("BLACK2", 5, "DS", True),
+    Game("WHITE2", 5, "DS", True),
+    Game("DREAMWORLD", 5, None, False, frozenset({"NO_DEX"})),
+    Game("DREAMRADAR", 5, "3DS", False, frozenset({"NO_BREED", "NO_EVOLVE", "SOFTWARE"})),
 ]}
 
 CONSOLES_WITH_SOFTWARE = [
     "Wii",
-
     "3DS",
+]
+
+BC_WF_TRAINERS = [
+    "BRITNEY", "CARLOS", "COLLIN", "DAVE", "DOUG", "ELIZA", "EMI", "FREDERIC", "GENE", "GRACE",
+    "HERMAN", "JACQUES", "KARENNA", "KEN", "LENA", "LEO", "LYNETTE", "MARIE", "MIHO", "MIKI",
+    "MOLLY", "PIERCE", "PIPER", "RALPH", "ROBBIE", "ROSA", "RYDER", "SHANE", "SILVIA", "VINCENT",
 ]
 
 class Generation():
@@ -248,15 +260,10 @@ class Cartridge():
         self.transfers[category].append(self)
 
     def init_rules(self):
-        if "NO_DEX" in self.game.props:
-            self.rules = Rules([])
-            self.transfer_rules = {}
-            return
-
         rules = []
         transfer_rules = []
 
-        if self.generation.breed is not None and "NO_BREED" not in self.game.props:
+        if self.generation.breed is not None and "NO_BREED" not in self.game.props and "NO_DEX" not in self.game.props:
             for _, row in self.generation.breed.iterrows():
                 pr = self.parse_pokemon_input(row.PARENT)
                 for gender in self.generation.genders(pr.species):
@@ -280,14 +287,21 @@ class Cartridge():
 
         trade_evos = {}
         trade_evos_by_item = {}
+        trade_evo_pairs = {}
 
-        if self.generation.evolve is not None and "NO_EVOLVE" not in self.game.props:
+        if self.generation.evolve is not None and "NO_EVOLVE" not in self.game.props and "NO_DEX" not in self.game.props:
             for _, row in self.generation.evolve.iterrows():
                 env = row.get("ENVIRONMENT")
                 if env and env not in self.env:
                     continue
+                other = self.parse_pokemon_input(row.OTHER_POKEMON) if row.get("OTHER_POKEMON") else None
                 if row.get("TRADE"):
                     item = row.get("ITEM", False)
+                    if other:
+                        if item:
+                            raise ValueError("Not handled")
+                        trade_evo_pairs[row.FROM] = (row.TO, other.species)
+                        continue
                     if row.FROM not in trade_evos:
                         trade_evos[row.FROM] = {}
                     trade_evos[row.FROM][item] = row.TO
@@ -296,7 +310,6 @@ class Cartridge():
                     trade_evos_by_item[item][row.FROM] = row.TO
                     continue
                 item = Item(row.ITEM) if row.ITEM else None
-                other = self.parse_pokemon_input(row.OTHER_POKEMON) if row.get("OTHER_POKEMON") else None
                 pre = self.parse_pokemon_input(row.FROM, forbidden={"NOEVOLVE"})
                 post = self.parse_output(row.TO, use_gender=False)
                 if len(post) != 1:
@@ -351,7 +364,7 @@ class Cartridge():
                     for pokemon_or_items in choices:
                         rules.append(Rule.choose(str(idx), pokemon_or_items))
 
-        if self.generation.pickup_item is not None:
+        if self.generation.pickup_item is not None and "NO_DEX" not in self.game.props:
             for _, row in self.generation.pickup_item.iterrows():
                 if self.game.name not in row.GAME:
                     continue
@@ -365,10 +378,10 @@ class Cartridge():
                     continue
                 if row.get("REQUIRED"):
                     reqs, valid = self.parse_input(row.REQUIRED)
-                    if reqs:
-                        raise ValueError(f"Non-game req(s) {reqs} not supported for in-game trade")
                     if not valid:
                         continue
+                else:
+                    reqs = []
                 if row.GIVE == "ANY":
                     give = None
                 else:
@@ -377,14 +390,28 @@ class Cartridge():
                 choice_id = None
                 if len(gets) > 1:
                     choice_id = f"TRADE_GENDER_{row.GET}_{idx}"
-                    rules.append(Rule.choice(choice_id, [], repeats=1))
+                    rules.append(Rule.choice(choice_id, reqs, repeats=1))
+                    reqs = None
                 for get in gets:
                     if len(get) != 1:
                         raise ValueError(f"Invalid trade entry {get}")
                     get = get[0]
                     item = row.get("ITEM")
-                    evolution = None
                     species = get.species
+                    if species in trade_evo_pairs:
+                        evolution, other = trade_evo_pairs(species) 
+                        if (give is None or give.species == other) and item != "Everstone":
+                            if choice_id is None:
+                                choice_id = f"TRADE_EVOLVE_{row.GET}_{idx}"
+                                rules.append(Rule.choice(choice_id, reqs, repeats=1))
+                                reqs = None
+                            if item:
+                                item = Item(item)
+                            # If your Pokemon holds an everstone, neither will evolve
+                            rules.append(Rule.ingame_trade(give, get, item, None, choice_id, give_everstone=(give.species == other), reqs=reqs))
+                            rules.append(Rule.ingame_trade(give, get, item, evolution, choice_id, reqs=reqs))
+        
+                    evolution = None
                     if species in trade_evos:
                         if item and item in trade_evos[species]:
                             evolution = trade_evos[species][item]
@@ -397,15 +424,16 @@ class Cartridge():
                                 (self.generation.id >= 4 and species == "Kadabra")
                         ):
                             evolution = trade_evos[species][False]
+                            
                     if evolution is not None:
                         evolution = Pokemon(evolution, get.gender, get.props)
                     if item:
                         item = Item(item)
-                    rules.append(Rule.ingame_trade(give, get, item, evolution, choice_id))
+                    rules.append(Rule.ingame_trade(give, get, item, evolution, choice_id, reqs=reqs))
 
 
         wild_items = {}
-        if self.generation.wild_item is not None:
+        if self.generation.wild_item is not None and "NO_DEX" not in self.game.props:
             for _, row in self.generation.wild_item.iterrows():
                 if self.game.name not in row.GAME:
                     continue
@@ -418,12 +446,10 @@ class Cartridge():
                 pokemon_or_item = row.SPECIES
                 items = [Item(i) for i in wild_items.get(pokemon_or_item, [])] or [None]
                 p_or_is = self.parse_output(pokemon_or_item, self.has_gender)
-                
-                for idx, (reqs, count) in enumerate(self.parse_wild_entry(row[self.game.name]).items()):
-                    reqs = list(reqs)
+                for idx, (consumed, reqs, count) in enumerate(self.parse_wild_entry(row[self.game.name])):
                     if count == 0:
                         continue
-                    if count != math.inf and len(items) * len(p_or_is) > 1:
+                    if count != math.inf and len(items) * len(p_or_is) > 1 and not consumed:
                         choice_id = f"WILD_{pokemon_or_item}_{idx}"
                         rules.append(Rule.choice(choice_id, reqs, repeats=count))
                         for p_or_i in p_or_is:
@@ -439,7 +465,7 @@ class Cartridge():
                             if len(p_or_i) != 1:
                                 raise ValueError("Confused")
                             for item in items:
-                                rules.append(Rule.wild(p_or_i[0], reqs, count, item))
+                                rules.append(Rule.wild(p_or_i[0], consumed, reqs, count, item))
 
         self.rules = Rules(rules)
 
@@ -452,19 +478,20 @@ class Cartridge():
                 if pokemon not in cart.generation.tradeable_pokemon:
                     continue
                 for item, evo in trade_evos.get(pokemon, {}).items():
-                    if evo not in cart.generation.tradeable_pokemon:
-                        continue
-                    transfer_rules.append(PokemonTransferRule(cart, pokemon, evo, item or None))
+                    if evo in cart.generation.tradeable_pokemon:
+                        transfer_rules.append(PokemonTransferRule(cart, pokemon, evo, item or None))
                 if pokemon in trade_evos_by_item.get(False, {}):
-                    # Held item loss glitch - Everstone is lost/ignored
-                    if self.generation.id == 3:
-                        continue
+                    # Held item loss glitch - in gen 3, Everstone is lost/ignored
                     # Everstone doesn't stop Kadabra from evolving since gen 4
-                    if pokemon == "Kadabra" and self.generation.id >= 4:
-                        continue
-                    transfer_rules.append(PokemonTransferRule(cart, pokemon, pokemon, "Everstone"))
+                    if self.generation.id != 3 and (pokemon != "Kadabra" or self.generation.id < 4):
+                        transfer_rules.append(PokemonTransferRule(cart, pokemon, pokemon, "Everstone"))
                 else:
                     transfer_rules.append(PokemonTransferRule(cart, pokemon, pokemon))
+                if pokemon in trade_evo_pairs:
+                    evo, other = trade_evo_pairs[pokemon]
+                    other_evo = trade_evo_pairs[other][0]
+                    if all(p in cart.generation.tradeable_pokemon for p in [evo, other, other_evo]):
+                        transfer_rules.append(TradePairRule(cart, pokemon, evo, other, other_evo))
         for item in self.generation.tradeable_items:
             for cart in self.transfers["ITEMS"]:
                 if item not in cart.generation.tradeable_items:
@@ -493,6 +520,10 @@ class Cartridge():
                     if trule.item not in self.transfer_rules:
                         self.transfer_rules[trule.item] = []
                     self.transfer_rules[trule.item].append(trule)
+            elif isinstance(trule, TradePairRule):
+                if trule.in1 not in self.transfer_rules:
+                    self.transfer_rules[trule.in1] = []
+                self.transfer_rules[trule.in1].append(trule)
             elif isinstance(trule, ItemTransferRule):
                 if trule.in_item is not None:
                     if trule.in_item not in self.transfer_rules:
@@ -541,9 +572,14 @@ class Cartridge():
                     out.add(o)
 
         for trule in self.transfer_rules.get(pokemon.species, []):
-            o = replace(pokemon, species=trule.out_species)
+            if isinstance(trule, PokemonTransferRule):
+                o = replace(pokemon, species=trule.out_species)
+            else:
+                o = replace(pokemon, species=trule.out1)
             if "TRANSFERRESET" in o.props:
                 o = replace(o, props=frozenset())
+            if "TRANSFERONE" in o.props:
+                o = replace(o, props - set(["TRANSFERONE"]))
             out.add(o)
         return out
 
@@ -560,12 +596,14 @@ class Cartridge():
             new_consumed = []
             new_required = []
             needs_change = False
-            props = None
             for c in rule.consumed:
                 if isinstance(c, PokemonReq):
                     needs_change = True
                     matches = [p for p in unique_pokemon.get(c.species, []) if c.matches(p)]
-                    props = [p.props for p in matches]
+                    for pokemon in matches:
+                        for prop in pokemon.props:
+                            if prop.startswith("ONE_"):
+                                raise ValueError("Not handled")
                     new_consumed.append(matches)
                 else:
                     new_consumed.append([c])
@@ -631,6 +669,10 @@ class Cartridge():
         elif "FEMALE" in props:
             props.remove("FEMALE")
             gender = Gender.FEMALE
+
+        if "ONE" in props:
+            props.remove("ONE")
+            props.add(f"ONE_{self.game.id}")
         return PokemonReq(species, gender, frozenset(props), frozenset(forbidden or []))
 
     def parse_input(self, entry, forbidden=None):
@@ -696,18 +738,22 @@ class Cartridge():
 
     def parse_wild_entry(self, entry, use_gender=True):
         if isinstance(entry, float) or isinstance(entry, int):
-            return {frozenset(): float(entry)}
-        out = {}
+            return [([], [], float(entry))]
+        out = []
         for e in entry.split(';'):
-            count, _, req_entry = e.partition('[')
-            if req_entry:
-                req, req_valid = self.parse_input(req_entry[:-1])
-                if not req_valid:
-                    continue
-                req = frozenset(req)
+            count, _, con_entry = e.partition('{')
+            if con_entry:
+                con, _ = self.parse_input(con_entry[:-1])
+                out.append((con, [], float(count)))
             else:
-                req = frozenset()
-            out[req] = out.get(req, 0) + float(count)
+                count, _, req_entry = e.partition('[')
+                if req_entry:
+                    req, req_valid = self.parse_input(req_entry[:-1])
+                    if not req_valid:
+                        continue
+                    out.append(([], req, float(count)))
+                else:
+                    out.append(([], [], float(count)))
         return out
         
 
@@ -728,14 +774,53 @@ class Cartridge():
                 return
 
             pokemon = entry
+            send_count = math.inf
             if "TRANSFERRESET" in entry.props:
+                # Pokemon that is only special to the given save
                 pokemon = replace(pokemon, props=frozenset({}))
+            if "TRANSFERONE" in entry.props:
+                # Pokemon that can be received only once by a given save of the destination game
+                pokemon = replace(pokemon, props=pokemon.props - set({"TRANSFERONE"}))
+                send_count = 1
+            for prop in entry.props:
+                # Pokemon that can be obtained only once from a cartridge, with no possibility of a reset
+                if prop.startswith("ONE_"):
+                    if prev_count >= 1:
+                        return
+                    cartsets = self.unique_pokemon_transfers(entry.species)
+                    if len(cartsets) > 1:
+                        raise ValueError("Not handled")
+                    cartset = gamesets[0]
+                    global all_cartridges
+                    for cart_id in gameset:
+                        if cart_id == self.id:
+                            continue
+                        all_cartridges[cart_id].acquire(entry, 1, communicate=False)
+                    return
 
-            for trule in self.transfer_rules.get(pokemon.species, []):
+            trules = self.transfer_rules.get(pokemon.species, [])
+            for trule in trules:
+                if not isinstance(trule, PokemonTransferRule):
+                    continue
                 if trule.item is not None and self.items.get(trule.item) == 0:
                     continue
                 transfer_pokemon = replace(pokemon, species=trule.out_species)
-                trule.cart.acquire(transfer_pokemon, count=math.inf)
+                trule.cart.acquire(transfer_pokemon, count=send_count)
+            for trule in trules:
+                if not isinstance(trule, TradePairRule):
+                    continue
+                if send_count != math.inf:
+                    raise ValueError("Not handled")
+                matches2 = self.get_matches(PokemonReq(trule.in2, forbidden=frozenset(["NOTRANSFER"])))
+                if matches2:
+                    transfer1 = replace(pokemon, species=trule.out1)
+                    trule.cart.acquire(transfer1, count=send_count)
+                for in2, count in matches2:
+                    if count != math.inf:
+                        raise ValueError("Not handled")
+                    transfer2 = replace(in2, species=trule.out2)
+                    trule.cart.acquire(transfer2, count=send_count)
+
         elif isinstance(entry, Item):
             item = entry.item
             self.items[item] = self.items.get(item, 0) + count
@@ -749,6 +834,8 @@ class Cartridge():
                         out_pokemon = replace(in_pokemon, species=trule.out_species)
                         if "TRANSFERRESET" in out_pokemon.props:
                             out_pokemon = replace(out_pokemon, props=frozenset({}))
+                        if "TRANSFERONE" in out_pokemon.props:
+                            raise ValueError("Not handled")
                         trule.cart.acquire(out_pokemon, count=math.inf)
                 elif isinstance(trule, ItemTransferRule):
                     if trule.in_choice is not None and self.choices.get(trule.in_choice, 0) == 0:
@@ -1056,6 +1143,79 @@ class Cartridge():
             final_dexes.add(tuple(self.dex.items()))
         return final_dexes
 
+    def handle_special(self, collection):
+        if self.game.name == "BLACK":
+            # Black City
+            # Exactly 10 trainers have useful items for sale (evolution stones), but unlimited
+            # amounts of all can be found in the wild.
+            return False
+
+        elif self.game.name == "WHITE":
+            # White Forest
+            if self.transfers["TRADE"]:
+                # If we can trade, we can reset and get every trainer
+                for trainer in BC_WF_TRAINERS:
+                    self.acquire(GameChoice(f"WF_{trainer}"), 1)
+                return True
+            elif self.transfers["POKEMON"]:
+                if self.id == collection.main_cartridge.id:
+                    raise ValueError("Not handled")
+                # If we can transfer, other cartridges can get every trainer.
+                # The exact combinations shouldn't matter
+                trainers = [GameChoice(f"WF_{trainer}") for trainer in BC_WF_TRAINERS]
+                rules = [Rule.choice("WF", [])]
+                rules.append(Rule.choose("WF", trainers[:10]))
+                rules.append(Rule.choose("WF", trainers[10:20]))
+                rules.append(Rule.choose("WF", trainers[20:30]))
+                for rule in rules:
+                    self.rules[rule.name] = rule
+                return True
+            else:
+                if len(collection.cartridges) == 1:
+                    # Every White Forest Pokemon is present in at least one of these groups, and
+                    # missing from at least one of these groups.
+                    #
+                    # The first group is one of the optimum combinations.
+                    tgroups = [
+                        ['BRITNEY', 'CARLOS', 'DOUG', 'ELIZA', 'EMI', 'FREDERIC', 'JACQUES', 'LENA', 'LYNETTE', 'SILVIA'],
+                        ['DAVE', 'GENE', 'LEO', 'LYNETTE', 'MIHO', 'MIKI', 'PIERCE', 'PIPER', 'ROBBIE', 'SHANE'],
+                        ['COLLIN', 'GRACE', 'HERMAN', 'KARENNA', 'KEN', 'MARIE', 'MOLLY', 'ROSA', 'RYDER', 'VINCENT'],
+                    ]
+                    cgroups = [[GameChoice(f"WF_{t}") for t in tgroup] for tgroup in tgroups]
+                    rules = [Rule.choice("WF", [])] + [Rule.choose("WF", cg) for cg in cgroups]
+                    for rule in rules:
+                        self.rules[rule.name] = rule
+                    return True
+
+                # If White is paired with Dream World or any 4th-gen game, all needed White
+                # Forest Pokemon can be acquired with fewer than 10 trainers
+                extra_pokemon = {}
+                for trainer in BC_WF_TRAINERS:
+                    game_copy = self.copy()
+                    game_copy.acquire(GameChoice(f"WF_{trainer}"), 1)
+                    game_copy.apply_all_safe_rules()
+                    extras = {species for species in self.dex if game_copy.dex[species] and not self.dex[species]}
+                    if extras:
+                        extra_pokemon[trainer] = extras
+                if len(extra_pokemon) <= 10:
+                    for trainer in extra_pokemon.keys():
+                        self.acquire(GameChoice(f"WF_{trainer}"), 1)
+                    return True
+                useful_trainers = set(extra_pokemon.keys())
+                useful_pokemon = set().union(*extra_pokemon.values())
+                num_useful = len(useful_pokemon)
+                best_trainers = set()
+                best_extra_count = 0
+                for idx, trainerset in enumerate(combinations(useful_trainers, 10)):
+                    extra = set().union(*(extra_pokemon[t] for t in trainerset))
+                    if len(extra) == num_useful:
+                        for trainer in trainerset:
+                            self.acquire(GameChoice(f"WF_{trainer}"), 1)
+                        return True
+                raise ValueError("Shouldn't reach here")
+        return False
+
+
     def get_matches(self, req):
         matches = []
         if isinstance(req, PokemonReq):
@@ -1089,7 +1249,38 @@ class Cartridge():
         else:
             import pdb; pdb.set_trace()
             raise ValueError(f"Invalid entry {entry}")
-            
+
+    def unique_pokemon_transfers(self, species, already_visited=None):
+        if already_visited is None:
+            already_visited = frozenset()
+        visited = already_visited.union(set([self.id]))
+        possibilities = set()
+        for cart in set(self.transfers["POKEMON"] + self.transfers["TRADE"]):
+            if cart.id in already_visited:
+                continue
+            if species not in cart.generation.tradeable_pokemon:
+                continue
+            for poss in cart.unique_pokemon_transfers(species, visited):
+                possibilities.add(poss)
+
+        if not possibilities:
+            return frozenset({visited})
+
+        to_remove = set()
+        for poss1 in possibilities:
+            for poss2 in possibilities:
+                if poss2 in to_remove:
+                    continue
+                if poss1 == poss2:
+                    continue
+                if poss1.issubset(poss2):
+                    to_remove.add(poss1)
+                    break
+        for poss in to_remove:
+            possibilities.remove(poss)
+        return frozenset(possibilities)
+                    
+
 
 class Collection():
     def __init__(self, cartridges, hardware):
@@ -1167,6 +1358,11 @@ class Collection():
                 return True
         elif game.console == "Wii":
             if self.hardware.get("Wii", 0) + self.hardware.get("WiiU", 0) >= 1:
+                return True
+
+        # GEN V
+        elif game.console == "3DS":
+            if self.hardware.get("3DS", 0) >= 1:
                 return True
 
         return False
@@ -1365,6 +1561,22 @@ class Collection():
                     elif game2.name in ["BATTLEREVOLUTION", "RANGER", "SHADOWOFALMIA", "GUARDIANSIGNS"]:
                         if ds_trade:
                             cart1.transfer(cart2, "CONNECT")
+                    elif game2.gen == 5 and game2.core:
+                        if ds_trade:
+                            cart1.transfer(cart2, "POKEMON")
+                elif game1.gen == 5 and game1.core:
+                    if game2.gen == 5 and game2.core:
+                        if ds_trade:
+                            cart1.transfer(cart2, "TRADE")
+                elif game1.name == "DREAMWORLD":
+                    if game2.gen == 5 and game2.core:
+                        cart1.transfer(cart2, "POKEMON")
+                        cart1.transfer(cart2, "ITEMS")
+                elif game1.name == "DREAMRADAR":
+                    if game2.gen == 4 and game2.core:
+                        cart1.transfer(cart2, "CONNECT")
+                    if game2.name in ["BLACK2", "WHITE2"]:
+                        cart1.transfer(cart2, "POKEMON")
 
     def calc_dexes(self):
         for cart in self.cartridges:
@@ -1374,29 +1586,12 @@ class Collection():
 
         if len(self.cartridges) == 1:
             self.main_cartridge.all_safe_paths()
+            if self.main_cartridge.handle_special(self):
+                self.main_cartridge.all_safe_paths()
         else:
-            state_copies = {cart.id: None for cart in self.cartridges}
-            while True:
-                updates = False
-                for cart in self.cartridges:
-                    cart_state = (cart.pokemon, cart.items, cart.choices)
-                    if state_copies[cart.id] != cart_state:
-                        updates = True
-                        state_copies[cart.id] = deepcopy(cart_state)
-                        cart.all_safe_paths()
-                if not updates:
-                    break
-            state_copies = {cart.id: None for cart in self.cartridges}
-            while True:
-                updates = False
-                for cart in self.cartridges:
-                    cart_state = (cart.pokemon, cart.items, cart.choices)
-                    if state_copies[cart.id] != cart_state:
-                        updates = True
-                        state_copies[cart.id] = deepcopy(cart_state)
-                        cart.try_paths(only_side_effects=True)
-                if not updates:
-                    break
+            self.try_cart_paths()
+            if any(cart.handle_special(self) for cart in self.cartridges):
+                self.try_cart_paths()
 
         paths = self.main_cartridge.try_paths()
         dexes = pd.DataFrame([[p[1] for p in path] for path in paths], columns=self.pokemon_list.index)
@@ -1429,10 +1624,66 @@ class Collection():
             combos = combos - subsets
             group_combos.append(combos)
 
-        self.dexes = dexes
-        self.groups = groups
-        self.group_combos = group_combos
-        self.pokemon_by_group_idx = pokemon_by_group_idx
+        group_min_idxs = [min([self.pokemon_list.loc[p, 'index'] for p in group]) for group in groups]
+
+        present = {}
+        missing = {}
+        idx2gidx = {}
+        idx2pokemon = {}
+
+        for pokemon, row in self.pokemon_list.iterrows():
+            idx = row['index']
+            idx2pokemon[idx] = pokemon
+            if all(dexes[pokemon]):
+                present[idx] = [idx]
+                continue
+            elif all(~dexes[pokemon]):
+                missing[idx] = [idx]
+                continue
+
+            group_idx = pokemon_by_group_idx[pokemon]
+            idx2gidx[idx] = group_idx
+            if idx == group_min_idxs[group_idx]:
+                group = [self.pokemon_list.loc[p, 'index'] for p in groups[group_idx]]
+                present_combos = sorted([
+                    [idx for idx, present in zip(group, combo) if present]
+                    for combo in group_combos[group_idx]
+                ], key=lambda group: (-len(group), group))
+                missing_combos = sorted([
+                    [idx for idx, present in zip(group, combo) if not present]
+                    for combo in group_combos[group_idx]
+                ], key=lambda group: (-len(group), group))
+                for line in zip_longest(*present_combos):
+                    present[min([l for l in line if l is not None])] = list(line)
+                for line in zip_longest(*missing_combos):
+                    missing[min([l for l in line if l is not None])] = list(line)
+                
+        return Result(present, missing, idx2gidx, idx2pokemon)
+
+
+    def try_cart_paths(self):
+        state_copies = {cart.id: None for cart in self.cartridges}
+        while True:
+            updates = False
+            for cart in self.cartridges:
+                cart_state = (cart.pokemon, cart.items, cart.choices)
+                if state_copies[cart.id] != cart_state:
+                    updates = True
+                    state_copies[cart.id] = deepcopy(cart_state)
+                    cart.all_safe_paths()
+            if not updates:
+                break
+        state_copies = {cart.id: None for cart in self.cartridges}
+        while True:
+            updates = False
+            for cart in self.cartridges:
+                cart_state = (cart.pokemon, cart.items, cart.choices)
+                if state_copies[cart.id] != cart_state:
+                    updates = True
+                    state_copies[cart.id] = deepcopy(cart_state)
+                    cart.try_paths(only_side_effects=True)
+            if not updates:
+                break
 
     def obtainable(self):
         groups_printed = set()
@@ -1517,6 +1768,214 @@ class Rules(dict):
                 outputs[o].add(rule_name)
         return outputs
 
+class MultiResult():
+    def __init__(self, results, pokemon2idx, match_version_exclusives):
+        self.results = results
+        self.max_idx = max([r.max_idx for r in results])
+        self.pokemon2idx = pokemon2idx
+        for result in self.results:
+            if result.max_idx == self.max_idx:
+                self.idx2pokemon = result.idx2pokemon
+                break
+        self.all_present = set()
+        self.all_missing = set()
+        for idx in range(1, self.max_idx + 1):
+            line = self.results[0].line(idx)
+            matches = True
+            for result in self.results[1:]:
+                if result.line(idx) != line:
+                    matches = False
+                    break
+            if matches:
+                if line is None:
+                    self.all_missing.add(idx)
+                else:
+                    self.all_present.add(idx)
+
+        
+        self.version_exclusives = {}
+        if match_version_exclusives:
+            ve_table = pd.read_csv(Path("data") / "version_exclusives.csv")
+            for _, row in ve_table.iterrows():
+                idx1 = self.pokemon2idx.get(row.SPECIES1)
+                idx2 = self.pokemon2idx.get(row.SPECIES2)
+                if idx1 is None or idx2 is None:
+                    continue
+                present_patterns = set([(idx1 in r.present, idx2 in r.present) for r in self.results])
+                if (True, False) in present_patterns and (False, True) in present_patterns and (True, True) not in present_patterns:
+                    if idx1 not in self.version_exclusives:
+                        self.version_exclusives[idx1] = set()
+                    if idx2 not in self.version_exclusives:
+                        self.version_exclusives[idx2] = set()
+                    self.version_exclusives[idx1].add(idx2)
+                    self.version_exclusives[idx2].add(idx1)
+                
+
+    def full_group(self, idx):
+        processed = set()
+        to_process = set([idx])
+        while to_process:
+            idx = to_process.pop()
+            processed.add(idx)
+            ve_opposites = self.version_exclusives.get(idx)
+            if ve_opposites is not None:
+                for opp_idx in ve_opposites:
+                    if opp_idx not in processed:
+                        to_process.add(opp_idx)
+                
+            for result in self.results:
+                gidx = result.idx2gidx.get(idx)
+                if gidx is None:
+                    continue
+                for sub_idx in result.gidx2idxs[gidx]:
+                    if sub_idx not in processed:
+                        to_process.add(sub_idx)
+        return processed
+
+
+    def _group_lines(self, idxs, obtainable=True):
+        lines = [r._lines(r.present if obtainable else r.missing, idxs) for r in self.results]
+        return list(zip_longest(*lines, fillvalue=""))
+
+    def print(self, obtainable=True, skip_identical=True):
+        vline = ["-" for _ in self.results]
+        handled_idxs = set()
+        lines = []
+        for idx in range(1, self.max_idx + 1):
+            if idx in handled_idxs:
+                continue
+            if idx in self.all_missing and skip_identical:
+                continue
+            if idx in self.all_present and skip_identical:
+                continue
+            
+            sub_idxs = self.full_group(idx)
+            if skip_identical:
+                sub_idxs = sub_idxs.difference(self.all_missing).difference(self.all_present)
+            sub_idxs = sorted(sub_idxs)
+            group_lines = self._group_lines(sub_idxs, obtainable)
+            if len(group_lines) > 1:
+                if lines and lines[-1] != vline:
+                    lines.append(vline)
+                lines += group_lines
+                lines.append(vline)
+            else:
+                lines += group_lines
+            handled_idxs = handled_idxs.union(sub_idxs)
+        if lines and lines[-1] != vline:
+            lines.append(vline)
+        lines.append([str(r.count()) for r in self.results])
+        self._print_lines(lines)
+
+    def print_compact(self, obtainable=True):
+        if obtainable:
+            lines = [r._lines(r.present, r.order()) for r in self.results]
+        else:
+            lines = [r._lines(r.missing, r.order()) for r in self.results]
+        lines = list(zip_longest(*lines, fillvalue=''))
+        lines.append(['-' for _ in self.results])
+        lines.append([str(r.count()) for r in self.results])
+        self._print_lines(lines)
+
+    def print_all_present(self):
+        r = self.results[0]
+        print("\n".join(self.results[0]._lines(self.results[0].present, sorted(self.all_present))))
+
+    def _print_lines(self, lines):
+        max_lens = [max(*[len(l[j]) for l in lines]) for j in range(len(lines[0]))]
+        lines = [[l[j] + ("-" if l[j] == "-" else " ")*(max_lens[j] - len(l[j])) for j in range(len(l))] for l in lines]
+        lines = [('-|-' if l[0].startswith('--') else ' | ').join(l) for l in lines]
+        print("\n".join(lines))
+        
+
+
+class Result():
+    def __init__(self, present, missing, idx2gidx, idx2pokemon):
+        self.present = present
+        self.missing = missing
+        self.idx2gidx = idx2gidx
+        self.idx2pokemon = idx2pokemon
+        self.max_idx = max(idx2pokemon.keys())
+        self.gidx2idxs = {}
+        for idx, gidx in self.idx2gidx.items():
+            if gidx not in self.gidx2idxs:
+                self.gidx2idxs[gidx] = set()
+            self.gidx2idxs[gidx].add(idx)
+
+    def obtainable_line(self, idx):
+        if idx not in self.present:
+            return None
+        return " / ".join([self.entry(i) for i in self.present[idx]])
+
+    def entry(self, idx):
+        if idx is None:
+            return "-"
+        return f"{idx:04}. {self.idx2pokemon[idx]}"
+
+    def line(self, idx):
+        sub_idxs = self.present.get(idx)
+        if not sub_idxs:
+            return None
+        return " / ".join([self.entry(sub_idx) for sub_idx in sub_idxs])
+
+    def _lines(self, source, idxs):
+        group_widths = {}
+        for idx in idxs:
+            gidx = self.idx2gidx.get(idx)
+            if gidx is None:
+                continue
+            sub_idxs = source.get(idx)
+            if not sub_idxs:
+                continue
+            lengths = [len(self.entry(sub_idx)) if sub_idx else 0 for sub_idx in sub_idxs]
+
+            if gidx in group_widths:
+                for j in range(len(lengths)):
+                    group_widths[gidx][j] = max(group_widths[gidx][j], lengths[j])
+            else:
+                group_widths[gidx] = lengths
+
+        out = []
+        for idx in idxs:
+            gidx = self.idx2gidx.get(idx)
+            if gidx is None:
+                if idx in source:
+                    out.append(self.entry(idx))
+                continue
+            sub_idxs = source.get(idx)
+            if not sub_idxs:
+                continue
+            line = zip([self.entry(sub_idx) for sub_idx in sub_idxs], group_widths[gidx])
+            line = [text + " "*(w - len(text)) for text, w in line]
+            out.append(" / ".join(line))
+
+        return out
+
+    def order(self):
+        handled_groups = set()
+        order = []
+        for idx in range(1, self.max_idx + 1):
+            gidx = self.idx2gidx.get(idx)
+            if gidx is None:
+                order.append(idx)
+                continue
+            if gidx in handled_groups:
+                continue
+            order += sorted(self.gidx2idxs[gidx])
+            handled_groups.add(gidx)
+        return order
+
+    def print_obtainable(self):
+        print("\n".join(self._lines(self.present, self.order())))
+
+    def print_missing(self):
+        print("\n".join(self._lines(self.missing, self.order())))
+
+    def count(self):
+        return len(self._lines(self.present, self.order()))
+
+
+
 @dataclass
 class PokemonTransferRule():
     cart: Cartridge
@@ -1525,12 +1984,20 @@ class PokemonTransferRule():
     item: Optional[str] = None
 
 @dataclass
+class TradePairRule():
+    cart: Cartridge
+    in1: str
+    out1: str
+    in2: str
+    out2: str
+
+@dataclass
 class ItemTransferRule():
     cart: Cartridge
     in_item: Optional[str]
     in_choice: Optional[str]
     out_item: str
-        
+ 
 
 class TransferRule():
     def __init__(self, cart, required, output, dex=None):
@@ -1608,7 +2075,7 @@ class Rule():
         return Rule(f"evolve:{pre}->{post}", consumed, reqs, post, math.inf, keep_props=True)
 
     @staticmethod
-    def ingame_trade(give, get, item, evolution, choice=None):
+    def ingame_trade(give, get, item, evolution, choice=None, give_everstone=False, reqs=None):
         if evolution is None:
             output = [get]
             dex = None
@@ -1622,12 +2089,15 @@ class Rule():
             consumed.append(give)
         if choice is not None:
             consumed.append(GameChoice(choice))
-        return Rule(f"trade:{give}->{get}", consumed, [], output, 1, dex=dex)
+        if give_everstone:
+            consumed.append(Item("Everstone"))
+        reqs = reqs or []
+        return Rule(f"trade:{give}->{get}", consumed, reqs, output, 1, dex=dex)
 
     @staticmethod
     def fossil(fossil, pokemon, reqs=[]):
         return Rule(f"fossil:{fossil}->{pokemon}", [fossil], reqs, [pokemon], math.inf)
-    
+
     @staticmethod
     def gift(pokemon_or_items, requirements):
         requirements = requirements or []
@@ -1638,13 +2108,13 @@ class Rule():
         return Rule(f"pickup:{pokemon}->{item}", [], [pokemon], [item], math.inf)
 
     @staticmethod
-    def wild(pokemon_or_item, required, repeats, item=None):
+    def wild(pokemon_or_item, consumed, required, repeats, item=None):
         output = [pokemon_or_item]
         if item:
             output.append(item)
+        consumed = consumed or []
         required = required or []
-        return Rule(f"wild:{pokemon_or_item}", [], required, output, repeats)
-
+        return Rule(f"wild:{pokemon_or_item}", consumed, required, output, repeats)
 
 
 def parse_game(games, game_list):
@@ -1705,73 +2175,41 @@ def main(args):
     if num_collections == 1:
         games = all_games[0]
         hardware = all_hardware[0]
-        collection = calc_dexes(games, hardware)
+        collection, result = calc_dexes(games, hardware)
 
-        obtainable = collection.obtainable()
-        print("\n".join(obtainable))
+        result.print_obtainable()
         print("\n---\n")
-        print("\n".join(collection.missing()))
+        result.print_missing()
         print("\n---\n")
-        print(f"TOTAL: {len(obtainable)}")
+        print(f"TOTAL: {result.count()}")
         cart = collection.main_cartridge
         import pdb; pdb.set_trace()
     elif num_collections == 2:
         raise ValueError("Games/hardware before the first '.' are universal, so there should be 0 or 2+ instances of '.'")
     else:
         collections = []
+        results = []
         for idx in range(1, num_collections):
-            games = all_games[0] + all_games[idx]
+            games = all_games[idx] + all_games[0]
             hardware = all_hardware[0].copy()
             for k, v in all_hardware[idx].items():
                 hardware[k] = hardware.get(k, 0) + v
-            collections.append(calc_dexes(games, hardware))
-        obtainables = [c.obtainable() for c in collections]
-        missings = [c.missing() for c in collections]
-
-        if args.all:
-            obtainable_lines = obtainables
+            c, r = calc_dexes(games, hardware)
+            collections.append(c)
+            results.append(r)
+        pokemon2idx = {}
+        for collection in collections:
+            for pokemon, row in collection.pokemon_list.iterrows():
+                idx = row['index']
+                pokemon2idx[pokemon] = idx
+        result = MultiResult(results, pokemon2idx, args.version_exclusive)
+        if args.all_present:
+            result.print_all_present()
+        elif args.compact:
+            result.print_compact()
         else:
-            obtainable_lines = []
-            for obtainable in obtainables:
-                lines = [line for line in obtainable if not all(line in o for o in obtainables)]
-                obtainable_lines.append(lines)
+            result.print(obtainable=(not args.missing), skip_identical=(not args.full))
 
-        if args.compact:
-            max_rows = max([len(lines) for lines in obtainable_lines])
-            obtainable_lines = [lines + ['']*(max_rows - len(lines)) for lines in obtainable_lines]
-
-        max_lens = [max([len(line) for line in lines]) if lines else 4 for lines in obtainable_lines]
-        for idx in range(len(obtainable_lines)):
-            lines = obtainable_lines[idx]
-            obtainable_lines[idx] = [line + ' '*(max_lens[idx] - len(line)) for line in lines]
-
-        if args.compact:
-            for idx in range(len(obtainable_lines[0])):
-                out = ' | '.join([lines[idx] for lines in obtainable_lines])
-                print(out)
-        else:
-            pointers = [0 if lines else None for lines in obtainable_lines]
-            while any(p is not None for p in pointers):
-                nums = [
-                    int(999) if pointers[idx] is None else int(lines[pointers[idx]].split('.')[0])
-                    for idx, lines in enumerate(obtainable_lines)
-                ]
-                min_num = min(nums)
-                out = []
-                for idx in range(len(obtainable_lines)):
-                    if nums[idx] == min_num:
-                        out.append(obtainable_lines[idx][pointers[idx]])
-                        pointers[idx] += 1
-                        if pointers[idx] == len(obtainable_lines[idx]):
-                            pointers[idx] = None
-                    else:
-                        out.append(' '*max_lens[idx])
-                print(' | '.join(out))
-        lens = [str(len(o)) for o in obtainables]
-        lens = [str(l) + ' '*(max_lens[idx] - len(l)) for idx, l in enumerate(lens)]
-        blank = ['-'*max_lens[idx] for idx in range(len(lens))]
-        print('-|-'.join(blank))
-        print(' | '.join(lens))
 
 def calc_dexes(games, hardware):
     generations = {gen: Generation(gen) for gen in set([g.gen for g, _ in games])}
@@ -1781,13 +2219,15 @@ def calc_dexes(games, hardware):
     for cart in cartridges:
         cart.init_rules()
 
-    collection.calc_dexes()
-    return collection
+    return collection, collection.calc_dexes()
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('game_or_hardware', nargs='+', default=[])
-    parser.add_argument('--all', '-a', action='store_true')
+    parser.add_argument('--full', '-f', action='store_true')
+    parser.add_argument('--all-present', '-a', action='store_true')
     parser.add_argument('--compact', '-c', action='store_true')
+    parser.add_argument('--version-exclusive', '-v', action='store_true')
+    parser.add_argument('--missing', '-m', action='store_true')
     args = parser.parse_args()
     main(args)

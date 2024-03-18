@@ -1,0 +1,31 @@
+GAME,GIVE,GET,ITEM,REQUIRED
+CORE,Ditto,Rotom,,
+"BLACK,WHITE",Boldore,Emolga_MALE,,
+"BLACK,WHITE",Cinccino,Munchlax_MALE,,
+"BLACK2,WHITE2",Emolga,Gigalith_MALE,,
+"BLACK2,WHITE2",Mantine,Tangrowth_MALE,,
+"BLACK2,WHITE2",Excadrill,Ambipom_MALE,,
+"BLACK2,WHITE2",Hippowdon,Alakazam_MALE,,
+"BLACK2,WHITE2",ANY,Meowth,,$BOY
+"BLACK2,WHITE2",ANY,Mankey,,$GIRL
+"BLACK2,WHITE2",ANY,Wobbuffet,Rage Candy Bar,
+"BLACK2,WHITE2",ANY,Ralts,,
+"BLACK2,WHITE2",ANY,Shieldon,,$BOY
+"BLACK2,WHITE2",ANY,Cranidos,,$GIRL
+"BLACK2,WHITE2",ANY,Rhyhorn,,
+"BLACK2,WHITE2",ANY,Shellos_WEST,,$BOY
+"BLACK2,WHITE2",ANY,Shellos_EAST,,$GIRL
+"BLACK2,WHITE2",ANY,Mawile,,$BOY
+"BLACK2,WHITE2",ANY,Sableye,,$GIRL
+"BLACK2,WHITE2",ANY,Spiritomb,,
+"BLACK2,WHITE2",ANY,Snorlax,,
+"BLACK2,WHITE2",ANY,Teddiursa,Rage Candy Bar,$BOY
+"BLACK2,WHITE2",ANY,Phanpy,Rage Candy Bar,$GIRL
+"BLACK2,WHITE2",ANY,Spinda,,
+"BLACK2,WHITE2",ANY,Togepi,Rage Candy Bar,
+BLACK,Cottonee,Petilil,,
+BLACK,Minccino,Basculin_RED_MALE,,
+WHITE,Petilil,Cottonee_FEMALE,,
+WHITE,Minccino,Basculin_BLUE_MALE,,
+BLACK2,Cottonee,Petilil,,
+WHITE2,Petilil,Cottonee_MALE,,
