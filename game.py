@@ -22,8 +22,8 @@ class Game():
     language: Optional[str]
     props: frozenset = frozenset([])
 
-    @classmethod
-    def parse(cls, gamestr, console=None):
+    @staticmethod
+    def parse(gamestr, console=None):
         split = gamestr.split('.')
         input_name = split[0]
         if input_name not in GAMEINPUTS:
@@ -47,7 +47,7 @@ class Game():
         if region is None and language is None:
             for r in DEFAULT_REGIONS:
                 for l in DEFAULT_LANGUAGES[r]:
-                    game = cls._get_game(input_name, r, l)
+                    game = Game._get_game(input_name, r, l)
                     if game is not None:
                         break
                 if game is not None:
@@ -56,26 +56,26 @@ class Game():
                 raise ValueError("Not handled")
         elif region is None and language is not None:
             for r in DEFAULT_REGIONS:
-                game = cls._get_game(input_name, r, language)
+                game = Game._get_game(input_name, r, language)
                 if game is not None:
                     break
             if game is None:
                 raise ValueError(f"Game {input_name} doesn't come in language {language}.")
         elif region is not None and language is None:
             for l in DEFAULT_LANGUAGES[region]:
-                game = cls._get_game(input_name, region, l)
+                game = Game._get_game(input_name, region, l)
                 if game is not None:
                     break
             if game is None:
                 raise ValueError(f"Game {input_name} wasn't released in region {region}.")
         else:
-            game = cls._get_game(input_name, region, language)
+            game = Game._get_game(input_name, region, language)
             if game is None:
                 raise ValueError(f"Game {input_name} wasn't released in the {region} region in {language}.")
         return game
 
-    @classmethod
-    def _get_game(cls, input_name, region, language):
+    @staticmethod
+    def _get_game(input_name, region, language):
         languages = [language]
         if language in EUROPEAN_LANGUAGES:
             languages.append("European")
@@ -87,7 +87,7 @@ class Game():
             props = frozenset()
             if c.TAGS:
                 props = frozenset(c.TAGS.split(','))
-            return cls(c.GAMEID, c.GENERATION, c.CONSOLE or None, c.CORE, c.REGION or None, c.LANGUAGE or None, props)
+            return Game(c.GAMEID, c.GENERATION, c.CONSOLE or None, c.CORE, c.REGION or None, c.LANGUAGE or None, props)
         return None
 
     def default_flow(self):
@@ -420,8 +420,8 @@ class Hardware():
         if self.model.regions is not None and self.region not in self.model.regions:
             raise ValueError(f"{self.model} wasn't released in region {self.region}")
 
-    @classmethod
-    def parse(cls, hardware_str):
+    @staticmethod
+    def parse(hardware_str):
         model_name, _, region = hardware_str.partition('.')
         if model_name not in HARDWARE_MODELS:
             raise ValueError(f"Unrecognized hardware '{model_name}'")
@@ -436,7 +436,7 @@ class Hardware():
                         break
                 if not region:
                     raise ValueError("Shouldn't happen")
-        return cls(model=model, region=region)
+        return Hardware(model=model, region=region)
 
     def region_match(self, other):
         if isinstance(other, Cartridge):
