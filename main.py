@@ -13,7 +13,7 @@ import networkx as nx
 from networkx.drawing.nx_agraph import graphviz_layout, to_agraph
 import pandas as pd
 
-from game import Game, Cartridge, Hardware, GAMES, GAMEIDS, GAMEINPUTS
+from game import Game, Cartridge, Hardware, Collection, GAMES, GAMEIDS, GAMEINPUTS
 from result import MultiResult, Result
 
 class Gender(str, Enum):
@@ -153,8 +153,8 @@ class GameSave():
 
         # Initialized later - indicates what other game states this one can communicate with
         self.transfers = {
-            "POKEMON": [], # Transfer Pokemon w/o trading
             "TRADE": [], # Trade Pokemon (possible w/held items)
+            "POKEMON": [], # Transfer Pokemon w/o trading
             "ITEMS": [], # Transfer items
             "MYSTERYGIFT": [], # Mystery gift
             "RECORDMIX": [], # Gen 3 record mixing
@@ -192,9 +192,6 @@ class GameSave():
     def transfer(self, other_cartridge, category):
         '''Register another cartridge as able to receive certain communications'''
         self.transfers[category].append(other_cartridge)
-
-    def self_transfer(self, category):
-        self.transfers[category].append(self)
 
     def init_rules(self):
         rules = []
@@ -1227,287 +1224,36 @@ class GameSave():
 
     def __str__(self):
         return str(self.cartridge)
-                    
 
-class Collection():
-    def __init__(self, cartridges, hardware):
-        if len(cartridges) == 0:
-            raise ValueError("No games!")
-        self.main_cartridge = cartridges[0]
-        if "NO_DEX" in self.main_cartridge.game.props:
-            raise ValueError(f"Can't use {self.main_cartridge.game.name} as main game")
 
-        self.cartridges = cartridges
-        self.hardware = hardware
+class CollectionSaves():
+    def __init__(self, collection):
+        generations = {gen: Generation(gen) for gen in set(c.game.gen for c in collection.cartridges)}
+        self.game_saves = {c: GameSave(c, generations[c.game.gen]) for c in collection.cartridges}
+        self.main_cartridge = collection.main_cartridge
 
-        self.hw_ports = {}
-        self.hw_plugs = {}
-        self.hw_wireless = {}
-        self.hw_carts = {}
-        self.sw_carts = {}
-        for hw in self.hardware:
-            for idx, port in enumerate(hw.model.ports):
-                for flow, port_types in port.items():
-                    if flow not in self.hw_ports:
-                        self.hw_ports[flow] = {}
-                    for port_type in port_types:
-                        if port_type not in self.hw_ports[flow]:
-                            self.hw_ports[flow][port_type] = set()
-                        self.hw_ports[flow][port_type].add((hw, idx))
-            for idx, plug in enumerate(hw.model.plugs):
-                for flow, plug_types in plug.items():
-                    if flow not in self.hw_plugs:
-                        self.hw_plugs[flow] = {}
-                    for plug_type in plug_types:
-                        if plug_type not in self.hw_plugs[flow]:
-                            self.hw_plugs[flow][plug_type] = set()
-                        self.hw_plugs[flow][plug_type].add((hw, idx))
-            for flow in hw.model.wireless:
-                if flow not in self.hw_wireless:
-                    self.hw_wireless[flow] = set()
-                self.hw_wireless[flow].add(hw)
-        for cart in self.cartridges:
-            if cart.console is None:
-                if cart.game.console not in self.hw_carts:
-                    self.hw_carts[cart.game.console] = set()
-                self.hw_carts[cart.game.console].add(cart)
-            else:
-                if cart.console not in self.sw_carts:
-                    self.sw_carts[cart.console] = set()
-                self.sw_carts[cart.console].add(cart)
-
-        self._connected_cache = {}
-        for cart in self.cartridges:
-            flow = cart.game.default_flow()
-            can_play, connections = cart.connections(self, flow)
-            if not can_play:
-                raise ValueError(f"Game {cart} cannot be played with specified hardware.")
-            self._connected_cache[cart] = connections
-
-        generations = {gen: Generation(gen) for gen in set(c.game.gen for c in self.cartridges)} 
-        self.game_states = {c: GameSave(c, generations[c.game.gen]) for c in self.cartridges}
-        self._init_interactions()
-
-        if any([gs.has_gender for gs in self.game_states.values()]):
-            for gs in self.game_states.values():
+        if any([gs.has_gender for gs in self.game_saves.values()]):
+            for gs in self.game_saves.values():
                 gs.has_gender = True
-        self.pokemon_list = self.game_states[self.main_cartridge].generation.pokemon_list
-
-        if len(self.cartridges) > 1:
-            G = nx.DiGraph()
-            for cart, gs in self.game_states.items():
-                G.add_node(cart)
-                for kind, gs2s in gs.transfers.items():
-                    for gs2 in gs2s:
-                        cart2 = gs2.cartridge
-                        if kind == "CONNECT":
-                            G.add_edge(cart2, cart)
-                        else:
-                            G.add_edge(cart, cart2)
-            for cart in self.cartridges:
-                if cart == self.main_cartridge:
-                    continue
-                if not nx.has_path(G, cart, self.main_cartridge):
-                    raise ValueError(f"Game {cart.game} cannot interact with main game {self.main_cartridge.game} (possibly due to specified hardware)")
-
-    def connected(self, cart1, cart2, flow=None):
-        if flow is None:
-            flow1 = cart1.game.default_flow()
-            flow2 = cart2.game.default_flow()
-            if flow1 == flow2:
-                flow = flow1
-            else:
-                raise ValueError(f"Need to specify flow for {cart1} and {cart2}")
-        if not cart1.game.core and cart2.game.core:
-            cart1, cart2 = cart2, cart1
-        if "NO_DEX" in cart1.game.props and "NO_DEX" not in cart2.game.props:
-            cart1, cart2 = cart2, cart1
-        if flow not in self._connected_cache:
-            self._connected_cache[flow] = {}
-        if cart1 not in self._connected_cache[flow] and cart2 not in self._connected_cache[flow]:
-            _, self._connected_cache[flow][cart1] = cart1.connections(self, flow)
-
-        if cart1 in self._connected_cache[flow]:
-            return cart2 in self._connected_cache[flow][cart1]
-        else:
-            return cart1 in self._connected_cache[flow][cart2]
-
-
-    def _init_interactions(self):
-        for cart1, gs1 in self.game_states.items():
-            game1 = cart1.game
-            for cart2, gs2 in self.game_states.items():
-                game2 = cart2.game
-                if cart1 == cart2:
-                    continue
-
-                if game1.gen == 1 and game1.core:
-                    if game2.gen == 1 and game2.core:
-                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "TRADE")
-                    elif game2.name in {"STADIUM_JPN", "STADIUM"}:
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "POKEMON")
-                    elif game2.gen == 2 and game2.core:
-                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "TRADE")
-                    elif game2.name == "STADIUM2":
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "POKEMON")
-                            # STADIUM2 is the only way to transfer items between gen 1 games
-                            for cart3, gs3 in self.game_states.items():
-                                game3 = cart3.game
-                                if game3.gen == 1 and game3.core:
-                                    if game1.language_match(game3) and self.connected(cart2, cart3):
-                                        gs1.transfer(gs3, "ITEMS")
-                elif game1.name in {"STADIUM_JPN", "STADIUM"}:
-                    if game2.gen == 1 and game2.core:
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "POKEMON")
-                elif game1.gen == 2 and game1.core:
-                    if game2.gen == 1 and game2.core:
-                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "TRADE")
-                            # Pokemon holding items can be traded to gen 1. Gen 1 can't access the
-                            # items, but they will be preserved if the Pokemon is later traded back
-                            # to gen 2, including the same cartridge.
-                            for cart3, gs3 in self.game_states.items():
-                                game3 = cart3.game
-                                if game3.gen == 2 and game3.core:
-                                    if (game1.language == "Japanese") == (game3.language == "Japanese") and self.connected(cart2, cart3):
-                                        gs1.transfer(gs3, "ITEMS")
-                    elif game2.gen == 2 and game2.core:
-                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
-                                gs1.transfer(gs2, "TRADE")
-                        if game1.language_match(game2) and self.connected(cart1, cart2, "GBC_ir"):
-                            gs1.transfer(gs2, "MYSTERYGIFT")
-                    elif game2.name == "STADIUM2":
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "POKEMON")
-                            gs1.transfer(gs2, "ITEMS")
-                            gs1.transfer(gs1, "MYSTERYGIFT") # self-transfer
-                elif game1.name == "STADIUM2":
-                    if game2.gen == 1 and game2.core:
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "POKEMON")
-                    elif game2.gen == 2 and game2.core:
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "POKEMON")
-                            gs1.transfer(gs2, "ITEMS")
-                elif game1.gen == 3 and game1.core:
-                    if game2.gen == 3 and game2.core:
-                        if self.connected(cart1, cart2) or (
-                                "GBA_WIRELESS" in game1.props and
-                                "GBA_WIRELESS" in game2.props and
-                                self.connected(cart1, cart2, "GBAw")
-                        ):
-                            gs1.transfer(gs2, "TRADE")
-                            RSE = {"Ruby", "Sapphire", "Emerald"}
-                            if game1.name in RSE and game2.name in RSE:
-                                if game1.language == game2.language or (game1.name == "EMERALD" and game2.name == "EMERALD"):
-                                    gs1.transfer(gs2, "RECORDMIX")
-                    elif game2.name == "BOX":
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "POKEMON")
-                            gs1.transfer(gs2, "ITEMS")
-                    elif game2.name in ["COLOSSEUM", "XD"]:
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "TRADE")
-                    elif game2.name == "BONUSDISC":
-                        if game1.name in ["RUBY", "SAPPHIRE"] and game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "CONNECT")
-                    elif game2.name == "BONUSDISC_JPN":
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "CONNECT")
-                    elif game2.name == "CHANNEL" and game2.region == "EUR":
-                        if game1.name in ["RUBY", "SAPPHIRE"] and game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "CONNECT")
-                    elif game2.name == "EONTICKET":
-                        if game1.name in ["RUBY", "SAPPHIRE"] and game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "CONNECT")
-                    elif game2.gen == 4 and game2.core:
-                        if (game1.language_match(game2) or game2.language == "Korean") and self.connected(cart1, cart2, "DS"):
-                            # Pal Park: language requirement
-                            gs1.transfer(gs2, "POKEMON")
-                            gs1.transfer(gs2, "ITEMS")
-                elif game1.name == "BOX":
-                    if game2.gen == 3 and game2.core:
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "POKEMON")
-                            gs1.transfer(gs2, "ITEMS")
-                elif game1.name == "COLOSSEUM":
-                    if game2.gen == 3 and game2.core:
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "TRADE")
-                    elif game2.name == "BONUSDISC_JPN":
-                        # The Japanese bonus disc reads and edits the Colosseum save file, so they
-                        # have to be compatible with the same GCN.
-                        if game1.language_match(game2) and game1.region_match(game2):
-                            gs1.transfer(gs2, "CONNECT")
-                    elif game2.name == "DOUBLEBATTLE":
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "CONNECT")
-                elif game1.name == "XD":
-                    if game2.gen == 3 and game2.core:
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "TRADE")
-                elif game1.gen == 4 and game1.core:
-                    if game2.gen == 3 and game2.core:
-                        if self.connected(cart1, cart2, "DS"):
-                            # Dual-slot mode: no language requirement
-                            gs1.transfer(gs2, "CONNECT")
-                    if game2.gen == 4 and game2.core:
-                        if (game1.language == "Korean") == (game2.language == "Korean") and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "TRADE")
-                    elif game2.name == "POKEWALKER":
-                        if game1.name in ["HEARTGOLD", "SOULSILVER"]:
-                            gs1.transfer(gs2, "CONNECT")
-                    elif game2.name == "RANCH":
-                        if game1.language_match(game2) and self.connected(cart1, cart2) and (
-                                game1.name in ["DIAMOND", "PEARL"] or \
-                                (game2.language == "Japanese" and game1.name == "PLATINUM")
-                        ):
-                            gs1.transfer(gs2, "CONNECT")
-                    elif game2.name in ["BATTLEREVOLUTION", "RANGER", "SHADOWOFALMIA", "GUARDIANSIGNS"]:
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "CONNECT")
-                    elif game2.gen == 5 and game2.core:
-                        if game1.language_match(game2) and self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "POKEMON")
-                elif game1.gen == 5 and game1.core:
-                    if game2.gen == 5 and game2.core:
-                        if self.connected(cart1, cart2):
-                            gs1.transfer(gs2, "TRADE")
-                elif game1.name == "DREAMWORLD":
-                    if game2.gen == 5 and game2.core:
-                        if game1.region_match(game2):
-                            gs1.transfer(gs2, "POKEMON")
-                            gs1.transfer(gs2, "ITEMS")
-                elif game1.name == "DREAMRADAR":
-                    if game2.gen == 4 and game2.core:
-                            gs1.transfer(gs2, "CONNECT")
-                    elif game2.name in ["BLACK2", "WHITE2"]:
-                        if game1.region_match(game2):
-                            gs1.transfer(gs2, "POKEMON")
-                            gs1.transfer(gs2, "ITEMS")
+        self.pokemon_list = self.game_saves[self.main_cartridge].generation.pokemon_list
 
 
     def calc_dexes(self):
-        for gs in self.game_states.values():
+        for gs in self.game_saves.values():
             gs.init_uniques()
-        for gs in self.game_states.values():
+        for gs in self.game_saves.values():
             gs.simplify_rules()
 
-        if len(self.cartridges) == 1:
-            self.game_states[self.main_cartridge].all_safe_paths()
-            if self.game_states[self.main_cartridge].handle_special(self):
-                self.game_states[self.main_cartridge].all_safe_paths()
+        if len(self.game_saves) == 1:
+            self.game_saves[self.main_cartridge].all_safe_paths()
+            if self.game_saves[self.main_cartridge].handle_special(self):
+                self.game_saves[self.main_cartridge].all_safe_paths()
         else:
             self.try_cart_paths()
-            if any(gs.handle_special(self) for gs in self.game_states.values()):
+            if any(gs.handle_special(self) for gs in self.game_saves.values()):
                 self.try_cart_paths()
 
-        paths = self.game_states[self.main_cartridge].try_paths()
+        paths = self.game_saves[self.main_cartridge].try_paths()
         dexes = pd.DataFrame([[p[1] for p in path] for path in paths], columns=self.pokemon_list.index)
 
         varying = [col for col in dexes.columns if not all(dexes[col]) and not all(~dexes[col])]
@@ -1576,10 +1322,10 @@ class Collection():
 
 
     def try_cart_paths(self):
-        state_copies = {cart: None for cart in self.cartridges}
+        state_copies = {cart: None for cart in self.game_saves.keys()}
         while True:
             updates = False
-            for cart, gs in self.game_states.items():
+            for cart, gs in self.game_saves.items():
                 save_state = (gs.pokemon, gs.items, gs.choices)
                 if state_copies[cart] != save_state:
                     updates = True
@@ -1587,10 +1333,10 @@ class Collection():
                     gs.all_safe_paths()
             if not updates:
                 break
-        state_copies = {cart: None for cart in self.cartridges}
+        state_copies = {cart: None for cart in self.game_saves.keys()}
         while True:
             updates = False
-            for cart, gs in self.game_states.items():
+            for cart, gs in self.game_saves.items():
                 save_state = (gs.pokemon, gs.items, gs.choices)
                 if state_copies[cart] != save_state:
                     updates = True
@@ -1788,29 +1534,29 @@ def main(args):
     if num_collections == 1:
         games = all_games[0]
         hardware = all_hardware[0]
-        collection, result = calc_dexes(games, hardware)
+        collection_saves, result = calc_dexes(games, hardware)
 
         result.print_obtainable()
         print("\n---\n")
         result.print_missing()
         print("\n---\n")
         print(f"TOTAL: {result.count()}")
-        cart = collection.main_cartridge
+        cart = collection_saves.main_cartridge
         import pdb; pdb.set_trace()
     elif num_collections == 2:
         raise ValueError("Games/hardware before the first '.' are universal, so there should be 0 or 2+ instances of '.'")
     else:
-        collections = []
+        collection_saves = []
         results = []
         for idx in range(1, num_collections):
             games = all_games[idx] + all_games[0]
             hardware = all_hardware[idx] + all_hardware[0]
             c, r = calc_dexes(games, hardware)
-            collections.append(c)
+            collection_saves.append(c)
             results.append(r)
         pokemon2idx = {}
-        for collection in collections:
-            for pokemon, row in collection.pokemon_list.iterrows():
+        for cs in collection_saves:
+            for pokemon, row in cs.pokemon_list.iterrows():
                 idx = row['index']
                 pokemon2idx[pokemon] = idx
         result = MultiResult(results, pokemon2idx, args.version_exclusive)
@@ -1825,12 +1571,11 @@ def main(args):
 def calc_dexes(games, hardware):
     cartridges = [Cartridge(g, cl, c) for g, cl, c in games]
     collection = Collection(cartridges, hardware)
-    game_states = collection.game_states.values()
-
-    for gs in game_states:
+    collection_saves = CollectionSaves(collection)
+    for gs in collection_saves.game_saves.values():
         gs.init_rules()
 
-    return collection, collection.calc_dexes()
+    return collection_saves, collection_saves.calc_dexes()
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

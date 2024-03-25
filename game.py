@@ -630,3 +630,272 @@ HARDWARE_MODELS = {h.name: h for h in [
         frozendict({"GBA": ("GCNc"),}),
     )),
 ]}
+
+class Collection():
+    def __init__(self, cartridges, hardware):
+        if len(cartridges) == 0:
+            raise ValueError("No games!")
+        self.main_cartridge = None
+        for cart in cartridges:
+            if "NO_DEX" in cart.game.props:
+                continue
+            self.main_cartridge = cart
+            break
+        else:
+            raise ValueError("No valid main game.")
+
+        self.cartridges = cartridges
+        self.hardware = hardware
+
+        self.hw_ports = {}
+        self.hw_plugs = {}
+        self.hw_wireless = {}
+        self.hw_carts = {}
+        self.sw_carts = {}
+        for hw in self.hardware:
+            for idx, port in enumerate(hw.model.ports):
+                for flow, port_types in port.items():
+                    if flow not in self.hw_ports:
+                        self.hw_ports[flow] = {}
+                    for port_type in port_types:
+                        if port_type not in self.hw_ports[flow]:
+                            self.hw_ports[flow][port_type] = set()
+                        self.hw_ports[flow][port_type].add((hw, idx))
+            for idx, plug in enumerate(hw.model.plugs):
+                for flow, plug_types in plug.items():
+                    if flow not in self.hw_plugs:
+                        self.hw_plugs[flow] = {}
+                    for plug_type in plug_types:
+                        if plug_type not in self.hw_plugs[flow]:
+                            self.hw_plugs[flow][plug_type] = set()
+                        self.hw_plugs[flow][plug_type].add((hw, idx))
+            for flow in hw.model.wireless:
+                if flow not in self.hw_wireless:
+                    self.hw_wireless[flow] = set()
+                self.hw_wireless[flow].add(hw)
+        for cart in self.cartridges:
+            if cart.console is None:
+                if cart.game.console not in self.hw_carts:
+                    self.hw_carts[cart.game.console] = set()
+                self.hw_carts[cart.game.console].add(cart)
+            else:
+                if cart.console not in self.sw_carts:
+                    self.sw_carts[cart.console] = set()
+                self.sw_carts[cart.console].add(cart)
+
+        self._connected_cache = {}
+        for cart in self.cartridges:
+            flow = cart.game.default_flow()
+            can_play, connections = cart.connections(self, flow)
+            if not can_play:
+                raise ValueError(f"Game {cart} cannot be played with specified hardware.")
+            self._connected_cache[cart] = connections
+
+        self._init_interactions()
+
+        if len(self.cartridges) > 1:
+            G = nx.DiGraph()
+            for cart in self.cartridges:
+                G.add_node(cart)
+            for kind, cart_pairs in self.interactions.items():
+                for cart1, cart2 in cart_pairs:
+                    if kind == "CONNECT":
+                        G.add_edge(cart2, cart1)
+                    else:
+                        G.add_edge(cart1, cart2)
+            for cart in self.cartridges:
+                if cart == self.main_cartridge:
+                    continue
+                if not nx.has_path(G, cart, self.main_cartridge):
+                    raise ValueError(f"Game {cart.game} cannot interact with main game {self.main_cartridge.game} (possibly due to specified hardware)")
+
+    def connected(self, cart1, cart2, flow=None):
+        if flow is None:
+            flow1 = cart1.game.default_flow()
+            flow2 = cart2.game.default_flow()
+            if flow1 == flow2:
+                flow = flow1
+            else:
+                raise ValueError(f"Need to specify flow for {cart1} and {cart2}")
+        if not cart1.game.core and cart2.game.core:
+            cart1, cart2 = cart2, cart1
+        if "NO_DEX" in cart1.game.props and "NO_DEX" not in cart2.game.props:
+            cart1, cart2 = cart2, cart1
+        if flow not in self._connected_cache:
+            self._connected_cache[flow] = {}
+        if cart1 not in self._connected_cache[flow] and cart2 not in self._connected_cache[flow]:
+            _, self._connected_cache[flow][cart1] = cart1.connections(self, flow)
+
+        if cart1 in self._connected_cache[flow]:
+            return cart2 in self._connected_cache[flow][cart1]
+        else:
+            return cart1 in self._connected_cache[flow][cart2]
+
+
+    def _init_interactions(self):
+        interactions = {
+            "TRADE": set(),
+            "POKEMON": set(),
+            "ITEMS": set(),
+            "MYSTERYGIFT": set(),
+            "RECORDMIX": set(),
+            "CONNECT": set(),
+        }
+
+        for cart1 in self.cartridges:
+            game1 = cart1.game
+            for cart2 in self.cartridges:
+                if cart1 == cart2:
+                    continue
+                game2 = cart2.game
+
+                if game1.gen == 1 and game1.core:
+                    if game2.gen == 1 and game2.core:
+                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name in {"STADIUM_JPN", "STADIUM"}:
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                    elif game2.gen == 2 and game2.core:
+                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "STADIUM2":
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                            # STADIUM2 is the only way to transfer items between gen 1 games
+                            for cart3 in self.cartridges:
+                                game3 = cart3.game
+                                if game3.gen == 1 and game3.core:
+                                    if game1.language_match(game3) and self.connected(cart2, cart3):
+                                        interactions["ITEMS"].add((cart1, cart3))
+                elif game1.name in {"STADIUM_JPN", "STADIUM"}:
+                    if game2.gen == 1 and game2.core:
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                elif game1.gen == 2 and game1.core:
+                    if game2.gen == 1 and game2.core:
+                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                            # Pokemon holding items can be traded to gen 1. Gen 1 can't access the
+                            # items, but they will be preserved if the Pokemon is later traded back
+                            # to gen 2, including the same cartridge.
+                            for cart3 in self.cartridges:
+                                game3 = cart3.game
+                                if game3.gen == 2 and game3.core:
+                                    if (game1.language == "Japanese") == (game3.language == "Japanese") and self.connected(cart2, cart3):
+                                        interactions["ITEMS"].add((cart1, cart3))
+                    elif game2.gen == 2 and game2.core:
+                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
+                                interactions["TRADE"].add((cart1, cart2))
+                        if game1.language_match(game2) and self.connected(cart1, cart2, "GBC_ir"):
+                            interactions["MYSTERYGIFT"].add((cart1, cart2))
+                    elif game2.name == "STADIUM2":
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                            interactions["ITEMS"].add((cart1, cart2))
+                            interactions["MYSTERYGIFT"].add((cart1, cart1)) # self-transfer
+                elif game1.name == "STADIUM2":
+                    if game2.gen == 1 and game2.core:
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                    elif game2.gen == 2 and game2.core:
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                            interactions["ITEMS"].add((cart1, cart2))
+                elif game1.gen == 3 and game1.core:
+                    if game2.gen == 3 and game2.core:
+                        if self.connected(cart1, cart2) or (
+                                "GBA_WIRELESS" in game1.props and
+                                "GBA_WIRELESS" in game2.props and
+                                self.connected(cart1, cart2, "GBAw")
+                        ):
+                            interactions["TRADE"].add((cart1, cart2))
+                            RSE = {"Ruby", "Sapphire", "Emerald"}
+                            if game1.name in RSE and game2.name in RSE:
+                                if game1.language == game2.language or (game1.name == "EMERALD" and game2.name == "EMERALD"):
+                                    interactions["RECORDMIX"].add((cart1, cart2))
+                    elif game2.name == "BOX":
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                            interactions["ITEMS"].add((cart1, cart2))
+                    elif game2.name in ["COLOSSEUM", "XD"]:
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "BONUSDISC":
+                        if game1.name in ["RUBY", "SAPPHIRE"] and game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["CONNECT"].add((cart1, cart2))
+                    elif game2.name == "BONUSDISC_JPN":
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["CONNECT"].add((cart1, cart2))
+                    elif game2.name == "CHANNEL" and game2.region == "EUR":
+                        if game1.name in ["RUBY", "SAPPHIRE"] and game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["CONNECT"].add((cart1, cart2))
+                    elif game2.name == "EONTICKET":
+                        if game1.name in ["RUBY", "SAPPHIRE"] and game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["CONNECT"].add((cart1, cart2))
+                    elif game2.gen == 4 and game2.core:
+                        if (game1.language_match(game2) or game2.language == "Korean") and self.connected(cart1, cart2, "DS"):
+                            # Pal Park: language requirement
+                            interactions["POKEMON"].add((cart1, cart2))
+                            interactions["ITEMS"].add((cart1, cart2))
+                elif game1.name == "BOX":
+                    if game2.gen == 3 and game2.core:
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                            interactions["ITEMS"].add((cart1, cart2))
+                elif game1.name == "COLOSSEUM":
+                    if game2.gen == 3 and game2.core:
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "BONUSDISC_JPN":
+                        # The Japanese bonus disc reads and edits the Colosseum save file, so they
+                        # have to be compatible with the same GCN.
+                        if game1.language_match(game2) and game1.region_match(game2):
+                            interactions["CONNECT"].add((cart1, cart2))
+                    elif game2.name == "DOUBLEBATTLE":
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["CONNECT"].add((cart1, cart2))
+                elif game1.name == "XD":
+                    if game2.gen == 3 and game2.core:
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                elif game1.gen == 4 and game1.core:
+                    if game2.gen == 3 and game2.core:
+                        if self.connected(cart1, cart2, "DS"):
+                            # Dual-slot mode: no language requirement
+                            interactions["CONNECT"].add((cart1, cart2))
+                    if game2.gen == 4 and game2.core:
+                        if (game1.language == "Korean") == (game2.language == "Korean") and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "POKEWALKER":
+                        if game1.name in ["HEARTGOLD", "SOULSILVER"]:
+                            interactions["CONNECT"].add((cart1, cart2))
+                    elif game2.name == "RANCH":
+                        if game1.language_match(game2) and self.connected(cart1, cart2) and (
+                                game1.name in ["DIAMOND", "PEARL"] or \
+                                (game2.language == "Japanese" and game1.name == "PLATINUM")
+                        ):
+                            interactions["CONNECT"].add((cart1, cart2))
+                    elif game2.name in ["BATTLEREVOLUTION", "RANGER", "SHADOWOFALMIA", "GUARDIANSIGNS"]:
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["CONNECT"].add((cart1, cart2))
+                    elif game2.gen == 5 and game2.core:
+                        if game1.language_match(game2) and self.connected(cart1, cart2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                elif game1.gen == 5 and game1.core:
+                    if game2.gen == 5 and game2.core:
+                        if self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                elif game1.name == "DREAMWORLD":
+                    if game2.gen == 5 and game2.core:
+                        if game1.region_match(game2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                            interactions["ITEMS"].add((cart1, cart2))
+                elif game1.name == "DREAMRADAR":
+                    if game2.gen == 4 and game2.core:
+                            interactions["CONNECT"].add((cart1, cart2))
+                    elif game2.name in ["BLACK2", "WHITE2"]:
+                        if game1.region_match(game2):
+                            interactions["POKEMON"].add((cart1, cart2))
+                            interactions["ITEMS"].add((cart1, cart2))
+        self.interactions = interactions
