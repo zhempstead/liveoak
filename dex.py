@@ -1566,19 +1566,24 @@ class GameSave():
             else:
                 self.apply_all_safe_rules()
 
-    def try_paths(self, only_side_effects=False):
-        start_end = set(["START", "END"])
+    def try_paths(self, subset=None, only_side_effects=False, spaces=''):
         component_dexsets = []
 
-        G = self.rule_graph()
-        subG = G.subgraph([n for n in G.nodes if n not in start_end])
-        for nodes in nx.connected_components(subG.to_undirected()):
-            Gcomp = G.copy()
-            Gcomp.remove_nodes_from([n for n in Gcomp if n not in nodes and n not in start_end])
-            if only_side_effects:
-                self.explore_component(Gcomp)
-            else:
-                component_dexsets.append(self.explore_component(Gcomp))
+        for G in self.rule_graph_components(subset):
+            ruleset = set(G.nodes).intersection(self.rules.keys())
+            for rule_name in ruleset:
+                rule = self.rules[rule_name]
+                if not self.check_rule_possible(rule):
+                    continue
+                print(spaces + rule_name)
+                save_copy = self.copy()
+                self.path_child = save_copy
+                save_copy.apply_rule_if_possible(rule_name)
+                save_copy.all_safe_paths()
+                if only_side_effects:
+                    save_copy.try_paths(G.nodes, only_side_effects, spaces + '  ')
+                else:
+                    component_dexsets.append(save_copy.try_paths(G.nodes, only_side_effects, spaces + '  '))
 
         if not only_side_effects:
             final_dexes = set()
@@ -1591,28 +1596,19 @@ class GameSave():
                 )
                 final_dexes.add(dex)
             return final_dexes
-        
-    def explore_component(self, G, spaces=''):
-        final_dexes = set()
-        ruleset = set(G.nodes).intersection(self.rules.keys())
 
-        for rule_name in ruleset:
-            rule = self.rules[rule_name]
-            if not self.check_rule_possible(rule):
-                continue
-            game_copy = self.copy()
-            self.path_child = game_copy
-            game_copy.apply_rule_if_possible(rule_name)
-            game_copy.all_safe_paths()
-            Gcopy = G.copy()
-            dexes = game_copy.explore_component(Gcopy, spaces=spaces + '  ')
-            self.path_child = None
-            final_dexes = final_dexes.union(dexes)
-        
-        if not final_dexes:
-            final_dexes.add(tuple(self.dex.items()))
-        return final_dexes
+    def rule_graph_components(self, subset=None):
+        start_end = set(["START", "END"])
+        G = self.rule_graph()
+        if subset is not None:
+            G.remove_nodes_from([n for n in G if n not in subset and n not in start_end])
+        Gsub = G.subgraph([n for n in G.nodes if n not in start_end])
+        for nodes in nx.connected_components(Gsub.to_undirected()):
+            Gcomp = G.copy()
+            Gcomp.remove_nodes_from([n for n in Gcomp if n not in nodes and n not in start_end])
+            yield Gcomp
 
+        
     def handle_special(self, collection):
         if self.game.name == "BLACK":
             # Black City
