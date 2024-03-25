@@ -13,9 +13,10 @@ CORE,Everstone,Lickitung
 CORE,Tyrogue,
 CORE,Upgrade,
 CORE,$MG_Fire Stone;$MG_Leaf Stone;$MG_Thunder Stone;$MG_Water Stone,
+CORE,Farfetch'd,STADIUM2
+CORE,Gligar,STADIUM2
 "GOLD,CRYSTAL",Fire Stone,Growlithe
 SILVER,Fire Stone,Vulpix
-CRYSTAL,Pichu;Cleffa;Igglybuff;Tyrogue;Smoochum;Elekid;Magby,
+CRYSTAL.Japanese,Pichu;Cleffa;Igglybuff;Tyrogue;Smoochum;Elekid;Magby,Egg Ticket
+"CRYSTAL.English,CRYSTAL.French,CRYSTAL.German,CRYSTAL.Italian,CRYSTAL.Spanish",Pichu;Cleffa;Igglybuff;Tyrogue;Smoochum;Elekid;Magby,
 CRYSTAL,Dratini,
-STADIUM2,Farfetch'd,
-STADIUM2,Gligar,

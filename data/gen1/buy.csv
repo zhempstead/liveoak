@@ -5,12 +5,16 @@ CORE,Fire Stone
 CORE,Leaf Stone
 CORE,Thunder Stone
 CORE,Water Stone
-"RED,BLUE",Clefairy
-"RED,BLUE",Dratini
+"RED,GREEN",Clefairy
+"RED,GREEN",Dratini
 "RED,YELLOW",Scyther
-"BLUE,YELLOW",Pinsir
+"GREEN,YELLOW",Pinsir
 RED,Nidorina
-BLUE,Nidorino
+GREEN,Nidorino
+BLUE,Pikachu
+BLUE,Horsea
+BLUE,Clefable
+BLUE,Dragonair
 YELLOW,Vulpix
 YELLOW,Wigglytuff
 STADIUM,Bulbasaur

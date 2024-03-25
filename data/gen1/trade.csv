@@ -1,13 +1,23 @@
 GAME,GIVE,GET
-"RED,BLUE",Abra,Mr. Mime
-"RED,BLUE",Nidoran♂,Nidoran♀
-"RED,BLUE",Nidorino,Nidorina
-"RED,BLUE",Slowbro,Lickitung
-"RED,BLUE",Poliwhirl,Jynx
-"RED,BLUE",Spearow,Farfetch'd
-"RED,BLUE",Raichu,Electrode
-"RED,BLUE",Venonat,Tangela
-"RED,BLUE",Ponyta,Seel
+"RED,GREEN",Abra,Mr. Mime
+"RED,GREEN",Nidorino,Nidorina
+"RED,GREEN",Slowbro,Lickitung
+"RED,GREEN",Poliwhirl,Jynx
+"RED,GREEN",Spearow,Farfetch'd
+"RED,GREEN",Raichu,Electrode
+"RED,GREEN",Venonat,Tangela
+"RED,GREEN",Ponyta,Seel
+"RED.JPN,GREEN.JPN",Nidoran♀,Nidoran♂
+"RED.USA,RED.PAL,GREEN.USA,GREEN.PAL",Nidoran♂,Nidoran♀
+BLUE,Jigglypuff,Mr. Mime
+BLUE,Rattata,Poliwag
+BLUE,Rhydon,Kangaskhan
+BLUE,Persian,Tauros
+BLUE,Machoke,Haunter
+BLUE,Pidgey,Farfetch'd
+BLUE,Kadabra,Graveler
+BLUE,Seel,Slowpoke
+BLUE,Growlithe,Krabby
 YELLOW,Clefairy,Mr. Mime
 YELLOW,Cubone,Machoke
 YELLOW,Lickitung,Dugtrio
