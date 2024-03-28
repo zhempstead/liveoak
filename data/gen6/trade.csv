@@ -1,0 +1,13 @@
+GAME,GIVE,GET,ITEM,REQUIRED
+"X,Y",Bunnelby,Farfetch'd_MALE,,
+"X,Y",Luvdisc,Steelix_FEMALE,,
+"X,Y",Jigglypuff,Bisharp_MALE,,
+"X,Y",ANY,Froakie,,$START_CHESPIN
+"X,Y",ANY,Chespin,,$START_FENNEKIN
+"X,Y",ANY,Fennekin,,$START_FROAKIE
+"X,Y",ANY,Ralts_FEMALE,,
+"X,Y",Gyarados,Magikarp_MALE,,
+"X,Y",ANY,Eevee_FEMALE,,
+"OMEGARUBY,ALPHASAPPHIRE",Slakoth,Makuhita_MALE,,
+"OMEGARUBY,ALPHASAPPHIRE",Spinda,Skitty_FEMALE,,
+"OMEGARUBY,ALPHASAPPHIRE",Bellossom,Corsola_FEMALE,,

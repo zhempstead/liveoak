@@ -8,6 +8,29 @@ from frozendict import frozendict
 import networkx as nx
 import pandas as pd
 
+GB_LANG_GROUPS = {
+    "Japanese": 1,
+    "English": 2,
+    "French": 2,
+    "German": 2,
+    "Italian": 2,
+    "Spanish": 2,
+    # Can cause glitches but generally possible to trade between Korean and Western games
+    "Korean": 2,
+}
+
+VC_LANG_GROUPS = {
+    "Japanese": 1,
+    "English": 2,
+    "French": 2,
+    "German": 2,
+    "Italian": 2,
+    "Spanish": 2,
+    # Trading between Western and Korean games disallowed on VC
+    "Korean": 3,
+}
+    
+
 @dataclass(frozen=True)
 class Game():
     '''
@@ -99,6 +122,10 @@ class Game():
             return "DS"
 
     def language_match(self, other):
+        '''
+        Returns True iff the languages are identical
+        (or overlapping if a cart supports multiple languages)
+        '''
         l1 = self.language
         l2 = other.language
         if l1 == l2:
@@ -108,6 +135,25 @@ class Game():
         if l2 == "European" and l1 in EUROPEAN_LANGUAGES:
             return True
         return False
+
+    def language_group(self, other):
+        '''
+        Returns True iff the languages are compatible for trading
+        Only relevant for core gen 1, 2, and 4 games
+        '''
+        if self.gen in {1, 2}:
+            if self.console in {"GB", "GBC"}:
+                # Glitchy but possible to trade between Western and Korean games.
+                # Japanese games are fully incompatible with others
+                return (self.language == "Japanese") == (other.language == "Japanese")
+            else:
+                # VC disallows Western-Korean trading
+                return (self.language == "Japanese") == (other.language == "Japanese") and \
+                        (self.language == "Korean") == (other.language == "Korean")
+        if self.gen == 4:
+            # Korean games were released later, so non-Korean games don't support trading w/Korean
+            return (self.language == "Korean") == (other.language == "Korean")
+        raise ValueError("Irrelevant")
 
     def region_match(self, other):
         if self.region is None:
@@ -180,22 +226,30 @@ class Cartridge():
         return f"{self.game.__repr__()}_{self.id}"
 
     def connections(self, collection, flow):
-        can_play = self.game.console is None
+        consoles = set()
         connects_to = set()
         G_start = nx.DiGraph()
         G_start.add_node(self)
         for G in self._connections(G_start, collection, flow):
             G = self._simplify_connection_graph(G)
             G = self._filter_connection_graph(G)
+            if self not in G.nodes:
+                continue
+
+            for neighbor in G.adj[self]:
+                if neighbor.model.is_console:
+                    consoles.add(neighbor)
+                else:
+                    for neighbor2 in G.adj[neighbor]:
+                        if neighbor2.model.is_console:
+                            consoles.add(neighbor2)
 
             for node in G:
-                if isinstance(node, Hardware):
-                    if node.model.is_console:
-                        can_play = True
-                elif isinstance(node, Cartridge):
+                if isinstance(node, Cartridge):
                     if node != self:
                         connects_to.add(node)
-        return can_play, connects_to
+
+        return consoles, connects_to
 
 
     def _connections(self, G, collection, flow):
@@ -210,19 +264,16 @@ class Cartridge():
                 if G.in_edges(node):
                     continue
                 cart = node
-                if cart.console is None:
-                    for hw, pidx in collection.hw_ports.get(flow, {}).get(cart.game.console, ()):
-                        if not hw.region_match(cart):
-                            continue
-                        pname = f"port_{pidx}"
-                        if (hw, pname) in G.nodes and G.edges((hw, pname)):
-                            continue
-                        found = True
-                        Gcopy = self._add_hardware(G, hw, pname, cart, collection.sw_carts, flow)
-                        for Gfull in self._connections(Gcopy, collection, flow):
-                            yield Gfull
-                else:
-                    Gcopy = self._add_hardware(G, cart.console, None, cart, collection.sw_carts, flow)
+                for hw, pidx in collection.hw_ports.get(flow, {}).get(cart.game.console, ()):
+                    if not hw.region_match(cart):
+                        continue
+                    if cart.console is not None and hw != cart.console:
+                        continue
+                    pname = f"port_{pidx}"
+                    if (hw, pname) in G.nodes and G.edges((hw, pname)):
+                        continue
+                    found = True
+                    Gcopy = self._add_hardware(G, hw, pname, cart, flow)
                     for Gfull in self._connections(Gcopy, collection, flow):
                         yield Gfull
                 continue
@@ -234,16 +285,18 @@ class Cartridge():
                 idx = int(conn_name.split('_')[1])
                 for plug_type in hardware.model.ports[idx].get(flow, ()):
                     for hw, pidx in collection.hw_plugs.get(flow, {}).get(plug_type, ()):
+                        if hardware == hw:
+                            continue
                         if not hardware.region_match(hw):
                             continue
                         pname = f"plug_{pidx}"
                         if (hw, pname) in G.nodes and G.edges((hw, pname)):
                             continue
                         found = True
-                        Gcopy = self._add_hardware(G, hw, pname, node, collection.sw_carts, flow)
+                        Gcopy = self._add_hardware(G, hw, pname, node, flow)
                         for Gfull in self._connections(Gcopy, collection, flow):
                             yield Gfull
-                    for cart in collection.hw_carts.get(plug_type, ()):
+                    for cart in collection.carts_by_type.get(plug_type, ()):
                         if not hardware.region_match(cart):
                             continue
                         if cart in G.nodes:
@@ -258,22 +311,26 @@ class Cartridge():
                 idx = int(conn_name.split('_')[1])
                 for port_type in hardware.model.plugs[idx].get(flow, ()):
                     for hw, pidx in collection.hw_ports.get(flow, {}).get(port_type, ()):
+                        if hardware == hw:
+                            continue
                         if not hardware.region_match(hw):
                             continue
                         pname = f"port_{pidx}"
                         if (hw, pname) in G.nodes and G.edges((hw, pname)):
                             continue
                         found = True
-                        Gcopy = self._add_hardware(G, hw, pname, node, collection.sw_carts, flow)
+                        Gcopy = self._add_hardware(G, hw, pname, node, flow)
                         for Gfull in self._connections(Gcopy, collection, flow):
                             yield Gfull
 
             elif conn_name == "wireless":
                 for hw in collection.hw_wireless.get(flow, ()):
+                    if hardware == hw:
+                        continue
                     if (hw, "wireless") in G.nodes and G.edges((hw, "wireless")):
                         continue
                     found = True
-                    Gcopy = self._add_hardware(G, hw, "wireless", node, collection.sw_carts, flow)
+                    Gcopy = self._add_hardware(G, hw, "wireless", node, flow)
                     for Gfull in self._connections(Gcopy, collection, flow):
                         yield Gfull
             else:
@@ -281,7 +338,7 @@ class Cartridge():
         if not found:
             yield G
 
-    def _add_hardware(self, G, hw, in_connection, from_node, software, flow):
+    def _add_hardware(self, G, hw, in_connection, from_node, flow):
         '''
         Return copy of G with from_node linked to relevant port/plug of G
         '''
@@ -311,9 +368,6 @@ class Cartridge():
             name = "wireless"
             if in_connection != name and (hw, name) not in G.nodes:
                 G.add_edge(hw, (hw, name))
-        for cart in software.get(hw, ()):
-            if cart not in G.nodes:
-                G.add_edge(hw, cart)
         return G
 
     def _simplify_connection_graph(self, G_in):
@@ -505,7 +559,7 @@ HARDWARE_MODELS = {h.name: h for h in [
     # 3DS, 3DS XL, 2DS, 2DS XL
     HardwareModel("3DS", frozenset({"JPN", "USA", "EUR", "KOR", "TWN", "CHN"}), True, frozenset({"3DS"}), (
         frozendict({"DS": ("DS", "3DS")}),
-    ), wireless=frozenset({"DS"})),
+    ), wireless=frozenset({"DS", "3DSir"})),
 
     # Home consoles
     # Super Nintendo. No relevant games, but works with the Super Game Boy
@@ -626,8 +680,8 @@ HARDWARE_MODELS = {h.name: h for h in [
     ), wireless=frozenset({"GBAw"})),
     # Game Cube - Game Boy Advance Link Cable
     HardwareModel("DOL-011", plugs=(
-        frozendict({"GBA": ("GLC3p"),}),
-        frozendict({"GBA": ("GCNc"),}),
+        frozendict({"GBA": ("GLC3p",)}),
+        frozendict({"GBA": ("GCNc",)}),
     )),
 ]}
 
@@ -650,8 +704,7 @@ class Collection():
         self.hw_ports = {}
         self.hw_plugs = {}
         self.hw_wireless = {}
-        self.hw_carts = {}
-        self.sw_carts = {}
+        self.carts_by_type = {}
         for hw in self.hardware:
             for idx, port in enumerate(hw.model.ports):
                 for flow, port_types in port.items():
@@ -674,22 +727,21 @@ class Collection():
                     self.hw_wireless[flow] = set()
                 self.hw_wireless[flow].add(hw)
         for cart in self.cartridges:
-            if cart.console is None:
-                if cart.game.console not in self.hw_carts:
-                    self.hw_carts[cart.game.console] = set()
-                self.hw_carts[cart.game.console].add(cart)
-            else:
-                if cart.console not in self.sw_carts:
-                    self.sw_carts[cart.console] = set()
-                self.sw_carts[cart.console].add(cart)
+            if cart.game.console not in self.carts_by_type:
+                self.carts_by_type[cart.game.console] = set()
+            self.carts_by_type[cart.game.console].add(cart)
 
         self._connected_cache = {}
+        self.cart2consoles = {}
         for cart in self.cartridges:
             flow = cart.game.default_flow()
-            can_play, connections = cart.connections(self, flow)
-            if not can_play:
+            consoles, connections = cart.connections(self, flow)
+            if not consoles and cart.game.console is not None:
                 raise ValueError(f"Game {cart} cannot be played with specified hardware.")
-            self._connected_cache[cart] = connections
+            self.cart2consoles[cart] = consoles
+            if flow not in self._connected_cache:
+                self._connected_cache[flow] = {}
+            self._connected_cache[flow][cart] = connections
 
         self._init_interactions()
 
@@ -707,6 +759,10 @@ class Collection():
                 if cart == self.main_cartridge:
                     continue
                 if not nx.has_path(G, cart, self.main_cartridge):
+                    if cart.game.name == "BANK" and self.main_cartridge.game.gen == 6 and nx.has_path(G, self.main_cartridge, cart):
+                        # No connection listed from BANK to gen 6, but there is one
+                        # (I do it this way because Pokemon from VC and gen 7 can't be transported to gen 6 via Bank)
+                        continue
                     raise ValueError(f"Game {cart.game} cannot interact with main game {self.main_cartridge.game} (possibly due to specified hardware)")
 
     def connected(self, cart1, cart2, flow=None):
@@ -749,15 +805,16 @@ class Collection():
                     continue
                 game2 = cart2.game
 
-                if game1.gen == 1 and game1.core:
-                    if game2.gen == 1 and game2.core:
-                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
+                # The cart1.console checks distinguish gen I/II physical games from VC games
+                if game1.gen == 1 and game1.core and cart1.console is None:
+                    if game2.gen == 1 and game2.core and cart2.console is None:
+                        if game1.language_group(game2) and self.connected(cart1, cart2):
                             interactions["TRADE"].add((cart1, cart2))
                     elif game2.name in {"STADIUM_JPN", "STADIUM"}:
                         if game1.language_match(game2) and self.connected(cart1, cart2):
                             interactions["POKEMON"].add((cart1, cart2))
-                    elif game2.gen == 2 and game2.core:
-                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
+                    elif game2.gen == 2 and game2.core and cart2.console is None:
+                        if game1.language_group(game2) and self.connected(cart1, cart2):
                             interactions["TRADE"].add((cart1, cart2))
                     elif game2.name == "STADIUM2":
                         if game1.language_match(game2) and self.connected(cart1, cart2):
@@ -765,29 +822,29 @@ class Collection():
                             # STADIUM2 is the only way to transfer items between gen 1 games
                             for cart3 in self.cartridges:
                                 game3 = cart3.game
-                                if game3.gen == 1 and game3.core:
+                                if game3.gen == 1 and game3.core and game3.console is None:
                                     if game1.language_match(game3) and self.connected(cart2, cart3):
                                         interactions["ITEMS"].add((cart1, cart3))
                 elif game1.name in {"STADIUM_JPN", "STADIUM"}:
-                    if game2.gen == 1 and game2.core:
+                    if game2.gen == 1 and game2.core and cart2.console is None:
                         if game1.language_match(game2) and self.connected(cart1, cart2):
                             interactions["POKEMON"].add((cart1, cart2))
-                elif game1.gen == 2 and game1.core:
-                    if game2.gen == 1 and game2.core:
-                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
+                elif game1.gen == 2 and game1.core and cart1.console is None:
+                    if game2.gen == 1 and game2.core and cart2.console is None:
+                        if game1.language_group(game2) and self.connected(cart1, cart2):
                             interactions["TRADE"].add((cart1, cart2))
                             # Pokemon holding items can be traded to gen 1. Gen 1 can't access the
                             # items, but they will be preserved if the Pokemon is later traded back
                             # to gen 2, including the same cartridge.
                             for cart3 in self.cartridges:
                                 game3 = cart3.game
-                                if game3.gen == 2 and game3.core:
-                                    if (game1.language == "Japanese") == (game3.language == "Japanese") and self.connected(cart2, cart3):
+                                if game3.gen == 2 and game3.core and cart3.console is None:
+                                    if game1.language_group(game3) and self.connected(cart2, cart3):
                                         interactions["ITEMS"].add((cart1, cart3))
-                    elif game2.gen == 2 and game2.core:
-                        if (game1.language == "Japanese") == (game2.language == "Japanese") and self.connected(cart1, cart2):
-                                interactions["TRADE"].add((cart1, cart2))
-                        if game1.language_match(game2) and self.connected(cart1, cart2, "GBC_ir"):
+                    elif game2.gen == 2 and game2.core and cart2.console is None:
+                        if game1.language_group(game2) and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                        if game1.language_match(game2) and self.connected(cart1, cart2, "GBCir"):
                             interactions["MYSTERYGIFT"].add((cart1, cart2))
                     elif game2.name == "STADIUM2":
                         if game1.language_match(game2) and self.connected(cart1, cart2):
@@ -795,10 +852,10 @@ class Collection():
                             interactions["ITEMS"].add((cart1, cart2))
                             interactions["MYSTERYGIFT"].add((cart1, cart1)) # self-transfer
                 elif game1.name == "STADIUM2":
-                    if game2.gen == 1 and game2.core:
+                    if game2.gen == 1 and game2.core and cart2.console is None:
                         if game1.language_match(game2) and self.connected(cart1, cart2):
                             interactions["POKEMON"].add((cart1, cart2))
-                    elif game2.gen == 2 and game2.core:
+                    elif game2.gen == 2 and game2.core and cart2.console is None:
                         if game1.language_match(game2) and self.connected(cart1, cart2):
                             interactions["POKEMON"].add((cart1, cart2))
                             interactions["ITEMS"].add((cart1, cart2))
@@ -865,8 +922,9 @@ class Collection():
                             # Dual-slot mode: no language requirement
                             interactions["CONNECT"].add((cart1, cart2))
                     if game2.gen == 4 and game2.core:
-                        if (game1.language == "Korean") == (game2.language == "Korean") and self.connected(cart1, cart2):
+                        if game1.language_group(game2) and self.connected(cart1, cart2):
                             interactions["TRADE"].add((cart1, cart2))
+                            interactions["RECORDMIX"].add((cart1, cart2))
                     elif game2.name == "POKEWALKER":
                         if game1.name in ["HEARTGOLD", "SOULSILVER"]:
                             interactions["CONNECT"].add((cart1, cart2))
@@ -886,6 +944,9 @@ class Collection():
                     if game2.gen == 5 and game2.core:
                         if self.connected(cart1, cart2):
                             interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "TRANSPORTER":
+                        # Works with any region
+                        interactions["POKEMON"].add((cart1, cart2))
                 elif game1.name == "DREAMWORLD":
                     if game2.gen == 5 and game2.core:
                         if game1.region_match(game2):
@@ -898,4 +959,64 @@ class Collection():
                         if game1.region_match(game2):
                             interactions["POKEMON"].add((cart1, cart2))
                             interactions["ITEMS"].add((cart1, cart2))
+                elif game1.gen == 6 and game1.core:
+                    if game2.gen == 6 and game2.core:
+                        if self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "BANK":
+                        # Any region
+                        if cart1.console is None or cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
+                elif game1.name == "BANK":
+                    if game2.gen == 6 and game2.core:
+                        # Any region
+                        if cart2.console is None or cart2.console == cart2.console:
+                            # You can't transport VC or gen 7 Pokemon to gen 6 games, so treat BANK
+                            # as enabling gen 6 games to transfer Pokemon between one another (and
+                            # potentially receive Pokemon from gen 5 games)
+                            has_transporter = any([c.game.name == "TRANSPORTER" and c.console == cart1.console for c in self.cartridges])
+                            for cart3 in self.cartridges:
+                                game3 = cart3.game
+                                if (has_transporter and game3.gen == 5 and game3.core) or \
+                                        (game3.gen == 6 and game3.core and (cart3.console is None or cart3.console == cart1.console)):
+                                    
+                                    interactions["POKEMON"].add((cart3, cart2))
+                                    # So that BANK counts as connected
+                            #interactions["POKEMON"].add((cart1, cart2))
+                elif game1.name == "TRANSPORTER":
+                    if game2.name == "BANK":
+                        if cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
+                # VC games
+                elif game1.gen == 1 and cart1.console is not None:
+                    if game2.gen == 1 and cart2.console is not None:
+                        if game1.language_group(game2) and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.gen == 2 and game2.core and cart2.console is not None:
+                        if game1.language_group(game2) and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "TRANSPORTER":
+                        if cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
+                elif game1.gen == 2 and cart1.console is not None:
+                    if game2.gen == 1 and game2.core and cart2.console is not None:
+                        if game1.language_group(game2) and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                            # As before, you can effectively use a gen 1 game to trade items between gen 2s
+                            for cart3 in self.cartridges:
+                                game3 = cart3.game
+                                if game3.gen == 2 and game3.core and cart3.console is not None:
+                                    if game1.language_group(game3) and self.connected(cart2, cart3):
+                                        interactions["ITEMS"].add((cart1, cart3))
+                    elif game2.gen == 2 and game2.core and cart2.console is not None:
+                        if game1.language_group(game2) and self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                        # Adding this for completeness; in practice on the VC, you can never MG if
+                        # you can't trade, and MG adds no practical benefit over trading
+                        if game1.language_match(game2) and self.connected(cart1, cart2, "3DSir"):
+                            interactions["MYSTERYGIFT"].add((cart1, cart2))
+                    elif game2.name == "TRANSPORTER":
+                        if cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
+       
         self.interactions = interactions

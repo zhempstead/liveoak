@@ -4,7 +4,7 @@ import argparse
 from copy import deepcopy
 from dataclasses import dataclass, replace
 from enum import Enum
-from itertools import combinations, product, zip_longest
+from itertools import chain, combinations, product, zip_longest
 import math
 from pathlib import Path
 from typing import Optional
@@ -92,6 +92,357 @@ BC_WF_TRAINERS = [
     "HERMAN", "JACQUES", "KARENNA", "KEN", "LENA", "LEO", "LYNETTE", "MARIE", "MIHO", "MIKI",
     "MOLLY", "PIERCE", "PIPER", "RALPH", "ROBBIE", "ROSA", "RYDER", "SHANE", "SILVIA", "VINCENT",
 ]
+
+FS_SLOTS = {
+    "BUG": {
+        1: [
+            {"Caterpie", "Metapod", "Butterfree"},
+            {"Paras", "Parasect"},
+            {"Ledyba", "Ledian"},
+            {"Combee", "Vespiquen"},
+        ],
+        2: [
+            {"Wurmple", "Silcoon", "Beautifly", "Cascoon", "Dustox"},
+            {"Surskit", "Masquerain"},
+            {"Volbeat", "Illumise"},
+        ],
+        3: [
+            {"Venonat", "Venomoth"},
+            {"Pinsir"},
+            {"Heracross"},
+            {"Scatterbug", "Spewpa", "Vivillon"},
+        ],
+    },
+    "DARK": {
+        1: [
+            {"Poochyena", "Mightyena"},
+            {"Seedot", "Nuzleaf", "Shiftry"},
+            {"Pawniard", "Bisharp"},
+            {"Vullaby", "Mandibuzz"},
+        ],
+        2: [
+            {"Sneasel", "Weavile"},
+            {"Cacnea", "Cacturne"},
+            {"Corphish", "Crawdaunt"},
+            {"Sandile", "Krokorok", "Krookodile"},
+        ],
+        3: [
+            {"Sableye"},
+            {"Absol"},
+            {"Purrloin", "Liepard"},
+            {"Inkay", "Malamar"},
+        ],
+    },
+    "DRAGON": {
+        1: [
+            {"Gible", "Gabite", "Garchomp"},
+            {"Axew", "Fraxure", "Haxorus"},
+        ],
+        2: [
+            {"Dratini", "Dragonair", "Dragonite"},
+            {"Bagon", "Shelgon", "Salamence"},
+            {"Noibat", "Noivern"},
+        ],
+        3: [
+            {"Druddigon"},
+            {"Goomy", "Sliggoo", "Goodra"},
+        ],
+    },
+    "ELECTRIC": {
+        1: [
+            {"Voltorb", "Electrode"},
+            {"Pachirisu"},
+            {"Emolga"},
+            {"Dedenne"},
+        ],
+        2: [
+            {"Pikachu", "Raichu", "Pichu"},
+            {"Electabuzz", "Elekid", "Electivire"},
+            {"Stunfisk"},
+            {"Helioptile", "Heliolisk"},
+        ],
+        3: [
+            {"Electrike", "Manectric"},
+            {"Shinx", "Luxio", "Luxray"},
+            {"Blitzle", "Zebstrika"},
+            {"Joltik", "Galvantula"},
+        ],
+    },
+    "FAIRY": {
+        1: [
+            {"Togepi", "Togetic", "Togekiss"},
+            {"Snubbull", "Granbull"},
+            {"Ralts", "Kirlia", "Gardevoir", "Gallade"},
+            {"Dedenne"},
+        ],
+        2: [
+            {"Jigglypuff", "Wigglytuff", "Igglybuff"},
+            {"Mawile"},
+            {"Spritzee", "Aromatisse"},
+            {"Swirlix", "Slurpuff"},
+        ],
+        3: [
+            {"Clefairy", "Clefable", "Cleffa"},
+            {"Flabébé_BLUE", "Floette_BLUE", "Florges_BLUE"},
+            {"Flabébé_RED", "Floette_RED", "Florges_RED"},
+            {"Flabébé_YELLOW", "Floette_YELLOW", "Florges_YELLOW"},
+        ],
+    },
+    "FIGHTING": {
+        1: [
+            {"Mankey", "Primeape"},
+            {"Machop", "Machoke", "Machamp"},
+            {"Meditite", "Medicham"},
+            {"Mienfoo", "Mienshao"},
+        ],
+        2: [
+            {"Throh"},
+            {"Sawk"},
+            {"Pancham", "Pangoro"},
+        ],
+        3: [
+            {"Hitmonlee", "Hitmonchan", "Tyrogue", "Hitmontop"},
+            {"Shroomish", "Breloom"},
+            {"Makuhita", "Hariyama"},
+            {"Riolu", "Lucario"},
+        ],
+    },
+    "FIRE": {
+        1: [
+            {"Growlithe", "Arcanine"},
+            {"Ponyta", "Rapidash"},
+            {"Magmar", "Magby", "Magmortar"},
+            {"Pansear", "Simisear"},
+        ],
+        2: [
+            {"Charmander", "Charmeleon", "Charizard"},
+            {"Slugma", "Magcargo"},
+            {"Larvesta", "Volcarona"},
+            {"Litleo", "Pyroar"},
+        ],
+        3: [
+            {"Vulpix", "Ninetales"},
+            {"Fennekin", "Braixen", "Delphox"},
+            {"Fletchling", "Fletchinder", "Talonflame"},
+        ],
+    },
+    "FLYING": {
+        1: [
+            {"Pidgey", "Pidgeotto", "Pidgeot"},
+            {"Spearow", "Fearow"},
+            {"Farfetch'd"},
+            {"Doduo", "Dodrio"},
+        ],
+        2: [
+            {"Hoothoot", "Noctowl"},
+            {"Pidove", "Tranquill", "Unfezant"},
+            {"Woobat", "Swoobat"},
+            {"Ducklett", "Swanna"},
+        ],
+        3: [
+            {"Tropius"},
+            {"Rufflet", "Braviary"},
+            {"Fletchinder", "Talonflame"},
+            {"Hawlucha"},
+        ],
+    },
+    "GHOST": {
+        1: [
+            {"Shuppet", "Banette"},
+            {"Litwick", "Lampent", "Chandelure"},
+        ],
+        2: [
+            {"Phantump", "Trevenant"},
+            {"Pumpkaboo_AVERAGE", "Gourgeist_AVERAGE"},
+        ],
+        3: [
+            {"Duskull", "Dusclops", "Dusknoir"},
+            {"Drifloon", "Drifblim"},
+            {"Spiritomb"},
+            {"Golett", "Golurk"},
+        ],
+    },
+    "GRASS": {
+        1: [
+            {"Oddish", "Gloom", "Vileplume", "Bellossom"},
+            {"Tangela", "Tangrowth"},
+            {"Sunkern", "Sunflora"},
+            {"Pansage", "Simisage"},
+        ],
+        2: [
+            {"Bulbasaur", "Ivysaur", "Venusaur"},
+            {"Sewaddle", "Swadloon", "Leavanny"},
+            {"Petilil", "Lilligant"},
+            {"Deerling", "Sawsbuck"},
+        ],
+        3: [
+            {"Maractus"},
+            {"Chespin", "Quilladin", "Chesnaught"},
+            {"Skiddo", "Gogoat"},
+        ],
+    },
+    "GROUND": {
+        1: [
+            {"Sandshrew", "Sandslash"},
+            {"Wooper", "Quagsire"},
+            {"Phanpy", "Donphan"},
+            {"Trapinch", "Vibrava", "Flygon"},
+        ],
+        2: [
+            {"Diglett", "Dugtrio"},
+            {"Cubone", "Marowak"},
+            {"Nincada", "Ninjask", "Shedinja"},
+            {"Numel", "Camerupt"},
+        ],
+        3: [
+            {"Shellos_WEST", "Gastrodon_WEST"},
+            {"Tympole", "Palpitoad", "Seismitoad"},
+            {"Bunnelby", "Diggersby"},
+        ],
+    },
+    "ICE": {
+        1: [
+            {"Delibird"},
+            {"Snorunt", "Glalie", "Froslass"},
+            {"Spheal", "Sealeo", "Walrein"},
+            {"Snover", "Abomasnow"},
+        ],
+        2: [
+            {"Sneasel", "Weavile"},
+            {"Cubchoo", "Beartic"},
+            {"Bergmite", "Avalugg"},
+        ],
+        3: [
+            {"Seel", "Dewgong"},
+            {"Shellder", "Cloyster"},
+            {"Lapras"},
+            {"Swinub", "Piloswine", "Mamoswine"},
+        ],
+    },
+    "NORMAL": {
+        1: [
+            {"Teddiursa", "Ursaring"},
+            {"Aipom", "Ambipom"},
+            {"Dunsparce"},
+            {"Lillipup", "Herdier", "Stoutland"},
+        ],
+        2: [
+            {"Whismur", "Loudred", "Exploud"},
+            {"Kecleon"},
+            {"Audino"},
+            {"Minccino", "Cinccino"},
+        ],
+        3: [
+            {"Chansey", "Blissey", "Happiny"},
+            {"Ditto"},
+            {"Eevee", "Vaporeon", "Jolteon", "Flareon", "Espeon", "Umbreon", "Leafeon", "Glaceon", "Sylveon"},
+            {"Smeargle"},
+        ],
+    },
+    "POISON": {
+        1: [
+            {"Weedle", "Kakuna", "Beedrill"},
+            {"Oddish", "Gloom", "Vileplume"},
+            {"Wurmple", "Silcoon", "Beautifly", "Cascoon", "Dustox"},
+            {"Seviper"},
+        ],
+        2: [
+            {"Venonat", "Venomoth"},
+            {"Spinarak", "Ariados"},
+            {"Gulpin", "Swalot"},
+            {"Trubbish", "Garbodor"},
+        ],
+        3: [
+            {"Grimer", "Muk"},
+            {"Skorupi", "Drapion"},
+            {"Croagunk", "Toxicroak"},
+            {"Venipede", "Whirlipede", "Scolipede"},
+        ],
+    },
+    "PSYCHIC": {
+        1: [
+            {"Abra", "Kadabra", "Alakazam"},
+            {"Drowzee", "Hypno"},
+            {"Spoink", "Grumpig"},
+            {"Munna", "Musharna"},
+        ],
+        2: [
+            {"Wobbuffet", "Wynaut"},
+            {"Sigilyph"},
+            {"Espurr", "Meowstic"},
+        ],
+        3: [
+            {"Natu", "Xatu"},
+            {"Girafarig"},
+            {"Gothita", "Gothorita", "Gothitelle"},
+            {"Solosis", "Duosion", "Reuniclus"},
+        ],
+    },
+    "ROCK": {
+        1: [
+            {"Nosepass", "Probopass"},
+            {"Roggenrola", "Boldore", "Gigalith"},
+            {"Dwebble", "Crustle"},
+        ],
+        2: [
+            {"Onix", "Steelix"},
+            {"Slugma", "Magcargo"},
+            {"Corsola"},
+            {"Larvitar", "Pupitar", "Tyranitar"},
+        ],
+        3: [
+            {"Rhyhorn", "Rhydon", "Rhyperior"},
+            {"Shuckle"},
+            {"Binacle", "Barbaracle"},
+        ],
+    },
+    "STEEL": {
+        1: [
+            {"Magnemite", "Magneton", "Magnezone"},
+            {"Mawile"},
+            {"Ferroseed", "Ferrothorn"},
+        ],
+        2: [
+            {"Pineco", "Forretress"},
+            {"Skarmory"},
+            {"Beldum", "Metang", "Metagross"},
+            {"Klink", "Klang", "Klinklang"},
+        ],
+        3: [
+            {"Bronzor", "Bronzong"},
+            {"Drilbur", "Excadrill"},
+            {"Klefki"},
+        ],
+    },
+    "WATER": {
+        1: [
+            {"Krabby", "Kingler"},
+            {"Remoraid", "Octillery"},
+            {"Bidoof", "Bibarel"},
+            {"Panpour", "Simipour"},
+        ],
+        2: [
+            {"Squirtle", "Wartortle", "Blastoise"},
+            {"Magikarp", "Gyarados"},
+            {"Wooper", "Quagsire"},
+            {"Buizel", "Floatzel"},
+        ],
+        3: [
+            {"Poliwag", "Poliwhirl", "Poliwrath", "Politoed"},
+            {"Marill", "Azumarill", "Azurill"},
+            {"Froakie", "Frogadier", "Greninja"},
+        ],
+    },
+}
+
+FS_TRADE_EVOLVE = {
+    "Alakazam", "Machamp",
+    "Politoed", "Steelix",
+    "Rhyperior", "Electivire", "Magmortar", "Dusknoir",
+    "Gigalith",
+    "Aromatisse", "Slurpuff", "Trevenant", "Gourgeist",
+}
+
 
 class Generation():
     DATA = ["breed", "buy", "environment", "evolve", "fossil", "gift", "pickup_item", "pickup_pokemon", "trade", "wild", "wild_item"]
@@ -199,7 +550,7 @@ class GameSave():
 
         if self.generation.breed is not None and "NO_BREED" not in self.game.props and "NO_DEX" not in self.game.props:
             for _, row in self.generation.breed.iterrows():
-                pr = self.parse_pokemon_input(row.PARENT)
+                pr = self.parse_pokemon_input(row.PARENT, forbidden={"NOBREED"})
                 for gender in self.generation.genders(pr.species):
                     pg = replace(pr, gender=gender)
                     for c in self.parse_output(row.CHILD):
@@ -291,7 +642,7 @@ class GameSave():
                 if not self.game.match(row.GAME):
                     continue
                 choices = self.parse_gift_entry(row.POKEMON_OR_ITEM)
-                reqs, valid = self.parse_input(row.REQUIRED)
+                reqs, valid = self.parse_input(row.get("REQUIRED"))
                 if not valid:
                     continue
                 if len(choices) == 1:
@@ -600,6 +951,19 @@ class GameSave():
             del self.rules[rule_name]
         for rule in to_add:
             self.rules[rule.name] = rule
+
+    def outputs_tradeable(self):
+        to_process = {self}
+        processed = set()
+        while to_process:
+            gs = to_process.pop()
+            processed.add(gs)
+            if gs.transfers["TRADE"]:
+                return True
+            for gs2 in gs.transfers["POKEMON"]:
+                if gs2 not in processed:
+                    to_process.add(gs2)
+        return False
 
     def parse_pokemon_input(self, entry, forbidden=None):
         split = entry.split('_')
@@ -1041,25 +1405,27 @@ class GameSave():
             else:
                 self.apply_all_safe_rules()
 
-    def try_paths(self, subset=None, only_side_effects=False):
+    def try_paths(self, subset=None, only_side_effects=False, spaces=''):
         component_dexsets = []
 
         for G in self.rule_graph_components(subset):
             local_dexsets = set()
-            ruleset = set(G.nodes).intersection(self.rules.keys())
+            ruleset = self.consolidate_rules(set(G.nodes).intersection(self.rules.keys()))
+
             for rule_name in ruleset:
                 rule = self.rules[rule_name]
                 if not self.check_rule_possible(rule):
                     continue
+                #print(spaces + rule_name)
                 save_copy = self.copy()
                 self.path_child = save_copy
                 save_copy.apply_rule_if_possible(rule_name)
                 save_copy.all_safe_paths()
                 if only_side_effects:
-                    save_copy.try_paths(G.nodes, only_side_effects)
+                    save_copy.try_paths(G.nodes, only_side_effects, spaces=spaces + '  ')
                 else:
-                    local_dexsets = local_dexsets.union(save_copy.try_paths(G.nodes, only_side_effects))
-            if not only_side_effects:
+                    local_dexsets = local_dexsets.union(save_copy.try_paths(G.nodes, only_side_effects, spaces=spaces + '  '))
+            if not only_side_effects and local_dexsets:
                 component_dexsets.append(local_dexsets)
 
         if not only_side_effects:
@@ -1086,7 +1452,9 @@ class GameSave():
             yield Gcomp
 
         
-    def handle_special(self, collection):
+    def handle_special(self, collection_saves):
+        collection = collection_saves.collection
+
         if self.game.name == "BLACK":
             # Black City
             # Exactly 10 trainers have useful items for sale (evolution stones), but unlimited
@@ -1101,7 +1469,7 @@ class GameSave():
                     self.acquire(GameChoice(f"WF_{trainer}"), 1)
                 return True
             elif self.transfers["POKEMON"]:
-                if self.id == collection.main_cartridge.id:
+                if self.cartridge == collection.main_cartridge:
                     raise ValueError("Not handled")
                 # If we can transfer, other cartridges can get every trainer.
                 # The exact combinations shouldn't matter
@@ -1118,7 +1486,7 @@ class GameSave():
                     # Every White Forest Pokemon is present in at least one of these groups, and
                     # missing from at least one of these groups.
                     #
-                    # The first group is one of the optimum combinations.
+                    # The first group is one of the optimal combinations.
                     tgroups = [
                         ['BRITNEY', 'CARLOS', 'DOUG', 'ELIZA', 'EMI', 'FREDERIC', 'JACQUES', 'LENA', 'LYNETTE', 'SILVIA'],
                         ['DAVE', 'GENE', 'LEO', 'LYNETTE', 'MIHO', 'MIKI', 'PIERCE', 'PIPER', 'ROBBIE', 'SHANE'],
@@ -1156,6 +1524,154 @@ class GameSave():
                             self.acquire(GameChoice(f"WF_{trainer}"), 1)
                         return True
                 raise ValueError("Shouldn't reach here")
+        elif self.game.name in {"X", "Y"}:
+            # Friend Safari
+            # Big assumption - choosing any particular Pokemon slot will only add availability
+            # for Pokemon in that evolution family
+
+            # Only process Friend Safari once for all games, since availability is tied to consoles
+            if collection_saves.friend_safaris is not None:
+                return False
+
+            consoles = {hw for hw in collection.hardware if hw.model.name == "3DS"}
+            playable_consoles = set()
+            connectable_consoles = set()
+            console2carts = {hw: set() for hw in collection.hardware if hw.model.name == "3DS"}
+            xy_carts = {cart for cart in collection.cartridges if cart.game.name in {"X", "Y"}}
+            for cart in collection.cartridges:
+                if cart.game.gen == 6 and cart.game.core:
+                    for console in collection.cart2consoles[cart]:
+                        console2carts[console].add(cart)
+            
+            safari2_consoles = 0
+            safari3_consoles = 0
+            for console, console_carts in console2carts.items():
+                if not console_carts:
+                    safari2_consoles += 1
+                    continue
+                other_playable = False # Can an XY cartridge be played on a different console?
+                simultaneous_playable = False # Can a gen 6 cartridge be played on this console as an XY cartridge is played on a different console?
+                for cart in xy_carts:
+                    if collection.cart2consoles[cart] != {console}:
+                        other_playable = True
+                        if console_carts != {cart}:
+                            simultaneous_playable = True
+                            break
+                if other_playable:
+                    if simultaneous_playable:
+                        safari3_consoles += 1
+                    else:
+                        safari2_consoles += 1
+                    
+            if not safari2_consoles and not safari3_consoles:
+                return False
+            print(safari2_consoles, safari3_consoles)
+
+            # Now, figure out if Pokemon acquired in the Friend Safari can be traded (and thus
+            # trade evolutions are obtainable)
+            trading = self.outputs_tradeable()
+            dex = collection_saves.game_saves[collection.main_cartridge].dex
+
+            def filter_slots(slots, needed_species):
+                out = {}
+                for fs_type, pokemon in slots.items():
+                    for key in pokemon.keys():
+                        if key == 3 and not safari3_consoles:
+                            continue
+                        for family in pokemon[key]:
+                            useful = [p for p in family if p.split('_')[0] in needed_species]
+                            if useful:
+                                if fs_type not in out:
+                                    out[fs_type] = {}
+                                if key not in out[fs_type]:
+                                    out[fs_type][key] = []
+                                out[fs_type][key].append(useful)
+                return out
+
+            needed_species = {s for s, obtained in dex.items() if not obtained}
+            if not trading:
+                needed_species = needed_species.difference(FS_TRADE_EVOLVE)
+            useful_slots = filter_slots(FS_SLOTS, needed_species)
+            
+            # Now we find the best possible set of safaris
+            safari2s = []
+            safari3s = []
+            for fs_type, slots in useful_slots.items():
+                if safari3_consoles:
+                    for safari in product(*slots.values()):
+                        safari3s.append(set(chain(*safari)))
+                if safari2_consoles:
+                    slot_values = [ps for idx, ps in slots.items() if idx != 3]
+                    if slot_values:
+                        for safari in product(*slot_values):
+                            safari2s.append(set(chain(*safari)))
+
+            gen1_starters = ["Bulbasaur", "Charmander", "Squirtle"]
+            best_count = 0
+            best_safari_group = set()
+            for s2s in combinations(safari2s, safari2_consoles):
+                for s3s in combinations(safari3s, safari3_consoles):
+                    safari_group = set(chain(*s2s, *s3s))
+                    count = len(safari_group)
+                    # Would "waste" entries since you get one starter
+                    if all([starter in safari_group for starter in gen1_starters]):
+                        count -= 3
+                    if count > best_count:
+                        best_count = count
+                        best_safari_group = safari_group
+
+            needed_species = needed_species.difference(best_safari_group)
+            useful_slots = filter_slots(useful_slots, needed_species)
+
+            # Now we cover the rest with the fewest options
+            # It turns out that at this point, there will be no families duplicated in different slots
+            # This simplifies the logic somewhat
+            safari3s = []
+            safari2s = []
+            for fs_type, slots in useful_slots.items():
+                counts = {key: len(slots.get(key, [])) for key in [1, 2, 3]}
+                for idx in range(max(counts.values())):
+                    safari = set()
+                    if counts[1] >= 1:
+                        safari = safari.union(slots[1][idx % counts[1]])
+                    if counts[2] >= 1:
+                        safari = safari.union(slots[2][idx % counts[2]])
+                    if counts[3] > idx:
+                        safari = safari.union(slots[3][idx])
+                        safari3s.append(safari)
+                    else:
+                        safari2s.append(safari)
+
+            safari_groups = [best_safari_group]
+            safari2s_done = len(safari2s) == 0
+            safari3s_done = len(safari3s) == 0
+            idx2 = 0
+            idx3 = 0
+            while not safari2s_done or not safari3s_done:
+                safari_group = set()
+                for _ in range(safari3_consoles):
+                    if safari3s_done and len(safari2s) > 0:
+                        safari_group = safari_group.union(safari2s[idx2])
+                        idx2 += 1
+                        if idx2 == len(safari2s):
+                            safari2s_done = True
+                            idx2 = 0
+                    else:
+                        safari_group = safari_group.union(safari3s[idx3])
+                        idx3 += 1
+                        if idx3 == len(safari3s):
+                            safari3s_done = True
+                            idx3 = 0
+                for _ in range(safari2_consoles):
+                    if len(safari2s) > 0:
+                        safari_group = safari_group.union(safari2s[idx2])
+                        idx2 += 1
+                        if idx2 == len(safari2s):
+                            safari2s_done = True
+                            idx2 = 0
+                safari_groups.append(safari_group)
+            collection_saves.friend_safaris = safari_groups
+            return True
         return False
 
 
@@ -1192,6 +1708,22 @@ class GameSave():
         else:
             raise ValueError(f"Invalid entry {entry}")
 
+    def consolidate_rules(self, ruleset):
+        out_rules = set()
+        rule_dups = set()
+        for rule_name in ruleset:
+            rule = self.rules[rule_name]
+            req = frozenset({r for r in rule.required if self.get_count(r) != math.inf})
+            cons = frozenset({c for c in rule.consumed if self.get_count(c) != math.inf})
+            out = frozenset({o for o in rule.output if self.get_count(o) != math.inf})
+            if not out:
+                continue
+            if (req, cons, out) not in rule_dups:
+                out_rules.add(rule_name)
+                if rule.repeats == math.inf:
+                    rule_dups.add((req, cons, out))
+        return out_rules
+
     def unique_pokemon_transfers(self, species, already_visited=None):
         if already_visited is None:
             already_visited = frozenset()
@@ -1227,15 +1759,46 @@ class GameSave():
 
 
 class CollectionSaves():
-    def __init__(self, collection):
-        generations = {gen: Generation(gen) for gen in set(c.game.gen for c in collection.cartridges)}
+    def __init__(self, collection, generations=None):
+        if generations is None:
+            generations = {gen: Generation(gen) for gen in set(c.game.gen for c in collection.cartridges)}
+        self.generations = generations
+
         self.game_saves = {c: GameSave(c, generations[c.game.gen]) for c in collection.cartridges}
+        self.collection = collection
         self.main_cartridge = collection.main_cartridge
+
+        # See GameSave.handle_special
+        self.friend_safaris = None
+
+        for kind, cart_pairs in collection.interactions.items():
+            for cart1, cart2 in cart_pairs:
+                self.game_saves[cart1].transfer(self.game_saves[cart2], kind)
 
         if any([gs.has_gender for gs in self.game_saves.values()]):
             for gs in self.game_saves.values():
                 gs.has_gender = True
         self.pokemon_list = self.game_saves[self.main_cartridge].generation.pokemon_list
+
+        for gs in self.game_saves.values():
+            gs.init_rules()
+
+    def copy(self):
+        memo = {}
+        cs = CollectionSaves(self.collection, self.generations)
+        for cart in self.collection.cartridges:
+            gs1 = self.game_saves[cart]
+            gs2 = cs.game_saves[cart]
+            gs2.dex = gs1.dex.copy()
+            gs2.pokemon = deepcopy(gs1.pokemon, memo)
+            gs2.items = deepcopy(gs1.items, memo)
+            gs2.choices = deepcopy(gs1.choices, memo)
+            gs2.rules = deepcopy(gs1.rules, memo)
+            gs2.transfer_rules = {}
+            for entry, rules in gs1.transfer_rules.items():
+                new_rules = [replace(r, game_save=cs.game_saves[r.game_save.cartridge]) for r in rules]
+                gs2.transfer_rules[entry] = new_rules
+        return cs
 
 
     def calc_dexes(self):
@@ -1253,7 +1816,36 @@ class CollectionSaves():
             if any(gs.handle_special(self) for gs in self.game_saves.values()):
                 self.try_cart_paths()
 
-        paths = self.game_saves[self.main_cartridge].try_paths()
+        safari_pokemon = set()
+        if self.friend_safaris is None:
+            paths = self.game_saves[self.main_cartridge].try_paths()
+        else:
+            paths = set()
+            print(len(self.friend_safaris))
+            if len(self.collection.cartridges) == 1:
+                gen1_starters = ["Bulbasaur", "Charmander", "Squirtle"]
+                del self.game_saves[self.main_cartridge].choices['3']
+            for idx, safari in enumerate(self.friend_safaris):
+                print(safari)
+                safari_pokemon = safari_pokemon.union(safari)
+                cs2 = self.copy()
+                for cart in self.collection.cartridges:
+                    if cart.game.name not in {"X", "Y"}:
+                        continue
+                    gs = cs2.game_saves[cart]
+                    for pokemon in safari:
+                        gs.choices[f"FS_{pokemon}"] = 1
+                    if len(self.collection.cartridges) == 1:
+                        # Solo copy of X/Y. Handle gen 1 starters to avoid combining all
+                        # starter/safari possibilities in output
+                        for plus in range(3):
+                            starter = gen1_starters[(idx + plus) % 3]
+                            if starter not in safari:
+                                break
+                        gs.pokemon[starter] = {Pokemon(starter, Gender.FEMALE): 1}
+                cs2.try_cart_paths()
+                paths = paths.union(cs2.game_saves[self.main_cartridge].try_paths())
+
         dexes = pd.DataFrame([[p[1] for p in path] for path in paths], columns=self.pokemon_list.index)
 
         varying = [col for col in dexes.columns if not all(dexes[col]) and not all(~dexes[col])]
@@ -1262,7 +1854,7 @@ class CollectionSaves():
         for pokemon in varying:
             found_group = False
             for idx, group in enumerate(groups):
-                if dexes[[pokemon, group[0]]].corr().round(8)[pokemon][group[0]] == 0:
+                if dexes[[pokemon, group[0]]].corr().round(8)[pokemon][group[0]] == 0 and (pokemon not in safari_pokemon or group[0] not in safari_pokemon):
                     continue
                 found_group = True
                 pokemon_by_group_idx[pokemon] = idx
@@ -1529,20 +2121,20 @@ def main(args):
             if gs:
                 for game_name in gs[:-1].split(','):
                     game = Game.parse(game_name, hardware)
-                    all_games[-1].append((game, item, hardware))
+                    all_games[-1].append((game, game_name, hardware))
 
     if num_collections == 1:
         games = all_games[0]
         hardware = all_hardware[0]
         collection_saves, result = calc_dexes(games, hardware)
 
-        result.print_obtainable()
-        print("\n---\n")
-        result.print_missing()
+        if args.missing:
+            result.print_missing()
+        else:
+            result.print_obtainable()
         print("\n---\n")
         print(f"TOTAL: {result.count()}")
         cart = collection_saves.main_cartridge
-        import pdb; pdb.set_trace()
     elif num_collections == 2:
         raise ValueError("Games/hardware before the first '.' are universal, so there should be 0 or 2+ instances of '.'")
     else:
@@ -1572,8 +2164,6 @@ def calc_dexes(games, hardware):
     cartridges = [Cartridge(g, cl, c) for g, cl, c in games]
     collection = Collection(cartridges, hardware)
     collection_saves = CollectionSaves(collection)
-    for gs in collection_saves.game_saves.values():
-        gs.init_rules()
 
     return collection_saves, collection_saves.calc_dexes()
         
