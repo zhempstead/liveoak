@@ -116,7 +116,7 @@ class Game():
     def default_flow(self):
         if self.console in {"GB", "GBC", "N64"}:
             return "GB"
-        elif self.console in {"GBA", "GCN"}:
+        elif self.console in {"GBA", "GCN", "eREADER"}:
             return "GBA"
         elif self.console in {"DS", "3DS", "Wii", None}:
             return "DS"
@@ -241,7 +241,7 @@ class Cartridge():
                     consoles.add(neighbor)
                 else:
                     for neighbor2 in G.adj[neighbor]:
-                        if neighbor2.model.is_console:
+                        if isinstance(neighbor2, Hardware) and neighbor2.model.is_console:
                             consoles.add(neighbor2)
 
             for node in G:
@@ -560,6 +560,11 @@ HARDWARE_MODELS = {h.name: h for h in [
     HardwareModel("3DS", frozenset({"JPN", "USA", "EUR", "KOR", "TWN", "CHN"}), True, frozenset({"3DS"}), (
         frozendict({"DS": ("DS", "3DS")}),
     ), wireless=frozenset({"DS", "3DSir"})),
+    # A 3DS that one is willing to factory reset in order to get all Friend Safari Pokemon
+    HardwareModel("3DSr", frozenset({"JPN", "USA", "EUR", "KOR", "TWN", "CHN"}), True, frozenset({"3DS"}), (
+        frozendict({"DS": ("DS", "3DS")}),
+    ), wireless=frozenset({"DS", "3DSir"})),
+
 
     # Home consoles
     # Super Nintendo. No relevant games, but works with the Super Game Boy
@@ -686,7 +691,7 @@ HARDWARE_MODELS = {h.name: h for h in [
 ]}
 
 class Collection():
-    def __init__(self, cartridges, hardware):
+    def __init__(self, cartridges, hardware, skip_validation=False):
         if len(cartridges) == 0:
             raise ValueError("No games!")
         self.main_cartridge = None
@@ -745,26 +750,11 @@ class Collection():
 
         self._init_interactions()
 
-        if len(self.cartridges) > 1:
-            G = nx.DiGraph()
-            for cart in self.cartridges:
-                G.add_node(cart)
-            for kind, cart_pairs in self.interactions.items():
-                for cart1, cart2 in cart_pairs:
-                    if kind == "CONNECT":
-                        G.add_edge(cart2, cart1)
-                    else:
-                        G.add_edge(cart1, cart2)
-            for cart in self.cartridges:
-                if cart == self.main_cartridge:
-                    continue
-                if not nx.has_path(G, cart, self.main_cartridge):
-                    if cart.game.name == "BANK" and self.main_cartridge.game.gen == 6 and nx.has_path(G, self.main_cartridge, cart):
-                        # No connection listed from BANK to gen 6, but there is one
-                        # (I do it this way because Pokemon from VC and gen 7 can't be transported to gen 6 via Bank)
-                        continue
-                    raise ValueError(f"Game {cart.game} cannot interact with main game {self.main_cartridge.game} (possibly due to specified hardware)")
-
+        if len(self.cartridges) > 1 and not skip_validation:
+            unreachable = self.unreachable_games()
+            if unreachable:
+                raise ValueError(f"The following game(s) can't interact with the main game {self.main_cartridge}, at least with the current collection: {unreachable}")
+     
     def connected(self, cart1, cart2, flow=None):
         if flow is None:
             flow1 = cart1.game.default_flow()
@@ -967,6 +957,7 @@ class Collection():
                         # Any region
                         if cart1.console is None or cart1.console == cart2.console:
                             interactions["POKEMON"].add((cart1, cart2))
+                            interactions["CONNECT"].add((cart1, cart2))
                 elif game1.name == "BANK":
                     if game2.gen == 6 and game2.core:
                         # Any region
@@ -979,10 +970,8 @@ class Collection():
                                 game3 = cart3.game
                                 if (has_transporter and game3.gen == 5 and game3.core) or \
                                         (game3.gen == 6 and game3.core and (cart3.console is None or cart3.console == cart1.console)):
-                                    
+ 
                                     interactions["POKEMON"].add((cart3, cart2))
-                                    # So that BANK counts as connected
-                            #interactions["POKEMON"].add((cart1, cart2))
                 elif game1.name == "TRANSPORTER":
                     if game2.name == "BANK":
                         if cart1.console == cart2.console:
@@ -1020,3 +1009,96 @@ class Collection():
                             interactions["POKEMON"].add((cart1, cart2))
        
         self.interactions = interactions
+
+    def interactions_graph(self):
+        G = nx.DiGraph()
+        for cart in self.cartridges:
+            G.add_node(cart)
+        for kind, cart_pairs in self.interactions.items():
+            for cart1, cart2 in cart_pairs:
+                if kind == "CONNECT":
+                    G.add_edge(cart2, cart1)
+                else:
+                    G.add_edge(cart1, cart2)
+        return G
+
+    def unreachable_games(self):
+        unreachable = set()
+        if len(self.cartridges) == 1:
+            return unreachable
+        G = self.interactions_graph()
+        for cart in self.cartridges:
+            if cart == self.main_cartridge:
+                continue
+            if not nx.has_path(G, cart, self.main_cartridge):
+                unreachable.add(cart)
+            elif cart.game.name == "BONUSDISC_JPN":
+                colosseum = [c for c in G.neighbors(cart) if c.game.name == "COLOSSEUM"]
+                if not colosseum:
+                    unreachable.add(cart)
+            elif cart.game.name == "TRANSPORTER":
+                transported = G.predecessors(cart)
+                if self.main_cartridge.game.gen == 6 and self.main_cartridge.game.core:
+                    # Can't deposit Pokemon from VC games to gen 6 games
+                    transported = [t for t in transported if t.game.gen == 5]
+                if not transported:
+                    unreachable.add(cart)
+        return unreachable
+
+
+    def reset_console(console):
+        '''
+        Return new Collection resulting from factory-resetting the specified console.
+        (If the console has no software games then self will be returned).
+
+        The new Collection will not have the software games from the reset console, or any games
+        that can no longer interact with the main game as a result of losing the software games.
+        '''
+        # TODO: I will be overhauling this and making it work better
+        if console.model.name != "3DSr":
+            raise ValueError("Can only reset a 3DSr.")
+        software = {cart for cart in self.cartridges if cart.console == console}
+        if not software:
+            return self
+        if self.main_cartridge in software:
+            raise ValueError("Can't reset the console with main game {self.main_cartridge} as software.")
+        keep_carts = self.cartridges.difference(software)
+        trial = Collection(keep_carts, self.hardware, skip_validation=True)
+        unreachable = trial.unreachable_games()
+        if not unreachable:
+            return trial
+        keep_carts = keep_carts.difference(unreachable)
+        return Collection(keep_carts, self.hardware)
+
+    def friend_safari_consoles(self):
+        # TODO: finish this and remove logic from GameSave.handle_special
+        xy_carts = {cart for cart in self.cartridges if cart.game.name in {"X", "Y"}}
+        gen6_carts = {cart for cart in self.cartridges if cart.game.gen == 6 and cart.game.core}
+        if not xy_carts:
+            return 0, 0, False
+        consoles = {hw for hw in collection.hardware if hw.model.name in {"3DS", "3DSr"}}
+        console2carts = {hw: set() for hw in consoles}
+        for cart in gen6_carts:
+            for console in self.cart2consoles[cart]:
+                console2carts[console].add(cart)
+
+        safari2_consoles = set()
+        safari3_consoles = set()
+        for console, console_carts in console2carts.items():
+            if not console_carts:
+                safari2_consoles.add(console)
+                continue
+            other_playable = False # Can an XY cartridge be played on a *different* console?
+            simultaneous_playable = False # Can a gen 6 cartridge be played on this console as an XY cartridge is played on a different console?
+            for cart in xy_carts:
+                if collection.cart2consoles[cart] != {console}:
+                    other_playable = True
+                    if console.carts != {cart}:
+                        simultaneous_playable = True
+                        break
+            if other_playable:
+                if simultaneous_playable:
+                    safari3_consoles.add(console)
+                else:
+                    safari2_consoles.add(console)
+

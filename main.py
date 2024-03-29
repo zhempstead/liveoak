@@ -842,8 +842,12 @@ class GameSave():
         if pokemon in self.unique_pokemon:
             return
         self.unique_pokemon.add(pokemon)
-        for cart in self.transfers["POKEMON"] + self.transfers["TRADE"]:
-            cart.add_unique(pokemon)
+        transfer_pokemon = pokemon
+        if "TRANSFERRESET" in pokemon.props:
+            transfer_pokemon = replace(pokemon, props=frozenset())
+        if "NOTRANSFER" not in pokemon.props:
+            for cart in self.transfers["POKEMON"] + self.transfers["TRADE"]:
+                cart.add_unique(pokemon)
         for out in self.outputs_of(pokemon):
             self.add_unique(out)
 
@@ -1533,16 +1537,14 @@ class GameSave():
             if collection_saves.friend_safaris is not None:
                 return False
 
-            consoles = {hw for hw in collection.hardware if hw.model.name == "3DS"}
-            playable_consoles = set()
-            connectable_consoles = set()
-            console2carts = {hw: set() for hw in collection.hardware if hw.model.name == "3DS"}
+            consoles = {hw for hw in collection.hardware if hw.model.name in {"3DS", "3DSr"}}
+            console2carts = {hw: set() for hw in collection.hardware if hw.model.name in {"3DS", "3DSr"}}
             xy_carts = {cart for cart in collection.cartridges if cart.game.name in {"X", "Y"}}
             for cart in collection.cartridges:
                 if cart.game.gen == 6 and cart.game.core:
                     for console in collection.cart2consoles[cart]:
                         console2carts[console].add(cart)
-            
+ 
             safari2_consoles = 0
             safari3_consoles = 0
             for console, console_carts in console2carts.items():
@@ -1705,6 +1707,8 @@ class GameSave():
             return self.items.get(entry.item, 0)
         elif isinstance(entry, GameChoice):
             return self.choices.get(entry.choice, 0)
+        elif isinstance(entry, DexReq):
+            return math.inf if all(self.dex[p] for p in entry.species) else 0
         else:
             raise ValueError(f"Invalid entry {entry}")
 
