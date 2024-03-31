@@ -1805,7 +1805,7 @@ class CollectionSaves():
         return cs
 
 
-    def calc_dexes(self):
+    def calc_dexes(self, flatten=False):
         for gs in self.game_saves.values():
             gs.init_uniques()
         for gs in self.game_saves.values():
@@ -1890,6 +1890,12 @@ class CollectionSaves():
         for pokemon, row in self.pokemon_list.iterrows():
             idx = row['index']
             idx2pokemon[idx] = pokemon
+            if flatten:
+                if any(dexes[pokemon]):
+                    present[idx] = [idx]
+                else:
+                    missing[idx] = [idx]
+                continue
             if all(dexes[pokemon]):
                 present[idx] = [idx]
                 continue
@@ -1913,6 +1919,9 @@ class CollectionSaves():
                     present[min([l for l in line if l is not None])] = list(line)
                 for line in zip_longest(*missing_combos):
                     missing[min([l for l in line if l is not None])] = list(line)
+
+        if flatten:
+            return Result(present, missing, {}, idx2pokemon)
                 
         return Result(present, missing, idx2gidx, idx2pokemon)
 
@@ -2130,7 +2139,7 @@ def main(args):
     if num_collections == 1:
         games = all_games[0]
         hardware = all_hardware[0]
-        collection_saves, result = calc_dexes(games, hardware)
+        collection_saves, result = calc_dexes(games, hardware, args.flatten)
 
         if args.missing:
             result.print_missing()
@@ -2147,7 +2156,7 @@ def main(args):
         for idx in range(1, num_collections):
             games = all_games[idx] + all_games[0]
             hardware = all_hardware[idx] + all_hardware[0]
-            c, r = calc_dexes(games, hardware)
+            c, r = calc_dexes(games, hardware, args.flatten)
             collection_saves.append(c)
             results.append(r)
         pokemon2idx = {}
@@ -2164,18 +2173,19 @@ def main(args):
             result.print(obtainable=(not args.missing), skip_identical=(not args.full))
 
 
-def calc_dexes(games, hardware):
+def calc_dexes(games, hardware, flatten=False):
     cartridges = [Cartridge(g, cl, c) for g, cl, c in games]
     collection = Collection(cartridges, hardware)
     collection_saves = CollectionSaves(collection)
 
-    return collection_saves, collection_saves.calc_dexes()
+    return collection_saves, collection_saves.calc_dexes(flatten)
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('game_or_hardware', nargs='+', default=[])
     parser.add_argument('--full', '-f', action='store_true')
     parser.add_argument('--all-present', '-a', action='store_true')
+    parser.add_argument('--flatten', action='store_true')
     parser.add_argument('--compact', '-c', action='store_true')
     parser.add_argument('--version-exclusive', '-v', action='store_true')
     parser.add_argument('--missing', '-m', action='store_true')
