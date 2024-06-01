@@ -1,0 +1,13 @@
+               |                | 0152. Chikorita 
+               |                | 0153. Bayleef   
+               |                | 0154. Meganium  
+               |                | 0155. Cyndaquil 
+               |                | 0156. Quilava   
+               |                | 0157. Typhlosion
+               |                | 0158. Totodile  
+               |                | 0159. Croconaw  
+               |                | 0160. Feraligatr
+0335. Zangoose |                | 0335. Zangoose  
+               | 0337. Lunatone | 0337. Lunatone  
+---------------|----------------|-----------------
+232            | 232            | 242             

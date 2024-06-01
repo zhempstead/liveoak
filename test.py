@@ -11,6 +11,7 @@ cases = [
     ('gen2_ir', 'GBC . GOLD . GOLD GBC SILVER'),
     ('gen3_noditto', 'GBA DOL-011 RUBY GCN COLOSSEUM'),
     ('gen3_xd', 'GCN XD'),
+    ('gen3_johto', 'GBA GBA AGB-005 . EMERALD RUBY . EMERALD SAPPHIRE . EMERALD RUBY SAPPHIRE'),
     ('gen4_dualslot', 'DS . DIAMOND . PEARL SAPPHIRE'),
     ('gen5_wf', 'DS DS WHITE . . WHITE'),
 ]
