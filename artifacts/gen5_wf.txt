@@ -1,0 +1,127 @@
+0029. Nidoran♀   / 0029. Nidoran♀  / 0016. Pidgey     | 0016. Pidgey    
+0030. Nidorina   / 0030. Nidorina  / 0017. Pidgeotto  | 0017. Pidgeotto 
+0031. Nidoqueen  / 0031. Nidoqueen / 0018. Pidgeot    | 0018. Pidgeot   
+0032. Nidoran♂   / 0032. Nidoran♂  / 0043. Oddish     | 0029. Nidoran♀  
+0033. Nidorino   / 0033. Nidorino  / 0044. Gloom      | 0030. Nidorina  
+0034. Nidoking   / 0034. Nidoking  / 0045. Vileplume  | 0031. Nidoqueen 
+0043. Oddish     / 0063. Abra      / 0069. Bellsprout | 0032. Nidoran♂  
+0044. Gloom      / 0064. Kadabra   / 0070. Weepinbell | 0033. Nidorino  
+0045. Vileplume  / 0066. Machop    / 0071. Victreebel | 0034. Nidoking  
+0113. Chansey    / 0067. Machoke   / 0092. Gastly     | 0043. Oddish    
+0182. Bellossom  / 0081. Magnemite / 0093. Haunter    | 0044. Gloom     
+0187. Hoppip     / 0082. Magneton  / 0111. Rhyhorn    | 0045. Vileplume 
+0188. Skiploom   / 0126. Magmar    / 0112. Rhydon     | 0063. Abra      
+0189. Jumpluff   / 0137. Porygon   / 0125. Electabuzz | 0064. Kadabra   
+0194. Wooper     / 0183. Marill    / 0175. Togepi     | 0066. Machop    
+0195. Quagsire   / 0184. Azumarill / 0176. Togetic    | 0067. Machoke   
+0242. Blissey    / 0194. Wooper    / 0179. Mareep     | 0069. Bellsprout
+0265. Wurmple    / 0195. Quagsire  / 0180. Flaaffy    | 0070. Weepinbell
+0266. Silcoon    / 0240. Magby     / 0181. Ampharos   | 0071. Victreebel
+0267. Beautifly  / 0270. Lotad     / 0182. Bellossom  | 0081. Magnemite 
+0268. Cascoon    / 0271. Lombre    / 0239. Elekid     | 0082. Magneton  
+0269. Dustox     / 0272. Ludicolo  / 0273. Seedot     | 0092. Gastly    
+0270. Lotad      / 0287. Slakoth   / 0274. Nuzleaf    | 0093. Haunter   
+0271. Lombre     / 0288. Vigoroth  / 0275. Shiftry    | 0111. Rhyhorn   
+0272. Ludicolo   / 0289. Slaking   / 0283. Surskit    | 0112. Rhydon    
+0280. Ralts      / 0293. Whismur   / 0284. Masquerain | 0113. Chansey   
+0281. Kirlia     / 0294. Loudred   / 0304. Aron       | 0125. Electabuzz
+0282. Gardevoir  / 0295. Exploud   / 0305. Lairon     | 0126. Magmar    
+0283. Surskit    / 0298. Azurill   / 0306. Aggron     | 0137. Porygon   
+0284. Masquerain / 0341. Corphish  / 0468. Togekiss   | 0175. Togepi    
+0315. Roselia    / 0342. Crawdaunt / -                | 0176. Togetic   
+0328. Trapinch   / 0371. Bagon     / -                | 0179. Mareep    
+0329. Vibrava    / 0372. Shelgon   / -                | 0180. Flaaffy   
+0330. Flygon     / 0373. Salamence / -                | 0181. Ampharos  
+0341. Corphish   / 0462. Magnezone / -                | 0182. Bellossom 
+0342. Crawdaunt  / -               / -                | 0183. Marill    
+0396. Starly     / -               / -                | 0184. Azumarill 
+0397. Staravia   / -               / -                | 0187. Hoppip    
+0398. Staraptor  / -               / -                | 0188. Skiploom  
+0403. Shinx      / -               / -                | 0189. Jumpluff  
+0404. Luxio      / -               / -                | 0194. Wooper    
+0405. Luxray     / -               / -                | 0195. Quagsire  
+0406. Budew      / -               / -                | 0239. Elekid    
+0407. Roserade   / -               / -                | 0240. Magby     
+0440. Happiny    / -               / -                | 0242. Blissey   
+0475. Gallade    / -               / -                | 0265. Wurmple   
+                                                      | 0266. Silcoon   
+                                                      | 0267. Beautifly 
+                                                      | 0268. Cascoon   
+                                                      | 0269. Dustox    
+                                                      | 0270. Lotad     
+                                                      | 0271. Lombre    
+                                                      | 0272. Ludicolo  
+                                                      | 0273. Seedot    
+                                                      | 0274. Nuzleaf   
+                                                      | 0275. Shiftry   
+                                                      | 0280. Ralts     
+                                                      | 0281. Kirlia    
+                                                      | 0282. Gardevoir 
+                                                      | 0283. Surskit   
+                                                      | 0284. Masquerain
+                                                      | 0287. Slakoth   
+                                                      | 0288. Vigoroth  
+                                                      | 0289. Slaking   
+                                                      | 0293. Whismur   
+                                                      | 0294. Loudred   
+                                                      | 0295. Exploud   
+                                                      | 0298. Azurill   
+                                                      | 0304. Aron      
+                                                      | 0305. Lairon    
+                                                      | 0306. Aggron    
+                                                      | 0315. Roselia   
+                                                      | 0328. Trapinch  
+                                                      | 0329. Vibrava   
+                                                      | 0330. Flygon    
+                                                      | 0341. Corphish  
+                                                      | 0342. Crawdaunt 
+                                                      | 0371. Bagon     
+                                                      | 0372. Shelgon   
+                                                      | 0373. Salamence 
+                                                      | 0396. Starly    
+                                                      | 0397. Staravia  
+                                                      | 0398. Staraptor 
+                                                      | 0403. Shinx     
+                                                      | 0404. Luxio     
+                                                      | 0405. Luxray    
+                                                      | 0406. Budew     
+                                                      | 0407. Roserade  
+                                                      | 0440. Happiny   
+                                                      | 0462. Magnezone 
+                                                      | 0468. Togekiss  
+                                                      | 0475. Gallade   
+------------------------------------------------------|-----------------
+                                                      | 0065. Alakazam  
+                                                      | 0068. Machamp   
+                                                      | 0076. Golem     
+                                                      | 0094. Gengar    
+                                                      | 0208. Steelix   
+                                                      | 0233. Porygon2  
+                                                      | 0367. Huntail   
+                                                      | 0464. Rhyperior 
+                                                      | 0466. Electivire
+                                                      | 0467. Magmortar 
+                                                      | 0474. Porygon-Z 
+------------------------------------------------------|-----------------
+0495. Snivy     / 0498. Tepig   / 0501. Oshawott      | 0495. Snivy     
+0496. Servine   / 0499. Pignite / 0502. Dewott        | 0496. Servine   
+0497. Serperior / 0500. Emboar  / 0503. Samurott      | 0497. Serperior 
+                                                      | 0498. Tepig     
+                                                      | 0499. Pignite   
+                                                      | 0500. Emboar    
+                                                      | 0501. Oshawott  
+                                                      | 0502. Dewott    
+                                                      | 0503. Samurott  
+------------------------------------------------------|-----------------
+                                                      | 0526. Gigalith  
+                                                      | 0534. Conkeldurr
+------------------------------------------------------|-----------------
+0564. Tirtouga   / 0566. Archen                       | 0564. Tirtouga  
+0565. Carracosta / 0567. Archeops                     | 0565. Carracosta
+                                                      | 0566. Archen    
+                                                      | 0567. Archeops  
+------------------------------------------------------|-----------------
+                                                      | 0589. Escavalier
+                                                      | 0617. Accelgor  
+------------------------------------------------------|-----------------
+378                                                   | 447             

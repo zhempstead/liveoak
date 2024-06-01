@@ -11,6 +11,8 @@ cases = [
     ('gen2_ir', 'GBC . GOLD . GOLD GBC SILVER'),
     ('gen3_noditto', 'GBA DOL-011 RUBY GCN COLOSSEUM'),
     ('gen3_xd', 'GCN XD'),
+    ('gen4_dualslot', 'DS . DIAMOND . PEARL SAPPHIRE'),
+    ('gen5_wf', 'DS DS WHITE . . WHITE'),
 ]
 
 def check_and_replace(fname, command):
