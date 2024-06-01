@@ -138,6 +138,47 @@ class Result():
                 self.gidx2idxs[gidx] = set()
             self.gidx2idxs[gidx].add(idx)
 
+    @staticmethod
+    def new(idx2pokemon, present, branches):
+        pokemon2idx = {v: k for k, v in idx2pokemon.items()}
+        missing = {}
+        idx2gidx = {}
+        present = {pokemon2idx[p]: [pokemon2idx[p]] for p in present}
+        not_missing = set(present.keys())
+        next_gidx = 0
+        for branch in branches:
+            # Replace species with idxs
+            branch = sorted(
+                [sorted([pokemon2idx[p] for p in choice]) for choice in branch],
+                key=lambda choice: (-len(choice), choice)
+            )
+            all_idxs = {idx for choice in branch for idx in choice}
+            not_missing = not_missing.union(all_idxs)
+            for b, p_or_m, add_gidx in [(branch, present, True), (Result._present2missing(branch), missing, False)]:
+                if add_gidx:
+                    gidx = next_gidx
+                    for idx in all_idxs:
+                        idx2gidx[idx] = gidx
+                    next_gidx += 1
+                max_choice_len = len(b[0])
+                padded = [choice + [None]*(max_choice_len - len(choice)) for choice in b]
+                for pos in range(max_choice_len):
+                    pos_idxs = [choice[pos] for choice in padded]
+                    p_or_m[pos_idxs[0]] = pos_idxs
+        for idx in set(idx2pokemon.keys()).difference(not_missing):
+            missing[idx] = [idx]
+
+        return Result(present, missing, idx2gidx, idx2pokemon)
+
+    @staticmethod
+    def _present2missing(branch):
+        all_idxs = {idx for choice in branch for idx in choice}
+        inverse_branch = sorted(
+            [sorted(list(all_idxs.difference(choice))) for choice in branch],
+            key=lambda choice: (-len(choice), choice)
+        )
+        return inverse_branch
+
     def obtainable_line(self, idx):
         if idx not in self.present:
             return None

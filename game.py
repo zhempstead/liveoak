@@ -203,11 +203,11 @@ class Cartridge():
     game: Game
     cl_name: str
     console: Optional[str] = None # For software games only
-    id: int = field(init=False)
+    id: str = field(init=False)
 
     def __post_init__(self):
         global _cartridge_idx
-        object.__setattr__(self, 'id', _cartridge_idx)
+        object.__setattr__(self, 'id', str(_cartridge_idx))
         _cartridge_idx += 1
 
         if self.console is None:
@@ -300,6 +300,8 @@ class Cartridge():
                         if not hardware.region_match(cart):
                             continue
                         if cart in G.nodes:
+                            continue
+                        if cart.console is not None and cart.console != hardware:
                             continue
                         found = True
                         Gcopy = G.copy()
@@ -534,7 +536,7 @@ HARDWARE_MODELS = {h.name: h for h in [
     )),
     # Game Boy Color; has same cable ports as Pocket/Light
     HardwareModel("GBC", is_console=True, ports=(
-        frozendict({"GB": ("GB", "GBC"), "GBCir": ("GBC",)}),
+        frozendict({"GB": ("GB", "GBC"), "GBCir": ("GB", "GBC")}),
         frozendict({"GB": ("GLC2",)}),
     ), wireless=frozenset({"GBCir"})),
     # Game Boy Advance; includes SP
@@ -940,6 +942,7 @@ class Collection():
                 elif game1.name == "DREAMWORLD":
                     if game2.gen == 5 and game2.core:
                         if game1.region_match(game2):
+                            interactions["CONNECT"].add((cart1, cart2))
                             interactions["POKEMON"].add((cart1, cart2))
                             interactions["ITEMS"].add((cart1, cart2))
                 elif game1.name == "DREAMRADAR":
@@ -961,7 +964,7 @@ class Collection():
                 elif game1.name == "BANK":
                     if game2.gen == 6 and game2.core:
                         # Any region
-                        if cart2.console is None or cart2.console == cart2.console:
+                        if cart2.console is None or cart1.console == cart2.console:
                             # You can't transport VC or gen 7 Pokemon to gen 6 games, so treat BANK
                             # as enabling gen 6 games to transfer Pokemon between one another (and
                             # potentially receive Pokemon from gen 5 games)
@@ -1071,34 +1074,27 @@ class Collection():
         return Collection(keep_carts, self.hardware)
 
     def friend_safari_consoles(self):
-        # TODO: finish this and remove logic from GameSave.handle_special
         xy_carts = {cart for cart in self.cartridges if cart.game.name in {"X", "Y"}}
         gen6_carts = {cart for cart in self.cartridges if cart.game.gen == 6 and cart.game.core}
+        consoles = {hw for hw in self.hardware if hw.model.name in {"3DS", "3DSr"}}
+        safaris = {hw: {} for hw in consoles}
         if not xy_carts:
-            return 0, 0, False
-        consoles = {hw for hw in collection.hardware if hw.model.name in {"3DS", "3DSr"}}
+            return safaris
         console2carts = {hw: set() for hw in consoles}
         for cart in gen6_carts:
             for console in self.cart2consoles[cart]:
                 console2carts[console].add(cart)
 
-        safari2_consoles = set()
-        safari3_consoles = set()
-        for console, console_carts in console2carts.items():
-            if not console_carts:
-                safari2_consoles.add(console)
-                continue
-            other_playable = False # Can an XY cartridge be played on a *different* console?
-            simultaneous_playable = False # Can a gen 6 cartridge be played on this console as an XY cartridge is played on a different console?
+        for console in consoles:
             for cart in xy_carts:
-                if collection.cart2consoles[cart] != {console}:
-                    other_playable = True
-                    if console.carts != {cart}:
-                        simultaneous_playable = True
-                        break
-            if other_playable:
-                if simultaneous_playable:
-                    safari3_consoles.add(console)
+                # It must be possible to play cart on a different console
+                if not self.cart2consoles[cart].difference({console}):
+                    continue
+                # If there is a cart other than the current one that can be played on the console,
+                # we can unlock the third safari slot.
+                if console2carts[console].difference({cart}):
+                    safaris[console][cart] = 3
                 else:
-                    safari2_consoles.add(console)
+                    safaris[console][cart] = 2
 
+        return safaris
