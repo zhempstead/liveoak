@@ -1,62 +1,36 @@
-                | 0027. Sandshrew 
-                | 0028. Sandslash 
-                | 0037. Vulpix    
-                | 0038. Ninetales 
-                | 0079. Slowpoke  
-                | 0080. Slowbro   
-0086. Seel      |                 
-0087. Dewgong   |                 
-                | 0094. Gengar    
-0123. Scyther   |                 
-                | 0127. Pinsir    
-0198. Murkrow   |                 
-                | 0200. Misdreavus
-                | 0228. Houndour  
-                | 0229. Houndoom  
-                | 0234. Stantler  
-0246. Larvitar  |                 
-0247. Pupitar   |                 
-0248. Tyranitar |                 
-                | 0252. Treecko   
-                | 0253. Grovyle   
-                | 0254. Sceptile  
-                | 0255. Torchic   
-                | 0256. Combusken 
-                | 0257. Blaziken  
-                | 0258. Mudkip    
-                | 0259. Marshtomp 
-                | 0260. Swampert  
-                | 0270. Lotad     
-                | 0271. Lombre    
-                | 0272. Ludicolo  
-                | 0302. Sableye   
-                | 0336. Seviper   
-                | 0337. Lunatone  
-                | 0357. Tropius   
-                | 0363. Spheal    
-                | 0364. Sealeo    
-                | 0365. Walrein   
-                | 0371. Bagon     
-                | 0372. Shelgon   
-                | 0373. Salamence 
-                | 0377. Regirock  
-                | 0378. Regice    
-                | 0379. Registeel 
-                | 0380. Latias    
-                | 0382. Kyogre    
-                | 0384. Rayquaza  
-0408. Cranidos  |                 
-0409. Rampardos |                 
-                | 0410. Shieldon  
-                | 0411. Bastiodon 
-                | 0429. Mismagius 
-0430. Honchkrow |                 
-                | 0431. Glameow   
-                | 0432. Purugly   
-0434. Stunky    |                 
-0435. Skuntank  |                 
-0483. Dialga    |                 
-                | 0484. Palkia    
-                | 0486. Regigigas 
-----------------|-----------------
-357             | 391             
+    |                | 0027. Sandshrew
+    |                | 0028. Sandslash
+    |                | 0037. Vulpix   
+    |                | 0038. Ninetales
+    | 0094. Gengar   | 0094. Gengar   
+    |                | 0252. Treecko  
+    |                | 0253. Grovyle  
+    |                | 0254. Sceptile 
+    |                | 0255. Torchic  
+    |                | 0256. Combusken
+    |                | 0257. Blaziken 
+    |                | 0258. Mudkip   
+    |                | 0259. Marshtomp
+    |                | 0260. Swampert 
+    |                | 0261. Poochyena
+    |                | 0262. Mightyena
+    | 0270. Lotad    | 0270. Lotad    
+    | 0271. Lombre   | 0271. Lombre   
+    | 0272. Ludicolo | 0272. Ludicolo 
+    | 0302. Sableye  | 0302. Sableye  
+    |                | 0304. Aron     
+    |                | 0305. Lairon   
+    |                | 0306. Aggron   
+    | 0336. Seviper  | 0336. Seviper  
+    | 0337. Lunatone | 0337. Lunatone 
+    |                | 0352. Kecleon  
+    |                | 0357. Tropius  
+    |                | 0377. Regirock 
+    |                | 0378. Regice   
+    |                | 0379. Registeel
+    |                | 0380. Latias   
+    |                | 0382. Kyogre   
+    |                | 0384. Rayquaza 
+    |                | 0486. Regigigas
+----|----------------|----------------
+357 | 364            | 391            
