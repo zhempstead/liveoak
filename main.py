@@ -739,6 +739,8 @@ class CollectionSaves():
             rules += gs_rules
             rules += reset_rules
         rules += self._friend_safari_rules()
+        
+        rules = self._handle_console_resets(rules)
         return rules
 
 
@@ -754,11 +756,18 @@ class CollectionSaves():
             cid = f"3DS_{console.id}"
             cart_ids = {cart.id: slot for cart, slot in carts.items()}
             if self.main_cartridge.id in cart_ids:
-                cart_ids["main_reset"] = cart_ids[self.main_cartridge_id]
-            rules.append((Rule(frozenset(), frozenset(), frozenset({ChoiceEntry(cid, "FS")})), 1))
+                cart_ids["main_reset"] = cart_ids[self.main_cartridge.id]
+            fs_base = ChoiceEntry(cid, "FS")
+            rules.append((Rule(frozenset(), frozenset(), frozenset({fs_base})), 1))
+            if console.model.name == "3DSr":
+                noreset = ChoiceEntry(cid, "NORESET")
+                reset = ChoiceEntry(cid, "RESET")
+                rules.append((Rule(frozenset(), frozenset(), frozenset({noreset})), 1))
+                rules.append((Rule(frozenset({noreset}), frozenset(), frozenset({reset}), can_explore=False), 1))
+                rules.append((Rule(frozenset(), frozenset({reset}), frozenset({fs_base})), math.inf))
             for pokemon_type in fs_pokemon['TYPE'].unique():
                 rules.append((Rule(
-                    frozenset({ChoiceEntry(cid, "FS")}),
+                    frozenset({fs_base}),
                     frozenset(),
                     frozenset({ChoiceEntry(cid, f"FS_{pokemon_type}_{slot}") for slot in range(1, 4)}),
                     can_explore=False), math.inf))
@@ -769,10 +778,30 @@ class CollectionSaves():
                 rules.append((Rule(frozenset({gc_in}), frozenset(), frozenset({gc_out})), math.inf))
                 for cart_id, max_cart_slot in cart_ids.items():
                     cart_out = ChoiceEntry(cart_id, f"FS_{row.SPECIES}")
-                    if max_cart_slot < slot:
-                        continue
-                    rules.append((Rule(frozenset(), frozenset({gc_out}), frozenset({cart_out})), math.inf))
+
+                    reqs = set({gc_out})
+                    if slot == 3:
+                        if max_cart_slot == 2:
+                            continue
+                        elif max_cart_slot == 2.5:
+                            # 3 only until reset
+                            reqs.add(noreset)
+                    rules.append((Rule(frozenset(), frozenset(reqs), frozenset({cart_out})), math.inf))
         return rules
+
+    def _handle_console_resets(self, rules):
+        '''
+        For every software cart that belongs to a console that can be reset, add a requirement to
+        every rule involving that cart that the console has not (yet) been reset
+        '''
+        for console, carts in self.collection.reset_consoles().items():
+            assert(console.model.name == "3DSr")
+            cid = f"3DS_{console.id}"
+            noreset = {ChoiceEntry(cid, "NORESET")}
+            for cart in carts:
+                rules = [(replace(r, required=(r.required | noreset)) if cart.id in (r.in_cart_ids() | r.out_cart_ids()) else r, repeats) for r, repeats in rules]
+        return rules
+        
 
     def _get_targets(self):
         return {DexEntry(self.main_cartridge.id, species) for species in self.pokemon_list.index}
@@ -803,6 +832,10 @@ class RuleGraph():
 
     def _add_rule(self, rule, repeats):
         G = self.G
+        if rule in G:
+            G.nodes[rule]['repeats'] += repeats
+            return
+
         for c in rule.consumed:
             G.add_edge(c, rule, consumed=True)
             if 'count' not in self.G.nodes[c]:
@@ -871,19 +904,27 @@ class RuleGraph():
         out_branches = []
         branches = self.try_branches()
         for branch in branches:
-            if len(branch) == 1:
+            all_present = frozenset.intersection(*branch)
+            if all_present:
+                for species in all_present:
+                    self.dex[species] = True
+                branch = {b - all_present for b in branch}
+                branch = {b for b in branch if b}
+            if len(branch) == 0:
+                continue
+            elif len(branch) == 1:
                 for species in branch.pop():
                     self.dex[species] = True
+                continue
             elif len(branch) > 12:
-                out_branches.append(self._curtail_branch_output(branch))
-            else:
-                out_branches.append(branch)
+                branch = self._curtail_branch_output(branch)
+            out_branches.append(branch)
         return out_branches
 
-    def try_branches(self):
+    def try_branches(self, ignore_special=False):
         outcomes = []
         for rg in self._get_components():
-            outcomes.append(rg._try_branches_single_component())
+            outcomes.append(rg._try_branches_single_component(ignore_special))
         return outcomes
 
     def _apply_rule(self, rule):
@@ -968,14 +1009,31 @@ class RuleGraph():
             G.remove_node(rule)
 
         while maybe_unreachable_entries or maybe_useless_entries or rules_with_removed_outputs or rules_with_removed_inputs:
-            if maybe_unreachable_entries:
+            if rules_with_removed_inputs:
+                rule = next(iter(rules_with_removed_inputs))
+                repeats = G.nodes[rule]['repeats']
+                removed_inputs = rules_with_removed_inputs.pop(rule)
+                new_rule = replace(
+                    rule,
+                    consumed=(rule.consumed - removed_inputs),
+                    required=(rule.required - removed_inputs))
+                G.remove_node(rule)
+                self._add_rule(new_rule, repeats)
+                removed_outputs = rules_with_removed_outputs.pop(rule, set())
+                if removed_outputs:
+                    if new_rule not in rules_with_removed_outputs:
+                        rules_with_removed_outputs[new_rule] = set()
+                    rules_with_removed_outputs[new_rule] = rules_with_removed_outputs[new_rule].union(removed_outputs)
+            elif maybe_unreachable_entries:
                 entry = maybe_unreachable_entries.pop()
-                if len(list(G.predecessors(entry))) == 0:
+                if not nx.has_path(G, "START", entry):
+                #if len(list(G.predecessors(entry))) == 0:
                     for rule in list(G.successors(entry)):
                         if not isinstance(rule, Rule):
                             continue
                         for entry2 in G.successors(rule):
-                            maybe_unreachable_entries.add(entry2)
+                            if entry2 != entry:
+                                maybe_unreachable_entries.add(entry2)
                         G.remove_node(rule)
                         if rule in rules_with_removed_inputs:
                             del rules_with_removed_inputs[rule]
@@ -1013,16 +1071,7 @@ class RuleGraph():
                         output=(rule.output - removed_outputs))
                     G.remove_node(rule)
                     self._add_rule(new_rule, repeats)
-            elif rules_with_removed_inputs:
-                rule = next(iter(rules_with_removed_inputs))
-                repeats = G.nodes[rule]['repeats']
-                removed_inputs = rules_with_removed_inputs.pop(rule)
-                new_rule = replace(
-                    rule,
-                    consumed=(rule.consumed - removed_inputs),
-                    required=(rule.required - removed_inputs))
-                G.remove_node(rule)
-                self._add_rule(new_rule, repeats)
+
 
     def _prune(self):
         G = self.G
@@ -1090,13 +1139,14 @@ class RuleGraph():
             dex = {entry.species: False for entry in Gcomponent.predecessors("END")}
             yield RuleGraph(dex, Gcomponent, spaces=self.spaces+2)
 
-    def _try_branches_single_component(self):
+    def _try_branches_single_component(self, ignore_special=False):
         '''
         Assumes the graph is made up of only one component!
         '''
-        special = self._handle_special_component()
-        if special is not None:
-            return special
+        if not ignore_special:
+            special = self._handle_special_component()
+            if special is not None:
+                return special
         outcomes = set()
         G = self.G
         rules = list(self._get_valid_rules())
@@ -1178,11 +1228,52 @@ class RuleGraph():
     def _handle_fs_component(self, fs_nodes):
         G = self.G
         console_possibilities = {}
+
+        reset_gains = set()
+        noreset_entries = set()
         for fs_node in fs_nodes:
             G.nodes[fs_node]['count'] = 0
             if ("START", fs_node) in G.edges:
                 G.remove_edge("START", fs_node)
-            console_id = fs_node[0]
+            noreset = ChoiceEntry(fs_node.cart_id, "NORESET")
+            if noreset in G.nodes:
+                assert(G.nodes[noreset]['count'] == 1)
+                noreset_entries.add(noreset)
+
+        copy = self.copy(set_parent=False)
+        for noreset in noreset_entries:
+            copy.G.nodes[noreset]['count'] = 0
+            copy.G.remove_edge("START", noreset)
+        copy._prune()
+        other_branches = copy.try_branches()
+        best_reset = frozenset()
+        if noreset_entries:
+            assert(not other_branches)
+        for noreset in noreset_entries:
+            console_id = noreset.cart_id
+            reset = ChoiceEntry(console_id, "RESET")
+            reset_rule = Rule(frozenset({noreset}), frozenset(), frozenset({reset}), can_explore=False)
+            if reset_rule not in G.nodes:
+                continue
+            copy = self.copy(set_parent=False)
+            for other_noreset in noreset_entries:
+                if other_noreset == noreset:
+                    continue
+                copy.G.nodes[other_noreset]['count'] = 0
+                copy.G.remove_edge("START", other_noreset)
+            copy._prune()
+            copy._apply_rule(reset_rule)
+            reset_branches = copy.try_branches(ignore_special=True)
+            assert(len(reset_branches) == 1)
+            assert(len(reset_branches[0]) == 1)
+            rb = reset_branches[0].pop()
+            if best_reset.issubset(rb):
+                best_reset = rb
+            else:
+                assert rb.issubset(best_reset)
+       
+        for fs_node in fs_nodes:
+            console_id = fs_node.cart_id
             downstreams = {}
             for pokemon_type in [
                 "Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost",
@@ -1192,25 +1283,26 @@ class RuleGraph():
                 for i in range(1, 4):
                     entry = ChoiceEntry(console_id, f"FS_{pokemon_type}_{i}")
                     if entry in G.nodes:
-                        downstreams[pokemon_type][i] = set()
                         for rule in G.successors(entry):
                             useful, valid = self._all_downstream(rule)
                             if not valid:
                                 raise ValueError("Not handled")
-                            downstreams[pokemon_type][i].add(frozenset(useful))
+                            useful = useful - best_reset
+                            if useful:
+                                if i not in downstreams[pokemon_type]:
+                                    downstreams[pokemon_type][i] = set()
+                                downstreams[pokemon_type][i].add(frozenset(useful))
             console_possibilities[console_id] = set()
             for pokemon_type, idxs in downstreams.items():
                 if not idxs:
                     continue
                 for tup in product(*idxs.values()):
                     console_possibilities[console_id].add(frozenset.union(*tup))
-        self._prune()
-        other_branches = self.try_branches()
         all_fs_entries = frozenset.union(*[frozenset.union(*ps) for ps in console_possibilities.values()])
         for ob in other_branches:
             all_in_branch = frozenset.union(*ob)
             assert(all_in_branch & all_fs_entries)
-        to_cross_multiply = other_branches
+        to_cross_multiply = other_branches or [{best_reset}]
         for possibilities in console_possibilities.values():
             if possibilities:
                 to_cross_multiply.append(possibilities)
@@ -1234,7 +1326,6 @@ class RuleGraph():
         '''
         G = self.G
         useful = {n.species for n in nx.descendants(G, rule) if (n, "END") in G.edges}
-        copy = self.copy()
         copy = self.copy(set_parent=False)
         for entry in copy.G.predecessors(rule):
             if copy.G.nodes[entry]['count'] != math.inf:
@@ -1242,7 +1333,15 @@ class RuleGraph():
                 copy.G.add_edge("START", entry)
         copy._apply_rule(rule)
         copy.apply_safe_rules()
-        return useful, all(copy.dex[u] for u in useful)
+        out = useful, all(copy.dex[u] for u in useful)
+        if not out[1]:
+            copy = self.copy(set_parent=False)
+            for entry in copy.G.predecessors(rule):
+                if copy.G.nodes[entry]['count'] != math.inf:
+                    copy.G.nodes[entry]['count'] = 1
+                    copy.G.add_edge("START", entry)
+            copy._apply_rule(rule)
+        return out
 
     def _curtail_branch_output(self, branch):
         '''
@@ -1251,7 +1350,7 @@ class RuleGraph():
         - every entry is *missing* from at least one branch
         - the branch with the most entries is guaranteed to be present (if a tie, at least one will be)
         '''
-        assert(not frozenset.intersection(*branch))
+        #assert(not frozenset.intersection(*branch))
         orig_branch = branch.copy()
         # Remove paths that are a subset of another path
         to_delete = set()
@@ -1283,6 +1382,8 @@ class RuleGraph():
             branch = [(b, (all_entries - b) & not_missing) for b in orig_branch]
             branch = [b for b in branch if b[1]]
         while not_missing:
+            if not branch:
+                break
             best, missing = max(branch, key=lambda b: len(b[1]))
             final_branch.add(best)
             not_missing = not_missing & best

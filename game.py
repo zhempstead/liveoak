@@ -1049,30 +1049,6 @@ class Collection():
         return unreachable
 
 
-    def reset_console(console):
-        '''
-        Return new Collection resulting from factory-resetting the specified console.
-        (If the console has no software games then self will be returned).
-
-        The new Collection will not have the software games from the reset console, or any games
-        that can no longer interact with the main game as a result of losing the software games.
-        '''
-        # TODO: I will be overhauling this and making it work better
-        if console.model.name != "3DSr":
-            raise ValueError("Can only reset a 3DSr.")
-        software = {cart for cart in self.cartridges if cart.console == console}
-        if not software:
-            return self
-        if self.main_cartridge in software:
-            raise ValueError("Can't reset the console with main game {self.main_cartridge} as software.")
-        keep_carts = self.cartridges.difference(software)
-        trial = Collection(keep_carts, self.hardware, skip_validation=True)
-        unreachable = trial.unreachable_games()
-        if not unreachable:
-            return trial
-        keep_carts = keep_carts.difference(unreachable)
-        return Collection(keep_carts, self.hardware)
-
     def friend_safari_consoles(self):
         xy_carts = {cart for cart in self.cartridges if cart.game.name in {"X", "Y"}}
         gen6_carts = {cart for cart in self.cartridges if cart.game.gen == 6 and cart.game.core}
@@ -1092,9 +1068,28 @@ class Collection():
                     continue
                 # If there is a cart other than the current one that can be played on the console,
                 # we can unlock the third safari slot.
-                if console2carts[console].difference({cart}):
-                    safaris[console][cart] = 3
+                other_carts = console2carts[console].difference({cart})
+
+                if other_carts:
+                    if console.model.name != "3DSr" or any(c.console is None for c in other_carts):
+                        safaris[console][cart] = 3
+                    else:
+                        # Third safari slot is only possible until reset
+                        safaris[console][cart] = 2.5
                 else:
                     safaris[console][cart] = 2
 
         return safaris
+
+
+    def reset_consoles(self):
+        out = {}
+        consoles = {hw for hw in self.hardware if hw.model.name == "3DSr"}
+        for console in consoles:
+            software_carts = set(cart for cart in self.cartridges if cart.console == console)
+            if software_carts:
+                out[console] = software_carts
+        return out
+
+
+        
