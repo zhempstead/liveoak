@@ -16,6 +16,7 @@ import pandas as pd
 from game import Game, Cartridge, Hardware, Collection, GAMES, GAMEIDS, GAMEINPUTS
 from result import MultiResult, Result
 
+
 class Gender(str, Enum):
     MALE = "MALE"
     FEMALE = "FEMALE"
@@ -709,14 +710,11 @@ class CollectionSaves():
         for pokemon, row in self.pokemon_list.iterrows():
             idx = row['index']
             idx2pokemon[idx] = pokemon
-        self.rule_graph = RuleGraph(
-            {p: False for p in self.pokemon_list.index},
-            self._get_rules(),
-            self._get_targets(),
-        )
-        self.rule_graph.explore()
-        branches = self.rule_graph.try_branches_and_update()
-        present = {k for k, v in self.rule_graph.dex.items() if v}
+        rule_graph = RuleGraph.make(self._get_rules(), self._get_targets())
+        rule_graph.explore()
+        branches = rule_graph.try_branches_and_update()
+        branches = [{frozenset({de.species for de in b}) for b in branch} for branch in branches]
+        present = {k.species for k, v in rule_graph.acquired.items() if v}
         if flatten:
             for branch in branches:
                 present = present.union(*branch)
@@ -808,27 +806,32 @@ class CollectionSaves():
 
 
 class RuleGraph():
-    def __init__(self, dex, rules_or_digraph, targets=None, parent=None, spaces=0):
-        self.dex = dex
+    def __init__(self, digraph, acquired, explore_parent=None, spaces=0):
+        self.G = digraph
+        self.acquired = acquired
+        self.explore_parent = explore_parent
         self.spaces = spaces
-        if isinstance(rules_or_digraph, nx.DiGraph):
-            self.G = rules_or_digraph
-        else:
-            if targets is None:
-                raise ValueError("Must pass in targets if not passing in DiGraph")
-            self.G = nx.DiGraph()
-            self.G.add_edge("START", "INF")
-            self.G.add_node("END")
-            for target in targets:
-                self.G.add_edge(target, "END")
-            for rule, repeats in rules_or_digraph:
-                self._add_rule(rule, repeats)
-            self._prune()
 
-        self.parent = parent
+    @classmethod
+    def make(cls, rules, targets):
+        G = nx.DiGraph()
+        G.add_edge("START", "INF")
+        G.add_node("END")
+        for target in targets:
+            if not isinstance(target, DexEntry):
+                raise ValueError("Only DexEntry can be targets")
+            G.add_edge(target, "END")
+            G.nodes[target]['target'] = True
+        acquired = {target: False for target in targets}
+        rg = cls(G, acquired)
+        for rule, repeats in rules:
+            rg._add_rule(rule, repeats)
+        rg._prune(handle_cycle=False)
+        rg._label_cycles()
+        return rg
 
-    def copy(self, set_parent=True):
-        return RuleGraph(self.dex.copy(), self.G.copy(), parent=(self if set_parent else None), spaces=self.spaces+2)
+    def copy(self, explore_parent=None):
+        return RuleGraph(self.G.copy(), self.acquired.copy(), explore_parent=explore_parent, spaces=(self.spaces + 2))
 
     def _add_rule(self, rule, repeats):
         G = self.G
@@ -853,6 +856,45 @@ class RuleGraph():
 
         G.nodes[rule]['repeats'] = repeats
 
+    def _replace_rule(self, old_rule, new_rule, handle_cycle=True):
+        G = self.G
+        if not new_rule.output:
+            raise ValueError("Shouldn't happen")
+        if new_rule in G.nodes:
+            if handle_cycle:
+                for entry in G.predecessors(old_rule):
+                    if isinstance(entry, str):
+                        continue
+                    if (entry, new_rule) in G.edges and G.edges[(entry, old_rule)]['cycle']:
+                        G.edges[(entry, new_rule)]['cycle'] = True
+                for entry in G.successors(old_rule):
+                    if isinstance(entry, str):
+                        continue
+                    if (new_rule, entry) in G.edges and G.edges[(old_rule, entry)]['cycle']:
+                        G.edges[(new_rule, entry)]['cycle'] = True
+            G.nodes[new_rule]['repeats'] += G.nodes[old_rule]['repeats']
+            G.remove_node(old_rule)
+        else:
+            for c in new_rule.consumed:
+                G.add_edge(c, new_rule)
+                G.edges[(c, new_rule)]['consumed'] = True
+                if handle_cycle:
+                    G.edges[(c, new_rule)]['cycle'] = G.edges[(c, old_rule)]['cycle']
+            for r in new_rule.required:
+                G.add_edge(r, new_rule)
+                G.edges[(r, new_rule)]['consumed'] = False
+                if handle_cycle:
+                    G.edges[(r, new_rule)]['cycle'] = G.edges[(r, old_rule)]['cycle']
+            for o in new_rule.output:
+                G.add_edge(new_rule, o)
+                if handle_cycle:
+                    G.edges[(new_rule, o)]['cycle'] = G.edges[(old_rule, o)]['cycle']
+            if not new_rule.consumed and not new_rule.required:
+                G.add_edge("INF", new_rule)
+            G.nodes[new_rule]['repeats'] = G.nodes[old_rule]['repeats']
+            G.remove_node(old_rule)
+
+
     def explore(self):
         '''
         Make a child and have the child explore among valid rules aside from those in the main cart
@@ -860,7 +902,7 @@ class RuleGraph():
         while True:
             any_transfer_rule = False
             self.apply_safe_rules()
-            child = self.copy()
+            child = self.copy(explore_parent=self)
             while True:
                 rules = list(child._get_valid_rules(explore=True))
                 any_rule = False
@@ -899,22 +941,22 @@ class RuleGraph():
     def try_branches_and_update(self):
         '''
         Try out all branching paths. For any branching path with only one outcome, simply add the
-        outcomes to dex.
+        outcomes to acquired.
         '''
         out_branches = []
         branches = self.try_branches()
         for branch in branches:
             all_present = frozenset.intersection(*branch)
             if all_present:
-                for species in all_present:
-                    self.dex[species] = True
+                for entry in all_present:
+                    self.acquired[entry] = True
                 branch = {b - all_present for b in branch}
                 branch = {b for b in branch if b}
             if len(branch) == 0:
                 continue
             elif len(branch) == 1:
                 for species in branch.pop():
-                    self.dex[species] = True
+                    self.acquired[entry] = True
                 continue
             elif len(branch) > 12:
                 branch = self._curtail_branch_output(branch)
@@ -954,15 +996,16 @@ class RuleGraph():
         # Acquire outputs
         # If it's a transfer rule, the parent (if it exists) also gets the outputs
         changes_by_rg = {self: [set(), zero_entries, zero_repeat_rules]}
-        if rule.is_transfer and self.parent is not None:
-            changes_by_rg[self.parent] = [set(), None, None]
+        if rule.is_transfer and self.explore_parent is not None:
+            changes_by_rg[self.explore_parent] = [set(), None, None]
 
         for rg, changes in changes_by_rg.items():
             for out in outputs:
                 if out not in rg.G.nodes:
                     continue
+                if rg.G.nodes[out].get('target', False):
+                    rg.acquired[out] = True
                 if isinstance(out, DexEntry):
-                    rg.dex[out.species] = True
                     changes[0].add(out)
                 else:
                     if rg.G.nodes[out]['count'] == 0:
@@ -1017,16 +1060,25 @@ class RuleGraph():
                     rule,
                     consumed=(rule.consumed - removed_inputs),
                     required=(rule.required - removed_inputs))
-                G.remove_node(rule)
-                self._add_rule(new_rule, repeats)
                 removed_outputs = rules_with_removed_outputs.pop(rule, set())
                 if removed_outputs:
-                    if new_rule not in rules_with_removed_outputs:
-                        rules_with_removed_outputs[new_rule] = set()
-                    rules_with_removed_outputs[new_rule] = rules_with_removed_outputs[new_rule].union(removed_outputs)
+                    # Copied from below
+                    if not self._is_potentially_useful(rule):
+                        for entry in G.predecessors(rule):
+                            if isinstance(entry, str):
+                                continue
+                            maybe_useless_entries.add(entry)
+                        G.remove_node(rule)
+                        continue
+                    else:
+                        new_rule = replace(new_rule, output=(new_rule.output - removed_outputs))
+                self._replace_rule(rule, new_rule)
+                if new_rule in rules_with_removed_outputs:
+                    assert rules_with_removed_outputs[new_rule].issubset(removed_outputs)
+                    del rules_with_removed_outputs[new_rule]
             elif maybe_unreachable_entries:
                 entry = maybe_unreachable_entries.pop()
-                if not nx.has_path(G, "START", entry):
+                if not self._is_probably_reachable(entry):
                 #if len(list(G.predecessors(entry))) == 0:
                     for rule in list(G.successors(entry)):
                         if not isinstance(rule, Rule):
@@ -1044,7 +1096,7 @@ class RuleGraph():
                         maybe_useless_entries.remove(entry)
             elif maybe_useless_entries:
                 entry = maybe_useless_entries.pop()
-                if not nx.has_path(G, entry, "END"):
+                if not self._is_potentially_useful(entry):
                     for rule in G.predecessors(entry):
                         if not isinstance(rule, Rule):
                             continue
@@ -1055,25 +1107,38 @@ class RuleGraph():
             elif rules_with_removed_outputs:
                 rule = next(iter(rules_with_removed_outputs))
                 removed_outputs = rules_with_removed_outputs.pop(rule)
-                removed_inputs = rules_with_removed_inputs.pop(rule, set())
-                if not nx.has_path(G, rule, "END"):
+                if not self._is_potentially_useful(rule):
                     for entry in G.predecessors(rule):
                         if isinstance(entry, str):
                             continue
                         maybe_useless_entries.add(entry)
                     G.remove_node(rule)
                 else:
-                    repeats = G.nodes[rule]['repeats']
-                    new_rule = replace(
-                        rule,
-                        consumed=(rule.consumed - removed_inputs),
-                        required=(rule.required - removed_inputs),
-                        output=(rule.output - removed_outputs))
-                    G.remove_node(rule)
-                    self._add_rule(new_rule, repeats)
+                    new_rule = replace(rule, output=(rule.output - removed_outputs))
+                    self._replace_rule(rule, new_rule)
 
+    def _is_probably_reachable(self, entry):
+        G = self.G
+        return nx.has_path(G, "START", entry)
 
-    def _prune(self):
+    def _is_potentially_useful(self, entry_or_rule):
+        G = self.G
+        visited_nodes = set()
+        to_process = {entry_or_rule}
+        while to_process:
+            node = to_process.pop()
+            for _, node2, data in G.edges(node, data=True):
+                if node2 == "END":
+                    return True
+                if isinstance(node2, str) or node2 in visited_nodes:
+                    continue
+                if not data['cycle']:
+                    return True
+                to_process.add(node2)
+            visited_nodes.add(node)
+        return False
+
+    def _prune(self, handle_cycle=True):
         G = self.G
 
         nx.set_node_attributes(G, False, "start")
@@ -1105,11 +1170,19 @@ class RuleGraph():
             if entry in good_nodes:
                 continue
             for rule in list(G.predecessors(entry)):
-                repeats = G.nodes[rule]['repeats']
                 new_rule = replace(rule, output=(rule.output - {entry}))
-                G.remove_node(rule)
-                self._add_rule(new_rule, repeats)
+                self._replace_rule(rule, new_rule, handle_cycle=handle_cycle)
             G.remove_node(entry)
+
+    def _label_cycles(self):
+        G = self.G
+        for n1, n2 in G.edges:
+            if isinstance(n1, str) or isinstance(n2, str):
+                continue
+            if nx.has_path(G, n2, n1):
+                G.edges[(n1, n2)]['cycle'] = True
+            else:
+                G.edges[(n1, n2)]['cycle'] = False
 
     def _get_valid_rules(self, explore=False):
         '''
@@ -1136,8 +1209,8 @@ class RuleGraph():
         for component in nx.connected_components(subgraph.to_undirected(as_view=True)):
             Gcomponent = G.copy()
             Gcomponent.remove_nodes_from([n for n in G.nodes if not isinstance(n, str) and n not in component])
-            dex = {entry.species: False for entry in Gcomponent.predecessors("END")}
-            yield RuleGraph(dex, Gcomponent, spaces=self.spaces+2)
+            acquired = {target: False for target in Gcomponent.predecessors("END")}
+            yield RuleGraph(Gcomponent, acquired, spaces=self.spaces+2)
 
     def _try_branches_single_component(self, ignore_special=False):
         '''
@@ -1153,15 +1226,15 @@ class RuleGraph():
         if not rules:
             return {frozenset()}
         for rule in rules:
-            copy = self.copy(set_parent=False)
+            copy = self.copy()
             #if self.spaces <= 12:
             #    print(f"{' '*copy.spaces}{rule}")
             
             copy._apply_rule(rule)
             copy.apply_safe_rules()
-            if all(copy.dex.values()):
-                return {frozenset(copy.dex.keys())}
-            for os in product({frozenset(s for s, v in copy.dex.items() if v)}, *copy.try_branches()):
+            if all(copy.acquired.values()):
+                return {frozenset(copy.acquired.keys())}
+            for os in product({frozenset(s for s, v in copy.acquired.items() if v)}, *copy.try_branches()):
                 outcomes.add(frozenset.union(*os))
 
         return RuleGraph._filter_outcomes(outcomes)
@@ -1215,12 +1288,12 @@ class RuleGraph():
         ]
         outcomes = set()
         for trainer_group in trainer_groups:
-            copy = self.copy(set_parent=False)
+            copy = self.copy()
             for trainer in trainer_group:
                 rule = Rule(frozenset({ChoiceEntry(white_id, "WF")}), frozenset(), frozenset({ChoiceEntry(white_id, f"WF_{trainer}")}), can_explore=False)
                 copy._apply_rule(rule)
             copy.apply_safe_rules()
-            for os in product({frozenset(s for s, v in copy.dex.items() if v)}, *copy.try_branches()):
+            for os in product({frozenset(s for s, v in copy.acquired.items() if v)}, *copy.try_branches()):
                 outcomes.add(frozenset.union(*os))
 
         return RuleGraph._filter_outcomes(outcomes)
@@ -1229,22 +1302,25 @@ class RuleGraph():
         G = self.G
         console_possibilities = {}
 
+        copy = self.copy()
         reset_gains = set()
         noreset_entries = set()
         for fs_node in fs_nodes:
-            G.nodes[fs_node]['count'] = 0
-            if ("START", fs_node) in G.edges:
-                G.remove_edge("START", fs_node)
+            copy.G.nodes[fs_node]['count'] = 0
+            if ("START", fs_node) in copy.G.edges:
+                copy.G.remove_edge("START", fs_node)
             noreset = ChoiceEntry(fs_node.cart_id, "NORESET")
-            if noreset in G.nodes:
-                assert(G.nodes[noreset]['count'] == 1)
+            if noreset in copy.G.nodes:
+                assert(copy.G.nodes[noreset]['count'] == 1)
                 noreset_entries.add(noreset)
-
-        copy = self.copy(set_parent=False)
-        for noreset in noreset_entries:
-            copy.G.nodes[noreset]['count'] = 0
-            copy.G.remove_edge("START", noreset)
-        copy._prune()
+        
+        copy._update_maintaining_invariant(zero_entries=set(fs_nodes))
+        if noreset_entries:
+            reset_copy = copy.copy()
+            for noreset in noreset_entries:
+                copy.G.nodes[noreset]['count'] = 0
+                copy.G.remove_edge("START", noreset)
+            copy._update_maintaining_invariant(zero_entries=noreset_entries)
         other_branches = copy.try_branches()
         best_reset = frozenset()
         if noreset_entries:
@@ -1255,13 +1331,12 @@ class RuleGraph():
             reset_rule = Rule(frozenset({noreset}), frozenset(), frozenset({reset}), can_explore=False)
             if reset_rule not in G.nodes:
                 continue
-            copy = self.copy(set_parent=False)
-            for other_noreset in noreset_entries:
-                if other_noreset == noreset:
-                    continue
+            copy = reset_copy.copy()
+            other_noresets = noreset_entries - {noreset}
+            for other_noreset in other_noresets:
                 copy.G.nodes[other_noreset]['count'] = 0
                 copy.G.remove_edge("START", other_noreset)
-            copy._prune()
+            copy._update_maintaining_invariant(zero_entries=other_noresets)
             copy._apply_rule(reset_rule)
             reset_branches = copy.try_branches(ignore_special=True)
             assert(len(reset_branches) == 1)
@@ -1271,7 +1346,13 @@ class RuleGraph():
                 best_reset = rb
             else:
                 assert rb.issubset(best_reset)
-       
+
+        if best_reset:
+            for dex_entry in best_reset:
+                assert(dex_entry in G)
+                self.acquired[dex_entry] = True
+            self._update_maintaining_invariant(inf_entries=best_reset)
+            
         for fs_node in fs_nodes:
             console_id = fs_node.cart_id
             downstreams = {}
@@ -1325,23 +1406,15 @@ class RuleGraph():
         simply by applying the rule and then other safe rules
         '''
         G = self.G
-        useful = {n.species for n in nx.descendants(G, rule) if (n, "END") in G.edges}
-        copy = self.copy(set_parent=False)
+        useful = {n for n in nx.descendants(G, rule) if (n, "END") in G.edges}
+        copy = self.copy()
         for entry in copy.G.predecessors(rule):
             if copy.G.nodes[entry]['count'] != math.inf:
                 copy.G.nodes[entry]['count'] = 1
                 copy.G.add_edge("START", entry)
         copy._apply_rule(rule)
         copy.apply_safe_rules()
-        out = useful, all(copy.dex[u] for u in useful)
-        if not out[1]:
-            copy = self.copy(set_parent=False)
-            for entry in copy.G.predecessors(rule):
-                if copy.G.nodes[entry]['count'] != math.inf:
-                    copy.G.nodes[entry]['count'] = 1
-                    copy.G.add_edge("START", entry)
-            copy._apply_rule(rule)
-        return out
+        return useful, all(copy.acquired[u] for u in useful)
 
     def _curtail_branch_output(self, branch):
         '''
