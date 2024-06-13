@@ -14,6 +14,7 @@ cases = [
     ('gen3_johto', 'GBA GBA AGB-005 . EMERALD RUBY . EMERALD SAPPHIRE . EMERALD RUBY SAPPHIRE'),
     ('gen4_dualslot', 'DS . PEARL . PEARL SAPPHIRE.Japanese . PEARL SAPPHIRE'),
     ('gen5_wf', 'DS DS WHITE . . WHITE'),
+    ('gen6_fs', '. 3DS[X] 3DS[X] 3DS . 3DS[X] 3DSr[X] 3DS . 3DS[X] 3DS[X] 3DSr . 3DS[X] 3DS 3DSr X')
 ]
 
 def check_and_replace(fname, command):
