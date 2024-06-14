@@ -958,8 +958,6 @@ class RuleGraph():
                 for species in branch.pop():
                     self.acquired[entry] = True
                 continue
-            elif len(branch) > 12:
-                branch = self._curtail_branch_output(branch)
             out_branches.append(branch)
         return out_branches
 
@@ -1415,54 +1413,6 @@ class RuleGraph():
         copy._apply_rule(rule)
         copy.apply_safe_rules()
         return useful, all(copy.acquired[u] for u in useful)
-
-    def _curtail_branch_output(self, branch):
-        '''
-        Reduce a large number of possibilities to a smaller set where
-        - every entry is in at least one branch
-        - every entry is *missing* from at least one branch
-        - the branch with the most entries is guaranteed to be present (if a tie, at least one will be)
-        '''
-        #assert(not frozenset.intersection(*branch))
-        orig_branch = branch.copy()
-        # Remove paths that are a subset of another path
-        to_delete = set()
-        for b1 in orig_branch:
-            found_superset = False
-            for b2 in orig_branch:
-                if b1 == b2:
-                    continue
-                if b1.issubset(b2):
-                    found_superset = True
-                    break
-            if found_superset:
-                to_delete.add(b1)
-                break
-        orig_branch = orig_branch - to_delete
-        all_entries = frozenset.union(*orig_branch)
-        not_present = all_entries.copy()
-        not_missing = all_entries.copy()
-        final_branch = set()
-        branch = [(b, b) for b in orig_branch]
-        while not_present:
-            best = max(branch, key=lambda b: len(b[1]))[0]
-            final_branch.add(best)
-            not_present = not_present - best
-            not_missing = not_missing & best
-            branch = [(b[0], b[1] - best) for b in branch]
-            branch = [b for b in branch if b[1]]
-        if not_missing:
-            branch = [(b, (all_entries - b) & not_missing) for b in orig_branch]
-            branch = [b for b in branch if b[1]]
-        while not_missing:
-            if not branch:
-                break
-            best, missing = max(branch, key=lambda b: len(b[1]))
-            final_branch.add(best)
-            not_missing = not_missing & best
-            branch = [(b[0], b[1] - missing) for b in branch]
-            branch = [b for b in branch if b[1]]
-        return final_branch
 
 
 _choice_idx = 0

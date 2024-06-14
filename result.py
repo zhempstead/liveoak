@@ -71,7 +71,13 @@ class MultiResult():
 
 
     def _group_lines(self, idxs, obtainable=True):
-        lines = [r._lines(r.present if obtainable else r.missing, idxs) for r in self.results]
+        lines = []
+        idx_set = set(idxs)
+        for r in self.results:
+            idxs_ordered = [o for o in r.order() if o in idx_set]
+            lines.append(r._lines(r.present if obtainable else r.missing, idxs_ordered))
+        #lines = [r._lines(r.present if obtainable else r.missing, idxs) for r in self.results]
+        #import pdb; pdb.set_trace()
         return list(zip_longest(*lines, fillvalue=""))
 
     def print(self, obtainable=True, skip_identical=True):
@@ -148,10 +154,10 @@ class Result():
         next_gidx = 0
         for branch in branches:
             # Replace species with idxs
-            branch = sorted(
-                [sorted([pokemon2idx[p] for p in choice]) for choice in branch],
-                key=lambda choice: (-len(choice), choice)
-            )
+            branch = [sorted([pokemon2idx[p] for p in choice]) for choice in branch]
+            if len(branch) > 12:
+                branch = Result._curtail_branch_output(branch)
+            branch = sorted(branch, key=lambda choice: (-len(choice), choice))
             all_idxs = {idx for choice in branch for idx in choice}
             not_missing = not_missing.union(all_idxs)
             for b, p_or_m, add_gidx in [(branch, present, True), (Result._present2missing(branch), missing, False)]:
@@ -169,6 +175,34 @@ class Result():
             missing[idx] = [idx]
 
         return Result(present, missing, idx2gidx, idx2pokemon)
+
+    @staticmethod
+    def _curtail_branch_output(branch):
+        '''
+        Reduce a large number of possibilities to a smaller set where
+        - every entry is in at least one branch
+        - every entry is *missing* from at least one branch
+        - the branch with the most entries is guaranteed to be present (if a tie, at least one will be)
+        '''
+        orig_branch = [choice.copy() for choice in branch]
+        all_entries = frozenset.union(*[frozenset(choice) for choice in branch])
+        not_present = all_entries.copy()
+        not_missing = all_entries.copy()
+        final_branch = []
+        branch = [(choice, set(choice), all_entries - set(choice)) for choice in orig_branch]
+        while not_present or not_missing:
+            # Pick the one with the most new species
+            # If a tie, favor the one that avoids the most species that have been in every choice so far
+            # If a tie, favor the one with the most species
+            # If a tie, favor those with lower idxs
+            best, _, missing = min(branch, key=lambda c: (-len(c[1]), -len(c[2]), -len(c[0]), c[0]))
+            best_set = set(best)
+            final_branch.append(best)
+            not_present = not_present - best_set
+            not_missing = not_missing & best_set
+            branch = [(c[0], c[1] - best_set, c[2] - missing) for c in branch]
+            branch = [c for c in branch if c[1] or c[2]]
+        return final_branch
 
     @staticmethod
     def _present2missing(branch):
