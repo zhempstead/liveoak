@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
 import argparse
-from dataclasses import dataclass, replace
-from enum import Enum
+from dataclasses import replace
 from itertools import chain, product
 import math
 from pathlib import Path
-from typing import Iterable, Optional, Self, Sequence
+from typing import Iterable, Self, Sequence
 
 import networkx as nx
 #from matplotlib import pyplot as plt
@@ -14,159 +13,25 @@ import pandas as pd
 
 from game import Game, Cartridge, Hardware, Collection, GAMES, GAMEIDS, GAMEINPUTS
 from result import MultiResult, Result
-
-
-class Gender(str, Enum):
-    MALE = "MALE"
-    FEMALE = "FEMALE"
-    UNKNOWN = "UNKNOWN"
-
-@dataclass(frozen=True)
-class Pokemon():
-    species: str
-    form: Optional[str]
-    idx: int
-
-    def __post_init__(self):
-        if self.form is not None and not self.form:
-            object.__setattr__(self, 'form', None)
-
-    def __str__(self):
-        out = self.species
-        if self.form is not None:
-            out += f" ({self.form})"
-        return out
-
-@dataclass(frozen=True)
-class PokemonReq():
-    species: str
-    form: Optional[str] = None
-    gender: Optional[Gender] = None
-    required: frozenset = frozenset()
-    forbidden: frozenset = frozenset([])
-
-    def matches(self, pokemon_entry):
-        if self.species != pokemon_entry.species:
-            return False
-        if self.form != pokemon_entry.form:
-            return False
-        if self.gender is not None and pokemon_entry.gender != self.gender:
-            return False
-        if not self.required.issubset(pokemon_entry.props):
-            return False
-        if self.forbidden.intersection(pokemon_entry.props):
-            return False
-        return True
- 
-    def __str__(self):
-        out = self.species
-        if self.form:
-            out += f' ({self.form})'
-        if self.gender == Gender.MALE:
-            out += '(♂)'
-        elif self.gender == Gender.FEMALE:
-            out += '(♀)'
-        if self.required:
-            out += ' {'
-            out += ', '.join(self.required)
-            out += '}'
-        return out
-
-
-@dataclass(frozen=True)
-class Entry():
-    cart_id: str
-
-@dataclass(frozen=True)
-class PokemonEntry(Entry):
-    species: str
-    form: Optional[str]
-    gender: Optional[Gender]
-    props: frozenset[str] = frozenset([])
-
-    @staticmethod
-    def new(cart_id: str, pokemon: Pokemon, gender=None, props: set[str] | frozenset[str]=set()):
-        return PokemonEntry(cart_id, pokemon.species, pokemon.form, gender, frozenset(props))
-
-    def __str__(self):
-        out = self.species
-        if self.form is not None:
-            out += f" ({self.form})"
-        if self.gender == Gender.MALE:
-            out += '(♂)'
-        elif self.gender == Gender.FEMALE:
-            out += '(♀)'
-
-        if self.props:
-            out += ' {'
-            out += ', '.join(self.props)
-            out += '}'
-        out += f'[{self.cart_id}]'
-        return out
-
-    __repr__ = __str__
-
-@dataclass(frozen=True)
-class ItemEntry(Entry):
-    item: str
-
-    def __repr__(self):
-        return f"ItemEntry({self.cart_id}, {self.item})"
-
-@dataclass(frozen=True)
-class ChoiceEntry(Entry):
-    choice: str
-
-    def __repr__(self):
-        return f"ChoiceEntry({self.cart_id}, {self.choice})"
-
-@dataclass(frozen=True)
-class DexEntry(Entry):
-    idx: int
-    species: str
-
-@dataclass(frozen=True)
-class SpeciesDexEntry(DexEntry):
-    @staticmethod
-    def new(cart_id: str, pokemon: Pokemon):
-        return SpeciesDexEntry(cart_id, pokemon.idx, pokemon.species)
-
-    def __repr__(self):
-        return f"SpeciesDexEntry({self.cart_id}, {self.species})"
-
-@dataclass(frozen=True)
-class FormDexEntry(DexEntry):
-    form: Optional[str]
-
-    @staticmethod
-    def new(cart_id: str, pokemon: Pokemon):
-        return FormDexEntry(cart_id, pokemon.idx, pokemon.species, pokemon.form)
-
-    def __repr__(self):
-        pokemon = self.species
-        if self.form:
-            pokemon += f' ({self.form})'
-        return f"FormDexEntry({self.cart_id}, {pokemon})"
-
-type Req = PokemonReq | Entry
+from structs import Gender, Pokemon, Req, PokemonReq, Entry, PokemonEntry, ItemEntry, ChoiceEntry, DexEntry, SpeciesDexEntry, FormDexEntry, Rule
 
 class Generation():
-    breed: Optional[pd.DataFrame]
-    buy: Optional[pd.DataFrame]
-    environment: Optional[pd.DataFrame]
-    evolve: Optional[pd.DataFrame]
-    forms_change: Optional[pd.DataFrame]
-    forms_ingame: Optional[pd.DataFrame]
-    forms_transfer: Optional[pd.DataFrame]
-    fossil: Optional[pd.DataFrame]
-    friend_safari: Optional[pd.DataFrame]
-    gift: Optional[pd.DataFrame]
-    misc: Optional[pd.DataFrame]
-    pickup_item: Optional[pd.DataFrame]
-    pickup_pokemon: Optional[pd.DataFrame]
-    trade: Optional[pd.DataFrame]
-    wild: Optional[pd.DataFrame]
-    wild_item: Optional[pd.DataFrame]
+    breed: pd.DataFrame | None
+    buy: pd.DataFrame | None
+    environment: pd.DataFrame | None
+    evolve: pd.DataFrame | None
+    forms_change: pd.DataFrame | None
+    forms_ingame: pd.DataFrame | None
+    forms_transfer: pd.DataFrame | None
+    fossil: pd.DataFrame | None
+    friend_safari: pd.DataFrame | None
+    gift: pd.DataFrame | None
+    misc: pd.DataFrame | None
+    pickup_item: pd.DataFrame | None
+    pickup_pokemon: pd.DataFrame | None
+    trade: pd.DataFrame | None
+    wild: pd.DataFrame | None
+    wild_item: pd.DataFrame | None
 
     DATA = ["breed", "buy", "environment", "evolve", "forms_change", "forms_ingame",
             "forms_transfer","fossil", "friend_safari", "gift", "misc", "pickup_item",
@@ -1638,41 +1503,6 @@ class RuleGraph():
 
 
 _choice_idx = 0
-
-@dataclass(frozen=True)
-class Rule():
-    consumed: frozenset[Entry]
-    required: frozenset[Entry]
-    output: frozenset[Entry]
-    is_transfer: bool = False
-    can_explore: bool = True
-
-    def __repr__(self) -> str:
-        consumed = set(self.consumed) or '{}'
-        required = set(self.required) or '{}'
-        output = set(self.output)
-        return f"{'T' if self.is_transfer else ''}{'E' if self.can_explore else ''}{consumed}{required}->{output}"
-
-    def in_cart_ids(self) -> set[str]:
-        return {c.cart_id for c in self.consumed} | {r.cart_id for r in self.required}
-
-    def out_cart_ids(self) -> set[str]:
-        return {o.cart_id for o in self.output}
-
-    def replace_in_cart_ids(self, old_cart_id: str, new_cart_id: str) -> Self:
-        new_consumed = frozenset({
-            replace(c, cart_id=new_cart_id) if c.cart_id == old_cart_id else c
-            for c in self.consumed})
-        new_required = frozenset({
-            replace(r, cart_id=new_cart_id) if r.cart_id == old_cart_id else r
-            for r in self.required})
-        return replace(self, consumed=new_consumed, required=new_required)
-
-    def replace_out_cart_ids(self, old_cart_id: str, new_cart_id: str) -> Self:
-        new_output = frozenset({
-            replace(o, cart_id=new_cart_id) if o.cart_id == old_cart_id else o
-            for o in self.output})
-        return replace(self, output=new_output)
 
 
 def main(args: argparse.Namespace):
