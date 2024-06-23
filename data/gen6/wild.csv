@@ -278,7 +278,7 @@ Floatzel,inf,inf,,
 Cherrim,,,inf,inf
 Shellos_WEST,,,inf,
 Shellos_EAST,,,,inf
-Gastrodon_WEST,inf[$FS_Gastrodon_WEST],inf[$FS_Gastrodon_WEST],,
+Gastrodon_WEST,inf[$FS_Gastrodon],inf[$FS_Gastrodon],,
 Drifloon,inf,inf,inf,inf
 Drifblim,inf[$FS_Drifblim],inf[$FS_Drifblim],,
 Buneary,,,inf,inf
