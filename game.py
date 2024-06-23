@@ -2,11 +2,17 @@
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
+from typing import Generator, Literal, Optional
 
-from frozendict import frozendict
+from networkx import DiGraph, Graph
+
+from frozendict import frozendict # type: ignore
 import networkx as nx
 import pandas as pd
+import numpy as np
+
+type Region = str | Literal[False]
+type Language = str | Literal[False]
 
 GB_LANG_GROUPS = {
     "Japanese": 1,
@@ -39,14 +45,14 @@ class Game():
     '''
     name: str
     gen: int
-    console: str
+    console: Optional[str]
     core: bool
     region: Optional[str]
     language: Optional[str]
-    props: frozenset = frozenset([])
+    props: frozenset[str] = frozenset([])
 
     @staticmethod
-    def parse(gamestr, console=None):
+    def parse(gamestr: str, console=None) -> "Game":
         split = gamestr.split('.')
         input_name = split[0]
         if input_name not in GAMEINPUTS:
@@ -98,7 +104,7 @@ class Game():
         return game
 
     @staticmethod
-    def _get_game(input_name, region, language):
+    def _get_game(input_name: str, region: Region | None, language: Language | None) -> "Game | None":
         languages = [language]
         if language in EUROPEAN_LANGUAGES:
             languages.append("European")
@@ -113,15 +119,16 @@ class Game():
             return Game(c.GAMEID, c.GENERATION, c.CONSOLE or None, c.CORE, c.REGION or None, c.LANGUAGE or None, props)
         return None
 
-    def default_flow(self):
+    def default_flow(self) -> str:
         if self.console in {"GB", "GBC", "N64"}:
             return "GB"
         elif self.console in {"GBA", "GCN", "eREADER"}:
             return "GBA"
         elif self.console in {"DS", "3DS", "Wii", None}:
             return "DS"
+        assert False, "Shouldn't reach here"
 
-    def language_match(self, other):
+    def language_match(self, other: "Game") -> bool:
         '''
         Returns True iff the languages are identical
         (or overlapping if a cart supports multiple languages)
@@ -136,7 +143,7 @@ class Game():
             return True
         return False
 
-    def language_group(self, other):
+    def language_group(self, other: "Game") -> bool:
         '''
         Returns True iff the languages are compatible for trading
         Only relevant for core gen 1, 2, and 4 games
@@ -155,7 +162,7 @@ class Game():
             return (self.language == "Korean") == (other.language == "Korean")
         raise ValueError("Irrelevant")
 
-    def region_match(self, other):
+    def region_match(self, other: "Game") -> bool:
         if self.region is None:
             return True
         if other.region is None:
@@ -166,7 +173,9 @@ class Game():
             return True
         return self.region == other.region
 
-    def match(self, gamestr):
+    def match(self, gamestr: str) -> bool:
+        if gamestr == "ALL":
+            return True
         if gamestr == "CORE":
             return self.core
         for g in gamestr.split(','):
@@ -202,7 +211,7 @@ class Cartridge():
     '''
     game: Game
     cl_name: str
-    console: Optional[str] = None # For software games only
+    console: Optional["Hardware"] = None # For software games only
     id: str = field(init=False)
 
     def __post_init__(self):
@@ -225,7 +234,7 @@ class Cartridge():
     def __repr__(self):
         return f"{self.game.__repr__()}_{self.id}"
 
-    def connections(self, collection, flow):
+    def connections(self, collection: "Collection", flow: str) -> tuple[set["Hardware"], set["Cartridge"]]:
         consoles = set()
         connects_to = set()
         G_start = nx.DiGraph()
@@ -252,7 +261,7 @@ class Cartridge():
         return consoles, connects_to
 
 
-    def _connections(self, G, collection, flow):
+    def _connections(self, G: nx.DiGraph, collection, flow) -> Generator[nx.DiGraph, None, None]:
         '''
         Yield directed graphs representing ways the cartridges/hardware can be connected
         '''
@@ -305,6 +314,7 @@ class Cartridge():
                             continue
                         found = True
                         Gcopy = G.copy()
+                        assert(isinstance(Gcopy, nx.DiGraph))
                         Gcopy.add_edge(node, cart)
                         for Gfull in self._connections(Gcopy, collection, flow):
                             yield Gfull
@@ -340,11 +350,11 @@ class Cartridge():
         if not found:
             yield G
 
-    def _add_hardware(self, G, hw, in_connection, from_node, flow):
+    def _add_hardware(self, G: nx.DiGraph, hw: "Hardware", in_connection: str, from_node: "Cartridge | tuple[Hardware, str]", flow: str) -> nx.DiGraph:
         '''
         Return copy of G with from_node linked to relevant port/plug of G
         '''
-        G = G.copy()
+        G = G.copy() # type: ignore
         if in_connection is None:
             if hw in G.nodes:
                 raise ValueError("Unexpected")
@@ -372,7 +382,7 @@ class Cartridge():
                 G.add_edge(hw, (hw, name))
         return G
 
-    def _simplify_connection_graph(self, G_in):
+    def _simplify_connection_graph(self, G_in: nx.DiGraph) -> nx.Graph:
         '''
         Convert from directed graph of ports/plugs to undirected graph of games/hardware
         '''
@@ -386,7 +396,7 @@ class Cartridge():
                     G.add_edge(node1, node2)
         return G
 
-    def _filter_connection_graph(self, G_in):
+    def _filter_connection_graph(self, G_in: nx.Graph) -> nx.Graph:
         G = G_in.copy()
         to_delete = set()
         for node in G.nodes:
@@ -432,7 +442,7 @@ class Cartridge():
                     elif isinstance(node2, Hardware) and node2.model.name == "DOL-011":
                         connector = node2
                     if gbp is not None:
-                        if disc != "GBPDISC":
+                        if game != "GBPDISC":
                             to_delete.add(gbp)
                         elif connector is not None:
                             to_delete.add(connector)
@@ -456,7 +466,7 @@ class HardwareModel():
     wireless: frozenset[str] = field(default_factory=frozenset)
 
     def __repr__(self):
-        return name
+        return self.name
 
 _hardware_idx = 0
 
@@ -477,7 +487,7 @@ class Hardware():
             raise ValueError(f"{self.model} wasn't released in region {self.region}")
 
     @staticmethod
-    def parse(hardware_str):
+    def parse(hardware_str) -> "Hardware":
         model_name, _, region = hardware_str.partition('.')
         if model_name not in HARDWARE_MODELS:
             raise ValueError(f"Unrecognized hardware '{model_name}'")
@@ -494,7 +504,7 @@ class Hardware():
                     raise ValueError("Shouldn't happen")
         return Hardware(model=model, region=region)
 
-    def region_match(self, other):
+    def region_match(self, other: "Cartridge | Hardware | Game") -> bool:
         if isinstance(other, Cartridge):
             other = other.game
         if not isinstance(other, Hardware) and not isinstance(other, Game):
@@ -510,19 +520,18 @@ class Hardware():
             return f"{self.model.name}_{self.id}"
         return f"{self.model.name}.{self.region}_{self.id}"
 
+DEFAULT_REGIONS: list[Region] = [False, "INTL", "USA", "JPN", "EUR", "AUS", "KOR", "CHN"]
+DEFAULT_LANGUAGES: dict[Region, list[Language]] = {False: [False, "European", "English", "Japanese"], "INTL": [False, "English"], "USA": [False, "English"], "JPN": [False, "Japanese"], "EUR": [False, "European", "English"], "AUS": [False, "English"], "KOR": [False, "Korean"], "CHN": [False, "Chinese"]}
 
-DEFAULT_REGIONS = [False, "INTL", "USA", "JPN", "EUR", "AUS", "KOR", "CHN"]
-DEFAULT_LANGUAGES = {False: [False, "European", "English", "Japanese"], "INTL": [False, "English"], "USA": [False, "English"], "JPN": [False, "Japanese"], "EUR": [False, "European", "English"], "AUS": [False, "English"], "KOR": [False, "Korean"], "CHN": [False, "Chinese"]}
+GAMES: pd.DataFrame = pd.read_csv(Path('data') / 'games.csv').fillna(False)
+GAMEIDS: set[str] = set(GAMES.GAMEID)
+GAMEINPUTS: set[str] = set(GAMES.GAME)
+REGIONS: set[Region] = set(GAMES.REGION)
+LANGUAGES: set[Language] = set(GAMES.LANGUAGE)
+EUROPEAN_LANGUAGES: set[Language] = {"English", "French", "German", "Italian", "Spanish"}
+INTL_REGIONS: set[Region] = {"USA", "EUR", "AUS"}
 
-GAMES = pd.read_csv(Path('data') / 'games.csv').fillna(False)
-GAMEIDS = set(GAMES.GAMEID)
-GAMEINPUTS = set(GAMES.GAME)
-REGIONS = set(GAMES.REGION)
-LANGUAGES = set(GAMES.LANGUAGE)
-EUROPEAN_LANGUAGES = {"English", "French", "German", "Italian", "Spanish"}
-INTL_REGIONS = {"USA", "EUR", "AUS"}
-
-HARDWARE_MODELS = {h.name: h for h in [
+HARDWARE_MODELS: dict[str, HardwareModel] = {h.name: h for h in [
     # Handhelds
     # Original Game Boy
     HardwareModel("GB", is_console=True, ports=(
@@ -693,17 +702,19 @@ HARDWARE_MODELS = {h.name: h for h in [
 ]}
 
 class Collection():
-    def __init__(self, cartridges, hardware, skip_validation=False):
+    def __init__(self, cartridges: list[Cartridge], hardware: set[Hardware], skip_validation=False):
         if len(cartridges) == 0:
             raise ValueError("No games!")
-        self.main_cartridge = None
+        main_cartridge: Optional[Cartridge] = None
         for cart in cartridges:
             if "NO_DEX" in cart.game.props:
                 continue
-            self.main_cartridge = cart
+            main_cartridge = cart
             break
-        else:
+        if main_cartridge is None:
             raise ValueError("No valid main game.")
+        else:
+            self.main_cartridge: Cartridge = main_cartridge
 
         self.cartridges = cartridges
         self.hardware = hardware
@@ -757,7 +768,7 @@ class Collection():
             if unreachable:
                 raise ValueError(f"The following game(s) can't interact with the main game {self.main_cartridge}, at least with the current collection: {unreachable}")
      
-    def connected(self, cart1, cart2, flow=None):
+    def connected(self, cart1: Cartridge, cart2: Cartridge, flow=None) -> bool:
         if flow is None:
             flow1 = cart1.game.default_flow()
             flow2 = cart2.game.default_flow()
@@ -1013,7 +1024,7 @@ class Collection():
        
         self.interactions = interactions
 
-    def interactions_graph(self):
+    def interactions_graph(self) -> DiGraph:
         G = nx.DiGraph()
         for cart in self.cartridges:
             G.add_node(cart)
@@ -1025,7 +1036,7 @@ class Collection():
                     G.add_edge(cart1, cart2)
         return G
 
-    def unreachable_games(self):
+    def unreachable_games(self) -> set[Cartridge]:
         unreachable = set()
         if len(self.cartridges) == 1:
             return unreachable
@@ -1049,7 +1060,7 @@ class Collection():
         return unreachable
 
 
-    def friend_safari_consoles(self):
+    def friend_safari_consoles(self) -> dict[Hardware, dict[Cartridge, float]]:
         xy_carts = {cart for cart in self.cartridges if cart.game.name in {"X", "Y"}}
         gen6_carts = {cart for cart in self.cartridges if cart.game.gen == 6 and cart.game.core}
         consoles = {hw for hw in self.hardware if hw.model.name in {"3DS", "3DSr"}}
@@ -1082,7 +1093,7 @@ class Collection():
         return safaris
 
 
-    def reset_consoles(self):
+    def reset_consoles(self) -> dict[Hardware, set[Cartridge]]:
         out = {}
         consoles = {hw for hw in self.hardware if hw.model.name == "3DSr"}
         for console in consoles:

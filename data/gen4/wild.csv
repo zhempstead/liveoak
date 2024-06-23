@@ -144,7 +144,34 @@ Wooper,inf,inf,inf,inf,inf
 Quagsire,inf,inf,inf,inf,inf
 Murkrow,inf,,,inf,inf
 Misdreavus,,inf,,inf,inf
-Unown,inf,inf,inf,inf,inf
+Unown_A,inf,inf,inf,inf,inf
+Unown_B,inf,inf,inf,inf,inf
+Unown_C,inf,inf,inf,inf,inf
+Unown_D,inf,inf,inf,inf,inf
+Unown_E,inf,inf,inf,inf,inf
+Unown_F,inf,inf,inf,inf,inf
+Unown_G,inf,inf,inf,inf,inf
+Unown_H,inf,inf,inf,inf,inf
+Unown_I,inf,inf,inf,inf,inf
+Unown_J,inf,inf,inf,inf,inf
+Unown_K,inf,inf,inf,inf,inf
+Unown_L,inf,inf,inf,inf,inf
+Unown_M,inf,inf,inf,inf,inf
+Unown_N,inf,inf,inf,inf,inf
+Unown_O,inf,inf,inf,inf,inf
+Unown_P,inf,inf,inf,inf,inf
+Unown_Q,inf,inf,inf,inf,inf
+Unown_R,inf,inf,inf,inf,inf
+Unown_S,inf,inf,inf,inf,inf
+Unown_T,inf,inf,inf,inf,inf
+Unown_U,inf,inf,inf,inf,inf
+Unown_V,inf,inf,inf,inf,inf
+Unown_W,inf,inf,inf,inf,inf
+Unown_X,inf,inf,inf,inf,inf
+Unown_Y,inf,inf,inf,inf,inf
+Unown_Z,inf,inf,inf,inf,inf
+Unown_!,inf,inf,inf,inf,inf
+Unown_?,inf,inf,inf,inf,inf
 Wobbuffet,inf,inf,inf,inf,inf
 Girafarig,inf,inf,inf,inf,inf
 Pineco,inf[EMERALD],inf[EMERALD],inf[EMERALD],inf,inf
@@ -305,17 +332,17 @@ Kricketune,inf,inf,inf,inf,inf
 Shinx,inf,inf,inf,inf,inf
 Luxio,inf,inf,inf,inf,inf
 Budew,inf,inf,inf,inf,inf
-Burmy,inf,inf,inf,inf,inf
+Burmy_Plant Cloak,inf,inf,inf,inf,inf
 Combee,inf,inf,inf,inf,inf
 Pachirisu,inf,inf,inf,inf,inf
 Buizel,inf,inf,inf,inf,inf
 Floatzel,inf,inf,inf,inf,inf
 Cherubi,inf,inf,inf,inf,inf
-Shellos_WEST,inf,inf,inf,,
-Shellos_WEST_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
-Shellos_EAST,inf,inf,inf,,
-Gastrodon_WEST,inf,inf,inf,,
-Gastrodon_EAST,inf,inf,inf,,
+Shellos_West Sea,inf,inf,inf,,
+Shellos_West Sea_FEMALE,,,,inf[POKEWALKER],inf[POKEWALKER]
+Shellos_East Sea,inf,inf,inf,,
+Gastrodon_West Sea,inf,inf,inf,,
+Gastrodon_East Sea,inf,inf,inf,,
 Drifloon,inf,inf,inf,,
 Buneary,inf,inf,inf,inf,inf
 Glameow,,inf,,,
@@ -359,11 +386,11 @@ Dialga,1,,1,,
 Palkia,,1,1,,
 Heatran,1,1,1,,
 Regigigas,"1[Regirock,Regice,Registeel]","1[Regirock,Regice,Registeel]","1[Regirock,Regice,Registeel]",,
-Giratina,1,1,1,,
+Giratina_Altered,1,1,1,,
 Cresselia,1,1,1,,
 Darkrai,1[Member Card],1[Member Card],1[Member Card],,
-Shaymin,1[Oak's Letter],1[Oak's Letter],,,
-Shaymin_FATEFUL,,,1[Oak's Letter],,
+Shaymin_Land,1[Oak's Letter],1[Oak's Letter],,,
+Shaymin_Land_FATEFUL,,,1[Oak's Letter],,
 Arceus_HALLOFORIGIN,1[Azure Flute],1[Azure Flute],1[Azure Flute],,
 Armor Fossil,,inf,inf[$TRAINERID_EVEN],,
 Claw Fossil,inf,inf,inf,inf,
@@ -371,20 +398,31 @@ Dawn Stone,2,2,3,1,1
 Deep Sea Scale,,,,1,1
 Deep Sea Tooth,,,,1,1
 Dome Fossil,inf,inf,inf,,inf
+Draco Plate,2,2,2,,
 Dragon Scale,,,,1,1
+Dread Plate,2,2,2,,
 Dubious Disc,1,1,2,1,1
 Dusk Stone,2,2,3,1,1
+Earth Plate,2,2,2,,
 Electirizer,,,1,1,1
 Everstone,inf,inf,inf,,
 Fire Stone,inf,inf,inf,inf[POKEWALKER],inf[POKEWALKER]
+Fist Plate,2,2,2,,
+Flame Plate,2,2,2,,
 Full Incense,1,1,1,1,1
+Griseous Orb,,,1,,
 Helix Fossil,inf,inf,inf,inf,
+Icicle Plate,2,2,2,,
+Insect Plate,2,2,2,,
+Iron Plate,2,2,2,,
 King's Rock,,,1,,
 Lax Incense,1,1,1,1,1
 Leaf Stone,inf,inf,inf,1,1
 Luck Incense,1,1,1,1,1
 Magmarizer,,,1,1,1
+Meadow Plate,2,2,2,,
 Metal Coat,,,1,1,1
+Mind Plate,2,2,2,,
 Moon Stone,inf,inf,inf,inf,inf
 Odd Incense,1,1,1,1,1
 Odd Keystone,inf,inf,inf,,
@@ -401,8 +439,14 @@ Rose Incense,1,1,1,1,1
 Sea Incense,1,1,1,1,1
 Shiny Stone,2,2,3,1,1
 Skull Fossil,inf,,inf[$TRAINERID_ODD],,
+Sky Plate,2,2,2,,
+Splash Plate,2,2,2,,
+Spooky Plate,2,2,2,,
+Stone Plate,2,2,2,,
 Sun Stone,inf,inf,inf,inf[POKEWALKER],inf[POKEWALKER]
 Thunder Stone,inf,inf,inf,,
+Toxic Plate,2,2,2,,
 Upgrade,,,2,,
 Water Stone,inf,inf,inf,1,1
 Wave Incense,1,1,1,1,1
+Zap Plate,2,2,2,,

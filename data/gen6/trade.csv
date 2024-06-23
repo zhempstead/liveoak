@@ -5,7 +5,7 @@ GAME,GIVE,GET,ITEM,REQUIRED
 "X,Y",ANY,Froakie,,$START_CHESPIN
 "X,Y",ANY,Chespin,,$START_FENNEKIN
 "X,Y",ANY,Fennekin,,$START_FROAKIE
-"X,Y",ANY,Ralts_FEMALE,,
+"X,Y",ANY,Ralts_FEMALE,Gardevoirite,
 "X,Y",Gyarados,Magikarp_MALE,,
 "X,Y",ANY,Eevee_FEMALE,,
 "OMEGARUBY,ALPHASAPPHIRE",Slakoth,Makuhita_MALE,,

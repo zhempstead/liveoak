@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 
 class MultiResult():
-    def __init__(self, results, pokemon2idx, match_version_exclusives):
+    def __init__(self, results: list["Result"], pokemon2idx: dict[str, int], match_version_exclusives: bool):
         self.results = results
         self.max_idx = max([r.max_idx for r in results])
         self.pokemon2idx = pokemon2idx
@@ -48,8 +48,8 @@ class MultiResult():
                     self.version_exclusives[idx2].add(idx1)
                 
 
-    def full_group(self, idx):
-        processed = set()
+    def full_group(self, idx: int) -> set[int]:
+        processed: set[int] = set()
         to_process = set([idx])
         while to_process:
             idx = to_process.pop()
@@ -70,8 +70,8 @@ class MultiResult():
         return processed
 
 
-    def _group_lines(self, idxs, obtainable=True):
-        lines = []
+    def _group_lines(self, idxs: list[int], obtainable=True) -> list[tuple[str, ...]]:
+        lines: list[list[str]] = []
         idx_set = set(idxs)
         for r in self.results:
             idxs_ordered = [o for o in r.order() if o in idx_set]
@@ -79,6 +79,7 @@ class MultiResult():
         #lines = [r._lines(r.present if obtainable else r.missing, idxs) for r in self.results]
         #import pdb; pdb.set_trace()
         return list(zip_longest(*lines, fillvalue=""))
+
 
     def print(self, obtainable=True, skip_identical=True):
         vline = ["-" for _ in self.results]
@@ -110,15 +111,15 @@ class MultiResult():
         lines.append([str(r.count()) for r in self.results])
         self._print_lines(lines)
 
+    # TODO: fix - this prints all rows
     def print_compact(self, obtainable=True):
         if obtainable:
             lines = [r._lines(r.present, r.order()) for r in self.results]
         else:
             lines = [r._lines(r.missing, r.order()) for r in self.results]
-        lines = list(zip_longest(*lines, fillvalue=''))
-        lines.append(['-' for _ in self.results])
-        lines.append([str(r.count()) for r in self.results])
-        self._print_lines(lines)
+        lines_filled: list[tuple[str, ...]] = list(zip_longest(*lines, fillvalue=''))
+        lines_filled.append(tuple(str(r.count()) for r in self.results))
+        self._print_lines(lines_filled)
 
     def print_all_present(self):
         r = self.results[0]
@@ -132,24 +133,24 @@ class MultiResult():
         
 
 class Result():
-    def __init__(self, present, missing, idx2gidx, idx2pokemon):
+    def __init__(self, present: dict[int, list[int]], missing: dict[int, list[int]], idx2gidx: dict[int, int], idx2pokemon: dict[int, str]):
         self.present = present
         self.missing = missing
         self.idx2gidx = idx2gidx
         self.idx2pokemon = idx2pokemon
         self.max_idx = max(idx2pokemon.keys())
-        self.gidx2idxs = {}
+        self.gidx2idxs: dict[int, set[int]] = {}
         for idx, gidx in self.idx2gidx.items():
             if gidx not in self.gidx2idxs:
                 self.gidx2idxs[gidx] = set()
             self.gidx2idxs[gidx].add(idx)
 
     @staticmethod
-    def new(idx2pokemon, present, branches):
+    def new(idx2pokemon: dict[int, str], present_set: set[str], branches: list[set[frozenset[str]]]):
         pokemon2idx = {v: k for k, v in idx2pokemon.items()}
-        missing = {}
-        idx2gidx = {}
-        present = {pokemon2idx[p]: [pokemon2idx[p]] for p in present}
+        missing: dict[int, list[int]] = {}
+        idx2gidx: dict[int, int] = {}
+        present = {pokemon2idx[p]: [pokemon2idx[p]] for p in present_set}
         not_missing = set(present.keys())
         next_gidx = 0
         for branch in branches:
@@ -177,18 +178,18 @@ class Result():
         return Result(present, missing, idx2gidx, idx2pokemon)
 
     @staticmethod
-    def _curtail_branch_output(branch):
+    def _curtail_branch_output(orig_branch: list[list[int]]) -> list[list[int]]:
         '''
         Reduce a large number of possibilities to a smaller set where
         - every entry is in at least one branch
         - every entry is *missing* from at least one branch
         - the branch with the most entries is guaranteed to be present (if a tie, at least one will be)
         '''
-        orig_branch = [choice.copy() for choice in branch]
-        all_entries = frozenset.union(*[frozenset(choice) for choice in branch])
-        not_present = all_entries.copy()
-        not_missing = all_entries.copy()
-        final_branch = []
+        orig_branch = [choice.copy() for choice in orig_branch]
+        all_entries: frozenset[int] = frozenset.union(*[frozenset(choice) for choice in orig_branch])
+        not_present: frozenset[int] = all_entries.copy()
+        not_missing: frozenset[int] = all_entries.copy()
+        final_branch: list[list[int]] = []
         branch = [(choice, set(choice), all_entries - set(choice)) for choice in orig_branch]
         while not_present or not_missing:
             # Pick the one with the most new species
@@ -205,7 +206,7 @@ class Result():
         return final_branch
 
     @staticmethod
-    def _present2missing(branch):
+    def _present2missing(branch: list[list[int]]) -> list[list[int]]:
         all_idxs = {idx for choice in branch for idx in choice}
         inverse_branch = sorted(
             [sorted(list(all_idxs.difference(choice))) for choice in branch],
@@ -213,24 +214,24 @@ class Result():
         )
         return inverse_branch
 
-    def obtainable_line(self, idx):
+    def obtainable_line(self, idx: int) -> str | None:
         if idx not in self.present:
             return None
         return " / ".join([self.entry(i) for i in self.present[idx]])
 
-    def entry(self, idx):
+    def entry(self, idx: int) -> str:
         if idx is None:
             return "-"
         return f"{idx:04}. {self.idx2pokemon[idx]}"
 
-    def line(self, idx):
+    def line(self, idx: int) -> str | None:
         sub_idxs = self.present.get(idx)
         if not sub_idxs:
             return None
         return " / ".join([self.entry(sub_idx) for sub_idx in sub_idxs])
 
-    def _lines(self, source, idxs):
-        group_widths = {}
+    def _lines(self, source: dict[int, list[int]], idxs: list[int]) -> list[str]:
+        group_widths: dict[int, list[int]] = {}
         for idx in idxs:
             gidx = self.idx2gidx.get(idx)
             if gidx is None:
@@ -246,7 +247,7 @@ class Result():
             else:
                 group_widths[gidx] = lengths
 
-        out = []
+        out: list[str] = []
         for idx in idxs:
             gidx = self.idx2gidx.get(idx)
             if gidx is None:
@@ -262,7 +263,7 @@ class Result():
 
         return out
 
-    def order(self):
+    def order(self) -> list[int]:
         handled_groups = set()
         order = []
         for idx in range(1, self.max_idx + 1):
@@ -282,5 +283,5 @@ class Result():
     def print_missing(self):
         print("\n".join(self._lines(self.missing, self.order())))
 
-    def count(self):
+    def count(self) -> int:
         return len(self._lines(self.present, self.order()))

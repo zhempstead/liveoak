@@ -274,16 +274,17 @@ Budew,,inf[$WF_FREDERIC],,,,
 Roserade,,,inf,inf,,
 Cranidos,,,,,,inf[BLACK];inf[WHITE]
 Shieldon,,,,,,inf[BLACK];inf[WHITE]
-Burmy,,,,,,inf
+Burmy_Plant Cloak,,,,,,inf[$CAFE]
+Burmy_Sandy Cloak,,,,,,inf
 Combee,inf,inf,inf,inf,,inf[BLACK];inf[WHITE]
 Vespiquen,inf,inf,inf,inf,,
 Pachirisu,,,inf,inf,,inf[BLACK];inf[WHITE]
 Buizel,inf,inf,inf,inf,,inf
 Floatzel,inf,inf,inf,inf,,
 Cherubi,,,,,,inf
-Cherrim,inf,inf,,,,
-Shellos_WEST,,,,,,inf[BLACK];inf[WHITE]
-Shellos_EAST,,,,,,inf[BLACK];inf[WHITE]
+Cherrim_Overcast,inf,inf,,,,
+Shellos_West Sea,,,,,,inf[BLACK];inf[WHITE]
+Shellos_East Sea,,,,,,inf[BLACK];inf[WHITE]
 Drifloon,,,inf,inf,inf,inf[BLACK];inf[WHITE]
 Drifblim,inf,inf,inf,inf,,
 Buneary,,,inf,,,inf
@@ -323,7 +324,7 @@ Dialga_ONETRANSFER,,,,,1[DIAMOND],
 Palkia_ONETRANSFER,,,,,1[PEARL],
 Heatran,,,1[Magma Stone],1[Magma Stone],,
 Regigigas,,,"1[Regirock,Regice,Registeel]","1[Regirock,Regice,Registeel]",,
-Giratina_ONETRANSFER,,,,,1[PLATINUM],
+Giratina_Altered_ONETRANSFER,,,,,1[PLATINUM],
 Cresselia,,,1[Lunar Wing],1[Lunar Wing],,
 Victini,1[Liberty Pass],1[Liberty Pass],,,,
 Patrat,inf,inf,inf,inf,,
@@ -367,14 +368,14 @@ Cottonee,inf,,inf,,,inf[BLACK2];inf[WHITE2]
 Whimsicott,inf,,inf,,,
 Petilil,,inf,,inf,,inf[BLACK2];inf[WHITE2]
 Lilligant,,inf,,inf,,
-Basculin_RED,inf,inf,inf,inf,,inf[BLACK2];inf[WHITE2]
-Basculin_BLUE,inf,inf,inf,inf,,inf[BLACK2];inf[WHITE2]
+Basculin_Red-Striped,inf,inf,inf,inf,,inf[BLACK2];inf[WHITE2]
+Basculin_Blue-Striped,inf,inf,inf,inf,,inf[BLACK2];inf[WHITE2]
 Sandile,inf,inf,inf,inf,,
 Krokorok,inf,inf,inf,inf,,
 Krookodile,,,,,,inf[BLACK2];inf[WHITE2]
 Darumaka,inf,inf,inf,inf,,
-Darmanitan,5{Rage Candy Bar},5{Rage Candy Bar},,,,
-Darmanitan_MALE,,,1[BLACK];1[WHITE],1[BLACK];1[WHITE],,
+Darmanitan_ZENMODE,5{Rage Candy Bar},5{Rage Candy Bar},,,,
+Darmanitan_ZENMODE,,,1[BLACK];1[WHITE],1[BLACK];1[WHITE],,
 Maractus,inf,inf,inf,inf,,inf[BLACK2];inf[WHITE2]
 Dwebble,inf,inf,inf,inf,,
 Crustle,inf,inf,inf,inf,,inf[BLACK2];inf[WHITE2]
@@ -400,8 +401,14 @@ Swanna,inf,inf,inf,inf,,
 Vanillite,inf,inf,,,,
 Vanillish,inf,inf,inf,inf,,inf[BLACK2];inf[WHITE2]
 Vanilluxe,,,inf,inf,,
-Deerling,inf,inf,inf,inf,,
-Sawsbuck,inf,inf,inf,inf,,
+Deerling_Spring,inf,inf,inf,inf,,
+Deerling_Summer,inf,inf,inf,inf,,
+Deerling_Autumn,inf,inf,inf,inf,,
+Deerling_Winter,inf,inf,inf,inf,,
+Sawsbuck_Spring,inf,inf,inf,inf,,
+Sawsbuck_Summer,inf,inf,inf,inf,,
+Sawsbuck_Autumn,inf,inf,inf,inf,,
+Sawsbuck_Winter,inf,inf,inf,inf,,
 Emolga,inf,inf,inf,inf,,inf[BLACK2];inf[WHITE2]
 Karrablast,inf,inf,inf,inf,,inf[BLACK2];inf[WHITE2]
 Foongus,inf,inf,inf,inf,,
@@ -451,31 +458,43 @@ Terrakion,,,1,1,,
 Terrakion,1[Cobalion_CAPTURE_TRANSFERRESET],1[Cobalion_CAPTURE_TRANSFERRESET],,,,
 Virizion,,,1,1,,
 Virizion,1[Cobalion_CAPTURE_TRANSFERRESET],1[Cobalion_CAPTURE_TRANSFERRESET],1,1,,
-Tornadus,1,,,,,
-Tornadus_ONETRANSFER,,,,,1,
-Thundurus,,1,,,,
-Thundurus_ONETRANSFER,,,,,1[Tornadus],
+Tornadus_Incarnate,1,,,,,
+Tornadus_Therian_ONETRANSFER,,,,,1,
+Thundurus_Incarnate,,1,,,,
+Thundurus_Therian_ONETRANSFER,,,,,1[Tornadus_Therian],
 Reshiram,1,,,1,,
 Zekrom,,1,1,,,
-Landorus,"1[Tornadus,Thundurus]","1[Tornadus,Thundurus]",,,,
-Landorus_ONETRANSFER,,,,,"1[Tornadus,Thundurus]",
+Landorus_Incarnate,"1[Tornadus_Incarnate,Thundurus_Incarnate]","1[Tornadus_Incarnate,Thundurus_Incarnate]",,,,
+Landorus_Therian_ONETRANSFER,,,,,"1[Tornadus_Therian,Thundurus_Therian]",
 Kyurem,1,1,1,1,,
 Cover Fossil,,,inf,,,
 Dawn Stone,inf,inf,inf,inf,inf,
 Deep Sea Scale,1,1,,,,
 Deep Sea Tooth,1,1,,,,
+DNA Splicers,,,1,1,,
+Draco Plate,1,1,1,1,,
 Dragon Scale,1,1,1,1,,
+Dread Plate,1,1,1,1,,
 Dubious Disc,1,1,1,1,,
 Dusk Stone,inf,inf,inf,inf,,
+Earth Plate,1,1,1,1,,
 Electirizer,1,1,,1,,
 Everstone,inf,inf,inf,inf,,
 Fire Stone,inf,inf,inf,inf,inf,
+Fist Plate,1,1,1,1,,
+Flame Plate,1,1,1,1,,
+Griseous Orb,,,1,1,,
+Icicle Plate,1,1,1,1,,
+Insect Plate,1,1,1,1,,
+Iron Plate,1,1,1,1,,
 King's Rock,,,1,1,inf,
 Leaf Stone,inf,inf,inf,inf,inf,
 Lunar Wing,,,1,1,,
 Magma Stone,,,1,1,,
 Magmarizer,,,1,,,
+Meadow Plate,1,1,1,1,,
 Metal Coat,1,1,2,2,,
+Mind Plate,1,1,1,1,,
 Moon Stone,inf,inf,inf,inf,inf,
 Oval Stone,inf,inf,inf,inf,,
 Prism Scale,1,1,1,1,,
@@ -485,8 +504,14 @@ Razor Claw,1,1,1,1,,
 Razor Fang,1,1,1,1,,
 Reaper Cloth,1,1,1,1,,inf
 Shiny Stone,inf,inf,inf,inf,,
+Sky Plate,1,1,1,1,,
+Splash Plate,1,1,1,1,,
+Spooky Plate,1,1,1,1,,
+Stone Plate,1,1,1,1,,
 Sun Stone,inf,inf,inf,inf,inf,
 Thunder Stone,inf,inf,inf,inf,inf,
+Toxic Plate,1,1,1,1,,
 Upgrade,1,1,2,2,,
 Water Stone,inf,inf,inf,inf,inf,
+Zap Plate,1,1,1,1,,
 $WF,0,10,0,0,0,0

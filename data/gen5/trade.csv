@@ -1,4 +1,4 @@
-GAME,GIVE,GET,ITEM,REQUIRED
+GAME,GIVE,GET,ITEM,REQUIRed-Striped
 CORE,Ditto,Rotom,,
 "BLACK,WHITE",Boldore,Emolga_MALE,,
 "BLACK,WHITE",Cinccino,Munchlax_MALE,,
@@ -13,8 +13,8 @@ CORE,Ditto,Rotom,,
 "BLACK2,WHITE2",ANY,Shieldon,,$BOY
 "BLACK2,WHITE2",ANY,Cranidos,,$GIRL
 "BLACK2,WHITE2",ANY,Rhyhorn,,
-"BLACK2,WHITE2",ANY,Shellos_WEST,,$BOY
-"BLACK2,WHITE2",ANY,Shellos_EAST,,$GIRL
+"BLACK2,WHITE2",ANY,Shellos_West Sea,,$BOY
+"BLACK2,WHITE2",ANY,Shellos_East Sea,,$GIRL
 "BLACK2,WHITE2",ANY,Mawile,,$BOY
 "BLACK2,WHITE2",ANY,Sableye,,$GIRL
 "BLACK2,WHITE2",ANY,Spiritomb,,
@@ -24,8 +24,8 @@ CORE,Ditto,Rotom,,
 "BLACK2,WHITE2",ANY,Spinda,,
 "BLACK2,WHITE2",ANY,Togepi,Rage Candy Bar,
 BLACK,Cottonee,Petilil,,
-BLACK,Minccino,Basculin_RED_MALE,,
+BLACK,Minccino,Basculin_Red-Striped_MALE,,
 WHITE,Petilil,Cottonee_FEMALE,,
-WHITE,Minccino,Basculin_BLUE_MALE,,
+WHITE,Minccino,Basculin_Blue-Striped_MALE,,
 BLACK2,Cottonee,Petilil,,
 WHITE2,Petilil,Cottonee_MALE,,

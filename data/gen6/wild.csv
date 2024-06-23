@@ -127,7 +127,34 @@ Wooper,inf[$FS_Wooper],inf[$FS_Wooper],,
 Quagsire,inf,inf,,
 Murkrow,inf,inf,inf,inf
 Misdreavus,,,inf,inf
-Unown,,,inf,inf
+Unown_A,,,inf,inf
+Unown_B,,,inf,inf
+Unown_C,,,inf,inf
+Unown_D,,,inf,inf
+Unown_E,,,inf,inf
+Unown_F,,,inf,inf
+Unown_G,,,inf,inf
+Unown_H,,,inf,inf
+Unown_I,,,inf,inf
+Unown_J,,,inf,inf
+Unown_K,,,inf,inf
+Unown_L,,,inf,inf
+Unown_M,,,inf,inf
+Unown_N,,,inf,inf
+Unown_O,,,inf,inf
+Unown_P,,,inf,inf
+Unown_Q,,,inf,inf
+Unown_R,,,inf,inf
+Unown_S,,,inf,inf
+Unown_T,,,inf,inf
+Unown_U,,,inf,inf
+Unown_V,,,inf,inf
+Unown_W,,,inf,inf
+Unown_X,,,inf,inf
+Unown_Y,,,inf,inf
+Unown_Z,,,inf,inf
+Unown_!,,,inf,inf
+Unown_?,,,inf,inf
 Wobbuffet,inf,inf,inf,inf
 Girafarig,inf[$FS_Girafarig],inf[$FS_Girafarig],inf,inf
 Forretress,inf[$FS_Forretress],inf[$FS_Forretress],inf,inf
@@ -271,14 +298,14 @@ Bibarel,inf,inf,,
 Kricketune,,,inf,inf
 Luxio,inf[$FS_Luxio],inf[$FS_Luxio],inf,inf
 Budew,inf,inf,,
-Burmy,inf,inf,,
+Burmy_Plant Cloak,inf,inf,,
 Combee,inf,inf,,
 Pachirisu,inf,inf,,
 Floatzel,inf,inf,,
-Cherrim,,,inf,inf
-Shellos_WEST,,,inf,
-Shellos_EAST,,,,inf
-Gastrodon_WEST,inf[$FS_Gastrodon],inf[$FS_Gastrodon],,
+Cherrim_Overcast,,,inf,inf
+Shellos_West Sea,,,inf,
+Shellos_East Sea,,,,inf
+Gastrodon_West Sea,inf[$FS_Gastrodon],inf[$FS_Gastrodon],,
 Drifloon,inf,inf,inf,inf
 Drifblim,inf[$FS_Drifblim],inf[$FS_Drifblim],,
 Buneary,,,inf,inf
@@ -314,7 +341,7 @@ Dialga,,,,"1[Uxie,Mesprit,Azelf]"
 Palkia,,,"1[Uxie,Mesprit,Azelf]",
 Heatran,,,1,1
 Regigigas,,,"1[Regirock,Regice,Registeel]","1[Regirock,Regice,Registeel]"
-Giratina,,,"1[Dialga,Palkia]","1[Dialga,Palkia]"
+Giratina_Altered,,,"1[Dialga,Palkia]","1[Dialga,Palkia]"
 Cresselia,,,1,1
 Watchog,inf,inf,,
 Lillipup,inf[$FS_Lillipup],inf[$FS_Lillipup],inf,inf
@@ -343,9 +370,11 @@ Venipede,inf,inf,,
 Whirlipede,inf[$FS_Whirlipede],inf[$FS_Whirlipede],,
 Cottonee,,,inf,inf
 Petilil,inf[$FS_Petilil],inf[$FS_Petilil],inf,inf
-Basculin_BLUE,inf,inf,,
+Basculin_Red-Striped,inf,inf,,
+Basculin_Blue-Striped,inf,inf,,
 Sandile,inf,inf,inf,inf
 Darmanitan,,,inf,inf
+Darmanitan_ZENMODE,,,inf,inf
 Maractus,inf[$FS_Maractus],inf[$FS_Maractus],inf,inf
 Dwebble,inf,inf,inf,inf
 Crustle,,,inf,inf
@@ -364,8 +393,8 @@ Duosion,inf[$FS_Duosion],inf[$FS_Duosion],,
 Ducklett,inf,inf,,
 Swanna,inf[$FS_Swanna],inf[$FS_Swanna],,
 Vanillite,inf,inf,,
-Deerling,,,inf,inf
-Sawsbuck,inf[$FS_Sawsbuck],inf[$FS_Sawsbuck],,
+Deerling_Spring,,,inf,inf
+Sawsbuck_Spring,inf[$FS_Sawsbuck],inf[$FS_Sawsbuck],,
 Emolga,inf,inf,,
 Karrablast,inf,inf,,
 Foongus,inf,inf,,
@@ -406,11 +435,11 @@ Larvesta,inf[$FS_Larvesta],inf[$FS_Larvesta],inf,inf
 Cobalion,,,1,1
 Terrakion,,,1,1
 Virizion,,,1,1
-Tornadus,,,1[Castform],
-Thundurus,,,,1[Castform]
+Tornadus_Incarnate,,,1[Castform],
+Thundurus_Incarnate,,,,1[Castform]
 Reshiram,,,1,
 Zekrom,,,,1
-Landorus,,,"1[Tornadus,Thundurus]","1[Tornadus,Thundurus]"
+Landorus_Incarnate,,,"1[Tornadus_Incarnate,Thundurus_Incarnate]","1[Tornadus_Incarnate,Thundurus_Incarnate]"
 Kyurem,,,"1[Reshiram,Zekrom]","1[Reshiram,Zekrom]"
 Quilladin,inf[$FS_Quilladin],inf[$FS_Quilladin],,
 Braixen,inf[$FS_Braixen],inf[$FS_Braixen],,
@@ -419,19 +448,70 @@ Bunnelby,inf,inf,,
 Diggersby,inf,inf,,
 Fletchling,inf,inf,,
 Fletchinder,inf[$FS_Fletchinder],inf[$FS_Fletchinder],,
-Scatterbug,inf,inf,,
-Spewpa,inf,inf,,
-Vivillon,inf[$FS_Vivillon],inf[$FS_Vivillon],,
+Scatterbug_ARCHIPELAGO,inf[$LOC_ARCHIPELAGO],inf[$LOC_ARCHIPELAGO],,
+Scatterbug_CONTINENTAL,inf[$LOC_CONTINENTAL],inf[$LOC_CONTINENTAL],,
+Scatterbug_ELEGANT,inf[$LOC_ELEGANT],inf[$LOC_ELEGANT],,
+Scatterbug_GARDEN,inf[$LOC_GARDEN],inf[$LOC_GARDEN],,
+Scatterbug_HIGHPLAINS,inf[$LOC_HIGHPLAINS],inf[$LOC_HIGHPLAINS],,
+Scatterbug_ICYSNOW,inf[$LOC_ICYSNOW],inf[$LOC_ICYSNOW],,
+Scatterbug_JUNGLE,inf[$LOC_JUNGLE],inf[$LOC_JUNGLE],,
+Scatterbug_MARINE,inf[$LOC_MARINE],inf[$LOC_MARINE],,
+Scatterbug_MEADOW,inf[$LOC_MEADOW],inf[$LOC_MEADOW],,
+Scatterbug_MODERN,inf[$LOC_MODERN],inf[$LOC_MODERN],,
+Scatterbug_MONSOON,inf[$LOC_MONSOON],inf[$LOC_MONSOON],,
+Scatterbug_OCEAN,inf[$LOC_OCEAN],inf[$LOC_OCEAN],,
+Scatterbug_POLAR,inf[$LOC_POLAR],inf[$LOC_POLAR],,
+Scatterbug_RIVER,inf[$LOC_RIVER],inf[$LOC_RIVER],,
+Scatterbug_SANDSTORM,inf[$LOC_SANDSTORM],inf[$LOC_SANDSTORM],,
+Scatterbug_SAVANNA,inf[$LOC_SAVANNA],inf[$LOC_SAVANNA],,
+Scatterbug_SUN,inf[$LOC_SUN],inf[$LOC_SUN],,
+Scatterbug_TUNDRA,inf[$LOC_TUNDRA],inf[$LOC_TUNDRA],,
+Spewpa_ARCHIPELAGO,inf[$LOC_ARCHIPELAGO],inf[$LOC_ARCHIPELAGO],,
+Spewpa_CONTINENTAL,inf[$LOC_CONTINENTAL],inf[$LOC_CONTINENTAL],,
+Spewpa_ELEGANT,inf[$LOC_ELEGANT],inf[$LOC_ELEGANT],,
+Spewpa_GARDEN,inf[$LOC_GARDEN],inf[$LOC_GARDEN],,
+Spewpa_HIGHPLAINS,inf[$LOC_HIGHPLAINS],inf[$LOC_HIGHPLAINS],,
+Spewpa_ICYSNOW,inf[$LOC_ICYSNOW],inf[$LOC_ICYSNOW],,
+Spewpa_JUNGLE,inf[$LOC_JUNGLE],inf[$LOC_JUNGLE],,
+Spewpa_MARINE,inf[$LOC_MARINE],inf[$LOC_MARINE],,
+Spewpa_MEADOW,inf[$LOC_MEADOW],inf[$LOC_MEADOW],,
+Spewpa_MODERN,inf[$LOC_MODERN],inf[$LOC_MODERN],,
+Spewpa_MONSOON,inf[$LOC_MONSOON],inf[$LOC_MONSOON],,
+Spewpa_OCEAN,inf[$LOC_OCEAN],inf[$LOC_OCEAN],,
+Spewpa_POLAR,inf[$LOC_POLAR],inf[$LOC_POLAR],,
+Spewpa_RIVER,inf[$LOC_RIVER],inf[$LOC_RIVER],,
+Spewpa_SANDSTORM,inf[$LOC_SANDSTORM],inf[$LOC_SANDSTORM],,
+Spewpa_SAVANNA,inf[$LOC_SAVANNA],inf[$LOC_SAVANNA],,
+Spewpa_SUN,inf[$LOC_SUN],inf[$LOC_SUN],,
+Spewpa_TUNDRA,inf[$LOC_TUNDRA],inf[$LOC_TUNDRA],,
+Vivillon_Archipelago,"inf[$FS_Vivillon,$LOC_ARCHIPELAGO]","inf[$FS_Vivillon,$LOC_ARCHIPELAGO]",,
+Vivillon_Continental,"inf[$FS_Vivillon,$LOC_CONTINENTAL]","inf[$FS_Vivillon,$LOC_CONTINENTAL]",,
+Vivillon_Elegant,"inf[$FS_Vivillon,$LOC_ELEGANT]","inf[$FS_Vivillon,$LOC_ELEGANT]",,
+Vivillon_Garden,"inf[$FS_Vivillon,$LOC_GARDEN]","inf[$FS_Vivillon,$LOC_GARDEN]",,
+Vivillon_High Plains,"inf[$FS_Vivillon,$LOC_HIGHPLAINS]","inf[$FS_Vivillon,$LOC_HIGHPLAINS]",,
+Vivillon_Icy Snow,"inf[$FS_Vivillon,$LOC_ICYSNOW]","inf[$FS_Vivillon,$LOC_ICYSNOW]",,
+Vivillon_Jungle,"inf[$FS_Vivillon,$LOC_JUNGLE]","inf[$FS_Vivillon,$LOC_JUNGLE]",,
+Vivillon_Marine,"inf[$FS_Vivillon,$LOC_MARINE]","inf[$FS_Vivillon,$LOC_MARINE]",,
+Vivillon_Meadow,"inf[$FS_Vivillon,$LOC_MEADOW]","inf[$FS_Vivillon,$LOC_MEADOW]",,
+Vivillon_Modern,"inf[$FS_Vivillon,$LOC_MODERN]","inf[$FS_Vivillon,$LOC_MODERN]",,
+Vivillon_Monsoon,"inf[$FS_Vivillon,$LOC_MONSOON]","inf[$FS_Vivillon,$LOC_MONSOON]",,
+Vivillon_Ocean,"inf[$FS_Vivillon,$LOC_OCEAN]","inf[$FS_Vivillon,$LOC_OCEAN]",,
+Vivillon_Polar,"inf[$FS_Vivillon,$LOC_POLAR]","inf[$FS_Vivillon,$LOC_POLAR]",,
+Vivillon_River,"inf[$FS_Vivillon,$LOC_RIVER]","inf[$FS_Vivillon,$LOC_RIVER]",,
+Vivillon_Sandstorm,"inf[$FS_Vivillon,$LOC_SANDSTORM]","inf[$FS_Vivillon,$LOC_SANDSTORM]",,
+Vivillon_Savanna,"inf[$FS_Vivillon,$LOC_SAVANNA]","inf[$FS_Vivillon,$LOC_SAVANNA]",,
+Vivillon_Sun,"inf[$FS_Vivillon,$LOC_SUN]","inf[$FS_Vivillon,$LOC_SUN]",,
+Vivillon_Tundra,"inf[$FS_Vivillon,$LOC_TUNDRA]","inf[$FS_Vivillon,$LOC_TUNDRA]",,
 Litleo,inf,inf,,
 Pyroar,inf[$FS_Pyroar],inf[$FS_Pyroar],,
-Flabébé_RED,inf,inf,,
-Flabébé_YELLOW,inf,inf,,
-Flabébé_ORANGE,inf,inf,,
-Flabébé_BLUE,inf,inf,,
-Flabébé_WHITE,inf,inf,,
-Floette_RED,inf[$FS_Floette_RED],inf[$FS_Floette_RED],,
-Floette_YELLOW,inf[$FS_Floette_YELLOW],inf[$FS_Floette_YELLOW],,
-Floette_BLUE,inf[$FS_FAIRY_BLUE],inf[$FS_Floette_BLUE],,
+Flabébé_Red,inf,inf,,
+Flabébé_Yellow,inf,inf,,
+Flabébé_Orange,inf,inf,,
+Flabébé_Blue,inf,inf,,
+Flabébé_White,inf,inf,,
+Floette_Red,inf[$FS_Floette_Red],inf[$FS_Floette_Red],,
+Floette_Yellow,inf[$FS_Floette_Yellow],inf[$FS_Floette_Yellow],,
+Floette_Blue,inf[$FS_FAIRY_Blue],inf[$FS_Floette_Blue],,
 Skiddo,inf,inf,,
 Gogoat,inf[$FS_Gogoat],inf[$FS_Gogoat],,
 Pancham,inf,inf,,
@@ -456,33 +536,71 @@ Sliggoo,inf,inf,,
 Klefki,inf,inf,inf,inf
 Phantump,inf,inf,inf,inf
 Trevenant,inf,inf,,
-Pumpkaboo_SMALL,inf,inf,,
-Pumpkaboo_AVERAGE,inf,inf,,
-Pumpkaboo_LARGE,inf,inf,,
-Pumpkaboo_SUPER,inf,inf,,
+Pumpkaboo_Small,inf,inf,,
+Pumpkaboo_Average,inf,inf,,
+Pumpkaboo_Large,inf,inf,,
+Pumpkaboo_Super,inf,inf,,
 Bergmite,inf,inf,,
 Noibat,inf,inf,,
 Xerneas,1,,,
 Yveltal,,1,,
-Zygarde,1,1,,
+Zygarde_50%,1,1,,
+Abomasite,,,1,1
+Absolite,,,1,1
+Aerodactylite,,,1,1
+Aggronite,,,1,1
+Alakazite,1,1,1,1
+Ampharosite,,,1,1
 Armor Fossil,inf,inf,inf,
+Banettite,1,1,1,1
+Beedrillite,,,1,1
+Blastoisinite,,,1,1
+Blazikenite,,,1,1
+Charizardite X,,,1,1
+Charizardite Y,,,1,1
 Claw Fossil,inf,,,
 Cover Fossil,inf,inf,,inf
 Dawn Stone,1,1,1,1
 Deep Sea Scale,1,1,inf,inf
 Deep Sea Tooth,1,1,inf,inf
+DNA Splicers,,,1,1
 Dome Fossil,,inf,inf,
+Draco Plate,1,1,1,1
 Dragon Scale,1,1,1,1
+Dread Plate,1,1,1,1
 Dusk Stone,2,2,,
+Earth Plate,1,1,1,1
 Everstone,,,1,1
 Fire Stone,inf,inf,1,1
+Fist Plate,1,1,1,1
+Flame Plate,1,1,1,1
+Garchompite,1,1,,
+Gengarite,,,1,1
+Griseous Orb,1,1,1,1
+Gyaradosite,1,1,,
 Helix Fossil,,inf,,inf
+Heracronite,,1,1,1
+Houndoominite,,1,1,1
+Icicle Plate,1,1,1,1
+Insect Plate,1,1,1,1
+Iron Plate,1,1,,
+Kangaskhanite,1,1,1,1
 Lax Incense,,1,1
 Leaf Stone,inf,inf,1,1
+Lopunnite,,,1,1
+Manectite,1,,1,1
+Mawilite,1,1,1,1
+Medichamite,1,1,1,1
 Metal Coat,1,1,1,1
+Mewtwonite X,1,,1,1
+Mewtwonite Y,,1,1,1
+Mind Plate,1,1,1,1
+Meadow Plate,1,1,1,1
 Moon Stone,2,2,1,1
 Old Amber,inf,inf,inf,inf
 Oval Stone,inf,inf,,
+Pinsirite,1,,1,1
+Pixie Plate,1,1,1,1
 Plume Fossil,inf,inf,inf,
 Prism Scale,inf,inf,,
 Protector,1,1,,
@@ -490,11 +608,25 @@ Razor Claw,,,inf,inf
 Razor Fang,,,inf,inf
 Reaper Cloth,1,1,,
 Root Fossil,inf,,,
+Sablenite,,,1,1
 Sachet,1,1,,
+Sceptilite,,,1,1
+Scizorite,1,1,1,1
 Sea Incense,,,1,1
 Shiny Stone,1,1,1,1
 Skull Fossil,inf,inf,,inf
+Sky Plate,1,1,1,1
+Slowbronite,,,1,1
+Splash Plate,1,1,1,1
+Spooky Plate,1,1,1,1
+Steelixite,,,1,1
+Stone Plate,1,1,1,1
 Sun Stone,2,2,,
+Swampertite,,,1,1
 Thunder Stone,2,2,1,1
+Toxic Plate,1,1,1,1
+Tyranitarite,1,,1,1
+Venusaurite,,,1,1
 Water Stone,2,2,,
 Whipped Dream,1,1,,
+Zap Plate,1,1,1,1

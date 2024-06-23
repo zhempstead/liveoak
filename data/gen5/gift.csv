@@ -3,6 +3,7 @@ CORE,$BOY;$GIRL
 CORE,Cover Fossil;Plume Fossil
 CORE,Magikarp,
 CORE,Prism Scale,
+CORE,Gracidea,Shaymin_Land_FATEFUL
 "BLACK,WHITE","Snivy,Panpour;Tepig,Pansage;Oshawott,Pansear",
 "BLACK,WHITE",Zorua_MALE,Celebi_FATEFUL
 "BLACK,WHITE",$SHINY_BEAST,Raikou_FATEFUL_SHINY
@@ -20,12 +21,18 @@ CORE,Prism Scale,
 "BLACK,WHITE",$OT_10,WHITE2
 "BLACK,WHITE",Everstone,$OT_10
 "BLACK,WHITE",Fire Stone;Leaf Stone;Water Stone,
+"BLACK,WHITE",Griseous Orb,
 "BLACK,WHITE",Thunder Stone,
+"BLACK,BLACK2",Shock Drive,Genesect
+"BLACK,BLACK2",Burn Drive,Genesect
+"WHITE,WHITE2",Chill Drive,Genesect
+"WHITE,WHITE2",Douse Drive,Genesect
 "BLACK2,WHITE2",Snivy;Tepig;Oshawott,
-"BLACK2,WHITE2",Deerling,
+"BLACK2,WHITE2",Deerling_Spring;Deerling_Summer;Deerling_Autumn;Deerling_Winter,
 "BLACK2,WHITE2",Eevee_MALE,
 "BLACK2,WHITE2",Happiny,
 "BLACK2,WHITE2",Zorua_MALE,
 "BLACK2,WHITE2",Everstone,
+"BLACK2,WHITE2",Reveal Glass,Landorus_Therian
 BLACK2,Gible,
 WHITE2,Dratini,
