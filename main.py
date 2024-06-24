@@ -1576,9 +1576,9 @@ def main(args: argparse.Namespace):
         if args.all_present:
             result.print_all_present()
         elif args.compact:
-            result.print_compact()
+            result.print_compact(not args.missing, not args.full)
         else:
-            result.print(obtainable=(not args.missing), skip_identical=(not args.full))
+            result.print(not args.missing, not args.full)
 
 
 def calc_dexes(games: list[tuple[Game, str, Hardware | None]], hardware: set[Hardware], mode: str, flatten=False) -> tuple[CollectionSaves, Result]:
@@ -1601,4 +1601,15 @@ if __name__ == '__main__':
     parser.add_argument('--missing', '-m', action='store_true')
     parser.add_argument('--mode', choices=["species", "form"], default="species")
     args = parser.parse_args()
+
+    if args.full and args.all_present:
+        raise ValueError("--full and --all-present are incompatible")
+    if args.all_present and args.compact:
+        raise ValueError("--all-present and --compact are incompatible")
+    if args.all_present and args.version_exclusive:
+        raise ValueError("--all-present and --version-exclusive are incompatible")
+    if args.all_present and args.missing:
+        raise ValueError("--all-present and --missing are incompatible")
+    if args.compact and args.version_exclusive:
+        raise ValueError("--compact and --version_exclusive are incompatible")
     main(args)

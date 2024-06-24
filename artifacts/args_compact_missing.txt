@@ -1,0 +1,16 @@
+0001. Bulbasaur  / 0001. Bulbasaur / 0004. Charmander | 0013. Weedle    
+0002. Ivysaur    / 0002. Ivysaur   / 0005. Charmeleon | 0014. Kakuna    
+0003. Venusaur   / 0003. Venusaur  / 0006. Charizard  | 0015. Beedrill  
+0004. Charmander / 0007. Squirtle  / 0007. Squirtle   | 0023. Ekans     
+0005. Charmeleon / 0008. Wartortle / 0008. Wartortle  | 0024. Arbok     
+0006. Charizard  / 0009. Blastoise / 0009. Blastoise  | 0026. Raichu    
+0027. Sandshrew                                       | 0109. Koffing   
+0028. Sandslash                                       | 0110. Weezing   
+0037. Vulpix                                          | 0124. Jynx      
+0038. Ninetales                                       | 0125. Electabuzz
+0068. Machamp                                         |                 
+0069. Bellsprout                                      |                 
+0070. Weepinbell                                      |                 
+0071. Victreebel                                      |                 
+0127. Pinsir                                          |                 
+124                                                   | 129             

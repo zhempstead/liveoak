@@ -1,0 +1,40 @@
+0001. Bulbasaur  / 0001. Bulbasaur / 0004. Charmander |                                                
+0002. Ivysaur    / 0002. Ivysaur   / 0005. Charmeleon |                                                
+0003. Venusaur   / 0003. Venusaur  / 0006. Charizard  |                                                
+0004. Charmander / 0007. Squirtle  / 0007. Squirtle   |                                                
+0005. Charmeleon / 0008. Wartortle / 0008. Wartortle  |                                                
+0006. Charizard  / 0009. Blastoise / 0009. Blastoise  |                                                
+------------------------------------------------------|------------------------------------------------
+                                                      | 0013. Weedle                                   
+                                                      | 0014. Kakuna                                   
+                                                      | 0015. Beedrill                                 
+0027. Sandshrew                                       | 0023. Ekans                                    
+0028. Sandslash                                       | 0024. Arbok                                    
+                                                      | 0026. Raichu                                   
+0037. Vulpix                                          |                                                
+0038. Ninetales                                       |                                                
+0052. Meowth                                          | 0052. Meowth                                   
+0053. Persian                                         | 0053. Persian                                  
+0065. Alakazam                                        | 0065. Alakazam                                 
+0068. Machamp                                         |                                                
+0069. Bellsprout                                      |                                                
+0070. Weepinbell                                      |                                                
+0071. Victreebel                                      |                                                
+0076. Golem                                           | 0076. Golem                                    
+0094. Gengar                                          | 0094. Gengar                                   
+0106. Hitmonlee / 0107. Hitmonchan                    | 0106. Hitmonlee / 0107. Hitmonchan             
+                                                      | 0109. Koffing                                  
+                                                      | 0110. Weezing                                  
+                                                      | 0124. Jynx                                     
+0127. Pinsir                                          | 0125. Electabuzz                               
+0126. Magmar                                          | 0126. Magmar                                   
+------------------------------------------------------|------------------------------------------------
+0134. Vaporeon / 0134. Vaporeon / 0135. Jolteon       | 0134. Vaporeon / 0134. Vaporeon / 0135. Jolteon
+0135. Jolteon  / 0136. Flareon  / 0136. Flareon       | 0135. Jolteon  / 0136. Flareon  / 0136. Flareon
+------------------------------------------------------|------------------------------------------------
+0138. Omanyte / 0140. Kabuto                          | 0138. Omanyte / 0140. Kabuto                   
+0139. Omastar / 0141. Kabutops                        | 0139. Omastar / 0141. Kabutops                 
+------------------------------------------------------|------------------------------------------------
+0151. Mew                                             | 0151. Mew                                      
+------------------------------------------------------|------------------------------------------------
+124                                                   | 129                                            

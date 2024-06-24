@@ -1,0 +1,11 @@
+0013. Weedle     | 0027. Sandshrew 
+0014. Kakuna     | 0028. Sandslash 
+0015. Beedrill   | 0037. Vulpix    
+0023. Ekans      | 0038. Ninetales 
+0024. Arbok      | 0068. Machamp   
+0026. Raichu     | 0069. Bellsprout
+0109. Koffing    | 0070. Weepinbell
+0110. Weezing    | 0071. Victreebel
+0124. Jynx       | 0127. Pinsir    
+0125. Electabuzz |                 
+135              | 134             

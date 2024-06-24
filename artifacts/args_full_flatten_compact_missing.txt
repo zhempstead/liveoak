@@ -1,0 +1,18 @@
+0027. Sandshrew  | 0013. Weedle    
+0028. Sandslash  | 0014. Kakuna    
+0037. Vulpix     | 0015. Beedrill  
+0038. Ninetales  | 0023. Ekans     
+0052. Meowth     | 0024. Arbok     
+0053. Persian    | 0026. Raichu    
+0065. Alakazam   | 0052. Meowth    
+0068. Machamp    | 0053. Persian   
+0069. Bellsprout | 0065. Alakazam  
+0070. Weepinbell | 0076. Golem     
+0071. Victreebel | 0094. Gengar    
+0076. Golem      | 0109. Koffing   
+0094. Gengar     | 0110. Weezing   
+0126. Magmar     | 0124. Jynx      
+0127. Pinsir     | 0125. Electabuzz
+0151. Mew        | 0126. Magmar    
+                 | 0151. Mew       
+135              | 134             

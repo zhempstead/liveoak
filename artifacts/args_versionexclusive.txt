@@ -1,0 +1,28 @@
+0001. Bulbasaur / 0004. Charmander / 0007. Squirtle  | 0001. Bulbasaur 
+0002. Ivysaur   / 0005. Charmeleon / 0008. Wartortle | 0002. Ivysaur   
+0003. Venusaur  / 0006. Charizard  / 0009. Blastoise | 0003. Venusaur  
+                                                     | 0004. Charmander
+                                                     | 0005. Charmeleon
+                                                     | 0006. Charizard 
+                                                     | 0007. Squirtle  
+                                                     | 0008. Wartortle 
+                                                     | 0009. Blastoise 
+-----------------------------------------------------|-----------------
+0013. Weedle                                         |                 
+0014. Kakuna                                         |                 
+0015. Beedrill                                       |                 
+0023. Ekans                                          | 0027. Sandshrew 
+0024. Arbok                                          | 0028. Sandslash 
+0026. Raichu                                         |                 
+                                                     | 0037. Vulpix    
+                                                     | 0038. Ninetales 
+                                                     | 0068. Machamp   
+                                                     | 0069. Bellsprout
+                                                     | 0070. Weepinbell
+                                                     | 0071. Victreebel
+0109. Koffing                                        |                 
+0110. Weezing                                        |                 
+0124. Jynx                                           |                 
+0125. Electabuzz                                     | 0127. Pinsir    
+-----------------------------------------------------|-----------------
+124                                                  | 129             

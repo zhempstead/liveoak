@@ -2,6 +2,7 @@
 
 from itertools import zip_longest
 from pathlib import Path
+from tkinter import W
 from typing import Iterable
 
 import pandas as pd
@@ -96,12 +97,12 @@ class MultiResult():
         lines.append([str(r.count()) for r in self.results])
         self._print_lines(lines)
 
-    # TODO: fix - this prints all rows
-    def print_compact(self, obtainable=True):
+    def print_compact(self, obtainable=True, skip_identical=True):
+        skip = self.all_present | self.all_missing
         if obtainable:
-            lines = [r._lines(r.present, r.order()) for r in self.results]
+            lines = [r._lines(r.present, [p for p in r.order() if p not in skip or not skip_identical]) for r in self.results]
         else:
-            lines = [r._lines(r.missing, r.order()) for r in self.results]
+            lines = [r._lines(r.missing, [p for p in r.order() if p not in skip or not skip_identical]) for r in self.results]
         lines_filled: list[tuple[str, ...]] = list(zip_longest(*lines, fillvalue=''))
         lines_filled.append(tuple(str(r.count()) for r in self.results))
         self._print_lines(lines_filled)

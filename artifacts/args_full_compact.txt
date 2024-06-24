@@ -1,0 +1,130 @@
+0001. Bulbasaur / 0004. Charmander / 0007. Squirtle  | 0001. Bulbasaur                               
+0002. Ivysaur   / 0005. Charmeleon / 0008. Wartortle | 0002. Ivysaur                                 
+0003. Venusaur  / 0006. Charizard  / 0009. Blastoise | 0003. Venusaur                                
+0010. Caterpie                                       | 0004. Charmander                              
+0011. Metapod                                        | 0005. Charmeleon                              
+0012. Butterfree                                     | 0006. Charizard                               
+0013. Weedle                                         | 0007. Squirtle                                
+0014. Kakuna                                         | 0008. Wartortle                               
+0015. Beedrill                                       | 0009. Blastoise                               
+0016. Pidgey                                         | 0010. Caterpie                                
+0017. Pidgeotto                                      | 0011. Metapod                                 
+0018. Pidgeot                                        | 0012. Butterfree                              
+0019. Rattata                                        | 0016. Pidgey                                  
+0020. Raticate                                       | 0017. Pidgeotto                               
+0021. Spearow                                        | 0018. Pidgeot                                 
+0022. Fearow                                         | 0019. Rattata                                 
+0023. Ekans                                          | 0020. Raticate                                
+0024. Arbok                                          | 0021. Spearow                                 
+0025. Pikachu                                        | 0022. Fearow                                  
+0026. Raichu                                         | 0025. Pikachu                                 
+0029. Nidoran♀                                       | 0027. Sandshrew                               
+0030. Nidorina                                       | 0028. Sandslash                               
+0031. Nidoqueen                                      | 0029. Nidoran♀                                
+0032. Nidoran♂                                       | 0030. Nidorina                                
+0033. Nidorino                                       | 0031. Nidoqueen                               
+0034. Nidoking                                       | 0032. Nidoran♂                                
+0035. Clefairy                                       | 0033. Nidorino                                
+0036. Clefable                                       | 0034. Nidoking                                
+0039. Jigglypuff                                     | 0035. Clefairy                                
+0040. Wigglytuff                                     | 0036. Clefable                                
+0041. Zubat                                          | 0037. Vulpix                                  
+0042. Golbat                                         | 0038. Ninetales                               
+0043. Oddish                                         | 0039. Jigglypuff                              
+0044. Gloom                                          | 0040. Wigglytuff                              
+0045. Vileplume                                      | 0041. Zubat                                   
+0046. Paras                                          | 0042. Golbat                                  
+0047. Parasect                                       | 0043. Oddish                                  
+0048. Venonat                                        | 0044. Gloom                                   
+0049. Venomoth                                       | 0045. Vileplume                               
+0050. Diglett                                        | 0046. Paras                                   
+0051. Dugtrio                                        | 0047. Parasect                                
+0054. Psyduck                                        | 0048. Venonat                                 
+0055. Golduck                                        | 0049. Venomoth                                
+0056. Mankey                                         | 0050. Diglett                                 
+0057. Primeape                                       | 0051. Dugtrio                                 
+0058. Growlithe                                      | 0054. Psyduck                                 
+0059. Arcanine                                       | 0055. Golduck                                 
+0060. Poliwag                                        | 0056. Mankey                                  
+0061. Poliwhirl                                      | 0057. Primeape                                
+0062. Poliwrath                                      | 0058. Growlithe                               
+0063. Abra                                           | 0059. Arcanine                                
+0064. Kadabra                                        | 0060. Poliwag                                 
+0066. Machop                                         | 0061. Poliwhirl                               
+0067. Machoke                                        | 0062. Poliwrath                               
+0072. Tentacool                                      | 0063. Abra                                    
+0073. Tentacruel                                     | 0064. Kadabra                                 
+0074. Geodude                                        | 0066. Machop                                  
+0075. Graveler                                       | 0067. Machoke                                 
+0077. Ponyta                                         | 0068. Machamp                                 
+0078. Rapidash                                       | 0069. Bellsprout                              
+0079. Slowpoke                                       | 0070. Weepinbell                              
+0080. Slowbro                                        | 0071. Victreebel                              
+0081. Magnemite                                      | 0072. Tentacool                               
+0082. Magneton                                       | 0073. Tentacruel                              
+0083. Farfetch'd                                     | 0074. Geodude                                 
+0084. Doduo                                          | 0075. Graveler                                
+0085. Dodrio                                         | 0077. Ponyta                                  
+0086. Seel                                           | 0078. Rapidash                                
+0087. Dewgong                                        | 0079. Slowpoke                                
+0088. Grimer                                         | 0080. Slowbro                                 
+0089. Muk                                            | 0081. Magnemite                               
+0090. Shellder                                       | 0082. Magneton                                
+0091. Cloyster                                       | 0083. Farfetch'd                              
+0092. Gastly                                         | 0084. Doduo                                   
+0093. Haunter                                        | 0085. Dodrio                                  
+0095. Onix                                           | 0086. Seel                                    
+0096. Drowzee                                        | 0087. Dewgong                                 
+0097. Hypno                                          | 0088. Grimer                                  
+0098. Krabby                                         | 0089. Muk                                     
+0099. Kingler                                        | 0090. Shellder                                
+0100. Voltorb                                        | 0091. Cloyster                                
+0101. Electrode                                      | 0092. Gastly                                  
+0102. Exeggcute                                      | 0093. Haunter                                 
+0103. Exeggutor                                      | 0095. Onix                                    
+0104. Cubone                                         | 0096. Drowzee                                 
+0105. Marowak                                        | 0097. Hypno                                   
+0106. Hitmonlee / 0107. Hitmonchan                   | 0098. Krabby                                  
+0108. Lickitung                                      | 0099. Kingler                                 
+0109. Koffing                                        | 0100. Voltorb                                 
+0110. Weezing                                        | 0101. Electrode                               
+0111. Rhyhorn                                        | 0102. Exeggcute                               
+0112. Rhydon                                         | 0103. Exeggutor                               
+0113. Chansey                                        | 0104. Cubone                                  
+0114. Tangela                                        | 0105. Marowak                                 
+0115. Kangaskhan                                     | 0106. Hitmonlee / 0107. Hitmonchan            
+0116. Horsea                                         | 0108. Lickitung                               
+0117. Seadra                                         | 0111. Rhyhorn                                 
+0118. Goldeen                                        | 0112. Rhydon                                  
+0119. Seaking                                        | 0113. Chansey                                 
+0120. Staryu                                         | 0114. Tangela                                 
+0121. Starmie                                        | 0115. Kangaskhan                              
+0122. Mr. Mime                                       | 0116. Horsea                                  
+0123. Scyther                                        | 0117. Seadra                                  
+0124. Jynx                                           | 0118. Goldeen                                 
+0125. Electabuzz                                     | 0119. Seaking                                 
+0128. Tauros                                         | 0120. Staryu                                  
+0129. Magikarp                                       | 0121. Starmie                                 
+0130. Gyarados                                       | 0122. Mr. Mime                                
+0131. Lapras                                         | 0123. Scyther                                 
+0132. Ditto                                          | 0127. Pinsir                                  
+0133. Eevee                                          | 0128. Tauros                                  
+0134. Vaporeon / 0135. Jolteon / 0136. Flareon       | 0129. Magikarp                                
+0137. Porygon                                        | 0130. Gyarados                                
+0138. Omanyte / 0140. Kabuto                         | 0131. Lapras                                  
+0139. Omastar / 0141. Kabutops                       | 0132. Ditto                                   
+0142. Aerodactyl                                     | 0133. Eevee                                   
+0143. Snorlax                                        | 0134. Vaporeon / 0135. Jolteon / 0136. Flareon
+0144. Articuno                                       | 0137. Porygon                                 
+0145. Zapdos                                         | 0138. Omanyte / 0140. Kabuto                  
+0146. Moltres                                        | 0139. Omastar / 0141. Kabutops                
+0147. Dratini                                        | 0142. Aerodactyl                              
+0148. Dragonair                                      | 0143. Snorlax                                 
+0149. Dragonite                                      | 0144. Articuno                                
+0150. Mewtwo                                         | 0145. Zapdos                                  
+                                                     | 0146. Moltres                                 
+                                                     | 0147. Dratini                                 
+                                                     | 0148. Dragonair                               
+                                                     | 0149. Dragonite                               
+                                                     | 0150. Mewtwo                                  
+124                                                  | 129                                           

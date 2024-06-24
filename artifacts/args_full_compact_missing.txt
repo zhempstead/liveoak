@@ -1,0 +1,28 @@
+0001. Bulbasaur  / 0001. Bulbasaur / 0004. Charmander | 0013. Weedle                                   
+0002. Ivysaur    / 0002. Ivysaur   / 0005. Charmeleon | 0014. Kakuna                                   
+0003. Venusaur   / 0003. Venusaur  / 0006. Charizard  | 0015. Beedrill                                 
+0004. Charmander / 0007. Squirtle  / 0007. Squirtle   | 0023. Ekans                                    
+0005. Charmeleon / 0008. Wartortle / 0008. Wartortle  | 0024. Arbok                                    
+0006. Charizard  / 0009. Blastoise / 0009. Blastoise  | 0026. Raichu                                   
+0027. Sandshrew                                       | 0052. Meowth                                   
+0028. Sandslash                                       | 0053. Persian                                  
+0037. Vulpix                                          | 0065. Alakazam                                 
+0038. Ninetales                                       | 0076. Golem                                    
+0052. Meowth                                          | 0094. Gengar                                   
+0053. Persian                                         | 0106. Hitmonlee / 0107. Hitmonchan             
+0065. Alakazam                                        | 0109. Koffing                                  
+0068. Machamp                                         | 0110. Weezing                                  
+0069. Bellsprout                                      | 0124. Jynx                                     
+0070. Weepinbell                                      | 0125. Electabuzz                               
+0071. Victreebel                                      | 0126. Magmar                                   
+0076. Golem                                           | 0134. Vaporeon / 0134. Vaporeon / 0135. Jolteon
+0094. Gengar                                          | 0135. Jolteon  / 0136. Flareon  / 0136. Flareon
+0106. Hitmonlee / 0107. Hitmonchan                    | 0138. Omanyte / 0140. Kabuto                   
+0126. Magmar                                          | 0139. Omastar / 0141. Kabutops                 
+0127. Pinsir                                          | 0151. Mew                                      
+0134. Vaporeon / 0134. Vaporeon / 0135. Jolteon       |                                                
+0135. Jolteon  / 0136. Flareon  / 0136. Flareon       |                                                
+0138. Omanyte / 0140. Kabuto                          |                                                
+0139. Omastar / 0141. Kabutops                        |                                                
+0151. Mew                                             |                                                
+124                                                   | 129                                            
