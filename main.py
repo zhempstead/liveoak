@@ -43,9 +43,10 @@ class Generation():
         self.games = set(GAMES.loc[GAMES.GENERATION == self.id, "GAMEID"])
 
         dex = pd.read_csv(self.dir / "dex.csv").fillna(False)
-        dex['POKEMON']: Series = dex.apply(lambda r: Pokemon(r.SPECIES, r.FORM, r.IDX), axis=1) # type: ignore
+        dex['FORM_IDX'] = dex.groupby('SPECIES').cumcount()
+        dex['POKEMON']: Series = dex.apply(lambda r: Pokemon(r.SPECIES, r.FORM, r.IDX, form_idx=r.FORM_IDX), axis=1) # type: ignore
         self.pokemon_list = dex.set_index('POKEMON', drop=True)
-        self.pokemon_list = self.pokemon_list.drop(['SPECIES', 'FORM', 'IDX'], axis=1)
+        self.pokemon_list = self.pokemon_list.drop(['SPECIES', 'FORM', 'IDX', 'FORM_IDX'], axis=1)
         self.pokemon_list.loc[self.pokemon_list.GENDER == False, 'GENDER'] = 'BOTH'
 
         self.items = pd.read_csv(self.dir / "item.csv").fillna(False).set_index("ITEM")
@@ -794,13 +795,14 @@ class CollectionSaves():
         rule_graph = RuleGraph.make(self._get_rules(), self._get_targets())
         rule_graph.explore()
         branches = rule_graph.try_branches_and_update()
-        branches = [{frozenset({de.species for de in b}) for b in branch} for branch in branches]
-        present = {k.species for k, v in rule_graph.acquired.items() if v}
+        branches = [{frozenset(entry.to_pokemon() for entry in choice) for choice in branch} for branch in branches]
+        present = {k.to_pokemon() for k, v in rule_graph.acquired.items() if v}
         if flatten:
             for branch in branches:
                 present = present.union(*branch)
             branches = []
-        return Result.new(idx2pokemon, present, branches)
+        all_records = {entry.to_pokemon() for entry in self._get_targets()}
+        return Result.new(all_records, present, branches)
 
     def _get_rules(self) -> list[tuple["Rule", float]]:
         rules = []
@@ -1541,7 +1543,7 @@ def main(args: argparse.Namespace):
     elif num_collections == 2:
         raise ValueError("Games/hardware before the first '.' are universal, so there should be 0 or 2+ instances of '.'")
     else:
-        collection_saves = []
+        collection_saves: list[CollectionSaves] = []
         results = []
         for idx in range(1, num_collections):
             games = all_games[idx] + all_games[0]
@@ -1553,7 +1555,24 @@ def main(args: argparse.Namespace):
         for cs in collection_saves:
             for pokemon in cs.pokemon_list.index:
                 pokemon2idx[pokemon.species] = pokemon.idx
-        result = MultiResult(results, pokemon2idx, args.version_exclusive)
+
+        ve_pairs: list[tuple[Pokemon, Pokemon]] = []
+        if args.version_exclusive:
+            ve_table = pd.read_csv(Path("data") / "version_exclusives.csv")
+            all_pokemon: set[Pokemon] = set.union(*(set(cs.pokemon_list.index) for cs in collection_saves)) # type: ignore
+            sf2pokemon = {(p.species, p.form): p for p in all_pokemon}
+            def parse_pokemon(pokemon_str: str) -> Pokemon | None:
+                split = pokemon_str.split('_')
+                species = split[0]
+                form = split[1] if len(split) > 1 else None
+                return sf2pokemon.get((species, form))
+            for _, row in ve_table.iterrows():
+                p1 = parse_pokemon(row.SPECIES1)
+                p2 = parse_pokemon(row.SPECIES2)
+                if p1 is not None and p2 is not None:
+                    ve_pairs.append((p1, p2))
+
+        result = MultiResult(results, ve_pairs)
         if args.all_present:
             result.print_all_present()
         elif args.compact:

@@ -13,13 +13,17 @@ class Pokemon():
     species: str
     form: str | None
     idx: int
+    form_idx: int
 
     def __post_init__(self):
         if self.form is not None and not self.form:
             object.__setattr__(self, 'form', None)
+    
+    def __lt__(self, other: "Pokemon") -> bool:
+        return (self.idx, self.form_idx) < (other.idx, other.form_idx)
 
     def __str__(self):
-        out = self.species
+        out = f"{self.idx:04}. {self.species}"
         if self.form is not None:
             out += f" ({self.form})"
         return out
@@ -113,6 +117,9 @@ class ChoiceEntry(Entry):
 class DexEntry(Entry):
     idx: int
     species: str
+    
+    def to_pokemon(self) -> Pokemon:
+        return Pokemon(self.species, None, self.idx, 0)
 
 @dataclass(frozen=True)
 class SpeciesDexEntry(DexEntry):
@@ -126,10 +133,14 @@ class SpeciesDexEntry(DexEntry):
 @dataclass(frozen=True)
 class FormDexEntry(DexEntry):
     form: str | None
+    form_idx: int
 
     @staticmethod
     def new(cart_id: str, pokemon: Pokemon):
-        return FormDexEntry(cart_id, pokemon.idx, pokemon.species, pokemon.form)
+        return FormDexEntry(cart_id, pokemon.idx, pokemon.species, pokemon.form, form_idx=pokemon.form_idx)
+
+    def to_pokemon(self) -> Pokemon:
+        return Pokemon(self.species, self.form, self.idx, self.form_idx)
 
     def __repr__(self):
         pokemon = self.species
@@ -137,9 +148,7 @@ class FormDexEntry(DexEntry):
             pokemon += f' ({self.form})'
         return f"FormDexEntry({self.cart_id}, {pokemon})"
 
-
 type Req = PokemonReq | Entry
-
 
 @dataclass(frozen=True)
 class Rule():

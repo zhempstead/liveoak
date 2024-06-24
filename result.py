@@ -2,102 +2,87 @@
 
 from itertools import zip_longest
 from pathlib import Path
+from typing import Iterable
 
 import pandas as pd
 
+from structs import Pokemon
+
 class MultiResult():
-    def __init__(self, results: list["Result"], pokemon2idx: dict[str, int], match_version_exclusives: bool):
+    def __init__(self, results: list["Result"], version_exclusive_pairs: list[tuple[Pokemon, Pokemon]] = []):
         self.results = results
-        self.max_idx = max([r.max_idx for r in results])
-        self.pokemon2idx = pokemon2idx
-        for result in self.results:
-            if result.max_idx == self.max_idx:
-                self.idx2pokemon = result.idx2pokemon
-                break
-        self.all_present = set()
-        self.all_missing = set()
-        for idx in range(1, self.max_idx + 1):
-            line = self.results[0].line(idx)
-            matches = True
-            for result in self.results[1:]:
-                if result.line(idx) != line:
-                    matches = False
-                    break
-            if matches:
+        self.all_pokemon: list[Pokemon] = sorted(set.union(*(set(r.all_pokemon) for r in self.results)))
+        self.all_present: set[Pokemon] = set()
+        self.all_missing: set[Pokemon] = set()
+        for pokemon in self.all_pokemon:
+            line = self.results[0].line(pokemon)
+            if all(result.line(pokemon) == line for result in self.results[1:]):
                 if line is None:
-                    self.all_missing.add(idx)
+                    self.all_missing.add(pokemon)
                 else:
-                    self.all_present.add(idx)
-
+                    self.all_present.add(pokemon)
         
-        self.version_exclusives = {}
-        if match_version_exclusives:
-            ve_table = pd.read_csv(Path("data") / "version_exclusives.csv")
-            for _, row in ve_table.iterrows():
-                idx1 = self.pokemon2idx.get(row.SPECIES1)
-                idx2 = self.pokemon2idx.get(row.SPECIES2)
-                if idx1 is None or idx2 is None:
-                    continue
-                present_patterns = set([(idx1 in r.present, idx2 in r.present) for r in self.results])
-                if (True, False) in present_patterns and (False, True) in present_patterns and (True, True) not in present_patterns:
-                    if idx1 not in self.version_exclusives:
-                        self.version_exclusives[idx1] = set()
-                    if idx2 not in self.version_exclusives:
-                        self.version_exclusives[idx2] = set()
-                    self.version_exclusives[idx1].add(idx2)
-                    self.version_exclusives[idx2].add(idx1)
-                
+        self.version_exclusives: dict[Pokemon, set[Pokemon]] = {}
+        for pokemon1, pokemon2 in version_exclusive_pairs:
+            if pokemon1 not in self.all_pokemon or pokemon2 not in self.all_pokemon:
+                continue
+            present_patterns = {(pokemon1 in r.present, pokemon2 in r.present) for r in self.results}
+            if (True, False) in present_patterns and (False, True) in present_patterns and (True, True) not in present_patterns:
+                if pokemon1 not in self.version_exclusives:
+                    self.version_exclusives[pokemon1] = set()
+                if pokemon2 not in self.version_exclusives:
+                    self.version_exclusives[pokemon2] = set()
+                self.version_exclusives[pokemon1].add(pokemon2)
+                self.version_exclusives[pokemon2].add(pokemon1)
 
-    def full_group(self, idx: int) -> set[int]:
-        processed: set[int] = set()
-        to_process = set([idx])
+    def full_group(self, pokemon: Pokemon) -> set[Pokemon]:
+        processed: set[Pokemon] = set()
+        to_process = {pokemon}
         while to_process:
-            idx = to_process.pop()
-            processed.add(idx)
-            ve_opposites = self.version_exclusives.get(idx)
+            pokemon = to_process.pop()
+            processed.add(pokemon)
+            ve_opposites = self.version_exclusives.get(pokemon)
             if ve_opposites is not None:
-                for opp_idx in ve_opposites:
-                    if opp_idx not in processed:
-                        to_process.add(opp_idx)
+                for opp_pokemon in ve_opposites:
+                    if opp_pokemon not in processed:
+                        to_process.add(opp_pokemon)
                 
             for result in self.results:
-                gidx = result.idx2gidx.get(idx)
-                if gidx is None:
+                group = result.pokemon2group.get(pokemon)
+                if group is None:
                     continue
-                for sub_idx in result.gidx2idxs[gidx]:
-                    if sub_idx not in processed:
-                        to_process.add(sub_idx)
+                for sub_result in result.group2pokes[group]:
+                    if sub_result not in processed:
+                        to_process.add(sub_result)
         return processed
 
 
-    def _group_lines(self, idxs: list[int], obtainable=True) -> list[tuple[str, ...]]:
+    def _group_lines(self, pokes: list[Pokemon], obtainable=True) -> list[tuple[str, ...]]:
         lines: list[list[str]] = []
-        idx_set = set(idxs)
+        pokemon_set = set(pokes)
         for r in self.results:
-            idxs_ordered = [o for o in r.order() if o in idx_set]
-            lines.append(r._lines(r.present if obtainable else r.missing, idxs_ordered))
-        #lines = [r._lines(r.present if obtainable else r.missing, idxs) for r in self.results]
-        #import pdb; pdb.set_trace()
+            pokes_ordered = [o for o in r.order() if o in pokemon_set]
+            lines.append(r._lines(r.present if obtainable else r.missing, pokes_ordered))
         return list(zip_longest(*lines, fillvalue=""))
 
 
     def print(self, obtainable=True, skip_identical=True):
         vline = ["-" for _ in self.results]
-        handled_idxs = set()
+        handled_pokes: set[Pokemon] = set()
         lines = []
-        for idx in range(1, self.max_idx + 1):
-            if idx in handled_idxs:
+        for pokemon in self.all_pokemon:
+            if pokemon in handled_pokes:
                 continue
-            if idx in self.all_missing and skip_identical:
+            if pokemon in self.all_missing and skip_identical:
                 continue
-            if idx in self.all_present and skip_identical:
+            if pokemon in self.all_present and skip_identical:
                 continue
             
-            sub_idxs = self.full_group(idx)
+            sub_pokes = self.full_group(pokemon)
             if skip_identical:
-                sub_idxs = sub_idxs.difference(self.all_missing).difference(self.all_present)
-            sub_idxs = sorted(sub_idxs)
-            group_lines = self._group_lines(sub_idxs, obtainable)
+                sub_pokes = sub_pokes.difference(self.all_missing).difference(self.all_present)
+            sub_pokes = sorted(sub_pokes)
+            group_lines = self._group_lines(sub_pokes, obtainable)
             if len(group_lines) > 1:
                 if lines and lines[-1] != vline:
                     lines.append(vline)
@@ -105,7 +90,7 @@ class MultiResult():
                 lines.append(vline)
             else:
                 lines += group_lines
-            handled_idxs = handled_idxs.union(sub_idxs)
+            handled_pokes = handled_pokes.union(sub_pokes)
         if lines and lines[-1] != vline:
             lines.append(vline)
         lines.append([str(r.count()) for r in self.results])
@@ -131,66 +116,67 @@ class MultiResult():
         lines = [('-|-' if l[0].startswith('--') else ' | ').join(l) for l in lines]
         print("\n".join(lines))
         
-
+type Row = list[Pokemon | None]
 class Result():
-    def __init__(self, present: dict[int, list[int]], missing: dict[int, list[int]], idx2gidx: dict[int, int], idx2pokemon: dict[int, str]):
+    def __init__(self, all_pokemon: list[Pokemon], present: dict[Pokemon, Row], missing: dict[Pokemon, Row], pokemon2group: dict[Pokemon, int]):
+        self.all_pokemon: list[Pokemon] = all_pokemon
         self.present = present
         self.missing = missing
-        self.idx2gidx = idx2gidx
-        self.idx2pokemon = idx2pokemon
-        self.max_idx = max(idx2pokemon.keys())
-        self.gidx2idxs: dict[int, set[int]] = {}
-        for idx, gidx in self.idx2gidx.items():
-            if gidx not in self.gidx2idxs:
-                self.gidx2idxs[gidx] = set()
-            self.gidx2idxs[gidx].add(idx)
+        self.pokemon2group = pokemon2group
+        self.max_idx = max(max(de.idx for de in present.keys()), max(de.idx for de in missing.keys()))
+        self.group2pokes: dict[int, set[Pokemon]] = {}
+        for pokemon, group_pokemon in self.pokemon2group.items():
+            if group_pokemon not in self.group2pokes:
+                self.group2pokes[group_pokemon] = set()
+            self.group2pokes[group_pokemon].add(pokemon)
 
     @staticmethod
-    def new(idx2pokemon: dict[int, str], present_set: set[str], branches: list[set[frozenset[str]]]):
-        pokemon2idx = {v: k for k, v in idx2pokemon.items()}
-        missing: dict[int, list[int]] = {}
-        idx2gidx: dict[int, int] = {}
-        present = {pokemon2idx[p]: [pokemon2idx[p]] for p in present_set}
+    def new(all_pokes: Iterable[Pokemon], present_set: set[Pokemon], branches: list[set[frozenset[Pokemon]]]) -> "Result":
+        present: dict[Pokemon, Row] = {p: [p] for p in present_set}
+        missing: dict[Pokemon, Row] = {}
+        pokemon2group: dict[Pokemon, int] = {}
         not_missing = set(present.keys())
         next_gidx = 0
         for branch in branches:
             # Replace species with idxs
-            branch = [sorted([pokemon2idx[p] for p in choice]) for choice in branch]
+            branch = [sorted(choice) for choice in branch]
             if len(branch) > 12:
                 branch = Result._curtail_branch_output(branch)
             branch = sorted(branch, key=lambda choice: (-len(choice), choice))
-            all_idxs = {idx for choice in branch for idx in choice}
-            not_missing = not_missing.union(all_idxs)
-            for b, p_or_m, add_gidx in [(branch, present, True), (Result._present2missing(branch), missing, False)]:
+            all_branch_pokes = {idx for choice in branch for idx in choice}
+            not_missing = not_missing.union(all_branch_pokes)
+            to_update: list[tuple[list[list[Pokemon]], dict[Pokemon, Row], bool]] = [(branch, present, True), (Result._present2missing(branch), missing, False)]
+            for b, p_or_m, add_gidx in to_update:
                 if add_gidx:
                     gidx = next_gidx
-                    for idx in all_idxs:
-                        idx2gidx[idx] = gidx
+                    for dex_pokemon in all_branch_pokes:
+                        pokemon2group[dex_pokemon] = gidx
                     next_gidx += 1
                 max_choice_len = len(b[0])
-                padded = [choice + [None]*(max_choice_len - len(choice)) for choice in b]
+                padded: list[Row] = [choice + [None]*(max_choice_len - len(choice)) for choice in b]
                 for pos in range(max_choice_len):
-                    pos_idxs = [choice[pos] for choice in padded]
-                    p_or_m[pos_idxs[0]] = pos_idxs
-        for idx in set(idx2pokemon.keys()).difference(not_missing):
-            missing[idx] = [idx]
+                    row: Row = [choice[pos] for choice in padded]
+                    assert(row[0] is not None)
+                    p_or_m[row[0]] = row
+        for pokemon in set(all_pokes) - not_missing:
+            missing[pokemon] = [pokemon]
 
-        return Result(present, missing, idx2gidx, idx2pokemon)
+        return Result(sorted(all_pokes), present, missing, pokemon2group)
 
     @staticmethod
-    def _curtail_branch_output(orig_branch: list[list[int]]) -> list[list[int]]:
+    def _curtail_branch_output(orig_branch: list[list[Pokemon]]) -> list[list[Pokemon]]:
         '''
         Reduce a large number of possibilities to a smaller set where
-        - every entry is in at least one branch
-        - every entry is *missing* from at least one branch
-        - the branch with the most entries is guaranteed to be present (if a tie, at least one will be)
+        - every pokemon is in at least one branch
+        - every pokemon is *missing* from at least one branch
+        - the branch with the most pokes is guaranteed to be present (if a tie, at least one will be)
         '''
         orig_branch = [choice.copy() for choice in orig_branch]
-        all_entries: frozenset[int] = frozenset.union(*[frozenset(choice) for choice in orig_branch])
-        not_present: frozenset[int] = all_entries.copy()
-        not_missing: frozenset[int] = all_entries.copy()
-        final_branch: list[list[int]] = []
-        branch = [(choice, set(choice), all_entries - set(choice)) for choice in orig_branch]
+        all_pokes: frozenset[Pokemon] = frozenset.union(*[frozenset(choice) for choice in orig_branch])
+        not_present: frozenset[Pokemon] = all_pokes.copy()
+        not_missing: frozenset[Pokemon] = all_pokes.copy()
+        final_branch: list[list[Pokemon]] = []
+        branch = [(choice, set(choice), all_pokes - set(choice)) for choice in orig_branch]
         while not_present or not_missing:
             # Pick the one with the most new species
             # If a tie, favor the one that avoids the most species that have been in every choice so far
@@ -206,7 +192,7 @@ class Result():
         return final_branch
 
     @staticmethod
-    def _present2missing(branch: list[list[int]]) -> list[list[int]]:
+    def _present2missing(branch: list[list[Pokemon]]) -> list[list[Pokemon]]:
         all_idxs = {idx for choice in branch for idx in choice}
         inverse_branch = sorted(
             [sorted(list(all_idxs.difference(choice))) for choice in branch],
@@ -214,67 +200,62 @@ class Result():
         )
         return inverse_branch
 
-    def obtainable_line(self, idx: int) -> str | None:
-        if idx not in self.present:
-            return None
-        return " / ".join([self.entry(i) for i in self.present[idx]])
-
-    def entry(self, idx: int) -> str:
-        if idx is None:
+    def out_str(self, pokemon: Pokemon | None) -> str:
+        if pokemon is None:
             return "-"
-        return f"{idx:04}. {self.idx2pokemon[idx]}"
+        return str(pokemon)
 
-    def line(self, idx: int) -> str | None:
-        sub_idxs = self.present.get(idx)
-        if not sub_idxs:
+    def line(self, pokemon: Pokemon) -> str | None:
+        pokes = self.present.get(pokemon)
+        if not pokes:
             return None
-        return " / ".join([self.entry(sub_idx) for sub_idx in sub_idxs])
+        return " / ".join([self.out_str(e) for e in pokes])
 
-    def _lines(self, source: dict[int, list[int]], idxs: list[int]) -> list[str]:
+    def _lines(self, source: dict[Pokemon, Row], pokes: list[Pokemon]) -> list[str]:
         group_widths: dict[int, list[int]] = {}
-        for idx in idxs:
-            gidx = self.idx2gidx.get(idx)
-            if gidx is None:
+        for pokemon in pokes:
+            group = self.pokemon2group.get(pokemon)
+            if group is None:
                 continue
-            sub_idxs = source.get(idx)
-            if not sub_idxs:
+            row = source.get(pokemon)
+            if not row:
                 continue
-            lengths = [len(self.entry(sub_idx)) if sub_idx else 0 for sub_idx in sub_idxs]
+            lengths = [len(str(e)) if e else 0 for e in row]
 
-            if gidx in group_widths:
+            if group in group_widths:
                 for j in range(len(lengths)):
-                    group_widths[gidx][j] = max(group_widths[gidx][j], lengths[j])
+                    group_widths[group][j] = max(group_widths[group][j], lengths[j])
             else:
-                group_widths[gidx] = lengths
+                group_widths[group] = lengths
 
         out: list[str] = []
-        for idx in idxs:
-            gidx = self.idx2gidx.get(idx)
-            if gidx is None:
-                if idx in source:
-                    out.append(self.entry(idx))
+        for pokemon in pokes:
+            group = self.pokemon2group.get(pokemon)
+            if group is None:
+                if pokemon in source:
+                    out.append(str(pokemon))
                 continue
-            sub_idxs = source.get(idx)
-            if not sub_idxs:
+            row = source.get(pokemon)
+            if not row:
                 continue
-            line = zip([self.entry(sub_idx) for sub_idx in sub_idxs], group_widths[gidx])
+            line = zip([self.out_str(e) for e in row], group_widths[group])
             line = [text + " "*(w - len(text)) for text, w in line]
             out.append(" / ".join(line))
 
         return out
 
-    def order(self) -> list[int]:
-        handled_groups = set()
-        order = []
-        for idx in range(1, self.max_idx + 1):
-            gidx = self.idx2gidx.get(idx)
-            if gidx is None:
-                order.append(idx)
+    def order(self) -> list[Pokemon]:
+        handled_groups: set[int] = set()
+        order: list[Pokemon] = []
+        for pokemon in self.all_pokemon:
+            group = self.pokemon2group.get(pokemon)
+            if group is None:
+                order.append(pokemon)
                 continue
-            if gidx in handled_groups:
+            if group in handled_groups:
                 continue
-            order += sorted(self.gidx2idxs[gidx])
-            handled_groups.add(gidx)
+            order += sorted(self.group2pokes[group])
+            handled_groups.add(group)
         return order
 
     def print_obtainable(self):
