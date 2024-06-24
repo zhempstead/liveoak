@@ -1,0 +1,31 @@
+GAME,REQUIRED,FORM
+CORE,Castform,Castform_Sunny
+CORE,Castform,Castform_Rainy
+CORE,Castform,Castform_Snowy
+CORE,Cherrim_Overcast,Cherrim_Sunshine
+CORE,"Giratina_Altered,Griseous Orb",Giratina_Origin
+CORE,"Shaymin_Land,Gracidea",Shaymin_Sky
+CORE,"Arceus,Insect Plate",Arceus_Bug
+CORE,"Arceus,Dread Plate",Arceus_Dark
+CORE,"Arceus,Draco Plate",Arceus_Dragon
+CORE,"Arceus,Zap Plate",Arceus_Electric
+CORE,"Arceus,Fist Plate",Arceus_Fighting
+CORE,"Arceus,Flame Plate",Arceus_Fire
+CORE,"Arceus,Sky Plate",Arceus_Flying
+CORE,"Arceus,Spooky Plate",Arceus_Ghost
+CORE,"Arceus,Meadow Plate",Arceus_Grass
+CORE,"Arceus,Earth Plate",Arceus_Ground
+CORE,"Arceus,Icicle Plate",Arceus_Ice
+CORE,"Arceus,Toxic Plate",Arceus_Poison
+CORE,"Arceus,Mind Plate",Arceus_Psychic
+CORE,"Arceus,Stone Plate",Arceus_Rock
+CORE,"Arceus,Iron Plate",Arceus_Steel
+CORE,"Arceus,Splash Plate",Arceus_Water
+CORE,Darmanitan_ZENMODE,Darmanitan_Zen
+CORE,Meloetta_Aria,Meloetta_Pirouette
+CORE,"Genesect,Shock Drive",Genesect_Shock Drive
+CORE,"Genesect,Burn Drive",Genesect_Burn Drive
+CORE,"Genesect,Chill Drive",Genesect_Chill Drive
+CORE,"Genesect,Douse Drive",Genesect_Douse Drive
+"BLACK2,WHITE2","Kyurem,Reshiram,DNA Splicers",Kyurem_White
+"BLACK2,WHITE2","Kyurem,Zekrom,DNA Splicers",Kyurem_Black

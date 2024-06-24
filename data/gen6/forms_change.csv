@@ -1,0 +1,31 @@
+GAME,SPECIES,IN_FORM,OUT_FORM,REQUIRED
+CORE,Deoxys,,Attack,
+CORE,Deoxys,,Defense,
+CORE,Deoxys,,Speed,
+CORE,Deoxys,Attack,,
+CORE,Deoxys,Defense,,
+CORE,Deoxys,Speed,,
+CORE,Burmy,Plant Cloak,Sandy Cloak,
+CORE,Burmy,Plant Cloak,Trash Cloak,
+CORE,Burmy,Sandy Cloak,Plant Cloak,
+CORE,Burmy,Sandy Cloak,Trash Cloak,
+CORE,Burmy,Trash Cloak,Plant Cloak,
+CORE,Burmy,Trash Cloak,Sandy Cloak,
+CORE,Rotom,,Heat,
+CORE,Rotom,,Wash,
+CORE,Rotom,,Frost,
+CORE,Rotom,,Fan,
+CORE,Rotom,,Mow,
+CORE,Rotom,Heat,,
+CORE,Rotom,Wash,,
+CORE,Rotom,Frost,,
+CORE,Rotom,Fan,,
+CORE,Rotom,Mow,,
+CORE,Tornadus,Incarnate,Therian,Reveal Glass
+CORE,Tornadus,Therian,Incarnate,Reveal Glass
+CORE,Thundurus,Incarnate,Therian,Reveal Glass
+CORE,Thundurus,Therian,Incarnate,Reveal Glass
+CORE,Landorus,Incarnate,Therian,Reveal Glass
+CORE,Landorus,Therian,Incarnate,Reveal Glass
+CORE,Keldeo,,Resolute,
+CORE,Keldeo,Resolute,,

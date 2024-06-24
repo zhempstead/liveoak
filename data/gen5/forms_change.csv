@@ -1,0 +1,39 @@
+GAME,SPECIES,IN_FORM,OUT_FORM,REQUIRED
+CORE,Deoxys,,Attack,
+CORE,Deoxys,,Defense,
+CORE,Deoxys,,Speed,
+CORE,Deoxys,Attack,,
+CORE,Deoxys,Defense,,
+CORE,Deoxys,Speed,,
+CORE,Burmy,Plant Cloak,Sandy Cloak,
+CORE,Burmy,Plant Cloak,Trash Cloak,
+CORE,Burmy,Sandy Cloak,Plant Cloak,
+CORE,Burmy,Sandy Cloak,Trash Cloak,
+CORE,Burmy,Trash Cloak,Plant Cloak,
+CORE,Burmy,Trash Cloak,Sandy Cloak,
+CORE,Rotom,,Heat,
+CORE,Rotom,,Wash,
+CORE,Rotom,,Frost,
+CORE,Rotom,,Fan,
+CORE,Rotom,,Mow,
+CORE,Rotom,Heat,,
+CORE,Rotom,Wash,,
+CORE,Rotom,Frost,,
+CORE,Rotom,Fan,,
+CORE,Rotom,Mow,,
+CORE,Deerling,Spring,Summer,
+CORE,Deerling,Summer,Autumn,
+CORE,Deerling,Autumn,Winter,
+CORE,Deerling,Winter,Spring,
+CORE,Sawsbuck,Spring,Summer,
+CORE,Sawsbuck,Summer,Autumn,
+CORE,Sawsbuck,Autumn,Winter,
+CORE,Sawsbuck,Winter,Spring,
+"BLACK2,WHITE2",Tornadus,Incarnate,Therian,Reveal Glass
+"BLACK2,WHITE2",Tornadus,Therian,Incarnate,Reveal Glass
+"BLACK2,WHITE2",Thundurus,Incarnate,Therian,Reveal Glass
+"BLACK2,WHITE2",Thundurus,Therian,Incarnate,Reveal Glass
+"BLACK2,WHITE2",Landorus,Incarnate,Therian,Reveal Glass
+"BLACK2,WHITE2",Landorus,Therian,Incarnate,Reveal Glass
+"BLACK2,WHITE2",Keldeo,,Resolute,
+"BLACK2,WHITE2",Keldeo,Resolute,,

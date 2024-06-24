@@ -1,0 +1,98 @@
+GAME,REQUIRED,FORM
+CORE,"Venusaur,Venusaurite",Venusaur_Mega
+CORE,"Charizard,Charizardite X",Charizard_Mega X
+CORE,"Charizard,Charizardite Y",Charizard_Mega Y
+CORE,"Blastoise,Blastoisinite",Blastoise_Mega
+CORE,"Alakazam,Alakazite",Alakazam_Mega
+CORE,"Gengar,Gengarite",Gengar_Mega
+CORE,"Kangaskhan,Kangaskhanite",Kangaskhan_Mega
+CORE,"Pinsir,Pinsirite",Pinsir_Mega
+CORE,"Gyarados,Gyaradosite",Gyarados_Mega
+CORE,"Aerodactyl,Aerodactylite",Aerodactyl_Mega
+CORE,"Mewtwo,Mewtwonite X",Mewtwo_Mega X
+CORE,"Mewtwo,Mewtwonite Y",Mewtwo_Mega Y
+CORE,"Ampharos,Ampharosite",Ampharos_Mega
+CORE,"Scizor,Scizorite",Scizor_Mega
+CORE,"Heracross,Heracronite",Heracross_Mega
+CORE,"Houndoom,Houndoominite",Houndoom_Mega
+CORE,"Tyranitar,Tyranitarite",Tyranitar_Mega
+CORE,"Blaziken,Blazikenite",Blaziken_Mega
+CORE,"Gardevoir,Gardevoirite",Gardevoir_Mega
+CORE,"Mawile,Mawilite",Mawile_Mega
+CORE,"Aggron,Aggronite",Aggron_Mega
+CORE,"Medicham,Medichamite",Medicham_Mega
+CORE,"Manectric,Manectite",Manectric_Mega
+CORE,Castform,Castform_Sunny
+CORE,Castform,Castform_Rainy
+CORE,Castform,Castform_Snowy
+CORE,"Banette,Banettite",Banette_Mega
+CORE,"Absol,Absolite",Absol_Mega
+CORE,"Latias,Latiasite",Latias_Mega
+CORE,"Latios,Latiosite",Latios_Mega
+CORE,Cherrim_Overcast,Cherrim_Sunshine
+CORE,"Garchomp,Garchompite",Garchomp_Mega
+CORE,"Lucario,Lucarionite",Lucario_Mega
+CORE,"Abomasnow,Abomasite",Abomasnow_Mega
+CORE,"Giratina_Altered,Griseous Orb",Giratina_Origin
+CORE,"Shaymin_Land,Gracidea",Shaymin_Sky
+CORE,"Arceus,Insect Plate",Arceus_Bug
+CORE,"Arceus,Dread Plate",Arceus_Dark
+CORE,"Arceus,Draco Plate",Arceus_Dragon
+CORE,"Arceus,Zap Plate",Arceus_Electric
+CORE,"Arceus,Fist Plate",Arceus_Fighting
+CORE,"Arceus,Flame Plate",Arceus_Fire
+CORE,"Arceus,Sky Plate",Arceus_Flying
+CORE,"Arceus,Spooky Plate",Arceus_Ghost
+CORE,"Arceus,Meadow Plate",Arceus_Grass
+CORE,"Arceus,Earth Plate",Arceus_Ground
+CORE,"Arceus,Icicle Plate",Arceus_Ice
+CORE,"Arceus,Toxic Plate",Arceus_Poison
+CORE,"Arceus,Mind Plate",Arceus_Psychic
+CORE,"Arceus,Stone Plate",Arceus_Rock
+CORE,"Arceus,Iron Plate",Arceus_Steel
+CORE,"Arceus,Splash Plate",Arceus_Water
+CORE,"Arceus,Pixie Plate",Arceus_Fairy
+CORE,Darmanitan_ZENMODE,Darmanitan_Zen
+CORE,"Kyurem,Reshiram,DNA Splicers",Kyurem_White
+CORE,"Kyurem,Zekrom,DNA Splicers",Kyurem_Black
+CORE,Meloetta_Aria,Meloetta_Pirouette
+CORE,"Genesect,Shock Drive",Genesect_Shock Drive
+CORE,"Genesect,Burn Drive",Genesect_Burn Drive
+CORE,"Genesect,Chill Drive",Genesect_Chill Drive
+CORE,"Genesect,Douse Drive",Genesect_Douse Drive
+CORE,Furfrou,Furfrou_Heart Trim
+CORE,Furfrou,Furfrou_Star Trim
+CORE,Furfrou,Furfrou_Diamond Trim
+CORE,Furfrou,Furfrou_Debutante Trim
+CORE,Furfrou,Furfrou_Matron Trim
+CORE,Furfrou,Furfrou_Dandy Trim
+CORE,Furfrou,Furfrou_La Reine Trim
+CORE,Furfrou,Furfrou_Kabuki Trim
+CORE,Furfrou,Furfrou_Pharaoh Trim
+CORE,Aegislash_Shield,Aegislash_Blade
+CORE,Xerneas,Xerneas_Active
+"OMEGARUBY,ALPHASAPPHIRE","Beedrill,Beedrillite",Beedrill_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Pidgeot,Pidgeotite",Pidgeot_Mega
+"OMEGARUBY,ALPHASAPPHIRE",Pikachu_Cosplay,Pikachu_Rock Star
+"OMEGARUBY,ALPHASAPPHIRE",Pikachu_Cosplay,Pikachu_Belle
+"OMEGARUBY,ALPHASAPPHIRE",Pikachu_Cosplay,Pikachu_Pop Star
+"OMEGARUBY,ALPHASAPPHIRE",Pikachu_Cosplay,Pikachu_Ph.D.
+"OMEGARUBY,ALPHASAPPHIRE",Pikachu_Cosplay,Pikachu_Libre
+"OMEGARUBY,ALPHASAPPHIRE","Slowbro,Slowbronite",Slowbro_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Steelix,Steelixite",Steelix_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Sceptile,Sceptilite",Sceptile_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Swampert,Swampertite",Swampert_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Sableye,Sablenite",Sableye_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Sharpedo,Sharpedonite",Sharpedo_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Camerupt,Cameruptite",Camerupt_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Altaria,Altarianite",Altaria_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Glalie,Glalitite",Glalie_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Salamence,Salamencite",Salamence_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Metagross,Metagrossite",Metagross_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Kyogre,Blue Orb",Kyogre_Primal
+"OMEGARUBY,ALPHASAPPHIRE","Groudon,Red Orb",Groudon_Primal
+"OMEGARUBY,ALPHASAPPHIRE","Lopunny,Lopunnite",Lopunny_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Gallade,Galladite",Gallade_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Audino,Audinite",Audino_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Diancie,Diancite",Diancie_Mega
+"OMEGARUBY,ALPHASAPPHIRE","Hoopa_Confined,Prison Bottle",Hoopa_Unbound

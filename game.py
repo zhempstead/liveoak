@@ -176,6 +176,8 @@ class Game():
     def match(self, gamestr: str) -> bool:
         if gamestr == "ALL":
             return True
+        if gamestr == "NONE":
+            return False
         if gamestr == "CORE":
             return self.core
         for g in gamestr.split(','):
