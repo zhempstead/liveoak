@@ -1,0 +1,13 @@
+GAME,SPECIES,IN_FORM,OUT_FORM
+CORE,Deoxys,,Attack
+CORE,Deoxys,,Defense
+CORE,Deoxys,,Speed
+CORE,Deoxys,Attack,
+CORE,Deoxys,Defense,
+CORE,Deoxys,Speed,
+CORE,Burmy,Plant Cloak,Sandy Cloak
+CORE,Burmy,Plant Cloak,Trash Cloak
+CORE,Burmy,Sandy Cloak,Plant Cloak
+CORE,Burmy,Sandy Cloak,Trash Cloak
+CORE,Burmy,Trash Cloak,Plant Cloak
+CORE,Burmy,Trash Cloak,Sandy Cloak

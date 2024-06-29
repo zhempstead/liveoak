@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+from dataclasses import replace
 from itertools import zip_longest
 from pathlib import Path
 from tkinter import W
@@ -10,7 +11,7 @@ import pandas as pd
 from structs import Pokemon
 
 class MultiResult():
-    def __init__(self, results: list["Result"], version_exclusive_pairs: list[tuple[Pokemon, Pokemon]] = []):
+    def __init__(self, results: list["Result"], use_forms: bool, version_exclusive_pairs: list[tuple[Pokemon, Pokemon]] = []):
         self.results = results
         self.all_pokemon: list[Pokemon] = sorted(set.union(*(set(r.all_pokemon) for r in self.results)))
         self.all_present: set[Pokemon] = set()
@@ -25,6 +26,11 @@ class MultiResult():
         
         self.version_exclusives: dict[Pokemon, set[Pokemon]] = {}
         for pokemon1, pokemon2 in version_exclusive_pairs:
+            if not use_forms:
+                pokemon1 = replace(pokemon1, form=None)
+                pokemon2 = replace(pokemon2, form=None)
+                if pokemon1 == pokemon2:
+                    continue
             if pokemon1 not in self.all_pokemon or pokemon2 not in self.all_pokemon:
                 continue
             present_patterns = {(pokemon1 in r.present, pokemon2 in r.present) for r in self.results}

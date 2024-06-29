@@ -1,0 +1,13 @@
+GAME,GET,BECOMES
+"RUBY,SAPPHIRE,COLOSSEUM,XD,BOX",Deoxys_Attack,Deoxys
+"RUBY,SAPPHIRE,COLOSSEUM,XD,BOX",Deoxys_Defense,Deoxys
+"RUBY,SAPPHIRE,COLOSSEUM,XD,BOX",Deoxys_Speed,Deoxys
+FIRERED,Deoxys,Deoxys_Attack
+FIRERED,Deoxys_Defense,Deoxys_Attack
+FIRERED,Deoxys_Speed,Deoxys_Attack
+LEAFGREEN,Deoxys,Deoxys_Defense
+LEAFGREEN,Deoxys_Attack,Deoxys_Defense
+LEAFGREEN,Deoxys_Speed,Deoxys_Defense
+EMERALD,Deoxys,Deoxys_Speed
+EMERALD,Deoxys_Attack,Deoxys_Speed
+EMERALD,Deoxys_Defense,Deoxys_Speed

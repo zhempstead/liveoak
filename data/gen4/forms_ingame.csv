@@ -1,0 +1,33 @@
+GAME,REQUIRED,FORM
+CORE,Castform,Castform_Sunny
+CORE,Castform,Castform_Rainy
+CORE,Castform,Castform_Snowy
+CORE,Cherrim_Overcast,Cherrim_Sunshine
+CORE,"Arceus,Insect Plate",Arceus_Bug
+CORE,"Arceus,Dread Plate",Arceus_Dark
+CORE,"Arceus,Draco Plate",Arceus_Dragon
+CORE,"Arceus,Zap Plate",Arceus_Electric
+CORE,"Arceus,Fist Plate",Arceus_Fighting
+CORE,"Arceus,Flame Plate",Arceus_Fire
+CORE,"Arceus,Sky Plate",Arceus_Flying
+CORE,"Arceus,Spooky Plate",Arceus_Ghost
+CORE,"Arceus,Meadow Plate",Arceus_Grass
+CORE,"Arceus,Earth Plate",Arceus_Ground
+CORE,"Arceus,Icicle Plate",Arceus_Ice
+CORE,"Arceus,Toxic Plate",Arceus_Poison
+CORE,"Arceus,Mind Plate",Arceus_Psychic
+CORE,"Arceus,Stone Plate",Arceus_Rock
+CORE,"Arceus,Iron Plate",Arceus_Steel
+CORE,"Arceus,Splash Plate",Arceus_Water
+"PLATINUM,HEARTGOLD,SOULSILVER","Giratina_Altered,Griseous Orb",Giratina_Origin
+"PLATINUM,HEARTGOLD,SOULSILVER","Shaymin_Land,Gracidea",Shaymin_Sky
+"HEARTGOLD,SOULSILVER",Rotom,Rotom_Heat
+"HEARTGOLD,SOULSILVER",Rotom,Rotom_Wash
+"HEARTGOLD,SOULSILVER",Rotom,Rotom_Frost
+"HEARTGOLD,SOULSILVER",Rotom,Rotom_Fan
+"HEARTGOLD,SOULSILVER",Rotom,Rotom_Mow
+PLATINUM,"Rotom,Secret Key",Rotom_Heat
+PLATINUM,"Rotom,Secret Key",Rotom_Wash
+PLATINUM,"Rotom,Secret Key",Rotom_Frost
+PLATINUM,"Rotom,Secret Key",Rotom_Fan
+PLATINUM,"Rotom,Secret Key",Rotom_Mow

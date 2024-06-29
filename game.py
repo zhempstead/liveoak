@@ -969,6 +969,9 @@ class Collection():
                     if game2.gen == 6 and game2.core:
                         if self.connected(cart1, cart2):
                             interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "ORAS_DEMO":
+                        if game1.name in ["OMEGARUBY", "ALPHASAPPHIRE"] and (cart1.console is None and game1.region_match(game2)) or cart1.console == cart2.console: 
+                            interactions["CONNECT"].add((cart1, cart2))
                     elif game2.name == "BANK":
                         # Any region
                         if cart1.console is None or cart1.console == cart2.console:

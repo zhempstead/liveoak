@@ -49,10 +49,7 @@ class Generation():
         self.pokemon_list = self.pokemon_list.drop(['SPECIES', 'FORM', 'IDX', 'FORM_IDX'], axis=1)
         self.pokemon_list.loc[self.pokemon_list.GENDER == False, 'GENDER'] = 'BOTH'
 
-        self.items = pd.read_csv(self.dir / "item.csv").fillna(False).set_index("ITEM")
-
-        self.tradeable_pokemon: set[Pokemon] = set(self.pokemon_list.index)
-        self.tradeable_items = set([item for item in self.items.index if not self.items.loc[item]["KEY"]])
+        self.items = pd.read_csv(self.dir / "item.csv").fillna(False).set_index("ITEM").convert_dtypes()
  
         for datum in Generation.DATA:
             fname = self.dir / f"{datum}.csv"
@@ -97,6 +94,13 @@ class GameSave():
         self.pokemon_list = self.generation.pokemon_list.copy()
         self.pokemon_list = self.pokemon_list[self.pokemon_list.apply(lambda r: self.game.match(r.GAME), axis=1)].drop('GAME', axis=1)
         self.all_species: set[str] = {p.species for p in self.pokemon_list.index}
+        self.transferable_pokemon: set[Pokemon] = {p for p in self.pokemon_list.index if self.pokemon_list.loc[p, 'TAG'] != "NOTRANSFER"}
+        self.tradeable_pokemon: set[Pokemon] = {p for p in self.transferable_pokemon if self.pokemon_list.loc[p, 'TAG'] != "NOTRADE"} # type: ignore
+        items = self.generation.items
+        if "GAME" in items:
+            items = items[items.apply(lambda r: self.game.match(r.GAME), axis=1)].drop(labels='GAME', axis=1)
+        self.items = set(items.index)
+        self.tradeable_items = set(items[~items.KEY].index)
 
         # Initialized later - indicates what other game states this one can communicate with
         self.transfers: dict[str, set[GameSave]] = {
@@ -115,18 +119,22 @@ class GameSave():
                     self.env.add(row.ENVIRONMENT)
 
         # These are used to initialize what will be the final rules.
-        self.evolutions: dict[Pokemon, dict[PokemonReq, set[PokemonEntry]]] = {pokemon: {} for pokemon in self.generation.pokemon_list.index}
-        self.breeding: dict[Pokemon, dict[PokemonReq, set[PokemonEntry]]] = {pokemon: {} for pokemon in self.generation.pokemon_list.index}
-        self.unique_pokemon: dict[Pokemon, set[PokemonEntry]] = {pokemon: set() for pokemon in self.generation.pokemon_list.index}
-        self.sf2pokemon: dict[tuple[str, str | None], Pokemon] = {(p.species, p.form): p for p in self.generation.pokemon_list.index}
+        self.evolutions: dict[Pokemon, dict[PokemonReq, set[PokemonEntry]]] = {pokemon: {} for pokemon in self.pokemon_list.index}
+        self.breeding: dict[Pokemon, dict[PokemonReq, set[PokemonEntry]]] = {pokemon: {} for pokemon in self.pokemon_list.index}
+        self.unique_pokemon: dict[Pokemon, set[PokemonEntry]] = {pokemon: set() for pokemon in self.pokemon_list.index}
+        self.sf2pokemon: dict[tuple[str, str | None], Pokemon] = {(p.species, p.form): p for p in self.pokemon_list.index}
+        self.transfer_forms: dict[Pokemon, Pokemon] = {}
 
-    def get_pokemon(self, misc: PokemonEntry | FormDexEntry | PokemonReq | tuple[str, str | None]) -> Pokemon:
+    def get_pokemon(self, misc: PokemonEntry | FormDexEntry | PokemonReq | tuple[str, str | None] | str) -> Pokemon:
         if isinstance(misc, PokemonEntry) or isinstance(misc, FormDexEntry) or isinstance(misc, PokemonReq):
-            if (misc.species, misc.form) not in self.sf2pokemon:
-                import pdb; pdb.set_trace()
             return self.sf2pokemon[(misc.species, misc.form)]
         if isinstance(misc, tuple):
             return self.sf2pokemon[misc]
+        if isinstance(misc, str):
+            split = misc.split('_')
+            species = split[0]
+            form = split[1] if len(split) > 1 else None
+            return self.sf2pokemon[(species, form)]
 
     def transfer(self, other_cartridge, category):
         '''Register another cartridge as able to receive certain communications'''
@@ -140,13 +148,30 @@ class GameSave():
             env = row.get("ENVIRONMENT")
             if env and env not in self.env:
                 continue
-            pre = self.parse_pokemon_input(row.FROM, forbidden={"NOEVOLVE"})
-            post: tuple[PokemonEntry] = self.parse_pokemon_output(row.TO, use_gender=False)[0]
-            pre_pokemon = self.get_pokemon(pre)
-            if pre not in self.evolutions[pre_pokemon]:
-                self.evolutions[pre_pokemon][pre] = set()
-            for p in post:
-                self.evolutions[pre_pokemon][pre].add(p)
+            self._init_single_evo(row.FROM, row.TO, {"NOEVOLVE"})
+        
+        # Including form changes in evolutions
+        if self.generation.forms_change is None:
+            return
+        for _, row in self.generation.forms_change.iterrows():
+            if "GAME" in row and not self.game.match(row.GAME):
+                continue
+            in_str = row.SPECIES
+            out_str = row.SPECIES
+            if row.IN_FORM:
+                in_str += f'_{row.IN_FORM}'
+            if row.OUT_FORM:
+                out_str += f'_{row.OUT_FORM}'
+            self._init_single_evo(in_str, out_str)
+    
+    def _init_single_evo(self, pre_str: str, post_str: str, forbidden_props={}):
+        pre = self.parse_pokemon_input(pre_str, forbidden=forbidden_props)
+        post = self.parse_pokemon_output(post_str, use_gender=False)[0]
+        pre_pokemon = self.get_pokemon(pre)
+        if pre not in self.evolutions[pre_pokemon]:
+            self.evolutions[pre_pokemon][pre] = set()
+        for p in post:
+            self.evolutions[pre_pokemon][pre].add(p)
 
     def init_breeding(self):
         if self.generation.breed is None or "NO_BREED" in self.game.props or "NO_DEX" in self.game.props:
@@ -159,6 +184,24 @@ class GameSave():
                 self.breeding[parent_pokemon][parent] = set()
             for child in self.parse_pokemon_output(row.CHILD):
                 self.breeding[parent_pokemon][parent].add(child[0])
+    
+    def init_transfer_forms(self) -> None:
+        if self.generation.forms_transfer is None or "NO_DEX" in self.game.props:
+            return
+        
+        for _, row in self.generation.forms_transfer.iterrows():
+            if not self.game.match(row.GAME):
+                continue
+            get_split: list[str] = row.GET.split('_')
+            get_species = get_split[0]
+            get_form = None if len(get_split) == 1 else get_split[1]
+            becomes_split: list[str] = row.BECOMES.split('_')
+            becomes_species = becomes_split[0]
+            assert get_species == becomes_species
+            becomes_form = None if len(becomes_split) == 1 else becomes_split[1]
+            becomes_pokemon = self.get_pokemon((becomes_species, becomes_form))
+            get_pokemon = replace(becomes_pokemon, form=get_form)
+            self.transfer_forms[get_pokemon] = becomes_pokemon
 
     def init_unique_pokemon(self):
         if self.generation.buy is not None:
@@ -242,6 +285,9 @@ class GameSave():
             for gs in transfer_to:
                 if pokemon in gs.unique_pokemon:
                     gs.add_unique(pokemon_entry)
+                elif pokemon in gs.transfer_forms:
+                    transfer_pokemon = gs.transfer_forms[pokemon]
+                    gs.add_unique(replace(pokemon_entry, species=transfer_pokemon.species, form=transfer_pokemon.form))
 
     def get_rules(self) -> list[tuple["Rule", float]]:
         global _choice_idx
@@ -312,7 +358,34 @@ class GameSave():
                 item = ItemEntry(self.cartridge.id, row.ITEM) if row.ITEM else None
                 if len(post) != 1:
                     raise ValueError(f"Invalid evolution entry {post}")
-                rules += self._evo_rules(pre, post[0], item, other)
+                reqs = set()
+                if other is not None:
+                    reqs.add(other)
+                rules += self._evo_rules(pre, post[0], item, reqs)
+
+        if self.generation.forms_change is not None:
+            for _, row in self.generation.forms_change.iterrows():
+                if not self.game.match(row.GAME):
+                    continue
+                reqs, _ = self.parse_input(row.get("REQUIRED"))
+                species: str = row.SPECIES
+                in_form: str | None = row.IN_FORM or None
+                out_form: str | None = row.OUT_FORM or None
+                in_pokemon_req = PokemonReq(species, in_form)
+                out_pokemon_entry = PokemonEntry(self.cartridge.id, species, out_form, None)
+                rules += self._evo_rules(in_pokemon_req, [out_pokemon_entry], None, reqs)
+
+        if self.generation.forms_ingame is not None:
+            for _, row in self.generation.forms_ingame.iterrows():
+                if not self.game.match(row.GAME):
+                    continue
+                reqs, _ = self.parse_input(row.REQUIRED)
+                out_pokemon = self.get_pokemon(row.FORM)
+                out = {
+                    SpeciesDexEntry.new(self.cartridge.id, out_pokemon),
+                    FormDexEntry.new(self.cartridge.id, out_pokemon),
+                }
+                rules += self._multi_rules([], reqs, out)
 
         if self.generation.fossil is not None:
             for _, row in self.generation.fossil.iterrows():
@@ -446,7 +519,7 @@ class GameSave():
                 for _, row in self.generation.wild.iterrows():
                     pokemon_or_item = row.SPECIES
                     items = wild_items.get(pokemon_or_item) or [None]
-                    p_or_is = self.parse_output(pokemon_or_item)
+                    p_or_is: list[tuple[Entry]] = []
                     for consumed, reqs, count in self.parse_wild_entry(row[gamecol]):
                         if count == 0:
                             continue
@@ -456,6 +529,8 @@ class GameSave():
                             rules += self._multi_rules(consumed, reqs, {choice}, count)
                             consumed = {choice}
                             reqs = set()
+                        if not p_or_is:
+                            p_or_is = self.parse_output(pokemon_or_item)
                         for p_or_i in p_or_is:
                             if len(p_or_i) != 1:
                                 raise ValueError("Confused")
@@ -466,28 +541,40 @@ class GameSave():
                                 rules += self._multi_rules(consumed, reqs, out, count)
 
         for pokemon in self.unique_pokemon:
+            if pokemon not in self.transferable_pokemon:
+                continue
             for pokemon_entry in self.unique_pokemon[pokemon]:
                 if "NOTRANSFER" in pokemon_entry.props:
                     continue
                 for gs in self.transfers["POKEMON"]:
-                    if pokemon not in gs.generation.tradeable_pokemon:
-                        continue
                     out_pokemon_entry = replace(pokemon_entry, cart_id=gs.cartridge.id)
+                    if pokemon in gs.transfer_forms:
+                        changed = gs.transfer_forms[pokemon]
+                        out_pokemon_entry = replace(out_pokemon_entry, species=changed.species, form=changed.form)
+                    elif pokemon not in gs.unique_pokemon:
+                        continue
+
                     if "TRANSFERRESET" in pokemon_entry.props:
                         out_pokemon_entry = replace(out_pokemon_entry, props=frozenset())
                     rules.append((self._transfer_rule(gs.cartridge.id, {pokemon_entry}, {out_pokemon_entry}), math.inf))
 
                 has_noitem_evo = False
+                if pokemon not in self.tradeable_pokemon:
+                    continue
                 for gs in self.transfers["TRADE"]:
-                    if pokemon not in gs.generation.tradeable_pokemon:
-                        continue
                     out_pokemon_entry = replace(pokemon_entry, cart_id=gs.cartridge.id)
+                    if pokemon in gs.transfer_forms:
+                        changed = gs.transfer_forms[pokemon]
+                        out_pokemon_entry = replace(out_pokemon_entry, species=changed.species, form=changed.form)
+                    elif pokemon not in gs.unique_pokemon:
+                        continue
                     if "TRANSFERRESET" in pokemon_entry.props:
                         out_pokemon_entry = replace(out_pokemon_entry, props=frozenset())
                     for item, evo_pokemon in trade_evos.get(pokemon, {}).items():
                         if item is None and "NOEVOLVE" not in out_pokemon_entry.props:
                             has_noitem_evo = True
-                        if evo_pokemon not in gs.generation.tradeable_pokemon:
+                        assert evo_pokemon in self.tradeable_pokemon, "Evolution should also be tradeable"
+                        if evo_pokemon not in gs.unique_pokemon:
                             continue
                         if "NOEVOLVE" in out_pokemon_entry.props:
                             continue
@@ -513,9 +600,9 @@ class GameSave():
                         rules.append((self._transfer_rule(gs.cartridge.id, {pokemon_entry}, {out_pokemon_entry}), math.inf))
                 
 
-        for item in self.generation.tradeable_items:
+        for item in self.tradeable_items:
             for gs in self.transfers["ITEMS"]:
-                if item not in gs.generation.tradeable_items:
+                if item not in gs.tradeable_items:
                     continue
                 rules.append((self._transfer_rule(gs.cartridge.id, {ItemEntry(self.cartridge.id, item)}, {ItemEntry(gs.cartridge.id, item)}), math.inf))
 
@@ -523,7 +610,7 @@ class GameSave():
                 for gs in self.transfers["TRADE"]:
                     if "NO_TRADE_ITEMS" in gs.game.props:
                         continue
-                    if item not in gs.generation.tradeable_items:
+                    if item not in gs.tradeable_items:
                         continue
                     rules.append((self._transfer_rule(gs.cartridge.id, {ItemEntry(self.cartridge.id, item)}, {ItemEntry(gs.cartridge.id, item)}), math.inf))
 
@@ -543,17 +630,20 @@ class GameSave():
         new_consumed = []
         new_required = []
         input_pokemon = set()
+        input_species = set()
         for inp, new_inp in [(consumed, new_consumed), (required, new_required)]:
             for i in inp:
                 if isinstance(i, PokemonReq):
                     ipokemon = self.get_pokemon(i)
                     input_pokemon.add((self.cartridge.id, ipokemon))
+                    input_species.add((self.cartridge.id, ipokemon.species))
                     matches = [p for p in self.unique_pokemon[ipokemon] if i.matches(p)]
                     if not matches:
                         return rules
                     new_inp.append(matches)
                 elif isinstance(i, PokemonEntry):
                     input_pokemon.add((i.cart_id, self.get_pokemon(i)))
+                    input_species.add((i.cart_id, i.species))
                     new_inp.append([i])
                 else:
                     new_inp.append([i])
@@ -564,8 +654,9 @@ class GameSave():
         for o in output:
             if isinstance(o, PokemonEntry):
                 o_pokemon = self.get_pokemon(o)
-                if (o.cart_id, o_pokemon) not in input_pokemon:
+                if (o.cart_id, o.species) not in input_species:
                     full_output.add(SpeciesDexEntry.new(o.cart_id, o_pokemon))
+                if (o.cart_id, o_pokemon) not in input_pokemon:
                     full_output.add(FormDexEntry.new(o.cart_id, o_pokemon))
         full_output = frozenset(full_output)
 
@@ -586,7 +677,7 @@ class GameSave():
             rules.add((Rule(c, r, full_output), repeats))
         return rules
 
-    def _evo_rules(self, pre_req: PokemonReq, post_entries: Iterable[PokemonEntry], item: ItemEntry | None=None, other: PokemonReq | None = None) -> set[tuple["Rule", float]]:
+    def _evo_rules(self, pre_req: PokemonReq, post_entries: Iterable[PokemonEntry], item: ItemEntry | None=None, reqs: Iterable[Req] = set()) -> set[tuple["Rule", float]]:
         rules: set[tuple["Rule", float]] = set()
         pre_pokemon = self.get_pokemon(pre_req)
         for pre_entry in self.unique_pokemon[pre_pokemon]:
@@ -606,16 +697,11 @@ class GameSave():
                     else:
                         raise ValueError(f"Gender mismatch between '{pre_pokemon}' and '{post_pokemon}' evolution")
                 out.append(replace(post_entry, gender=post_gender, props=pre_entry.props.union(post_entry.props)))
-                out.append(SpeciesDexEntry.new(post_entry.cart_id, post_pokemon))
-                out.append(FormDexEntry.new(post_entry.cart_id, post_pokemon))
             consumed: set[Entry] = {pre_entry}
-            required = set()
             if item is not None:
                 consumed.add(item)
-            if other is not None:
-                required.add(other)
             # Need to call _multi_rules since required might contain a PokemonReq
-            rules |= self._multi_rules(consumed, required, out)
+            rules |= self._multi_rules(consumed, set(reqs), out)
         return rules
     
     def _transfer_rule(self, out_cart_id: str, inputs: Iterable[Entry], outputs: Iterable[Entry]) -> "Rule":
@@ -670,13 +756,13 @@ class GameSave():
                 continue
             except ValueError:
                 pass
-            if e in self.generation.items.index:
+            if e in self.items:
                 out.append(ItemEntry(self.cartridge.id, e))
             elif e.split('.')[0] in GAMEIDS:
                 if not any([gs.cartridge != self.cartridge and gs.game.match(e) for gs in self.transfers["CONNECT"].union(self.transfers["RECORDMIX"])]): 
                     valid = False
             elif e.startswith("DEX_"):
-                out += [SpeciesDexEntry.new(self.cartridge.id, p) for p in self.generation.pokemon_list.index if self.generation.pokemon_list.loc[p, e]]
+                out += [SpeciesDexEntry.new(self.cartridge.id, p) for p in self.pokemon_list.index if self.pokemon_list.loc[p, e]]
             elif e.startswith("$"):
                 out.append(ChoiceEntry(self.cartridge.id, e[1:]))
             else:
@@ -688,7 +774,7 @@ class GameSave():
         for e in entry.split(','):
             if e.split('_')[0] in self.all_species:
                 out.append(self._parse_pokemon_output_entry(e, use_gender))
-            elif e in self.generation.items.index:
+            elif e in self.items:
                 out.append([ItemEntry(self.cartridge.id, e)])
             elif e.startswith("$"):
                 out.append([ChoiceEntry(self.cartridge.id, e[1:])])
@@ -785,6 +871,7 @@ class CollectionSaves():
         for gs in self.game_saves.values():
             gs.init_evolutions()
             gs.init_breeding()
+            gs.init_transfer_forms()
         for gs in self.game_saves.values():
             gs.init_unique_pokemon()
 
@@ -1309,20 +1396,21 @@ class RuleGraph():
             if special is not None:
                 return special
         outcomes = set()
-        G = self.G
         rules = list(self._get_valid_rules())
         if not rules:
             return {frozenset()}
         for rule in rules:
             copy = self.copy()
             #print(f"{' '*copy.spaces}{rule}")
-            
             copy._apply_rule(rule)
             copy.apply_safe_rules()
             if all(copy.acquired.values()):
                 return {frozenset(copy.acquired.keys())}
             for os in product({frozenset(s for s, v in copy.acquired.items() if v)}, *copy.try_branches()):
-                outcomes.add(frozenset.union(*os))
+                unioned = frozenset.union(*os)
+                if frozenset(copy.acquired.keys()) == unioned:
+                    return {unioned}
+                outcomes.add(unioned)
 
         return RuleGraph._filter_outcomes(outcomes)
 
@@ -1532,7 +1620,7 @@ def main(args: argparse.Namespace):
     if num_collections == 1:
         games = all_games[0]
         hardware = set(all_hardware[0])
-        collection_saves, result = calc_dexes(games, hardware, args.mode, args.flatten)
+        _, result = calc_dexes(games, hardware, args.mode, args.flatten)
 
         if args.missing:
             result.print_missing()
@@ -1558,6 +1646,7 @@ def main(args: argparse.Namespace):
 
         ve_pairs: list[tuple[Pokemon, Pokemon]] = []
         if args.version_exclusive:
+            games = {idx: {gs.game for gs in cs.game_saves.values()} for idx, cs in enumerate(collection_saves)}
             ve_table = pd.read_csv(Path("data") / "version_exclusives.csv")
             all_pokemon: set[Pokemon] = set.union(*(set(cs.pokemon_list.index) for cs in collection_saves)) # type: ignore
             sf2pokemon = {(p.species, p.form): p for p in all_pokemon}
@@ -1567,12 +1656,19 @@ def main(args: argparse.Namespace):
                 form = split[1] if len(split) > 1 else None
                 return sf2pokemon.get((species, form))
             for _, row in ve_table.iterrows():
+                matches_first = {idx for idx, gameset in games.items() if any(g.match(row.GAME1) for g in gameset)}
+                matches_second = {idx for idx, gameset in games.items() if any(g.match(row.GAME2) for g in gameset)}
+                if len(matches_first) == 0 or len(matches_second) == 0:
+                    continue
+                if len(matches_first) == 1 and matches_first == matches_second:
+                    continue
                 p1 = parse_pokemon(row.SPECIES1)
                 p2 = parse_pokemon(row.SPECIES2)
                 if p1 is not None and p2 is not None:
+                    
                     ve_pairs.append((p1, p2))
 
-        result = MultiResult(results, ve_pairs)
+        result = MultiResult(results, args.mode == "form", ve_pairs)
         if args.all_present:
             result.print_all_present()
         elif args.compact:
