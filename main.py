@@ -18,7 +18,6 @@ from structs import Gender, Pokemon, Req, PokemonReq, Entry, PokemonEntry, ItemE
 class Generation():
     breed: pd.DataFrame | None
     buy: pd.DataFrame | None
-    environment: pd.DataFrame | None
     evolve: pd.DataFrame | None
     forms_change: pd.DataFrame | None
     forms_ingame: pd.DataFrame | None
@@ -28,14 +27,12 @@ class Generation():
     gift: pd.DataFrame | None
     misc: pd.DataFrame | None
     pickup_item: pd.DataFrame | None
-    pickup_pokemon: pd.DataFrame | None
     trade: pd.DataFrame | None
     wild: pd.DataFrame | None
     wild_item: pd.DataFrame | None
 
-    DATA = ["breed", "buy", "environment", "evolve", "forms_change", "forms_ingame",
-            "forms_transfer","fossil", "friend_safari", "gift", "misc", "pickup_item",
-            "pickup_pokemon", "trade", "wild", "wild_item"]
+    DATA = ["breed", "buy", "evolve", "forms_change", "forms_ingame", "forms_transfer",
+            "fossil", "friend_safari", "gift", "misc", "pickup_item", "trade", "wild", "wild_item"]
 
     def __init__(self, gen: int):
         self.id = gen
@@ -112,12 +109,6 @@ class GameSave():
             "CONNECT": set(), # Miscellaneous
         }
 
-        self.env = set()
-        if self.generation.environment is not None:
-            for _, row in self.generation.environment.iterrows():
-                if self.game.match(row.GAME):
-                    self.env.add(row.ENVIRONMENT)
-
         # These are used to initialize what will be the final rules.
         self.evolutions: dict[Pokemon, dict[PokemonReq, set[PokemonEntry]]] = {pokemon: {} for pokemon in self.pokemon_list.index}
         self.breeding: dict[Pokemon, dict[PokemonReq, set[PokemonEntry]]] = {pokemon: {} for pokemon in self.pokemon_list.index}
@@ -145,8 +136,7 @@ class GameSave():
             return
 
         for _, row in self.generation.evolve.iterrows():
-            env = row.get("ENVIRONMENT")
-            if env and env not in self.env:
+            if "GAME" in row and not self.game.match(row.GAME):
                 continue
             self._init_single_evo(row.FROM, row.TO, {"NOEVOLVE"})
         
@@ -331,8 +321,7 @@ class GameSave():
 
         if self.generation.evolve is not None and "NO_EVOLVE" not in self.game.props and "NO_DEX" not in self.game.props:
             for _, row in self.generation.evolve.iterrows():
-                env = row.get("ENVIRONMENT")
-                if env and env not in self.env:
+                if "GAME" in row and not self.game.match(row.GAME):
                     continue
                 other = self.parse_pokemon_input(row.OTHER_POKEMON) if row.get("OTHER_POKEMON") else None
                 if row.get("TRADE"):
@@ -430,13 +419,11 @@ class GameSave():
                     frozenset(output[0])), repeats))
 
         if self.generation.pickup_item is not None and "NO_DEX" not in self.game.props:
-            assert(self.generation.pickup_pokemon is not None)
+            # Assumes it's possible to obtain a Pokemon with Pickup in any game w/abilities
             for _, row in self.generation.pickup_item.iterrows():
                 if not self.game.match(row.GAME):
                     continue
-                for pokemon in self.generation.pickup_pokemon.SPECIES:
-                    req = self.parse_pokemon_input(pokemon)
-                    rules += self._multi_rules(set(), {req}, {ItemEntry(self.cartridge.id, row.ITEM)})
+                rules += self._multi_rules(set(), set(), {ItemEntry(self.cartridge.id, row.ITEM)})
         
         if self.generation.trade is not None:
             for _, row in self.generation.trade.iterrows():
@@ -1665,7 +1652,6 @@ def main(args: argparse.Namespace):
                 p1 = parse_pokemon(row.SPECIES1)
                 p2 = parse_pokemon(row.SPECIES2)
                 if p1 is not None and p2 is not None:
-                    
                     ve_pairs.append((p1, p2))
 
         result = MultiResult(results, args.mode == "form", ve_pairs)
