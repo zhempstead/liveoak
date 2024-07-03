@@ -12,8 +12,19 @@ class Pokemon():
     '''Represents a unique species/form combination'''
     species: str
     form: str | None
+    dex_form: str | None # For visually-indistinct forms
     idx: int
     form_idx: int
+    dex_form_idx: int
+
+    @staticmethod
+    def new(species, form, idx, form_idx) -> "Pokemon":
+        if not form:
+            return Pokemon(species, None, None, idx, form_idx, form_idx)
+        split = form.split(';')
+        if len(split) == 1:
+            return Pokemon(species, form, form, idx, form_idx, form_idx)
+        return Pokemon(species, split[0], split[2] or None, idx, form_idx, int(split[1]))
 
     def __post_init__(self):
         if self.form is not None and not self.form:
@@ -119,7 +130,7 @@ class DexEntry(Entry):
     species: str
     
     def to_pokemon(self) -> Pokemon:
-        return Pokemon(self.species, None, self.idx, 0)
+        return Pokemon(self.species, None, None, self.idx, 0, 0)
 
 @dataclass(frozen=True)
 class SpeciesDexEntry(DexEntry):
@@ -137,10 +148,11 @@ class FormDexEntry(DexEntry):
 
     @staticmethod
     def new(cart_id: str, pokemon: Pokemon):
-        return FormDexEntry(cart_id, pokemon.idx, pokemon.species, pokemon.form, form_idx=pokemon.form_idx)
+        return FormDexEntry(cart_id, pokemon.idx, pokemon.species, pokemon.dex_form, form_idx=pokemon.dex_form_idx)
 
     def to_pokemon(self) -> Pokemon:
-        return Pokemon(self.species, self.form, self.idx, self.form_idx)
+        # It's okay that this doesn't roundtrip regarding form and dex_form
+        return Pokemon(self.species, self.form, self.form, self.idx, self.form_idx, self.form_idx)
 
     def __repr__(self):
         pokemon = self.species

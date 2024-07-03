@@ -41,7 +41,7 @@ class Generation():
 
         dex = pd.read_csv(self.dir / "dex.csv").fillna(False)
         dex['FORM_IDX'] = dex.groupby('SPECIES').cumcount()
-        dex['POKEMON']: Series = dex.apply(lambda r: Pokemon(r.SPECIES, r.FORM, r.IDX, form_idx=r.FORM_IDX), axis=1) # type: ignore
+        dex['POKEMON']: Series = dex.apply(lambda r: Pokemon.new(r.SPECIES, r.FORM, r.IDX, form_idx=r.FORM_IDX), axis=1) # type: ignore
         self.pokemon_list = dex.set_index('POKEMON', drop=True)
         self.pokemon_list = self.pokemon_list.drop(['SPECIES', 'FORM', 'IDX', 'FORM_IDX'], axis=1)
         self.pokemon_list.loc[self.pokemon_list.GENDER == False, 'GENDER'] = 'BOTH'
