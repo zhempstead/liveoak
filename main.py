@@ -1096,7 +1096,7 @@ class RuleGraph():
             if not any_transfer_rule:
                 break
 
-    def apply_safe_rules(self):
+    def apply_safe_rules(self, state: dict[Entry, float] | None = None):
         G = self.G
         while True:
             while True:
@@ -1106,13 +1106,13 @@ class RuleGraph():
 
                 for rule in no_consumed:
                     if rule in G.nodes:
-                        self._apply_rule(rule)
+                        self._apply_rule(rule, state)
 
             any_applied = False
             for rule in list(self._get_safe_rules()):
                 if rule in G:
                     any_applied = True
-                    self._apply_rule(rule)
+                    self._apply_rule(rule, state)
             if not any_applied:
                 break
 
@@ -1139,13 +1139,23 @@ class RuleGraph():
             out_branches.append(branch)
         return out_branches
 
-    def try_branches(self, ignore_special=False) -> list[set[frozenset[DexEntry]]]:
+    def try_branches(self, curr_state: dict[Entry, float] | None = None, state_cache: set[frozenset[tuple[Entry, float]]] | None = None, ignore_special=False) -> list[set[frozenset[DexEntry]]]:
+        G = self.G
         outcomes = []
+        assert (curr_state is None) == (state_cache is None), "curr_state and state_cache should both be None or both be not None"
         for rg in self._get_components():
-            outcomes.append(rg._try_branches_single_component(ignore_special))
+            if curr_state is None:
+                curr_state = dict()
+                for succ in G.successors("START"):
+                    if isinstance(succ, Entry):
+                        curr_state[succ] = G.nodes[succ]['count']
+                state_cache = set()
+            else:
+                assert state_cache is not None
+            outcomes.append(rg._try_branches_single_component(curr_state, state_cache, ignore_special))
         return outcomes
 
-    def _apply_rule(self, rule: "Rule"):
+    def _apply_rule(self, rule: "Rule", state: dict[Entry, float] | None = None):
         '''
         Apply rule once if it has any consumed, or as many times as possible if it doesn't.
         '''
@@ -1160,9 +1170,13 @@ class RuleGraph():
             if G.edges[(i, rule)]['consumed']:
                 has_consumed = True
                 G.nodes[i]['count'] -= 1
+                if state is not None:
+                    state[i] -= 1
                 if G.nodes[i]['count'] == 0:
                     zero_entries.add(i)
                     G.remove_edge("START", i)
+                    if state is not None:
+                        del state[i]
 
         repeats = 1 if has_consumed else G.nodes[rule]['repeats']
         G.nodes[rule]['repeats'] -= repeats
@@ -1183,10 +1197,16 @@ class RuleGraph():
                     rg.acquired[out] = True
                 if isinstance(out, DexEntry):
                     changes[0].add(out)
+                    if state is not None:
+                        state[out] = math.inf
                 else:
                     if rg.G.nodes[out]['count'] == 0:
                         rg.G.add_edge("START", out)
+                        if state is not None:
+                            state[out] = 0
                     rg.G.nodes[out]['count'] += repeats
+                    if state is not None:
+                        state[out] += repeats
                     if repeats == math.inf or self._not_consumed(out):
                         changes[0].add(out)
             rg._update_maintaining_invariant(*changes)
@@ -1388,7 +1408,7 @@ class RuleGraph():
             acquired = {target: False for target in Gcomponent.predecessors("END")}
             yield RuleGraph(Gcomponent, acquired, spaces=self.spaces+2)
 
-    def _try_branches_single_component(self, ignore_special=False) -> set[frozenset[DexEntry]]:
+    def _try_branches_single_component(self, curr_state: dict[Entry, float], state_cache: set[frozenset[tuple[Entry, float]]], ignore_special=False) -> set[frozenset[DexEntry]]:
         '''
         Assumes the graph is made up of only one component!
         '''
@@ -1402,12 +1422,18 @@ class RuleGraph():
             return {frozenset()}
         for rule in rules:
             copy = self.copy()
+            state = curr_state.copy()
             #print(f"{' '*copy.spaces}{rule}")
-            copy._apply_rule(rule)
-            copy.apply_safe_rules()
+            copy._apply_rule(rule, state)
+            copy.apply_safe_rules(state)
+            frozenstate = frozenset(state.items())
+            if frozenstate in state_cache:
+                continue
+            state_cache.add(frozenstate)
+
             if all(copy.acquired.values()):
                 return {frozenset(copy.acquired.keys())}
-            for os in product({frozenset(s for s, v in copy.acquired.items() if v)}, *copy.try_branches()):
+            for os in product({frozenset(s for s, v in copy.acquired.items() if v)}, *copy.try_branches(state, state_cache, ignore_special)):
                 unioned = frozenset.union(*os)
                 if frozenset(copy.acquired.keys()) == unioned:
                     return {unioned}
