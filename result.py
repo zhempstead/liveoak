@@ -27,8 +27,8 @@ class MultiResult():
         self.version_exclusives: dict[Pokemon, set[Pokemon]] = {}
         for pokemon1, pokemon2 in version_exclusive_pairs:
             if not use_forms:
-                pokemon1 = replace(pokemon1, form=None)
-                pokemon2 = replace(pokemon2, form=None)
+                pokemon1 = pokemon1.without_form()
+                pokemon2 = pokemon2.without_form()
                 if pokemon1 == pokemon2:
                     continue
             if pokemon1 not in self.all_pokemon or pokemon2 not in self.all_pokemon:

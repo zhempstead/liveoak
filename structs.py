@@ -26,6 +26,9 @@ class Pokemon():
             return Pokemon(species, form, form, idx, form_idx, form_idx)
         return Pokemon(species, split[0], split[2] or None, idx, form_idx, int(split[1]))
 
+    def without_form(self):
+        return replace(self, form=None, dex_form=None, form_idx=0, dex_form_idx=0)
+
     def __post_init__(self):
         if self.form is not None and not self.form:
             object.__setattr__(self, 'form', None)

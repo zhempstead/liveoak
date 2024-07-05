@@ -168,6 +168,8 @@ class GameSave():
             return
 
         for _, row in self.generation.breed.iterrows():
+            if "GAME" in row and not self.game.match(row.GAME):
+                continue
             parent = self.parse_pokemon_input(row.PARENT, forbidden={"NOBREED"})
             parent_pokemon = self.get_pokemon(parent)
             if parent not in self.breeding[parent_pokemon]:
@@ -220,8 +222,19 @@ class GameSave():
                         if isinstance(o, PokemonEntry):
                             self.add_unique(o)
 
+        if self.generation.misc is not None:
+            for _, row in self.generation.misc.iterrows():
+                if not self.game.match(row.GAME):
+                    continue
+                for choice in self.parse_output(row.OUTPUT):
+                    for o in choice:
+                        if isinstance(o, PokemonEntry):
+                            self.add_unique(o)
+
         if self.generation.trade is not None:
             for _, row in self.generation.trade.iterrows():
+                if not self.game.match(row.GAME):
+                    continue
                 for os in self.parse_pokemon_output(row.GET):
                     for o in os:
                         self.add_unique(o)
@@ -286,6 +299,8 @@ class GameSave():
         if self.generation.breed is not None and "NO_BREED" not in self.game.props and "NO_DEX" not in self.game.props:
             ditto = self.parse_pokemon_input('Ditto', forbidden={"NOBREED"})
             for _, row in self.generation.breed.iterrows():
+                if "GAME" in row and not self.game.match(row.GAME):
+                    continue
                 pr = self.parse_pokemon_input(row.PARENT, forbidden={"NOBREED"})
                 for gender in self.generation.genders(self.get_pokemon(pr)): 
                     pg = replace(pr, gender=gender)
@@ -412,11 +427,9 @@ class GameSave():
                 cons, _ = self.parse_input(row.get("CONSUMED"))
                 reqs, _ = self.parse_input(row.get("REQUIRED"))
                 output = self.parse_output(row.OUTPUT)
-                repeats = int(row.REPEATS)
-                rules.append((Rule(
-                    frozenset(cons) if cons else frozenset(), # type: ignore
-                    frozenset(reqs) if reqs else frozenset(), # type: ignore
-                    frozenset(output[0])), repeats))
+                assert len(output) == 1, "misc doesn't support choice outputs"
+                repeats = float(row.REPEATS)
+                rules += self._multi_rules(cons, reqs, output[0], repeats)
 
         if self.generation.pickup_item is not None and "NO_DEX" not in self.game.props:
             # Assumes it's possible to obtain a Pokemon with Pickup in any game w/abilities
@@ -429,6 +442,7 @@ class GameSave():
             for _, row in self.generation.trade.iterrows():
                 if not self.game.match(row.GAME):
                     continue
+                repeats = float(row.get("REPEATS", 1))
                 reqs, valid = self.parse_input(row.get("REQUIRED"))
                 if not valid:
                     continue
@@ -444,10 +458,10 @@ class GameSave():
                 get_pokemon = self.get_pokemon(gets[0][0])
                 item = row.get("ITEM") or None
                 choice = None
-                if len(gets) * len(gives) > 1:
+                if len(gets) * len(gives) > 1 and repeats != math.inf:
                     _choice_idx += 1
                     choice = ChoiceEntry(self.cartridge.id, f"trade_{row.GET}:{_choice_idx}")
-                    rules += self._multi_rules(set(), reqs, {choice}, 1)
+                    rules += self._multi_rules(set(), reqs, {choice}, repeats)
                     reqs = set()
 
                 if get_pokemon in trade_evo_pairs:
@@ -486,7 +500,7 @@ class GameSave():
                         if item:
                             evo_output.add(ItemEntry(self.cartridge.id, item))
                         
-                        rules += self._multi_rules(evo_consumed, reqs, evo_output, repeats=1)
+                        rules += self._multi_rules(evo_consumed, reqs, evo_output, repeats)
 
         wild_items = {}
         if self.generation.wild_item is not None:

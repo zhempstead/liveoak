@@ -1,0 +1,116 @@
+GAME,REQUIRED,FORM
+CORE,"Venusaur,Venusaurite",Venusaur_Mega
+CORE,"Charizard,Charizardite X",Charizard_Mega X
+CORE,"Charizard,Charizardite Y",Charizard_Mega Y
+CORE,"Blastoise,Blastoisinite",Blastoise_Mega
+CORE,"Beedrill,Beedrillite",Beedrill_Mega
+CORE,"Pidgeot,Pidgeotite",Pidgeot_Mega
+CORE,"Alakazam,Alakazite",Alakazam_Mega
+CORE,"Slowbro,Slowbronite",Slowbro_Mega
+CORE,"Gengar,Gengarite",Gengar_Mega
+CORE,"Kangaskhan,Kangaskhanite",Kangaskhan_Mega
+CORE,"Pinsir,Pinsirite",Pinsir_Mega
+CORE,"Gyarados,Gyaradosite",Gyarados_Mega
+CORE,"Aerodactyl,Aerodactylite",Aerodactyl_Mega
+CORE,"Mewtwo,Mewtwonite X",Mewtwo_Mega X
+CORE,"Mewtwo,Mewtwonite Y",Mewtwo_Mega Y
+"SUN,MOON,ULTRASUN,ULTRAMOON","Ampharos,Ampharosite",Ampharos_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Steelix,Steelixite",Steelix_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Scizor,Scizorite",Scizor_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Heracross,Heracronite",Heracross_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Houndoom,Houndoominite",Houndoom_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Tyranitar,Tyranitarite",Tyranitar_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Sceptile,Sceptilite",Sceptile_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Blaziken,Blazikenite",Blaziken_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Swampert,Swampertite",Swampert_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Gardevoir,Gardevoirite",Gardevoir_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Sableye,Sablenite",Sableye_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Mawile,Mawilite",Mawile_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Aggron,Aggronite",Aggron_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Medicham,Medichamite",Medicham_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Manectric,Manectite",Manectric_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Sharpedo,Sharpedonite",Sharpedo_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Camerupt,Cameruptite",Camerupt_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Altaria,Altarianite",Altaria_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON",Castform,Castform_Sunny
+"SUN,MOON,ULTRASUN,ULTRAMOON",Castform,Castform_Rainy
+"SUN,MOON,ULTRASUN,ULTRAMOON",Castform,Castform_Snowy
+"SUN,MOON,ULTRASUN,ULTRAMOON","Banette,Banettite",Banette_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Absol,Absolite",Absol_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Glalie,Glalitite",Glalie_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Salamence,Salamencite",Salamence_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Metagross,Metagrossite",Metagross_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Latias,Latiasite",Latias_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Latios,Latiosite",Latios_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Kyogre,Blue Orb",Kyogre_Primal
+"SUN,MOON,ULTRASUN,ULTRAMOON","Groudon,Red Orb",Groudon_Primal
+"SUN,MOON,ULTRASUN,ULTRAMOON",Cherrim_Overcast,Cherrim_Sunshine
+"SUN,MOON,ULTRASUN,ULTRAMOON","Lopunny,Lopunnite",Lopunny_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Garchomp,Garchompite",Garchomp_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Lucario,Lucarionite",Lucario_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Abomasnow,Abomasite",Abomasnow_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Gallade,Galladite",Gallade_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON","Giratina_Altered,Griseous Orb",Giratina_Origin
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Insect Plate",Arceus_Bug
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Dread Plate",Arceus_Dark
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Draco Plate",Arceus_Dragon
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Zap Plate",Arceus_Electric
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Fist Plate",Arceus_Fighting
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Flame Plate",Arceus_Fire
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Sky Plate",Arceus_Flying
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Spooky Plate",Arceus_Ghost
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Meadow Plate",Arceus_Grass
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Earth Plate",Arceus_Ground
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Icicle Plate",Arceus_Ice
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Toxic Plate",Arceus_Poison
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Mind Plate",Arceus_Psychic
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Stone Plate",Arceus_Rock
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Iron Plate",Arceus_Steel
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Splash Plate",Arceus_Water
+"SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Pixie Plate",Arceus_Fairy
+"SUN,MOON,ULTRASUN,ULTRAMOON","Audino,Audinite",Audino_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON",Darmanitan_ZENMODE,Darmanitan_Zen
+"SUN,MOON,ULTRASUN,ULTRAMOON","Kyurem,Reshiram,DNA Splicers",Kyurem_White
+"SUN,MOON,ULTRASUN,ULTRAMOON","Kyurem,Zekrom,DNA Splicers",Kyurem_Black
+"SUN,MOON,ULTRASUN,ULTRAMOON",Meloetta_Aria,Meloetta_Pirouette
+"SUN,MOON,ULTRASUN,ULTRAMOON","Genesect,Shock Drive",Genesect_Shock Drive
+"SUN,MOON,ULTRASUN,ULTRAMOON","Genesect,Burn Drive",Genesect_Burn Drive
+"SUN,MOON,ULTRASUN,ULTRAMOON","Genesect,Chill Drive",Genesect_Chill Drive
+"SUN,MOON,ULTRASUN,ULTRAMOON","Genesect,Douse Drive",Genesect_Douse Drive
+"SUN,MOON,ULTRASUN,ULTRAMOON",Greninja_Battle Bond,Greninja_Ash
+"SUN,MOON,ULTRASUN,ULTRAMOON",Aegislash_Shield,Aegislash_Blade
+"SUN,MOON,ULTRASUN,ULTRAMOON",Xerneas,Xerneas_Active
+"SUN,MOON,ULTRASUN,ULTRAMOON",Zygarde_50% Power Construct,Zygarde_Complete
+"SUN,MOON,ULTRASUN,ULTRAMOON",Zygarde_10% Power Construct,Zygarde_Complete
+"SUN,MOON,ULTRASUN,ULTRAMOON","Diancie,Diancite",Diancie_Mega
+"SUN,MOON,ULTRASUN,ULTRAMOON",Wishiwashi_Solo,Wishiwashi_School
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Bug Memory",Silvally_Type: Bug
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Dark Memory",Silvally_Type: Dark
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Dragon Memory",Silvally_Type: Dragon
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Electric Memory",Silvally_Type: Electric
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Fairy Memory",Silvally_Type: Fairy
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Fighting Memory",Silvally_Type: Fighting
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Fire Memory",Silvally_Type: Fire
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Flying Memory",Silvally_Type: Flying
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Ghost Memory",Silvally_Type: Ghost
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Grass Memory",Silvally_Type: Grass
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Ground Memory",Silvally_Type: Ground
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Ice Memory",Silvally_Type: Ice
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Poison Memory",Silvally_Type: Poison
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Psychic Memory",Silvally_Type: Psychic
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Rock Memory",Silvally_Type: Rock
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Steel Memory",Silvally_Type: Steel
+"SUN,MOON,ULTRASUN,ULTRAMOON","Silvally,Water Memory",Silvally_Type: Water
+"SUN,MOON,ULTRASUN,ULTRAMOON",Minior_Red Core,Minior_Meteor
+"SUN,MOON,ULTRASUN,ULTRAMOON",Minior_Orange Core,Minior_Meteor
+"SUN,MOON,ULTRASUN,ULTRAMOON",Minior_Yellow Core,Minior_Meteor
+"SUN,MOON,ULTRASUN,ULTRAMOON",Minior_Green Core,Minior_Meteor
+"SUN,MOON,ULTRASUN,ULTRAMOON",Minior_Blue Core,Minior_Meteor
+"SUN,MOON,ULTRASUN,ULTRAMOON",Minior_Indigo Core,Minior_Meteor
+"SUN,MOON,ULTRASUN,ULTRAMOON",Minior_Violet Core,Minior_Meteor
+"SUN,MOON,ULTRASUN,ULTRAMOON",Mimikyu_Disguised,Mimikyu_Busted
+"SUN,MOON,ULTRASUN,ULTRAMOON",Mimikyu_Disguised Totem,Mimikyu_Busted Totem
+"ULTRASUN,ULTRAMOON","Necrozma,Solgaleo,N-Solarizer",Necrozma_Dusk Mane
+"ULTRASUN,ULTRAMOON","Necrozma,Lunala,N-Lunarizer",Necrozma_Dawn Wings
+"ULTRASUN,ULTRAMOON","Necrozma,Solgaleo,N-Solarizer",Necrozma_Ultra
+"ULTRASUN,ULTRAMOON","Necrozma,Lunala,N-Lunarizer",Necrozma_Ultra

@@ -1,0 +1,25 @@
+GAME,GIVE,GET,ITEM,REQUIRED,REPEATS
+"SUN,MOON",Spearow,Machop_MALE,,,1
+"SUN,MOON",Lillipup,Bounsweet,,,1
+"SUN,MOON",Zubat,Poliwhirl_FEMALE,,,1
+"SUN,MOON",Pancham,Happiny,,,1
+"SUN,MOON",Haunter,Graveler_Alolan_MALE,,,1
+"SUN,MOON",Granbull,Steenee,,,1
+"SUN,MOON",Bewear,Talonflame,,,1
+"ULTRASUN,ULTRAMOON",Spearow,Hawlucha_MALE,,,1
+"ULTRASUN,ULTRAMOON",Lillipup,Noibat_MALE,,,1
+"ULTRASUN,ULTRAMOON",Tentacool,Barboach_FEMALE,,,1
+"ULTRASUN,ULTRAMOON",Trumbeak,Arbok_FEMALE,,,1
+"ULTRASUN,ULTRAMOON",Phantump,Phantump_MALE,,,1
+"ULTRASUN,ULTRAMOON",Granbull,Shellos_West Sea_FEMALE,,,1
+"ULTRASUN,ULTRAMOON",Bewear,Tauros,,,1
+"LETSGOPIKACHU,LETSGOEEVEE",Rattata,Rattata_Alolan,,,inf
+"LETSGOPIKACHU,LETSGOEEVEE",Geodude,Geodude_Alolan,,,inf
+"LETSGOPIKACHU,LETSGOEEVEE",Diglett,Diglett_Alolan,,,inf
+"LETSGOPIKACHU,LETSGOEEVEE",Raichu,Raichu_Alolan,,,inf
+"LETSGOPIKACHU,LETSGOEEVEE",Marowak,Marowak_Alolan,,,inf
+"LETSGOPIKACHU,LETSGOEEVEE",Exeggutor,Exeggutor_Alolan,,,inf
+LETSGOPIKACHU,Sandshrew,Sandshrew_Alolan,,,inf
+LETSGOPIKACHU,Grimer,Grimer_Alolan,,,inf
+LETSGOEEVEE,Vulpix,Vulpix_Alolan,,,inf
+LETSGOEEVEE,Meowth,Meowth_Alolan,,,inf

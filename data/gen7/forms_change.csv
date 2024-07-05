@@ -1,0 +1,67 @@
+GAME,SPECIES,IN_FORM,OUT_FORM,REQUIRED,CONSUMED
+"SUN,MOON,ULTRASUN,ULTRAMOON",Deoxys,,Attack,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Deoxys,,Defense,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Deoxys,,Speed,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Deoxys,Attack,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Deoxys,Defense,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Deoxys,Speed,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Burmy,Plant Cloak,Sandy Cloak,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Burmy,Plant Cloak,Trash Cloak,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Burmy,Sandy Cloak,Plant Cloak,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Burmy,Sandy Cloak,Trash Cloak,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Burmy,Trash Cloak,Plant Cloak,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Burmy,Trash Cloak,Sandy Cloak,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rotom,,Heat,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rotom,,Wash,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rotom,,Frost,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rotom,,Fan,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rotom,,Mow,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rotom,Heat,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rotom,Wash,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rotom,Frost,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rotom,Fan,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rotom,Mow,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Shaymin,Land,Sky,Gracidea,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Shaymin,Sky,Land,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Tornadus,Incarnate,Therian,Reveal Glass,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Tornadus,Therian,Incarnate,Reveal Glass,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Thundurus,Incarnate,Therian,Reveal Glass,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Thundurus,Therian,Incarnate,Reveal Glass,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Landorus,Incarnate,Therian,Reveal Glass,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Landorus,Therian,Incarnate,Reveal Glass,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Keldeo,,Resolute,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Keldeo,Resolute,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,,Heart Trim,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,,Star Trim,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,,Diamond Trim,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,,Debutante Trim,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,,Matron Trim,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,,Dandy Trim,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,,La Reine Trim,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,,Kabuki Trim,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,,Pharaoh Trim,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,Heart Trim,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,Star Trim,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,Diamond Trim,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,Debutante Trim,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,Matron Trim,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,Dandy Trim,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,La Reine Trim,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,Kabuki Trim,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Furfrou,Pharaoh Trim,,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Hoopa,Confined,Unbound,Prison Bottle,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Hoopa,Unbound,Confined,,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Zygarde,50% Power Construct,10% Power Construct,Zygarde Cube,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Zygarde,10% Power Construct,50% Power Construct,Zygarde Cube,
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Pom-Pom Style,Baile Style,,Red Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Pa'u Style,Baile Style,,Red Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Sensu Style,Baile Style,,Red Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Baile Style,Pom-Pom Style,,Yellow Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Pa'u Style,Pom-Pom Style,,Yellow Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Sensu Style,Pom-Pom Style,,Yellow Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Baile Style,Pa'u Style,,Pink Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Pom-Pom Style,Pa'u Style,,Pink Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Sensu Style,Pa'u Style,,Pink Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Baile Style,Sensu Style,,Purple Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Pom-Pom Style,Sensu Style,,Purple Nectar
+"SUN,MOON,ULTRASUN,ULTRAMOON",Oricorio,Pa'u Style,Sensu Style,,Purple Nectar

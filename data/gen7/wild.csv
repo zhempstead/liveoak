@@ -1,0 +1,529 @@
+SPECIES,SUN,MOON,ULTRASUN,ULTRAMOON,LETSGOPIKACHU,LETSGOEEVEE
+Bulbasaur,,,inf,inf,inf,inf
+Charmander,,,inf,inf,inf,inf
+Charizard,,,,,inf,inf
+Squirtle,,,inf,inf,inf,inf
+Caterpie,inf,inf,inf,inf,inf,inf
+Metapod,inf,inf,inf,inf,inf,inf
+Butterfree,inf,inf,inf,inf,inf,
+Weedle,,,,,inf,inf
+Kakuna,,,,,inf,inf
+Beedrill,,,inf,inf,,inf
+Pidgey,,,,,inf,inf
+Pidgeotto,,,,,inf,inf
+Pidgeot,,,inf,inf,inf,inf
+Rattata,,,,,inf,inf
+Rattata_Alolan,inf,inf,inf,inf,,
+Raticate,,,,,inf,inf
+Raticate_Alolan,inf,inf,inf,inf,,
+Spearow,inf,inf,inf,inf,inf,inf
+Fearow,inf,inf,inf,inf,inf,inf
+Ekans,,,inf,inf,,inf
+Arbok,,,,,,inf
+Pikachu,inf,inf,inf,inf,inf,inf
+Sandshrew,,,,,inf,
+Sandshrew_Alolan,,inf,,inf,,
+Nidoran♀,,,,,inf,inf
+Nidorina,,,,,inf,inf
+Nidoqueen,,,,,inf,inf
+Nidoran♂,,,,,inf,inf
+Nidorino,,,,,inf,inf
+Nidoking,,,,,inf,inf
+Clefairy,inf,inf,inf,inf,inf,inf
+Clefable,,,,,inf,inf
+Vulpix,,,,,,inf
+Vulpix_Alolan,inf,,inf,,,
+Ninetales,,,,,,inf
+Jigglypuff,inf,inf,inf,inf,inf,inf
+Zubat,inf,inf,inf,inf,inf,inf
+Golbat,inf,inf,inf,inf,inf,inf
+Oddish,,,,,inf,
+Gloom,,,,,inf,
+Vileplume,,,,,inf,
+Paras,inf,inf,inf,inf,inf,inf
+Parasect,,,inf,inf,,
+Venonat,,,,,inf,inf
+Venomoth,,,,,inf,inf
+Diglett,,,,,inf,inf
+Diglett_Alolan,inf,inf,inf,inf,,
+Dugtrio,,,,,inf,inf
+Dugtrio_Alolan,inf,inf,inf,inf,,
+Meowth,,,,,,inf
+Meowth_Alolan,inf,inf,inf,inf,,
+Persian_Alolan,,,inf,inf,,
+Psyduck,inf,inf,inf,inf,inf,inf
+Golduck,inf,inf,inf,inf,inf,inf
+Mankey,inf,inf,inf,inf,inf,
+Primeape,inf,inf,inf,inf,,
+Growlithe,inf,inf,inf,inf,inf,
+Arcanine,,,,,inf,
+Poliwag,inf,inf,inf,inf,inf,inf
+Poliwhirl,inf,inf,inf,inf,inf,inf
+Poliwrath,inf,inf,inf,inf,inf,inf
+Abra,inf,inf,inf,inf,inf,inf
+Kadabra,inf,inf,,,inf,inf
+Machop,inf,inf,inf,inf,inf,inf
+Machoke,inf,inf,inf,inf,inf,inf
+Bellsprout,inf,inf,,,,inf
+Weepinbell,,,,,,inf
+Victreebel,,,,,,inf
+Tentacool,inf,inf,inf,inf,inf,inf
+Tentacruel,inf,inf,inf,inf,inf,inf
+Geodude,,,,,inf,inf
+Geodude_Alolan,inf,inf,,,,
+Graveler,,,,,inf,inf
+Graveler_Alolan,inf,inf,inf,inf,,
+Ponyta,,,,,inf,inf
+Rapidash,,,,,inf,inf
+Slowpoke,inf,inf,inf,inf,inf,inf
+Slowbro,inf,inf,inf,inf,inf,inf
+Magnemite,inf,inf,inf,inf,inf,inf
+Magneton,,,,,inf,inf
+Farfetch'd,,,,,inf,inf
+Doduo,,,,,inf,inf
+Dodrio,,,,,inf,inf
+Seel,,,inf,inf,inf,inf
+Dewgong,,,,,inf,inf
+Grimer,,,,,inf,
+Grimer_Alolan,inf,inf,inf,inf,,
+Muk,,,,,inf,
+Shellder,inf,inf,inf,inf,inf,inf
+Cloyster,,,,,inf,inf
+Gastly,inf,inf,inf,inf,inf,inf
+Haunter,inf,inf,inf,inf,inf,inf
+Gengar,inf,inf,inf,inf,,
+Onix,,,inf,inf,inf,inf
+Drowzee,inf,inf,inf,inf,inf,inf
+Hypno,inf,inf,inf,inf,,
+Krabby,,,,,inf,inf
+Kingler,,,,,inf,inf
+Voltorb,,,,,inf,inf
+Electrode,,,3,3,4,4
+Exeggcute,inf,inf,inf,inf,inf,inf
+Exeggutor,,,,,inf,inf
+Exeggutor_Alolan,inf,inf,inf,inf,,
+Cubone,inf,inf,inf,inf,inf,inf
+Hitmonlee,,,,,inf,inf
+Hitmonchan,,,,,inf,inf
+Lickitung,,,inf,inf,inf,inf
+Koffing,,,,,,inf
+Weezing,,,,,,inf
+Rhyhorn,inf,inf,inf,inf,inf,inf
+Rhydon,,,,,inf,inf
+Chansey,inf,inf,inf,inf,inf,inf
+Tangela,,,,,inf,inf
+Kangaskhan,inf,inf,inf,inf,inf,inf
+Horsea,inf,inf,inf,inf,inf,inf
+Seadra,,,,,inf,inf
+Goldeen,inf,inf,inf,inf,inf,inf
+Seaking,inf,inf,inf,inf,inf,inf
+Staryu,inf,inf,inf,inf,inf,inf
+Starmie,inf,inf,inf,inf,inf,inf
+Mr. Mime,,,inf,inf,inf,inf
+Scyther,inf,inf,inf,inf,inf,
+Jynx,,,inf,inf,inf,inf
+Electabuzz,inf,inf,inf,inf,inf,inf
+Magmar,inf,inf,inf,inf,inf,inf
+Pinsir,inf,inf,inf,inf,,inf
+Tauros,inf,inf,inf,inf,inf,inf
+Magikarp,inf,inf,inf,inf,inf,inf
+Gyarados,inf,inf,inf,inf,inf,inf
+Lapras,inf,inf,inf,inf,inf,inf
+Ditto,inf,inf,inf,inf,inf,inf
+Eevee,inf,inf,inf,inf,inf,inf
+Porygon,,,,,inf,inf
+Snorlax,inf,inf,inf,inf,inf,inf
+Articuno,,,1,1,inf,inf
+Zapdos,,,1,1,inf,inf
+Moltres,,,1,1,inf,inf
+Dratini,inf,inf,inf,inf,inf,inf
+Dragonair,inf,inf,inf,inf,inf,inf
+Dragonite,inf,inf,inf,inf,inf,inf
+Mewtwo,,,1,1,1,1
+Chikorita,inf,inf,,,,
+Cyndaquil,inf,inf,,,,
+Totodile,inf,inf,,,,
+Hoothoot,,,inf,inf,,
+Noctowl,,,inf,inf,,
+Ledyba,inf,inf,inf,inf,,
+Ledian,inf,inf,inf,inf,,
+Spinarak,inf,inf,inf,inf,,
+Ariados,inf,inf,inf,inf,,
+Crobat,inf,inf,inf,inf,,
+Chinchou,inf,inf,inf,inf,,
+Lanturn,,,inf,inf,,
+Pichu,inf,inf,inf,inf,,
+Cleffa,inf,inf,inf,inf,,
+Igglybuff,inf,inf,inf,inf,,
+Natu,,,inf,inf,,
+Xatu,,,inf,inf,,
+Mareep,,,inf,inf,,
+Flaaffy,,,inf,inf,,
+Marill,inf,inf,,,,
+Sudowoodo,inf,inf,inf,inf,,
+Politoed,inf,inf,inf,inf,,
+Aipom,,,inf,inf,,
+Quagsire,,,inf,inf,,
+Espeon,inf,inf,inf,inf,,
+Umbreon,inf,inf,inf,inf,,
+Murkrow,inf,inf,inf,inf,,
+Slowking,,,inf,inf,,
+Misdreavus,inf,inf,inf,inf,,
+Pineco,,,inf,inf,,
+Dunsparce,,,inf,inf,,
+Snubbull,,,inf,inf,,
+Granbull,inf,inf,inf,inf,,
+Heracross,,,inf,inf,,
+Sneasel,inf,inf,inf,inf,,
+Magcargo,,,inf,inf,,
+Swinub,inf,inf,inf,inf,,
+Corsola,inf,inf,inf,inf,,
+Remoraid,,,inf,inf,,
+Octillery,,,inf,inf,,
+Delibird,inf,inf,inf,inf,,
+Skarmory,inf,inf,inf,inf,,
+Houndour,,,inf,,,
+Houndoom,,,inf,,,
+Smeargle,inf,inf,inf,inf,,
+Smoochum,,,inf,inf,,
+Elekid,inf,inf,inf,inf,,
+Magby,inf,inf,inf,inf,,
+Miltank,inf,inf,inf,inf,,
+Blissey,,,inf,inf,,
+Raikou,,,1,,,
+Entei,,,,1,,
+Suicune,,,"1[Raikou,Entei]","1[Raikou,Entei]",,
+Larvitar,,,inf,inf,,
+Lugia,,,,1,,
+Ho-Oh,,,1,,,
+Grovyle,,,inf,inf,,
+Combusken,,,inf,inf,,
+Marshtomp,,,inf,inf,,
+Lombre,,,inf,inf,,
+Nuzleaf,,,inf,inf,,
+Swellow,,,inf,inf,,
+Wingull,inf,inf,inf,inf,,
+Pelipper,inf,inf,inf,inf,,
+Ralts,,,inf,inf,,
+Surskit,inf,inf,inf,inf,,
+Masquerain,inf,inf,inf,inf,,
+Vigoroth,inf,inf,,,,
+Makuhita,inf,inf,inf,inf,,
+Hariyama,inf,inf,inf,inf,,
+Nosepass,inf,inf,inf,inf,,
+Sableye,inf,inf,inf,inf,,
+Mawile,,,inf,inf,,
+Aggron,,,inf,inf,,
+Medicham,,,inf,inf,,
+Electrike,,,,inf,,
+Manectric,,,,inf,,
+Roselia,inf,inf,,,,
+Carvanha,,,inf,inf,,
+Sharpedo,inf,inf,inf,inf,,
+Wailmer,inf,inf,inf,inf,,
+Wailord,inf,inf,inf,inf,,
+Torkoal,inf,inf,inf,inf,,
+Grumpig,,,inf,inf,,
+Spinda,inf,inf,inf,inf,,
+Trapinch,inf,inf,inf,inf,,
+Altaria,,,inf,inf,,
+Barboach,inf,inf,inf,inf,,
+Whiscash,inf,inf,inf,inf,,
+Corphish,,,inf,inf,,
+Crawdaunt,,,inf,inf,,
+Baltoy,,,,inf,,
+Feebas,inf,inf,inf,inf,,
+Castform,inf,inf,inf,inf,,
+Kecleon,,,inf,inf,,
+Shuppet,,,inf,inf,,
+Banette,,,inf,inf,,
+Tropius,,,inf,inf,,
+Absol,inf,inf,inf,inf,,
+Snorunt,inf,inf,inf,inf,,
+Glalie,inf,inf,inf,inf,,
+Spheal,inf,inf,inf,inf,,
+Clamperl,,,inf,inf,,
+Huntail,,,inf,inf,,
+Gorebyss,,,inf,inf,,
+Relicanth,inf,inf,inf,inf,,
+Luvdisc,inf,inf,inf,inf,,
+Bagon,inf,inf,inf,inf,,
+Shelgon,inf,inf,inf,inf,,
+Salamence,inf,inf,inf,inf,,
+Beldum,inf,inf,inf,inf,,
+Metang,inf,inf,,,,
+Regirock,,,1,1,,
+Regice,,,1,1,,
+Registeel,,,1,1,,
+Latias,,,,1,,
+Latios,,,1,,,
+Kyogre,,,,1,,
+Groudon,,,1,,,
+Groudon_Primal,,,
+Rayquaza,,,"1[Kyogre,Groudon]","1[Kyogre,Groudon]",,
+Grotle,,,inf,inf,,
+Monferno,,,inf,inf,,
+Prinplup,,,inf,inf,,
+Staravia,inf,inf,,,,
+Luxio,inf,inf,,,,
+Floatzel,,,inf,inf,,
+Gastrodon_East Sea,inf,inf,inf,inf,,
+Ambipom,,,inf,inf,,
+Drifloon,inf,inf,inf,inf,,
+Drifblim,inf,inf,,,,
+Buneary,,,inf,inf,,
+Lopunny,,,inf,inf,,
+Mismagius,inf,inf,,,,
+Honchkrow,,,inf,inf,,
+Bonsly,inf,inf,inf,inf,,
+Mime Jr.,,,inf,inf,,
+Happiny,inf,inf,inf,inf,,
+Gabite,inf,inf,inf,inf,,
+Munchlax,inf,inf,inf,inf,,
+Riolu,inf,inf,inf,inf,,
+Lucario,inf,inf,inf,inf,,
+Hippowdon,,,inf,inf,,
+Drapion,,,inf,inf,,
+Finneon,inf,inf,inf,inf,,
+Lumineon,inf,inf,inf,inf,,
+Mantyke,,,inf,inf,,
+Abomasnow,,,inf,inf,,
+Togekiss,inf,inf,,,,
+Yanmega,,,inf,inf,,
+Rotom,,,inf,inf,,
+Uxie,,,1,1,,
+Mesprit,,,1,1,,
+Azelf,,,1,1,,
+Dialga,,,1,,,
+Palkia,,,,1,,
+Heatran,,,1,,,
+Regigigas,,,,1,,
+Giratina_Altered,,,"1[Dialga,Palkia]","1[Dialga,Palkia]",,
+Cresselia,,,1,1,,
+Serperior,inf,inf,,,,
+Emboar,inf,inf,,,,
+Samurott,inf,inf,,,,
+Lillipup,inf,inf,inf,inf,,
+Roggenrola,inf,inf,inf,inf,,
+Boldore,inf,inf,inf,inf,,
+Audino,,,inf,inf,,
+Conkeldurr,inf,inf,,,,
+Leavanny,inf,inf,inf,inf,,
+Venipede,inf,inf,,,,
+Cottonee,inf,,inf,,,
+Petilil,,inf,,inf,,
+Basculin_Red-Striped,,,inf,,,
+Basculin_Blue-Striped,,,,inf,,
+Sandile,inf,inf,,,,
+Krokorok,,,inf,inf,,
+Crustle,,,inf,inf,,
+Scraggy,,,inf,inf,,
+Sigilyph,,,inf,inf,,
+Trubbish,inf,inf,inf,inf,,
+Garbodor,inf,inf,,,,
+Zorua,,,inf,inf,,
+Zoroark,,,inf,inf,,
+Minccino,,,inf,inf,,
+Gothita,inf,inf,,,,
+Duosion,inf,inf,,,,
+Swanna,,,inf,inf,,
+Vanillite,inf,inf,inf,inf,,
+Vanillish,inf,inf,inf,inf,,
+Vanilluxe,,,inf,inf,,
+Emolga,inf,inf,inf,inf,,
+Frillish,,,inf,inf,,
+Alomomola,inf,inf,inf,inf,,
+Klink,inf,inf,,,,
+Eelektross,inf,inf,inf,inf,,
+Elgyem,,,inf,inf,,
+Litwick,inf,inf,inf,inf,,
+Axew,inf,inf,inf,inf,,
+Stunfisk,,,inf,inf,,
+Mienfoo,,,inf,inf,,
+Druddigon,,,inf,inf,,
+Golett,,,inf,,,
+Pawniard,,,inf,inf,,
+Bisharp,,,inf,inf,,
+Rufflet,inf,,inf,,,
+Braviary,inf,,inf,,,
+Vullaby,,inf,,inf,,
+Mandibuzz,,inf,,inf,,
+Deino,inf,inf,,,,
+Larvesta,,,inf,inf,,
+Volcarona,,,inf,inf,,
+Cobalion,,,1,1,,
+Terrakion,,,1,1,,
+Virizion,,,1,1,,
+Tornadus_Incarnate,,,1,,,
+Thundurus_Incarnate,,,,1,,
+Reshiram,,,1,,,
+Zekrom,,,,1,,
+Landorus_Incarnate,,,"1[Tornadus_Incarnate,Thundurus_Incarnate]","1[Tornadus_Incarnate,Thundurus_Incarnate]",,
+Kyurem,,,"1[Reshiram,Zekrom]","1[Reshiram,Zekrom]",,
+Chesnaught,,,inf,inf,,
+Delphox,,,inf,inf,,
+Greninja,,,inf,inf,,
+Fletchling,inf,inf,inf,inf,,
+Fletchinder,inf,inf,inf,inf,,
+Scatterbug_Archipelago,,,inf[$LOC_ARCHIPELAGO],inf[$LOC_ARCHIPELAGO],,
+Scatterbug_Continental,,,inf[$LOC_CONTINENTAL],inf[$LOC_CONTINENTAL],,
+Scatterbug_Elegant,,,inf[$LOC_ELEGANT],inf[$LOC_ELEGANT],,
+Scatterbug_Garden,,,inf[$LOC_GARDEN],inf[$LOC_GARDEN],,
+Scatterbug_High Plains,,,inf[$LOC_HIGHPLAINS],inf[$LOC_HIGHPLAINS],,
+Scatterbug_Icy Snow,,,inf[$LOC_ICYSNOW],inf[$LOC_ICYSNOW],,
+Scatterbug_Jungle,,,inf[$LOC_JUNGLE],inf[$LOC_JUNGLE],,
+Scatterbug_Marine,,,inf[$LOC_MARINE],inf[$LOC_MARINE],,
+Scatterbug_Meadow,,,inf[$LOC_MEADOW],inf[$LOC_MEADOW],,
+Scatterbug_Modern,,,inf[$LOC_MODERN],inf[$LOC_MODERN],,
+Scatterbug_Monsoon,,,inf[$LOC_MONSOON],inf[$LOC_MONSOON],,
+Scatterbug_Ocean,,,inf[$LOC_OCEAN],inf[$LOC_OCEAN],,
+Scatterbug_Polar,,,inf[$LOC_POLAR],inf[$LOC_POLAR],,
+Scatterbug_River,,,inf[$LOC_RIVER],inf[$LOC_RIVER],,
+Scatterbug_Sandstorm,,,inf[$LOC_SANDSTORM],inf[$LOC_SANDSTORM],,
+Scatterbug_Savanna,,,inf[$LOC_SAVANNA],inf[$LOC_SAVANNA],,
+Scatterbug_Sun,,,inf[$LOC_SUN],inf[$LOC_SUN],,
+Scatterbug_Tundra,,,inf[$LOC_TUNDRA],inf[$LOC_TUNDRA],,
+Litleo,,,inf,inf,,
+Pyroar,,,inf,inf,,
+Flabébé_Yellow,,,inf,inf,,
+Flabébé_Orange,,,inf,inf,,
+Flabébé_White,,,inf,inf,,
+Floette_Red,,,inf,inf,,
+Floette_Orange,,,inf,inf,,
+Floette_Blue,,,inf,inf,,
+Floette_White,,,inf,inf,,
+Pancham,inf,inf,inf,inf,,
+Pangoro,inf,inf,inf,inf,,
+Furfrou,,,inf,inf,,
+Honedge,inf,inf,inf,inf,,
+Inkay,,,inf,inf,,
+Barbaracle,,,inf,inf,,
+Dragalge,,,,inf,,
+Clawitzer,,,inf,,,
+Heliolisk,,,inf,inf,,
+Hawlucha,,,inf,inf,,
+Dedenne,,,inf,inf,,
+Carbink,inf,inf,inf,inf,,
+Goomy,inf,inf,inf,inf,,
+Sliggoo,inf,inf,inf,inf,,
+Klefki,inf,inf,inf,inf,,
+Phantump,inf,inf,inf,inf,,
+Trevenant,inf,inf,,,,
+Noibat,,,inf,inf,,
+Noivern,,,inf,inf,,
+Xerneas,,,1,,,
+Yveltal,,,,1,,
+Zygarde_50%,,,1,1,,
+Pikipek,inf,inf,inf,inf,,
+Trumbeak,inf,inf,inf,inf,,
+Toucannon,,,inf,inf,,
+Yungoos,inf,inf,inf,inf,,
+Gumshoos,inf,inf,inf,inf,,
+Grubbin,inf,inf,inf,inf,,
+Charjabug,inf,inf,inf,inf,,
+Vikavolt,,,inf,inf,,
+Crabrawler,inf,inf,inf,inf,,
+Oricorio_Baile Style,inf,inf,inf,inf,,
+Oricorio_Pom-Pom Style,inf,inf,inf,inf,,
+Oricorio_Pa'u Style,inf,inf,inf,inf,,
+Oricorio_Sensu Style,inf,inf,inf,inf,,
+Cutiefly,inf,inf,inf,inf,,
+Ribombee,inf,inf,inf,inf,,
+Rockruff,inf,inf,inf,inf,,
+Lycanroc_Midday,inf,inf,inf,inf,,
+Lycanroc_Midnight,inf,inf,inf,inf,,
+Wishiwashi_Solo,inf,inf,inf,inf,,
+Mareanie,inf,inf,inf,inf,,
+Mudbray,inf,inf,inf,inf,,
+Mudsdale,inf,inf,inf,inf,,
+Dewpider,inf,inf,inf,inf,,
+Araquanid,inf,inf,inf,inf,,
+Araquanid_Totem,None,,
+Fomantis,inf,inf,inf,inf,,
+Morelull,inf,inf,inf,inf,,
+Shiinotic,,,inf,inf,,
+Salandit,inf,inf,inf,inf,,
+Salazzle,,,inf,inf,,
+Stufful,inf,inf,inf,inf,,
+Bewear,inf,inf,inf,inf,,
+Bounsweet,inf,inf,,,,
+Steenee,,,inf,inf,,
+Comfey,inf,inf,inf,inf,,
+Oranguru,,inf,,inf,,
+Passimian,inf,,inf,,,
+Wimpod,inf,inf,inf,inf,,
+Sandygast,inf,inf,inf,inf,,
+Pyukumuku,inf,inf,inf,inf,,
+Minior_Red Core,inf,inf,inf,inf,,
+Minior_Orange Core,inf,inf,inf,inf,,
+Minior_Yellow Core,inf,inf,inf,inf,,
+Minior_Green Core,inf,inf,inf,inf,,
+Minior_Blue Core,inf,inf,inf,inf,,
+Minior_Indigo Core,inf,inf,inf,inf,,
+Minior_Violet Core,inf,inf,inf,inf,,
+Komala,inf,inf,inf,inf,,
+Turtonator,inf,,inf,,,
+Togedemaru,inf,inf,inf,inf,,
+Mimikyu_Disguised,inf,inf,inf,inf,,
+Bruxish,inf,inf,inf,inf,,
+Drampa,,inf,,inf,,
+Dhelmise,inf,inf,inf,inf,,
+Jangmo-o,inf,inf,inf,inf,,
+Hakamo-o,inf,inf,inf,inf,,
+Kommo-o,inf,inf,inf,inf,,
+Tapu Koko,1,1,1,1,,
+Tapu Lele,1,1,1,1,,
+Tapu Bulu,1,1,1,1,,
+Tapu Fini,1,1,1,1,,
+Solgaleo,1,,1,,,
+Lunala,,1,,1,,
+Nihilego,1,1,inf,inf,,
+Buzzwole,2,,inf,,,
+Pheromosa,,4,,inf,,
+Xurkitree,2,2,inf,inf,,
+Celesteela,,2,,inf,,
+Kartana,4,,inf,,,
+Guzzlord,1,1,inf,inf,,
+Necrozma,1,1,1,1,,
+Magearna,1,1,1,1,,
+Stakataka,,,,2,,
+Blacephalon,,,2,,,
+Armor Fossil,,,inf,inf,,
+Claw Fossil,,,inf,inf,,
+Cover Fossil,,,inf,inf,,
+Dawn Stone,inf,inf,inf,inf,,
+Dome Fossil,,,inf,inf,inf,inf
+Draco Plate,1,1,1,1,,
+Dusk Stone,inf,inf,inf,inf,,
+Earth Plate,1,1,1,1,,
+Everstone,inf,inf,inf,inf,,
+Fire Stone,inf,inf,inf,inf,inf,inf
+Flame Plate,1,1,1,1,,
+Helix Fossil,,,inf,inf,inf,inf
+Ice Stone,inf,inf,inf,inf,inf,inf
+Icicle Plate,1,1,1,1,,
+Insect Plate,1,1,1,1,,
+Jaw Fossil,,,inf,inf,,
+King's Rock,inf,inf,inf,inf,,
+Leaf Stone,inf,inf,inf,inf,2,2
+Meadow Plate,1,1,1,1,,
+Metal Coat,,,1,1,,
+Mind Plate,1,1,1,1,,
+Moon Stone,inf,inf,inf,inf,inf,inf
+Old Amber,,,,,inf,inf
+Oval Stone,1,1,inf,inf,,
+Pink Nectar,inf,inf,inf,inf,,
+Plume Fossil,,,inf,inf,,
+Prism Scale,inf,inf,inf,inf,,
+Purple Nectar,inf,inf,inf,inf,,
+Red Nectar,inf,inf,inf,inf,,
+Root Fossil,,,inf,inf,,
+Sail Fossil,,,inf,inf,,
+Shiny Stone,inf,inf,inf,inf,,
+Skull Fossil,,,inf,inf,,
+Spooky Plate,1,1,1,1,,
+Sun Stone,inf,inf,inf,inf,,
+Thunder Stone,inf,inf,inf,inf,inf,inf
+Toxic Plate,1,1,1,1,,
+Water Stone,inf,inf,inf,inf,inf,inf
+Yellow Nectar,inf,inf,inf,inf,,

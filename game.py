@@ -124,7 +124,7 @@ class Game():
             return "GB"
         elif self.console in {"GBA", "GCN", "eREADER"}:
             return "GBA"
-        elif self.console in {"DS", "3DS", "Wii", None}:
+        elif self.console in {"DS", "3DS", "Wii", "SWITCH", None}:
             return "DS"
         assert False, "Shouldn't reach here"
 
@@ -606,6 +606,10 @@ HARDWARE_MODELS: dict[str, HardwareModel] = {h.name: h for h in [
     HardwareModel("WiiU", frozenset({"JPN", "USA", "EUR", "KOR"}), True, ports=(
         frozendict({"DS": ("Wii",)}),
     ), wireless=frozenset({"DS"})),
+    # Switch
+    HardwareModel("SWITCH", is_console=True, ports=(
+        frozendict({"DS": ("SWITCH",)}),
+    ), wireless=frozenset({"DS"})),
 
     # Peripherals
     # Super Game Boy
@@ -976,7 +980,7 @@ class Collection():
                         # Any region
                         if cart1.console is None or cart1.console == cart2.console:
                             interactions["POKEMON"].add((cart1, cart2))
-                            interactions["CONNECT"].add((cart1, cart2))
+                            #interactions["CONNECT"].add((cart1, cart2))
                 elif game1.name == "BANK":
                     if game2.gen == 6 and game2.core:
                         # Any region
@@ -989,8 +993,10 @@ class Collection():
                                 game3 = cart3.game
                                 if (has_transporter and game3.gen == 5 and game3.core) or \
                                         (game3.gen == 6 and game3.core and (cart3.console is None or cart3.console == cart1.console)):
- 
                                     interactions["POKEMON"].add((cart3, cart2))
+                    elif game2.name in ["SUN", "MOON", "ULTRASUN", "ULTRAMOON"]:
+                        if cart2.console is None or cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
                 elif game1.name == "TRANSPORTER":
                     if game2.name == "BANK":
                         if cart1.console == cart2.console:
@@ -1026,6 +1032,22 @@ class Collection():
                     elif game2.name == "TRANSPORTER":
                         if cart1.console == cart2.console:
                             interactions["POKEMON"].add((cart1, cart2))
+                elif game1.name in ["SUN", "MOON", "ULTRASUN", "ULTRAMOON"]:
+                    if game2.name in ["SUN", "MOON", "ULTRASUN", "ULTRAMOON"]:
+                        if self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "SM_DEMO":
+                        if game1.name in ["SUN", "MOON"] and (cart1.console is None and game1.region_match(game2)) or cart1.console == cart2.console:
+                            interactions["CONNECT"].add((cart1, cart2))
+                    elif game2.name == "BANK":
+                        # Any region
+                        if cart1.console is None or cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
+                            interactions["CONNECT"].add((cart1, cart2))
+                elif game1.name in ["LETSGOPIKACHU", "LETSGOEEVEE"]:
+                    if game2.name in ["LETSGOPIKACHU", "LETSGOEEVEE"]:
+                        if self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
        
         self.interactions = interactions
 
