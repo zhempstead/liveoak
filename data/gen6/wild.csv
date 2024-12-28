@@ -191,8 +191,8 @@ Entei,,,1[Ho-Oh],1[Lugia]
 Suicune,,,1[Ho-Oh],1[Lugia]
 Larvitar,,inf,,
 Pupitar,inf[$FS_Pupitar],inf,,
-Lugia,,,,1[Tidal Bell]
-Ho-Oh,,,1[Clear Bell],
+Lugia,,,,1
+Ho-Oh,,,1,
 Poochyena,,,inf,inf
 Mightyena,inf,inf[$FS_Mightyena],,
 Zigzagoon,inf,inf,inf,inf
@@ -289,7 +289,7 @@ Latias,,,1[Eon Ticket],
 Latios,,,,1[Eon Ticket]
 Kyogre,,,,1
 Groudon,,,1,
-Rayquaza,,,1,1
+Rayquaza_DRAGONASCENT,,,1,1
 Deoxys,,,1,1
 Starly,inf,inf,,
 Staravia,inf,inf,,
@@ -563,7 +563,6 @@ Cover Fossil,inf,inf,,inf
 Dawn Stone,1,1,1,1
 Deep Sea Scale,1,1,inf,inf
 Deep Sea Tooth,1,1,inf,inf
-DNA Splicers,,,1,1
 Dome Fossil,,inf,inf,
 Draco Plate,1,1,1,1
 Dragon Scale,1,1,1,1

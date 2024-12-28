@@ -44,6 +44,7 @@ CORE,"Mewtwo,Mewtwonite Y",Mewtwo_Mega Y
 "SUN,MOON,ULTRASUN,ULTRAMOON","Latios,Latiosite",Latios_Mega
 "SUN,MOON,ULTRASUN,ULTRAMOON","Kyogre,Blue Orb",Kyogre_Primal
 "SUN,MOON,ULTRASUN,ULTRAMOON","Groudon,Red Orb",Groudon_Primal
+"SUN,MOON,ULTRASUN,ULTRAMOON",Rayquaza_DRAGONASCENT,Rayquaza_Mega
 "SUN,MOON,ULTRASUN,ULTRAMOON",Cherrim_Overcast,Cherrim_Sunshine
 "SUN,MOON,ULTRASUN,ULTRAMOON","Lopunny,Lopunnite",Lopunny_Mega
 "SUN,MOON,ULTRASUN,ULTRAMOON","Garchomp,Garchompite",Garchomp_Mega
@@ -70,8 +71,8 @@ CORE,"Mewtwo,Mewtwonite Y",Mewtwo_Mega Y
 "SUN,MOON,ULTRASUN,ULTRAMOON","Arceus,Pixie Plate",Arceus_Fairy
 "SUN,MOON,ULTRASUN,ULTRAMOON","Audino,Audinite",Audino_Mega
 "SUN,MOON,ULTRASUN,ULTRAMOON",Darmanitan_ZENMODE,Darmanitan_Zen
-"SUN,MOON,ULTRASUN,ULTRAMOON","Kyurem,Reshiram,DNA Splicers",Kyurem_White
-"SUN,MOON,ULTRASUN,ULTRAMOON","Kyurem,Zekrom,DNA Splicers",Kyurem_Black
+"SUN,MOON,ULTRASUN,ULTRAMOON","Kyurem,Reshiram",Kyurem_White
+"SUN,MOON,ULTRASUN,ULTRAMOON","Kyurem,Zekrom",Kyurem_Black
 "SUN,MOON,ULTRASUN,ULTRAMOON",Meloetta_Aria,Meloetta_Pirouette
 "SUN,MOON,ULTRASUN,ULTRAMOON","Genesect,Shock Drive",Genesect_Shock Drive
 "SUN,MOON,ULTRASUN,ULTRAMOON","Genesect,Burn Drive",Genesect_Burn Drive
@@ -110,7 +111,7 @@ CORE,"Mewtwo,Mewtwonite Y",Mewtwo_Mega Y
 "SUN,MOON,ULTRASUN,ULTRAMOON",Minior_Violet Core,Minior_Meteor
 "SUN,MOON,ULTRASUN,ULTRAMOON",Mimikyu_Disguised,Mimikyu_Busted
 "SUN,MOON,ULTRASUN,ULTRAMOON",Mimikyu_Disguised Totem,Mimikyu_Busted Totem
-"ULTRASUN,ULTRAMOON","Necrozma,Solgaleo,N-Solarizer",Necrozma_Dusk Mane
-"ULTRASUN,ULTRAMOON","Necrozma,Lunala,N-Lunarizer",Necrozma_Dawn Wings
-"ULTRASUN,ULTRAMOON","Necrozma,Solgaleo,N-Solarizer",Necrozma_Ultra
-"ULTRASUN,ULTRAMOON","Necrozma,Lunala,N-Lunarizer",Necrozma_Ultra
+"ULTRASUN,ULTRAMOON","Necrozma,Solgaleo",Necrozma_Dusk Mane
+"ULTRASUN,ULTRAMOON","Necrozma,Lunala",Necrozma_Dawn Wings
+"ULTRASUN,ULTRAMOON","Necrozma,Solgaleo",Necrozma_Ultra
+"ULTRASUN,ULTRAMOON","Necrozma,Lunala",Necrozma_Ultra

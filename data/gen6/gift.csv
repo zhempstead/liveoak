@@ -1,13 +1,6 @@
 GAME,POKEMON_OR_ITEM,REQUIRED
 CORE,King's Rock,
 CORE,Sun Stone,
-CORE,Gracidea,Shaymin_Land
-CORE,Reveal Glass,Tornadus_Incarnate
-CORE,Reveal Glass,Tornadus_Therian
-CORE,Reveal Glass,Thundurus_Incarnate
-CORE,Reveal Glass,Thundurus_Therian
-CORE,Reveal Glass,Landorus_Incarnate
-CORE,Reveal Glass,Landorus_Therian
 CORE,Burn Drive,Genesect
 CORE,Chill Drive,Genesect
 CORE,Douse Drive,Genesect
@@ -31,7 +24,6 @@ CORE,Shock Drive,Genesect
 "X,Y",Gengarite,
 "X,Y",Prism Scale,
 "X,Y",Venusaurite,
-"X,Y",DNA Splicers,Kyurem
 "OMEGARUBY,ALPHASAPPHIRE","Steelix,Steelixite",ORAS_DEMO.JPN
 "OMEGARUBY,ALPHASAPPHIRE",$DEMO_INTL,ORAS_DEMO.USA
 "OMEGARUBY,ALPHASAPPHIRE",$DEMO_INTL,ORAS_DEMO.EUR
@@ -69,13 +61,10 @@ CORE,Shock Drive,Genesect
 "OMEGARUBY,ALPHASAPPHIRE",Red Orb,
 "OMEGARUBY,ALPHASAPPHIRE",Salamencite,
 "OMEGARUBY,ALPHASAPPHIRE",Sharpedonite,
-"OMEGARUBY,ALPHASAPPHIRE",Prison Bottle,Hoopa_Confined
 X,Charizardite X,
 X,Whipped Dream,
 Y,Aggronite,
 Y,Charizardite Y,
 Y,Sachet,
 OMEGARUBY,Latios,
-OMEGARUBY,Clear Bell,
 ALPHASAPPHIRE,Latias,
-ALPHASAPPHIRE,Tidal Bell,

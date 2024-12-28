@@ -319,9 +319,9 @@ Regice,,,1[Regigigas_FATEFUL],,
 Registeel,,,1[Regigigas_FATEFUL],,
 Latias,,,,1,1[Enigma Stone]
 Latios,,,,1[Enigma Stone],1
-Kyogre_HG,,,,1[Blue Orb],
-Groudon_SS,,,,,1[Red Orb]
-Rayquaza,,,,1[Jade Orb],1[Jade Orb]
+Kyogre_HG,,,,1,
+Groudon_SS,,,,,1
+Rayquaza,,,,"1[Kyogre_HG,Groudon_SS]","1[Kyogre_HG,Groudon_SS]"
 Starly,inf,inf,inf,inf,inf
 Staravia,inf,inf,inf,,
 Bidoof,inf,inf,inf,inf,inf
