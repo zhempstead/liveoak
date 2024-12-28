@@ -1,0 +1,27 @@
+GAME,GIVE,GET,ITEM,REQUIRED,REPEATS
+"SWORD,SHIELD",Bunnelby,Skwovet_MALE,,,1
+"SWORD,SHIELD",Meowth_Galarian,Meowth_MALE,,,1
+"SWORD,SHIELD",Minccino,Cottonee_FEMALE,,,1
+"SWORD,SHIELD",Toxel,Togepi_MALE,,,1
+SWORD,Maractus,Hatenna,,,1
+SHIELD,Maractus,Impidimp,,,1
+"SWORD,SHIELD",Yamask_Galarian,Yamask_MALE,,,1
+SWORD,Vanillish,Throh,,,1
+SHIELD,Vanillish,Sawk,,,1
+"SWORD,SHIELD",Obstagoon,Mr. Mime_MALE,,,1
+"SWORD,SHIELD",Frosmoth,Duraludon,,,1
+"SWORD,SHIELD",Meowth_Galarian,Meowth,,$ISLEOFARMOR,inf
+SHIELD,Ponyta_Galarian,Ponyta,,$ISLEOFARMOR,inf
+SWORD,Farfetch'd_Galarian,Farfetch'd,,$ISLEOFARMOR,inf
+"SWORD,SHIELD",Exeggutor,Exeggutor_Alolan,,$ISLEOFARMOR,inf
+"SWORD,SHIELD",Marowak,Marowak_Alolan,,$ISLEOFARMOR,inf
+"SWORD,SHIELD",Weezing_Galarian,Weezing,,$ISLEOFARMOR,inf
+"SWORD,SHIELD",Mr. Mime_Galarian,Mr. Mime,,$ISLEOFARMOR,inf
+SHIELD,Corsola_Galarian,Corsola,,$ISLEOFARMOR,inf
+"SWORD,SHIELD",Zigzagoon_Galarian,Zigzagoon,,$ISLEOFARMOR,inf
+SWORD,Darumaka_Galarian,Darumaka_ZENMODE,,$ISLEOFARMOR,inf
+"SWORD,SHIELD",Stunfisk_Galarian,Stunfisk,,$ISLEOFARMOR,inf
+"BRILLIANTDIAMOND,SHININGPEARL",Machop,Abra_MALE,,,1
+"BRILLIANTDIAMOND,SHININGPEARL",Buizel,Chatot_FEMALE,,,1
+"BRILLIANTDIAMOND,SHININGPEARL",Medicham,Haunter_MALE,Everstone,,1
+"BRILLIANTDIAMOND,SHININGPEARL",Finneon,Magikarp_FEMALE,,,1

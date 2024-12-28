@@ -1,0 +1,2078 @@
+GAME,PARENT,CHILD,ITEM
+ALL,Bulbasaur,Bulbasaur,
+ALL,Ivysaur,Bulbasaur,
+ALL,Venusaur,Bulbasaur,
+ALL,Charmander,Charmander,
+ALL,Charmeleon,Charmander,
+ALL,Charizard,Charmander,
+ALL,Squirtle,Squirtle,
+ALL,Wartortle,Squirtle,
+ALL,Blastoise,Squirtle,
+ALL,Caterpie,Caterpie,
+ALL,Metapod,Caterpie,
+ALL,Butterfree,Caterpie,
+"BRILLIANTDIAMOND,SHININGPEARL",Weedle,Weedle,
+"BRILLIANTDIAMOND,SHININGPEARL",Kakuna,Weedle,
+"BRILLIANTDIAMOND,SHININGPEARL",Beedrill,Weedle,
+"BRILLIANTDIAMOND,SHININGPEARL",Pidgey,Pidgey,
+"BRILLIANTDIAMOND,SHININGPEARL",Pidgeotto,Pidgey,
+"BRILLIANTDIAMOND,SHININGPEARL",Pidgeot,Pidgey,
+"BRILLIANTDIAMOND,SHININGPEARL",Rattata,Rattata,
+NONE,Rattata_Alolan,Rattata,
+NONE,Rattata_Alolan,Rattata_Alolan,Everstone
+"BRILLIANTDIAMOND,SHININGPEARL",Raticate,Rattata,
+NONE,Raticate_Alolan,Rattata,
+NONE,Raticate_Alolan,Rattata_Alolan,Everstone
+"BRILLIANTDIAMOND,SHININGPEARL",Spearow,Spearow,
+"BRILLIANTDIAMOND,SHININGPEARL",Fearow,Spearow,
+"BRILLIANTDIAMOND,SHININGPEARL",Ekans,Ekans,
+"BRILLIANTDIAMOND,SHININGPEARL",Arbok,Ekans,
+ALL,Pikachu,Pichu,
+ALL,Raichu,Pichu,
+"SWORD,SHIELD",Raichu_Alolan,Pichu
+ALL,Sandshrew,Sandshrew,
+"SWORD,SHIELD",Sandshrew_Alolan,Sandshrew,
+"SWORD,SHIELD",Sandshrew_Alolan,Sandshrew_Alolan,Everstone
+ALL,Sandslash,Sandshrew,
+"SWORD,SHIELD",Sandslash_Alolan,Sandshrew,
+"SWORD,SHIELD",Sandslash_Alolan,Sandshrew_Alolan,Everstone
+ALL,Nidoran♀,Nidoran♀,
+ALL,Nidoran♀,Nidoran♂,
+ALL,Nidoran♂,Nidoran♀,
+ALL,Nidoran♂,Nidoran♂,
+ALL,Nidorino,Nidoran♀,
+ALL,Nidorino,Nidoran♂,
+ALL,Nidoking,Nidoran♀,
+ALL,Nidoking,Nidoran♂,
+ALL,Clefairy,Cleffa,
+ALL,Clefable,Cleffa,
+ALL,Vulpix,Vulpix,
+"SWORD,SHIELD",Vulpix_Alolan,Vulpix,Everstone
+"SWORD,SHIELD",Vulpix_Alolan,Vulpix_Alolan,Everstone
+ALL,Ninetales,Vulpix,
+"SWORD,SHIELD",Ninetales_Alolan,Vulpix,
+"SWORD,SHIELD",Ninetales_Alolan,Vulpix_Alolan,Everstone
+ALL,Jigglypuff,Igglybuff,
+ALL,Wigglytuff,Igglybuff,
+ALL,Zubat,Zubat,
+ALL,Golbat,Zubat,
+ALL,Oddish,Oddish,
+ALL,Gloom,Oddish,
+ALL,Vileplume,Oddish,
+"BRILLIANTDIAMOND,SHININGPEARL",Paras,Paras,
+"BRILLIANTDIAMOND,SHININGPEARL",Parasect,Paras,
+"BRILLIANTDIAMOND,SHININGPEARL",Venonat,Venonat,
+"BRILLIANTDIAMOND,SHININGPEARL",Venomoth,Venonat,
+ALL,Diglett,Diglett,
+"SWORD,SHIELD",Diglett_Alolan,Diglett,
+"SWORD,SHIELD",Diglett_Alolan,Diglett_Alolan,Everstone
+ALL,Dugtrio,Diglett,
+"SWORD,SHIELD",Dugtrio_Alolan,Diglett,
+"SWORD,SHIELD",Dugtrio_Alolan,Diglett,Everstone
+"BRILLIANTDIAMOND,SHININGPEARL",Meowth,Meowth,
+"SWORD,SHIELD",Meowth,Meowth,Everstone
+"SWORD,SHIELD",Meowth,Meowth_Galarian,
+"SWORD,SHIELD",Meowth_Alolan,Meowth_Alolan,Everstone
+"SWORD,SHIELD",Meowth_Alolan,Meowth_Galarian,
+"SWORD,SHIELD",Meowth_Galarian,Meowth_Galarian,
+"BRILLIANTDIAMOND,SHININGPEARL",Persian,Meowth,
+"SWORD,SHIELD",Persian,Meowth,Everstone
+"SWORD,SHIELD",Persian,Meowth_Galarian,
+"SWORD,SHIELD",Persian_Alolan,Meowth_Alolan,Everstone
+"SWORD,SHIELD",Persian_Alolan,Meowth_Galarian,
+ALL,Psyduck,Psyduck,
+ALL,Golduck,Psyduck,
+"BRILLIANTDIAMOND,SHININGPEARL",Mankey,Mankey,
+"BRILLIANTDIAMOND,SHININGPEARL",Primeape,Mankey,
+ALL,Growlithe,Growlithe,
+ALL,Arcanine,Growlithe,
+ALL,Poliwag,Poliwag,
+ALL,Poliwhirl,Poliwag,
+ALL,Poliwrath,Poliwag,
+ALL,Abra,Abra,
+ALL,Kadabra,Abra,
+ALL,Alakazam,Abra,
+ALL,Machop,Machop,
+ALL,Machoke,Machop,
+ALL,Machamp,Machop,
+"BRILLIANTDIAMOND,SHININGPEARL",Bellsprout,Bellsprout,
+"BRILLIANTDIAMOND,SHININGPEARL",Weepinbell,Bellsprout,
+"BRILLIANTDIAMOND,SHININGPEARL",Victreebel,Bellsprout,
+ALL,Tentacool,Tentacool,
+ALL,Tentacruel,Tentacool,
+"BRILLIANTDIAMOND,SHININGPEARL",Geodude,Geodude,
+NONE,Geodude_Alolan,Geodude,
+NONE,Geodude_Alolan,Geodude_Alolan,Everstone
+"BRILLIANTDIAMOND,SHININGPEARL",Geodude,Geodude,
+NONE,Graveler_Alolan,Geodude,
+NONE,Graveler_Alolan,Geodude_Alolan,Everstone
+"BRILLIANTDIAMOND,SHININGPEARL",Golem,Geodude,
+NONE,Golem_Alolan,Geodude,
+NONE,Golem_Alolan,Geodude_Alolan,Everstone
+"BRILLIANTDIAMOND,SHININGPEARL",Ponyta,Ponyta,
+"SWORD,SHIELD",Ponyta,Ponyta,Everstone
+"SWORD,SHIELD",Ponyta,Ponyta_Galarian,
+"SWORD,SHIELD",Ponyta_Galarian,Ponyta_Galarian,
+"BRILLIANTDIAMOND,SHININGPEARL",Rapidash,Ponyta,
+"SWORD,SHIELD",Rapidash,Ponyta,Everstone
+"SWORD,SHIELD",Rapidash,Ponyta_Galarian,
+"SWORD,SHIELD",Rapidash_Galarian,Ponyta_Galarian,
+"BRILLIANTDIAMOND,SHININGPEARL",Slowpoke,Slowpoke,
+"SWORD,SHIELD",Slowpoke,Slowpoke,Everstone
+"SWORD,SHIELD",Slowpoke,Slowpoke_Galarian,
+"SWORD,SHIELD",Slowpoke_Galarian,Slowpoke_Galarian,
+"BRILLIANTDIAMOND,SHININGPEARL",Slowbro,Slowpoke,
+"SWORD,SHIELD",Slowbro,Slowpoke,Everstone
+"SWORD,SHIELD",Slowbro,Slowpoke_Galarian,
+"SWORD,SHIELD",Slowbro_Galarian,Slowpoke_Galarian,
+ALL,Magnemite,Magnemite,
+ALL,Magneton,Magnemite,
+"BRILLIANTDIAMOND,SHININGPEARL",Farfetch'd,Farfetch'd,
+"SWORD,SHIELD",Farfetch'd,Farfetch'd,Everstone
+"SWORD,SHIELD",Farfetch'd,Farfetch'd_Galarian,
+"SWORD,SHIELD",Farfetch'd_Galarian,Farfetch'd_Galarian,
+"BRILLIANTDIAMOND,SHININGPEARL",Doduo,Doduo,
+"BRILLIANTDIAMOND,SHININGPEARL",Dodrio,Doduo,
+"BRILLIANTDIAMOND,SHININGPEARL",Seel,Seel,
+"BRILLIANTDIAMOND,SHININGPEARL",Dewgong,Seel,
+"BRILLIANTDIAMOND,SHININGPEARL",Grimer,Grimer,
+NONE,Grimer_Alolan,Grimer,
+NONE,Grimer_Alolan,Grimer_Alolan,Everstone
+"BRILLIANTDIAMOND,SHININGPEARL",Muk,Grimer,
+NONE,Muk_Alolan,Grimer,
+NONE,Muk_Alolan,Grimer_Alolan,Everstone
+ALL,Shellder,Shellder,
+ALL,Cloyster,Shellder,
+ALL,Gastly,Gastly,
+ALL,Haunter,Gastly,
+ALL,Gengar,Gastly,
+ALL,Onix,Onix,
+"BRILLIANTDIAMOND,SHININGPEARL",Drowzee,Drowzee,
+"BRILLIANTDIAMOND,SHININGPEARL",Hypno,Drowzee,
+ALL,Krabby,Krabby,
+ALL,Kingler,Krabby,
+"BRILLIANTDIAMOND,SHININGPEARL",Voltorb,Voltorb,
+"BRILLIANTDIAMOND,SHININGPEARL",Electrode,Voltorb,
+ALL,Exeggcute,Exeggcute,
+ALL,Exeggutor,Exeggcute,
+"SWORD,SHIELD",Exeggutor_Alolan,Exeggcute,
+ALL,Cubone,Cubone,
+ALL,Marowak,Cubone,
+"SWORD,SHIELD",Marowak_Alolan,Cubone,
+ALL,Hitmonlee,Tyrogue,
+ALL,Hitmonchan,Tyrogue,
+ALL,Lickitung,Lickitung,
+ALL,Koffing,Koffing,
+ALL,Weezing,Koffing,
+"SWORD,SHIELD",Weezing_Galarian,Koffing,
+ALL,Rhyhorn,Rhyhorn,
+ALL,Rhydon,Rhyhorn,
+ALL,Chansey,Chansey,
+ALL,Chansey,Happiny,Luck Incense
+ALL,Tangela,Tangela,
+ALL,Kangaskhan,Kangaskhan,
+ALL,Horsea,Horsea,
+ALL,Seadra,Horsea,
+ALL,Goldeen,Goldeen,
+ALL,Seaking,Goldeen,
+ALL,Staryu,Staryu,
+ALL,Starmie,Staryu,
+"BRILLIANTDIAMOND,SHININGPEARL",Mr. Mime,Mr. Mime,
+"SWORD,SHIELD",Mr. Mime,Mr. Mime,Everstone
+ALL,Mr. Mime,Mime Jr.,Odd Incense
+"SWORD,SHIELD",Mr. Mime_Galarian,Mr. Mime_Galarian,
+"SWORD,SHIELD",Mr. Mime_Galarian,Mime Jr.,Odd Incense
+ALL,Scyther,Scyther,
+ALL,Jynx,Smoochum,
+ALL,Electabuzz,Elekid,
+ALL,Magmar,Magby,
+ALL,Pinsir,Pinsir,
+ALL,Tauros,Tauros,
+ALL,Magikarp,Magikarp
+ALL,Gyarados,Magikarp,
+ALL,Lapras,Lapras,
+ALL,Eevee,Eevee,
+ALL,Vaporeon,Eevee,
+ALL,Jolteon,Eevee,
+ALL,Flareon,Eevee,
+ALL,Porygon,Porygon,
+ALL,Omanyte,Omanyte,
+ALL,Omastar,Omanyte,
+ALL,Kabuto,Kabuto,
+ALL,Kabutops,Kabuto,
+ALL,Aerodactyl,Aerodactyl,
+ALL,Snorlax,Snorlax,
+ALL,Snorlax,Munchlax,Full Incense
+ALL,Dratini,Dratini,
+ALL,Dragonair,Dratini,
+ALL,Dragonite,Dratini,
+"BRILLIANTDIAMOND,SHININGPEARL",Chikorita,Chikorita,
+"BRILLIANTDIAMOND,SHININGPEARL",Bayleef,Chikorita,
+"BRILLIANTDIAMOND,SHININGPEARL",Meganium,Chikorita,
+"BRILLIANTDIAMOND,SHININGPEARL",Cyndaquil,Cyndaquil,
+"BRILLIANTDIAMOND,SHININGPEARL",Quilava,Cyndaquil,
+"BRILLIANTDIAMOND,SHININGPEARL",Typhlosion,Cyndaquil,
+"BRILLIANTDIAMOND,SHININGPEARL",Totodile,Totodile,
+"BRILLIANTDIAMOND,SHININGPEARL",Croconaw,Totodile,
+"BRILLIANTDIAMOND,SHININGPEARL",Feraligatr,Totodile,
+"BRILLIANTDIAMOND,SHININGPEARL",Sentret,Sentret,
+"BRILLIANTDIAMOND,SHININGPEARL",Furret,Sentret,
+ALL,Hoothoot,Hoothoot,
+ALL,Noctowl,Hoothoot,
+"BRILLIANTDIAMOND,SHININGPEARL",Ledyba,Ledyba,
+"BRILLIANTDIAMOND,SHININGPEARL",Ledian,Ledyba,
+"BRILLIANTDIAMOND,SHININGPEARL",Spinarak,Spinarak,
+"BRILLIANTDIAMOND,SHININGPEARL",Ariados,Spinarak,
+ALL,Crobat,Zubat,
+ALL,Chinchou,Chinchou,
+ALL,Lanturn,Chinchou,
+ALL,Togetic,Togepi,
+ALL,Natu,Natu,
+ALL,Xatu,Natu,
+"BRILLIANTDIAMOND,SHININGPEARL",Mareep,Mareep,
+"BRILLIANTDIAMOND,SHININGPEARL",Flaaffy,Mareep,
+"BRILLIANTDIAMOND,SHININGPEARL",Ampharos,Mareep,
+ALL,Bellossom,Oddish,
+ALL,Marill,Marill,
+ALL,Marill,Azurill,Sea Incense
+ALL,Azumarill,Marill,
+ALL,Azumarill,Azurill,Sea Incense
+ALL,Sudowoodo,Sudowoodo,
+ALL,Sudowoodo,Bonsly,Rock Incense
+ALL,Politoed,Poliwag,
+"BRILLIANTDIAMOND,SHININGPEARL",Hoppip,Hoppip,
+"BRILLIANTDIAMOND,SHININGPEARL",Skiploom,Hoppip,
+"BRILLIANTDIAMOND,SHININGPEARL",Jumpluff,Hoppip,
+"BRILLIANTDIAMOND,SHININGPEARL",Aipom,Aipom,
+"BRILLIANTDIAMOND,SHININGPEARL",Sunkern,Sunkern,
+"BRILLIANTDIAMOND,SHININGPEARL",Sunflora,Sunkern,
+"BRILLIANTDIAMOND,SHININGPEARL",Yanma,Yanma,
+"BRILLIANTDIAMOND,SHININGPEARL",Wooper,Wooper,
+"BRILLIANTDIAMOND,SHININGPEARL",Quagsire,Wooper,
+ALL,Espeon,Eevee,
+ALL,Umbreon,Eevee,
+"BRILLIANTDIAMOND,SHININGPEARL",Murkrow,Murkrow,
+"BRILLIANTDIAMOND,SHININGPEARL",Slowking,Slowpoke,
+"SWORD,SHIELD",Slowking,Slowpoke,Everstone
+"SWORD,SHIELD",Slowking,Slowpoke_Galarian,
+"SWORD,SHIELD",Slowking_Galarian,Slowpoke_Galarian,
+"BRILLIANTDIAMOND,SHININGPEARL",Misdreavus,Misdreavus,
+ALL,Wobbuffet,Wobbuffet,
+ALL,Wobbuffet,Wynaut,Lax Incense
+"BRILLIANTDIAMOND,SHININGPEARL",Girafarig,Girafarig,
+"BRILLIANTDIAMOND,SHININGPEARL",Pineco,Pineco,
+"BRILLIANTDIAMOND,SHININGPEARL",Forretress,Pineco,
+ALL,Dunsparce,Dunsparce,
+"BRILLIANTDIAMOND,SHININGPEARL",Gligar,Gligar,
+ALL,Steelix,Onix,
+"BRILLIANTDIAMOND,SHININGPEARL",Snubbull,Snubbull,
+"BRILLIANTDIAMOND,SHININGPEARL",Granbull,Snubbull,
+ALL,Qwilfish,Qwilfish,
+ALL,Scizor,Scyther,
+ALL,Shuckle,Shuckle,
+ALL,Heracross,Heracross,
+ALL,Sneasel,Sneasel,
+"BRILLIANTDIAMOND,SHININGPEARL",Teddiursa,Teddiursa,
+"BRILLIANTDIAMOND,SHININGPEARL",Ursaring,Teddiursa,
+"BRILLIANTDIAMOND,SHININGPEARL",Slugma,Slugma,
+"BRILLIANTDIAMOND,SHININGPEARL",Magcargo,Slugma,
+ALL,Swinub,Swinub,
+ALL,Piloswine,Swinub,
+"BRILLIANTDIAMOND,SHININGPEARL",Corsola,Corsola,
+"SWORD,SHIELD",Corsola,Corsola,Everstone
+"SWORD,SHIELD",Corsola,Corsola_Galarian,
+"SWORD,SHIELD",Corsola_Galarian,Corsola_Galarian,
+ALL,Remoraid,Remoraid,
+ALL,Octillery,Remoraid,
+ALL,Delibird,Delibird,
+ALL,Mantine,Mantine,
+ALL,Mantine,Mantyke,Wave Incense
+ALL,Skarmory,Skarmory,
+"BRILLIANTDIAMOND,SHININGPEARL",Houndour,Houndour,
+"BRILLIANTDIAMOND,SHININGPEARL",Houndoom,Houndour,
+ALL,Kingdra,Horsea,
+"BRILLIANTDIAMOND,SHININGPEARL",Phanpy,Phanpy,
+"BRILLIANTDIAMOND,SHININGPEARL",Donphan,Phanpy,
+ALL,Porygon2,Porygon,
+"BRILLIANTDIAMOND,SHININGPEARL",Stantler,Stantler,
+"BRILLIANTDIAMOND,SHININGPEARL",Smeargle,Smeargle,
+ALL,Hitmontop,Tyrogue,
+ALL,Miltank,Miltank,
+ALL,Blissey,Chansey,
+ALL,Blissey,Happiny,Luck Incense
+ALL,Larvitar,Larvitar,
+ALL,Pupitar,Larvitar,
+ALL,Tyranitar,Larvitar,
+ALL,Treecko,Treecko,
+ALL,Grovyle,Treecko,
+ALL,Sceptile,Treecko,
+ALL,Torchic,Torchic,
+ALL,Combusken,Torchic,
+ALL,Blaziken,Torchic,
+ALL,Mudkip,Mudkip,
+ALL,Marshtomp,Mudkip,
+ALL,Swampert,Mudkip,
+"BRILLIANTDIAMOND,SHININGPEARL",Poochyena,Poochyena,
+"BRILLIANTDIAMOND,SHININGPEARL",Mightyena,Poochyena,
+"BRILLIANTDIAMOND,SHININGPEARL",Zigzagoon,Zigzagoon,
+"SWORD,SHIELD",Zigzagoon,Zigzagoon,Everstone
+"SWORD,SHIELD",Zigzagoon,Zigzagoon_Galarian,
+"SWORD,SHIELD",Zigzagoon_Galarian,Zigzagoon_Galarian,
+"BRILLIANTDIAMOND,SHININGPEARL",Linoone,Zigzagoon,
+"SWORD,SHIELD",Linoone,Zigzagoon,Everstone
+"SWORD,SHIELD",Linoone,Zigzagoon_Galarian,
+"SWORD,SHIELD",Linoone_Galarian,Zigzagoon_Galarian,
+"BRILLIANTDIAMOND,SHININGPEARL",Wurmple,Wurmple,
+"BRILLIANTDIAMOND,SHININGPEARL",Silcoon,Wurmple,
+"BRILLIANTDIAMOND,SHININGPEARL",Beautifly,Wurmple,
+"BRILLIANTDIAMOND,SHININGPEARL",Cascoon,Wurmple,
+"BRILLIANTDIAMOND,SHININGPEARL",Dustox,Wurmple,
+ALL,Lotad,Lotad,
+ALL,Lombre,Lotad,
+ALL,Ludicolo,Lotad,
+ALL,Seedot,Seedot,
+ALL,Nuzleaf,Seedot,
+ALL,Shiftry,Seedot,
+"BRILLIANTDIAMOND,SHININGPEARL",Taillow,Taillow,
+"BRILLIANTDIAMOND,SHININGPEARL",Swellow,Taillow,
+ALL,Wingull,Wingull,
+ALL,Pelipper,Wingull,
+ALL,Ralts,Ralts,
+ALL,Kirlia,Ralts,
+ALL,Gardevoir,Ralts,
+"BRILLIANTDIAMOND,SHININGPEARL",Surskit,Surskit,
+"BRILLIANTDIAMOND,SHININGPEARL",Masquerain,Surskit,
+"BRILLIANTDIAMOND,SHININGPEARL",Shroomish,Shroomish,
+"BRILLIANTDIAMOND,SHININGPEARL",Breloom,Shroomish,
+"BRILLIANTDIAMOND,SHININGPEARL",Slakoth,Slakoth,
+"BRILLIANTDIAMOND,SHININGPEARL",Vigoroth,Slakoth,
+"BRILLIANTDIAMOND,SHININGPEARL",Slaking,Slakoth,
+ALL,Nincada,Nincada,
+ALL,Ninjask,Nincada,
+ALL,Shedinja,Nincada,
+ALL,Whismur,Whismur,
+ALL,Loudred,Whismur,
+ALL,Exploud,Whismur,
+"BRILLIANTDIAMOND,SHININGPEARL",Makuhita,Makuhita,
+"BRILLIANTDIAMOND,SHININGPEARL",Hariyama,Makuhita,
+"BRILLIANTDIAMOND,SHININGPEARL",Nosepass,Nosepass,
+"BRILLIANTDIAMOND,SHININGPEARL",Skitty,Skitty,
+"BRILLIANTDIAMOND,SHININGPEARL",Delcatty,Skitty,
+ALL,Sableye,Sableye,
+ALL,Mawile,Mawile,
+ALL,Aron,Aron,
+ALL,Lairon,Aron,
+ALL,Aggron,Aron,
+"BRILLIANTDIAMOND,SHININGPEARL",Meditite,Meditite,
+"BRILLIANTDIAMOND,SHININGPEARL",Medicham,Meditite,
+ALL,Electrike,Electrike,
+ALL,Manectric,Electrike,
+"BRILLIANTDIAMOND,SHININGPEARL",Plusle,Plusle,
+"BRILLIANTDIAMOND,SHININGPEARL",Minun,Minun,
+"BRILLIANTDIAMOND,SHININGPEARL",Volbeat,Volbeat,
+"BRILLIANTDIAMOND,SHININGPEARL",Volbeat,Illumise,
+"BRILLIANTDIAMOND,SHININGPEARL",Illumise,Volbeat,
+"BRILLIANTDIAMOND,SHININGPEARL",Illumise,Illumise,
+ALL,Roselia,Roselia,
+ALL,Roselia,Budew,Rose Incense
+"BRILLIANTDIAMOND,SHININGPEARL",Gulpin,Gulpin,
+"BRILLIANTDIAMOND,SHININGPEARL",Swalot,Gulpin,
+ALL,Carvanha,Carvanha,
+ALL,Sharpedo,Carvanha,
+ALL,Wailmer,Wailmer,
+ALL,Wailord,Wailmer,
+"BRILLIANTDIAMOND,SHININGPEARL",Numel,Numel,
+"BRILLIANTDIAMOND,SHININGPEARL",Camerupt,Numel,
+ALL,Torkoal,Torkoal,
+"BRILLIANTDIAMOND,SHININGPEARL",Spoink,Spoink,
+"BRILLIANTDIAMOND,SHININGPEARL",Grumpig,Spoink,
+"BRILLIANTDIAMOND,SHININGPEARL",Spinda,Spinda,
+ALL,Trapinch,Trapinch,
+ALL,Vibrava,Trapinch,
+ALL,Flygon,Trapinch,
+"BRILLIANTDIAMOND,SHININGPEARL",Cacnea,Cacnea,
+"BRILLIANTDIAMOND,SHININGPEARL",Cacturne,Cacnea,
+ALL,Swablu,Swablu,
+ALL,Altaria,Swablu,
+"BRILLIANTDIAMOND,SHININGPEARL",Zangoose,Zangoose,
+"BRILLIANTDIAMOND,SHININGPEARL",Seviper,Seviper,
+ALL,Lunatone,Lunatone,
+ALL,Solrock,Solrock,
+ALL,Barboach,Barboach,
+ALL,Whiscash,Barboach,
+ALL,Corphish,Corphish,
+ALL,Crawdaunt,Corphish,
+ALL,Baltoy,Baltoy,
+ALL,Claydol,Baltoy,
+ALL,Lileep,Lileep,
+ALL,Cradily,Lileep,
+ALL,Anorith,Anorith,
+ALL,Armaldo,Anorith,
+ALL,Feebas,Feebas,
+ALL,Milotic,Feebas,
+"BRILLIANTDIAMOND,SHININGPEARL",Castform,Castform,
+"BRILLIANTDIAMOND,SHININGPEARL",Kecleon,Kecleon,
+"BRILLIANTDIAMOND,SHININGPEARL",Shuppet,Shuppet,
+"BRILLIANTDIAMOND,SHININGPEARL",Banette,Shuppet,
+ALL,Duskull,Duskull,
+ALL,Dusclops,Duskull,
+"BRILLIANTDIAMOND,SHININGPEARL",Tropius,Tropius,
+"BRILLIANTDIAMOND,SHININGPEARL",Chimecho,Chimecho,
+"BRILLIANTDIAMOND,SHININGPEARL",Chimecho,Chingling,Pure Incense
+ALL,Absol,Absol,
+ALL,Snorunt,Snorunt,
+ALL,Glalie,Snorunt,
+ALL,Spheal,Spheal,
+ALL,Sealeo,Spheal,
+ALL,Walrein,Spheal,
+"BRILLIANTDIAMOND,SHININGPEARL",Clamperl,Clamperl,
+"BRILLIANTDIAMOND,SHININGPEARL",Huntail,Clamperl,
+"BRILLIANTDIAMOND,SHININGPEARL",Gorebyss,Clamperl,
+ALL,Relicanth,Relicanth,
+"BRILLIANTDIAMOND,SHININGPEARL",Luvdisc,Luvdisc,
+ALL,Bagon,Bagon,
+ALL,Shelgon,Bagon,
+ALL,Salamence,Bagon,
+ALL,Beldum,Beldum,
+ALL,Metang,Beldum,
+ALL,Metagross,Beldum,
+"BRILLIANTDIAMOND,SHININGPEARL",Turtwig,Turtwig,
+"BRILLIANTDIAMOND,SHININGPEARL",Grotle,Turtwig,
+"BRILLIANTDIAMOND,SHININGPEARL",Torterra,Turtwig,
+"BRILLIANTDIAMOND,SHININGPEARL",Chimchar,Chimchar,
+"BRILLIANTDIAMOND,SHININGPEARL",Monferno,Chimchar,
+"BRILLIANTDIAMOND,SHININGPEARL",Infernape,Chimchar,
+"BRILLIANTDIAMOND,SHININGPEARL",Piplup,Piplup,
+"BRILLIANTDIAMOND,SHININGPEARL",Prinplup,Piplup,
+"BRILLIANTDIAMOND,SHININGPEARL",Empoleon,Piplup,
+"BRILLIANTDIAMOND,SHININGPEARL",Starly,Starly,
+"BRILLIANTDIAMOND,SHININGPEARL",Staravia,Starly,
+"BRILLIANTDIAMOND,SHININGPEARL",Staraptor,Starly,
+"BRILLIANTDIAMOND,SHININGPEARL",Bidoof,Bidoof,
+"BRILLIANTDIAMOND,SHININGPEARL",Bibarel,Bidoof,
+"BRILLIANTDIAMOND,SHININGPEARL",Kricketot,Kricketot,
+"BRILLIANTDIAMOND,SHININGPEARL",Kricketune,Kricketot,
+ALL,Shinx,Shinx,
+ALL,Luxio,Shinx,
+ALL,Luxray,Shinx,
+ALL,Roserade,Roselia,
+ALL,Roserade,Budew,Rose Incense
+"BRILLIANTDIAMOND,SHININGPEARL",Cranidos,Cranidos,
+"BRILLIANTDIAMOND,SHININGPEARL",Rampardos,Cranidos,
+"BRILLIANTDIAMOND,SHININGPEARL",Shieldon,Shieldon,
+"BRILLIANTDIAMOND,SHININGPEARL",Bastiodon,Shieldon,
+"BRILLIANTDIAMOND,SHININGPEARL",Burmy_Plant Cloak,Burmy_Plant Cloak,
+"BRILLIANTDIAMOND,SHININGPEARL",Burmy_Sandy Cloak,Burmy_Sandy Cloak,
+"BRILLIANTDIAMOND,SHININGPEARL",Burmy_Trash Cloak,Burmy_Trash Cloak,
+"BRILLIANTDIAMOND,SHININGPEARL",Wormadam_Plant Cloak,Burmy_Plant Cloak,
+"BRILLIANTDIAMOND,SHININGPEARL",Wormadam_Sandy Cloak,Burmy_Sandy Cloak,
+"BRILLIANTDIAMOND,SHININGPEARL",Wormadam_Trash Cloak,Burmy_Trash Cloak,
+"BRILLIANTDIAMOND,SHININGPEARL",Mothim,Burmy_Plant Cloak,
+ALL,Combee,Combee,
+ALL,Vespiquen,Combee,
+"BRILLIANTDIAMOND,SHININGPEARL",Pachirisu,Pachirisu,
+"BRILLIANTDIAMOND,SHININGPEARL",Buizel,Buizel,
+"BRILLIANTDIAMOND,SHININGPEARL",Floatzel,Buizel,
+ALL,Cherubi,Cherubi,
+ALL,Cherrim_Overcast,Cherubi,
+ALL,Shellos_West Sea,Shellos_West Sea,
+ALL,Shellos_East Sea,Shellos_East Sea,
+ALL,Gastrodon_West Sea,Shellos_West Sea,
+ALL,Gastrodon_East Sea,Shellos_East Sea,
+"BRILLIANTDIAMOND,SHININGPEARL",Ambipom,Aipom,
+ALL,Drifloon,Drifloon,
+ALL,Drifblim,Drifloon,
+ALL,Buneary,Buneary,
+ALL,Lopunny,Buneary,
+"BRILLIANTDIAMOND,SHININGPEARL",Mismagius,Misdreavus,
+"BRILLIANTDIAMOND,SHININGPEARL",Honchkrow,Murkrow,
+"BRILLIANTDIAMOND,SHININGPEARL",Glameow,Glameow,
+"BRILLIANTDIAMOND,SHININGPEARL",Purugly,Glameow,
+ALL,Stunky,Stunky,
+ALL,Skuntank,Stunky,
+ALL,Bronzor,Bronzor,
+ALL,Bronzong,Bronzor,
+"BRILLIANTDIAMOND,SHININGPEARL",Chatot,Chatot,
+ALL,Spiritomb,Spiritomb,
+ALL,Gible,Gible,
+ALL,Gabite,Gible,
+ALL,Garchomp,Gible,
+ALL,Lucario,Riolu,
+ALL,Hippopotas,Hippopotas,
+ALL,Hippowdon,Hippopotas,
+ALL,Skorupi,Skorupi,
+ALL,Drapion,Skorupi,
+ALL,Croagunk,Croagunk,
+ALL,Toxicroak,Croagunk,
+"BRILLIANTDIAMOND,SHININGPEARL",Carnivine,Carnivine,
+"BRILLIANTDIAMOND,SHININGPEARL",Finneon,Finneon,
+"BRILLIANTDIAMOND,SHININGPEARL",Lumineon,Finneon,
+ALL,Snover,Snover,
+ALL,Abomasnow,Snover,
+ALL,Weavile,Sneasel,
+ALL,Magnezone,Magneton,
+ALL,Lickilicky,Lickitung,
+ALL,Rhyperior,Rhyhorn,
+ALL,Tangrowth,Tangela,
+ALL,Electivire,Elekid,
+ALL,Magmortar,Magby,
+ALL,Togekiss,Togepi,
+"BRILLIANTDIAMOND,SHININGPEARL",Yanmega,Yanma,
+ALL,Leafeon,Eevee,
+ALL,Glaceon,Eevee,
+"BRILLIANTDIAMOND,SHININGPEARL",Gliscor,Gligar,
+ALL,Mamoswine,Swinub,
+ALL,Porygon-Z,Porygon,
+ALL,Gallade,Ralts,
+"BRILLIANTDIAMOND,SHININGPEARL",Probopass,Nosepass,
+ALL,Dusknoir,Duskull,
+ALL,Froslass,Snorunt,
+ALL,Rotom,Rotom,
+ALL,Rotom_Heat,Rotom,
+ALL,Rotom_Wash,Rotom,
+ALL,Rotom_Frost,Rotom,
+ALL,Rotom_Fan,Rotom,
+ALL,Rotom_Mow,Rotom,
+"BRILLIANTDIAMOND,SHININGPEARL",Phione,Phione,
+"BRILLIANTDIAMOND,SHININGPEARL",Manaphy,Phione,
+NONE,Snivy,Snivy,
+NONE,Servine,Snivy,
+NONE,Serperior,Snivy,
+NONE,Tepig,Tepig,
+NONE,Pignite,Tepig,
+NONE,Emboar,Tepig,
+NONE,Oshawott,Oshawott,
+NONE,Dewott,Oshawott,
+NONE,Samurott,Oshawott,
+NONE,Patrat,Patrat,
+NONE,Watchog,Patrat,
+"SWORD,SHIELD",Lillipup,Lillipup,
+"SWORD,SHIELD",Herdier,Lillipup,
+"SWORD,SHIELD",Stoutland,Lillipup,
+"SWORD,SHIELD",Purrloin,Purrloin,
+"SWORD,SHIELD",Liepard,Purrloin,
+NONE,Pansage,Pansage,
+NONE,Simisage,Pansage,
+NONE,Pansear,Pansear,
+NONE,Simisear,Pansear,
+NONE,Panpour,Panpour,
+NONE,Simipour,Panpour,
+"SWORD,SHIELD",Munna,Munna,
+"SWORD,SHIELD",Musharna,Munna,
+"SWORD,SHIELD",Pidove,Pidove,
+"SWORD,SHIELD",Tranquill,Pidove,
+"SWORD,SHIELD",Unfezant,Pidove,
+NONE,Blitzle,Blitzle,
+NONE,Zebstrika,Blitzle,
+"SWORD,SHIELD",Roggenrola,Roggenrola,
+"SWORD,SHIELD",Boldore,Roggenrola,
+"SWORD,SHIELD",Gigalith,Roggenrola,
+"SWORD,SHIELD",Woobat,Woobat,
+"SWORD,SHIELD",Swoobat,Woobat,
+"SWORD,SHIELD",Drilbur,Drilbur,
+"SWORD,SHIELD",Excadrill,Drilbur,
+"SWORD,SHIELD",Audino,Audino,
+"SWORD,SHIELD",Timburr,Timburr,
+"SWORD,SHIELD",Gurdurr,Timburr,
+"SWORD,SHIELD",Conkeldurr,Timburr,
+"SWORD,SHIELD",Tympole,Tympole,
+"SWORD,SHIELD",Palpitoad,Tympole,
+"SWORD,SHIELD",Seismitoad,Tympole,
+"SWORD,SHIELD",Throh,Throh,
+"SWORD,SHIELD",Sawk,Sawk,
+NONE,Sewaddle,Sewaddle,
+NONE,Swadloon,Sewaddle,
+NONE,Leavanny,Sewaddle,
+"SWORD,SHIELD",Venipede,Venipede,
+"SWORD,SHIELD",Whirlipede,Venipede,
+"SWORD,SHIELD",Scolipede,Venipede,
+"SWORD,SHIELD",Cottonee,Cottonee,
+"SWORD,SHIELD",Whimsicott,Cottonee,
+"SWORD,SHIELD",Petilil,Petilil,
+"SWORD,SHIELD",Lilligant,Petilil,
+"SWORD,SHIELD",Basculin_Red-Striped,Basculin_Red-Striped,
+"SWORD,SHIELD",Basculin_Blue-Striped,Basculin_Blue-Striped,
+"SWORD,SHIELD",Sandile,Sandile,
+"SWORD,SHIELD",Krokorok,Sandile,
+"SWORD,SHIELD",Krookodile,Sandile,
+"SWORD,SHIELD",Darumaka,Darumaka,Everstone
+"SWORD,SHIELD",Darumaka,Darumaka_Galarian,
+"SWORD,SHIELD",Darumaka_ZENMODE,Darumaka_ZENMODE,Everstone
+"SWORD,SHIELD",Darumaka_ZENMODE,Darumaka_Galarian_ZENMODE,
+"SWORD,SHIELD",Darumaka_Galarian,Darumaka_Galarian,
+"SWORD,SHIELD",Darumaka_Galarian_ZENMODE,Darumaka_Galarian_ZENMODE,
+"SWORD,SHIELD",Darmanitan,Darumaka,Everstone
+"SWORD,SHIELD",Darmanitan,Darumaka_Galarian,
+"SWORD,SHIELD",Darmanitan_ZENMODE,Darumaka_ZENMODE,Everstone
+"SWORD,SHIELD",Darmanitan_ZENMODE,Darumaka_Galarian_ZENMODE,
+"SWORD,SHIELD",Darmanitan_Galarian,Darumaka_Galarian,
+"SWORD,SHIELD",Darmanitan_Galarian_ZENMODE,Darumaka_Galarian_ZENMODE,
+"SWORD,SHIELD",Maractus,Maractus,
+"SWORD,SHIELD",Dwebble,Dwebble,
+"SWORD,SHIELD",Crustle,Dwebble,
+"SWORD,SHIELD",Scraggy,Scraggy,
+"SWORD,SHIELD",Scrafty,Scraggy,
+"SWORD,SHIELD",Sigilyph,Sigilyph,
+"SWORD,SHIELD",Yamask,Yamask,Everstone
+"SWORD,SHIELD",Yamask,Yamask_Galarian,
+"SWORD,SHIELD",Yamask_Galarian,Yamask_Galarian,
+"SWORD,SHIELD",Cofagrigus,Yamask,Everstone
+"SWORD,SHIELD",Cofagrigus,Yamask_Galarian,
+"SWORD,SHIELD",Tirtouga,Tirtouga,
+"SWORD,SHIELD",Carracosta,Tirtouga,
+"SWORD,SHIELD",Archen,Archen,
+"SWORD,SHIELD",Archeops,Archen,
+"SWORD,SHIELD",Trubbish,Trubbish,
+"SWORD,SHIELD",Garbodor,Trubbish,
+"SWORD,SHIELD",Zorua,Zorua,
+"SWORD,SHIELD",Zoroark,Zorua,
+"SWORD,SHIELD",Minccino,Minccino,
+"SWORD,SHIELD",Cinccino,Minccino,
+"SWORD,SHIELD",Gothita,Gothita,
+"SWORD,SHIELD",Gothorita,Gothita,
+"SWORD,SHIELD",Gothitelle,Gothita,
+"SWORD,SHIELD",Solosis,Solosis,
+"SWORD,SHIELD",Duosion,Solosis,
+"SWORD,SHIELD",Reuniclus,Solosis,
+NONE,Ducklett,Ducklett,
+NONE,Swanna,Ducklett,
+"SWORD,SHIELD",Vanillite,Vanillite,
+"SWORD,SHIELD",Vanillish,Vanillite,
+"SWORD,SHIELD",Vanilluxe,Vanillite,
+NONE,Deerling_Spring,Deerling_Spring,
+NONE,Deerling_Summer,Deerling_Summer,
+NONE,Deerling_Autumn,Deerling_Autumn,
+NONE,Deerling_Winter,Deerling_Winter,
+NONE,Sawsbuck_Spring,Deerling_Spring,
+NONE,Sawsbuck_Summer,Deerling_Summer,
+NONE,Sawsbuck_Autumn,Deerling_Autumn,
+NONE,Sawsbuck_Winter,Deerling_Winter,
+"SWORD,SHIELD",Emolga,Emolga,
+"SWORD,SHIELD",Karrablast,Karrablast,
+"SWORD,SHIELD",Escavalier,Karrablast,
+"SWORD,SHIELD",Foongus,Foongus,
+"SWORD,SHIELD",Amoonguss,Foongus,
+"SWORD,SHIELD",Frillish,Frillish,
+"SWORD,SHIELD",Jellicent,Frillish,
+NONE,Alomomola,Alomomola,
+"SWORD,SHIELD",Joltik,Joltik,
+"SWORD,SHIELD",Galvantula,Joltik,
+"SWORD,SHIELD",Ferroseed,Ferroseed,
+"SWORD,SHIELD",Ferrothorn,Ferroseed,
+"SWORD,SHIELD",Klink,Klink,
+"SWORD,SHIELD",Klang,Klink,
+"SWORD,SHIELD",Klinklang,Klink,
+NONE,Tynamo,Tynamo,
+NONE,Eelektrik,Tynamo,
+NONE,Eelektross,Tynamo,
+"SWORD,SHIELD",Elgyem,Elgyem,
+"SWORD,SHIELD",Beheeyem,Elgyem,
+"SWORD,SHIELD",Litwick,Litwick,
+"SWORD,SHIELD",Lampent,Litwick,
+"SWORD,SHIELD",Chandelure,Litwick,
+"SWORD,SHIELD",Axew,Axew,
+"SWORD,SHIELD",Fraxure,Axew,
+"SWORD,SHIELD",Haxorus,Axew,
+"SWORD,SHIELD",Cubchoo,Cubchoo,
+"SWORD,SHIELD",Beartic,Cubchoo,
+"SWORD,SHIELD",Cryogonal,Cryogonal,
+"SWORD,SHIELD",Shelmet,Shelmet,
+"SWORD,SHIELD",Accelgor,Shelmet,
+"SWORD,SHIELD",Stunfisk,Stunfisk,Everstone
+"SWORD,SHIELD",Stunfisk,Stunfisk_Galarian,
+"SWORD,SHIELD",Stunfisk_Galarian,Stunfisk_Galarian,
+"SWORD,SHIELD",Mienfoo,Mienfoo,
+"SWORD,SHIELD",Mienshao,Mienfoo,
+"SWORD,SHIELD",Druddigon,Druddigon,
+"SWORD,SHIELD",Golett,Golett,
+"SWORD,SHIELD",Golurk,Golett,
+"SWORD,SHIELD",Pawniard,Pawniard,
+"SWORD,SHIELD",Bisharp,Pawniard,
+"SWORD,SHIELD",Bouffalant,Bouffalant,
+"SWORD,SHIELD",Rufflet,Rufflet,
+"SWORD,SHIELD",Braviary,Rufflet,
+"SWORD,SHIELD",Vullaby,Vullaby,
+"SWORD,SHIELD",Mandibuzz,Vullaby,
+"SWORD,SHIELD",Heatmor,Heatmor,
+"SWORD,SHIELD",Durant,Durant,
+"SWORD,SHIELD",Deino,Deino,
+"SWORD,SHIELD",Zweilous,Deino,
+"SWORD,SHIELD",Hydreigon,Deino,
+"SWORD,SHIELD",Larvesta,Larvesta,
+"SWORD,SHIELD",Volcarona,Larvesta,
+NONE,Chespin,Chespin,
+NONE,Quilladin,Chespin,
+NONE,Chesnaught,Chespin,
+NONE,Fennekin,Fennekin,
+NONE,Braixen,Fennekin,
+NONE,Delphox,Fennekin,
+NONE,Froakie,Froakie,
+NONE,Frogadier,Froakie,
+NONE,Greninja,Froakie,
+"SWORD,SHIELD",Bunnelby,Bunnelby,
+"SWORD,SHIELD",Diggersby,Bunnelby,
+"SWORD,SHIELD",Fletchling,Fletchling,
+"SWORD,SHIELD",Fletchinder,Fletchling,
+"SWORD,SHIELD",Talonflame,Fletchling,
+NONE,Scatterbug_Archipelago,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Archipelago,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Archipelago,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Archipelago,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Archipelago,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Archipelago,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Archipelago,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Archipelago,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Archipelago,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Archipelago,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Archipelago,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Archipelago,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Archipelago,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Archipelago,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Archipelago,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Archipelago,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Archipelago,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Archipelago,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Continental,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Continental,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Continental,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Continental,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Continental,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Continental,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Continental,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Continental,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Continental,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Continental,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Continental,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Continental,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Continental,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Continental,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Continental,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Continental,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Continental,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Continental,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Elegant,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Elegant,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Elegant,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Elegant,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Elegant,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Elegant,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Elegant,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Elegant,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Elegant,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Elegant,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Elegant,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Elegant,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Elegant,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Elegant,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Elegant,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Elegant,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Elegant,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Elegant,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Garden,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Garden,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Garden,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Garden,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Garden,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Garden,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Garden,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Garden,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Garden,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Garden,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Garden,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Garden,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Garden,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Garden,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Garden,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Garden,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Garden,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Garden,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_High Plains,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_High Plains,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_High Plains,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_High Plains,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_High Plains,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_High Plains,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_High Plains,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_High Plains,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_High Plains,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_High Plains,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_High Plains,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_High Plains,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_High Plains,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_High Plains,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_High Plains,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_High Plains,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_High Plains,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_High Plains,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Icy Snow,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Icy Snow,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Icy Snow,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Icy Snow,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Icy Snow,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Icy Snow,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Icy Snow,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Icy Snow,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Icy Snow,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Icy Snow,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Icy Snow,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Icy Snow,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Icy Snow,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Icy Snow,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Icy Snow,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Icy Snow,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Icy Snow,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Icy Snow,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Jungle,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Jungle,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Jungle,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Jungle,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Jungle,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Jungle,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Jungle,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Jungle,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Jungle,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Jungle,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Jungle,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Jungle,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Jungle,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Jungle,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Jungle,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Jungle,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Jungle,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Jungle,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Marine,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Marine,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Marine,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Marine,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Marine,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Marine,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Marine,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Marine,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Marine,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Marine,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Marine,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Marine,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Marine,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Marine,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Marine,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Marine,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Marine,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Marine,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Meadow,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Meadow,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Meadow,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Meadow,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Meadow,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Meadow,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Meadow,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Meadow,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Meadow,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Meadow,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Meadow,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Meadow,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Meadow,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Meadow,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Meadow,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Meadow,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Meadow,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Meadow,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Modern,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Modern,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Modern,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Modern,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Modern,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Modern,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Modern,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Modern,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Modern,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Modern,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Modern,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Modern,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Modern,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Modern,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Modern,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Modern,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Modern,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Modern,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Monsoon,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Monsoon,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Monsoon,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Monsoon,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Monsoon,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Monsoon,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Monsoon,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Monsoon,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Monsoon,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Monsoon,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Monsoon,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Monsoon,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Monsoon,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Monsoon,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Monsoon,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Monsoon,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Monsoon,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Monsoon,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Ocean,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Ocean,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Ocean,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Ocean,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Ocean,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Ocean,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Ocean,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Ocean,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Ocean,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Ocean,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Ocean,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Ocean,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Ocean,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Ocean,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Ocean,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Ocean,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Ocean,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Ocean,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Polar,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Polar,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Polar,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Polar,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Polar,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Polar,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Polar,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Polar,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Polar,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Polar,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Polar,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Polar,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Polar,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Polar,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Polar,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Polar,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Polar,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Polar,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_River,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_River,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_River,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_River,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_River,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_River,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_River,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_River,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_River,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_River,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_River,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_River,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_River,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_River,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_River,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_River,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_River,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_River,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Sandstorm,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Sandstorm,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Sandstorm,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Sandstorm,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Sandstorm,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Sandstorm,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Sandstorm,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Sandstorm,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Sandstorm,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Sandstorm,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Sandstorm,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Sandstorm,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Sandstorm,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Sandstorm,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Sandstorm,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Sandstorm,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Sandstorm,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Sandstorm,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Savanna,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Savanna,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Savanna,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Savanna,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Savanna,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Savanna,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Savanna,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Savanna,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Savanna,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Savanna,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Savanna,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Savanna,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Savanna,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Savanna,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Savanna,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Savanna,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Savanna,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Savanna,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Sun,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Sun,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Sun,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Sun,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Sun,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Sun,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Sun,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Sun,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Sun,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Sun,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Sun,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Sun,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Sun,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Sun,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Sun,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Sun,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Sun,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Sun,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Tundra,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Tundra,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Tundra,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Tundra,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Tundra,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Tundra,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Tundra,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Tundra,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Tundra,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Tundra,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Tundra,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Tundra,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Tundra,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Tundra,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Tundra,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Tundra,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Tundra,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Tundra,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Fancy,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Fancy,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Fancy,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Fancy,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Fancy,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Fancy,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Fancy,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Fancy,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Fancy,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Fancy,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Fancy,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Fancy,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Fancy,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Fancy,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Fancy,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Fancy,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Fancy,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Fancy,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Scatterbug_Poké Ball,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Scatterbug_Poké Ball,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Scatterbug_Poké Ball,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Scatterbug_Poké Ball,Scatterbug_Garden,$LOC_GARDEN
+NONE,Scatterbug_Poké Ball,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Scatterbug_Poké Ball,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Scatterbug_Poké Ball,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Scatterbug_Poké Ball,Scatterbug_Marine,$LOC_MARINE
+NONE,Scatterbug_Poké Ball,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Scatterbug_Poké Ball,Scatterbug_Modern,$LOC_MODERN
+NONE,Scatterbug_Poké Ball,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Scatterbug_Poké Ball,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Scatterbug_Poké Ball,Scatterbug_Polar,$LOC_POLAR
+NONE,Scatterbug_Poké Ball,Scatterbug_River,$LOC_RIVER
+NONE,Scatterbug_Poké Ball,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Scatterbug_Poké Ball,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Scatterbug_Poké Ball,Scatterbug_Sun,$LOC_SUN
+NONE,Scatterbug_Poké Ball,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Archipelago,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Archipelago,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Archipelago,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Archipelago,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Archipelago,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Archipelago,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Archipelago,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Archipelago,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Archipelago,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Archipelago,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Archipelago,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Archipelago,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Archipelago,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Archipelago,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Archipelago,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Archipelago,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Archipelago,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Archipelago,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Continental,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Continental,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Continental,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Continental,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Continental,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Continental,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Continental,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Continental,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Continental,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Continental,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Continental,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Continental,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Continental,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Continental,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Continental,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Continental,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Continental,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Continental,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Elegant,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Elegant,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Elegant,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Elegant,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Elegant,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Elegant,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Elegant,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Elegant,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Elegant,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Elegant,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Elegant,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Elegant,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Elegant,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Elegant,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Elegant,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Elegant,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Elegant,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Elegant,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Garden,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Garden,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Garden,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Garden,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Garden,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Garden,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Garden,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Garden,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Garden,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Garden,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Garden,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Garden,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Garden,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Garden,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Garden,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Garden,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Garden,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Garden,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_High Plains,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_High Plains,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_High Plains,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_High Plains,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_High Plains,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_High Plains,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_High Plains,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_High Plains,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_High Plains,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_High Plains,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_High Plains,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_High Plains,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_High Plains,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_High Plains,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_High Plains,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_High Plains,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_High Plains,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_High Plains,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Icy Snow,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Icy Snow,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Icy Snow,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Icy Snow,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Icy Snow,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Icy Snow,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Icy Snow,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Icy Snow,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Icy Snow,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Icy Snow,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Icy Snow,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Icy Snow,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Icy Snow,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Icy Snow,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Icy Snow,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Icy Snow,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Icy Snow,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Icy Snow,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Jungle,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Jungle,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Jungle,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Jungle,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Jungle,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Jungle,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Jungle,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Jungle,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Jungle,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Jungle,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Jungle,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Jungle,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Jungle,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Jungle,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Jungle,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Jungle,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Jungle,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Jungle,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Marine,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Marine,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Marine,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Marine,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Marine,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Marine,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Marine,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Marine,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Marine,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Marine,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Marine,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Marine,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Marine,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Marine,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Marine,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Marine,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Marine,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Marine,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Meadow,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Meadow,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Meadow,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Meadow,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Meadow,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Meadow,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Meadow,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Meadow,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Meadow,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Meadow,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Meadow,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Meadow,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Meadow,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Meadow,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Meadow,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Meadow,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Meadow,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Meadow,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Modern,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Modern,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Modern,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Modern,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Modern,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Modern,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Modern,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Modern,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Modern,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Modern,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Modern,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Modern,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Modern,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Modern,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Modern,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Modern,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Modern,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Modern,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Monsoon,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Monsoon,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Monsoon,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Monsoon,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Monsoon,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Monsoon,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Monsoon,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Monsoon,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Monsoon,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Monsoon,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Monsoon,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Monsoon,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Monsoon,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Monsoon,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Monsoon,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Monsoon,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Monsoon,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Monsoon,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Ocean,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Ocean,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Ocean,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Ocean,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Ocean,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Ocean,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Ocean,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Ocean,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Ocean,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Ocean,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Ocean,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Ocean,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Ocean,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Ocean,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Ocean,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Ocean,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Ocean,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Ocean,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Polar,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Polar,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Polar,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Polar,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Polar,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Polar,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Polar,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Polar,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Polar,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Polar,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Polar,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Polar,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Polar,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Polar,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Polar,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Polar,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Polar,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Polar,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_River,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_River,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_River,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_River,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_River,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_River,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_River,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_River,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_River,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_River,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_River,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_River,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_River,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_River,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_River,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_River,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_River,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_River,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Sandstorm,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Sandstorm,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Sandstorm,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Sandstorm,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Sandstorm,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Sandstorm,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Sandstorm,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Sandstorm,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Sandstorm,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Sandstorm,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Sandstorm,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Sandstorm,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Sandstorm,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Sandstorm,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Sandstorm,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Sandstorm,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Sandstorm,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Sandstorm,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Savanna,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Savanna,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Savanna,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Savanna,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Savanna,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Savanna,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Savanna,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Savanna,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Savanna,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Savanna,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Savanna,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Savanna,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Savanna,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Savanna,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Savanna,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Savanna,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Savanna,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Savanna,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Sun,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Sun,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Sun,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Sun,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Sun,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Sun,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Sun,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Sun,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Sun,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Sun,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Sun,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Sun,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Sun,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Sun,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Sun,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Sun,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Sun,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Sun,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Tundra,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Tundra,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Tundra,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Tundra,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Tundra,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Tundra,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Tundra,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Tundra,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Tundra,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Tundra,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Tundra,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Tundra,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Tundra,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Tundra,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Tundra,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Tundra,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Tundra,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Tundra,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Fancy,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Fancy,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Fancy,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Fancy,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Fancy,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Fancy,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Fancy,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Fancy,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Fancy,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Fancy,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Fancy,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Fancy,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Fancy,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Fancy,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Fancy,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Fancy,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Fancy,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Fancy,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Spewpa_Poké Ball,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Spewpa_Poké Ball,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Spewpa_Poké Ball,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Spewpa_Poké Ball,Scatterbug_Garden,$LOC_GARDEN
+NONE,Spewpa_Poké Ball,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Spewpa_Poké Ball,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Spewpa_Poké Ball,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Spewpa_Poké Ball,Scatterbug_Marine,$LOC_MARINE
+NONE,Spewpa_Poké Ball,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Spewpa_Poké Ball,Scatterbug_Modern,$LOC_MODERN
+NONE,Spewpa_Poké Ball,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Spewpa_Poké Ball,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Spewpa_Poké Ball,Scatterbug_Polar,$LOC_POLAR
+NONE,Spewpa_Poké Ball,Scatterbug_River,$LOC_RIVER
+NONE,Spewpa_Poké Ball,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Spewpa_Poké Ball,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Spewpa_Poké Ball,Scatterbug_Sun,$LOC_SUN
+NONE,Spewpa_Poké Ball,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Archipelago,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Archipelago,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Archipelago,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Archipelago,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Archipelago,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Archipelago,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Archipelago,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Archipelago,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Archipelago,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Archipelago,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Archipelago,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Archipelago,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Archipelago,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Archipelago,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Archipelago,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Archipelago,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Archipelago,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Archipelago,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Continental,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Continental,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Continental,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Continental,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Continental,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Continental,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Continental,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Continental,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Continental,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Continental,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Continental,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Continental,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Continental,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Continental,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Continental,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Continental,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Continental,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Continental,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Elegant,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Elegant,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Elegant,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Elegant,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Elegant,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Elegant,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Elegant,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Elegant,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Elegant,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Elegant,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Elegant,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Elegant,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Elegant,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Elegant,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Elegant,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Elegant,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Elegant,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Elegant,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Garden,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Garden,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Garden,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Garden,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Garden,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Garden,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Garden,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Garden,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Garden,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Garden,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Garden,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Garden,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Garden,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Garden,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Garden,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Garden,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Garden,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Garden,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_High Plains,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_High Plains,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_High Plains,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_High Plains,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_High Plains,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_High Plains,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_High Plains,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_High Plains,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_High Plains,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_High Plains,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_High Plains,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_High Plains,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_High Plains,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_High Plains,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_High Plains,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_High Plains,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_High Plains,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_High Plains,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Icy Snow,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Icy Snow,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Icy Snow,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Icy Snow,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Icy Snow,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Icy Snow,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Icy Snow,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Icy Snow,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Icy Snow,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Icy Snow,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Icy Snow,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Icy Snow,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Icy Snow,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Icy Snow,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Icy Snow,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Icy Snow,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Icy Snow,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Icy Snow,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Jungle,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Jungle,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Jungle,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Jungle,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Jungle,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Jungle,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Jungle,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Jungle,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Jungle,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Jungle,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Jungle,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Jungle,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Jungle,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Jungle,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Jungle,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Jungle,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Jungle,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Jungle,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Marine,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Marine,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Marine,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Marine,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Marine,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Marine,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Marine,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Marine,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Marine,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Marine,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Marine,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Marine,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Marine,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Marine,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Marine,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Marine,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Marine,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Marine,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Meadow,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Meadow,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Meadow,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Meadow,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Meadow,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Meadow,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Meadow,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Meadow,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Meadow,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Meadow,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Meadow,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Meadow,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Meadow,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Meadow,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Meadow,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Meadow,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Meadow,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Meadow,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Modern,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Modern,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Modern,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Modern,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Modern,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Modern,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Modern,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Modern,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Modern,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Modern,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Modern,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Modern,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Modern,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Modern,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Modern,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Modern,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Modern,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Modern,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Monsoon,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Monsoon,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Monsoon,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Monsoon,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Monsoon,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Monsoon,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Monsoon,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Monsoon,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Monsoon,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Monsoon,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Monsoon,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Monsoon,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Monsoon,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Monsoon,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Monsoon,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Monsoon,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Monsoon,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Monsoon,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Ocean,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Ocean,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Ocean,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Ocean,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Ocean,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Ocean,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Ocean,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Ocean,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Ocean,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Ocean,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Ocean,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Ocean,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Ocean,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Ocean,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Ocean,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Ocean,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Ocean,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Ocean,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Polar,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Polar,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Polar,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Polar,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Polar,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Polar,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Polar,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Polar,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Polar,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Polar,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Polar,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Polar,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Polar,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Polar,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Polar,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Polar,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Polar,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Polar,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_River,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_River,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_River,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_River,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_River,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_River,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_River,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_River,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_River,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_River,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_River,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_River,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_River,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_River,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_River,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_River,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_River,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_River,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Sandstorm,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Sandstorm,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Sandstorm,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Sandstorm,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Sandstorm,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Sandstorm,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Sandstorm,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Sandstorm,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Sandstorm,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Sandstorm,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Sandstorm,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Sandstorm,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Sandstorm,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Sandstorm,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Sandstorm,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Sandstorm,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Sandstorm,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Sandstorm,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Savanna,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Savanna,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Savanna,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Savanna,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Savanna,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Savanna,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Savanna,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Savanna,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Savanna,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Savanna,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Savanna,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Savanna,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Savanna,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Savanna,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Savanna,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Savanna,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Savanna,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Savanna,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Sun,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Sun,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Sun,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Sun,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Sun,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Sun,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Sun,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Sun,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Sun,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Sun,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Sun,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Sun,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Sun,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Sun,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Sun,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Sun,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Sun,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Sun,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Tundra,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Tundra,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Tundra,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Tundra,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Tundra,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Tundra,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Tundra,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Tundra,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Tundra,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Tundra,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Tundra,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Tundra,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Tundra,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Tundra,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Tundra,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Tundra,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Tundra,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Tundra,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Fancy,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Fancy,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Fancy,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Fancy,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Fancy,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Fancy,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Fancy,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Fancy,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Fancy,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Fancy,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Fancy,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Fancy,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Fancy,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Fancy,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Fancy,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Fancy,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Fancy,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Fancy,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Vivillon_Poké Ball,Scatterbug_Archipelago,$LOC_ARCHIPELAGO
+NONE,Vivillon_Poké Ball,Scatterbug_Continental,$LOC_CONTINENTAL
+NONE,Vivillon_Poké Ball,Scatterbug_Elegant,$LOC_ELEGANT
+NONE,Vivillon_Poké Ball,Scatterbug_Garden,$LOC_GARDEN
+NONE,Vivillon_Poké Ball,Scatterbug_High Plains,$LOC_HIGHPLAINS
+NONE,Vivillon_Poké Ball,Scatterbug_Icy Snow,$LOC_ICYSNOW
+NONE,Vivillon_Poké Ball,Scatterbug_Jungle,$LOC_JUNGLE
+NONE,Vivillon_Poké Ball,Scatterbug_Marine,$LOC_MARINE
+NONE,Vivillon_Poké Ball,Scatterbug_Meadow,$LOC_MEADOW
+NONE,Vivillon_Poké Ball,Scatterbug_Modern,$LOC_MODERN
+NONE,Vivillon_Poké Ball,Scatterbug_Monsoon,$LOC_MONSOON
+NONE,Vivillon_Poké Ball,Scatterbug_Ocean,$LOC_OCEAN
+NONE,Vivillon_Poké Ball,Scatterbug_Polar,$LOC_POLAR
+NONE,Vivillon_Poké Ball,Scatterbug_River,$LOC_RIVER
+NONE,Vivillon_Poké Ball,Scatterbug_Sandstorm,$LOC_SANDSTORM
+NONE,Vivillon_Poké Ball,Scatterbug_Savanna,$LOC_SAVANNA
+NONE,Vivillon_Poké Ball,Scatterbug_Sun,$LOC_SUN
+NONE,Vivillon_Poké Ball,Scatterbug_Tundra,$LOC_TUNDRA
+NONE,Litleo,Litleo,
+NONE,Pyroar,Litleo,
+NONE,Flabébé_Red,Flabébé_Red,
+NONE,Flabébé_Yellow,Flabébé_Yellow,
+NONE,Flabébé_Orange,Flabébé_Orange,
+NONE,Flabébé_Blue,Flabébé_Blue,
+NONE,Flabébé_White,Flabébé_White,
+NONE,Floette_Red,Flabébé_Red,
+NONE,Floette_Yellow,Flabébé_Yellow,
+NONE,Floette_Orange,Flabébé_Orange,
+NONE,Floette_Blue,Flabébé_Blue,
+NONE,Floette_White,Flabébé_White,
+NONE,Florges_Red,Flabébé_Red,
+NONE,Florges_Yellow,Flabébé_Yellow,
+NONE,Florges_Orange,Flabébé_Orange,
+NONE,Florges_Blue,Flabébé_Blue,
+NONE,Florges_White,Flabébé_White,
+NONE,Skiddo,Skiddo,
+NONE,Gogoat,Skiddo,
+"SWORD,SHIELD",Pancham,Pancham,
+"SWORD,SHIELD",Pangoro,Pancham,
+NONE,Furfrou,Furfrou,
+"SWORD,SHIELD",Espurr,Espurr,
+"SWORD,SHIELD",Meowstic_♂,Espurr,
+"SWORD,SHIELD",Meowstic_♀,Espurr,
+"SWORD,SHIELD",Honedge,Honedge,
+"SWORD,SHIELD",Doublade,Honedge,
+"SWORD,SHIELD",Aegislash_Shield,Honedge,
+"SWORD,SHIELD",Spritzee,Spritzee,
+"SWORD,SHIELD",Aromatisse,Spritzee,
+"SWORD,SHIELD",Swirlix,Swirlix,
+"SWORD,SHIELD",Slurpuff,Swirlix,
+"SWORD,SHIELD",Inkay,Inkay,
+"SWORD,SHIELD",Malamar,Inkay,
+"SWORD,SHIELD",Binacle,Binacle,
+"SWORD,SHIELD",Barbaracle,Binacle,
+"SWORD,SHIELD",Skrelp,Skrelp,
+"SWORD,SHIELD",Dragalge,Skrelp,
+"SWORD,SHIELD",Clauncher,Clauncher,
+"SWORD,SHIELD",Clawitzer,Clauncher,
+"SWORD,SHIELD",Helioptile,Helioptile,
+"SWORD,SHIELD",Heliolisk,Helioptile,
+"SWORD,SHIELD",Tyrunt,Tyrunt,
+"SWORD,SHIELD",Tyrantrum,Tyrunt,
+"SWORD,SHIELD",Amaura,Amaura,
+"SWORD,SHIELD",Aurorus,Amaura,
+"SWORD,SHIELD",Sylveon,Eevee,
+"SWORD,SHIELD",Hawlucha,Hawlucha,
+"SWORD,SHIELD",Dedenne,Dedenne,
+"SWORD,SHIELD",Carbink,Carbink,
+"SWORD,SHIELD",Goomy,Goomy,
+"SWORD,SHIELD",Sliggoo,Goomy,
+"SWORD,SHIELD",Goodra,Goomy,
+"SWORD,SHIELD",Klefki,Klefki,
+"SWORD,SHIELD",Phantump,Phantump,
+"SWORD,SHIELD",Trevenant,Phantump,
+"SWORD,SHIELD",Pumpkaboo_Small,Pumpkaboo_Small,
+"SWORD,SHIELD",Pumpkaboo_Average,Pumpkaboo_Average,
+"SWORD,SHIELD",Pumpkaboo_Large,Pumpkaboo_Large,
+"SWORD,SHIELD",Pumpkaboo_Super,Pumpkaboo_Super,
+"SWORD,SHIELD",Gourgeist_Small,Pumpkaboo_Small,
+"SWORD,SHIELD",Gourgeist_Average,Pumpkaboo_Average,
+"SWORD,SHIELD",Gourgeist_Large,Pumpkaboo_Large,
+"SWORD,SHIELD",Gourgeist_Super,Pumpkaboo_Super,
+"SWORD,SHIELD",Bergmite,Bergmite,
+"SWORD,SHIELD",Avalugg,Bergmite,
+"SWORD,SHIELD",Noibat,Noibat,
+"SWORD,SHIELD",Noivern,Noibat,
+"SWORD,SHIELD",Rowlet,Rowlet,
+"SWORD,SHIELD",Dartrix,Rowlet,
+"SWORD,SHIELD",Decidueye,Rowlet,
+"SWORD,SHIELD",Litten,Litten,
+"SWORD,SHIELD",Torracat,Litten,
+"SWORD,SHIELD",Incineroar,Litten,
+"SWORD,SHIELD",Popplio,Popplio,
+"SWORD,SHIELD",Brionne,Popplio,
+"SWORD,SHIELD",Primarina,Popplio,
+NONE,Pikipek,Pikipek,
+NONE,Trumbeak,Pikipek,
+NONE,Toucannon,Pikipek,
+NONE,Yungoos,Yungoos,
+NONE,Gumshoos,Yungoos,
+"SWORD,SHIELD",Grubbin,Grubbin,
+"SWORD,SHIELD",Charjabug,Grubbin,
+"SWORD,SHIELD",Vikavolt,Grubbin,
+NONE,Crabrawler,Crabrawler,
+NONE,Crabominable,Crabrawler,
+NONE,Oricorio_Baile Style,Oricorio_Baile Style,
+NONE,Oricorio_Pom-Pom Style,Oricorio_Pom-Pom Style,
+NONE,Oricorio_Pa'u Style,Oricorio_Pa'u Style,
+NONE,Oricorio_Sensu Style,Oricorio_Sensu Style,
+"SWORD,SHIELD",Cutiefly,Cutiefly,
+"SWORD,SHIELD",Ribombee,Cutiefly,
+"SWORD,SHIELD",Rockruff,Rockruff,
+"SWORD,SHIELD",Rockruff_Own Tempo,Rockruff_Own Tempo,
+"SWORD,SHIELD",Lycanroc_Midday,Rockruff,
+"SWORD,SHIELD",Lycanroc_Midnight,Rockruff,
+"SWORD,SHIELD",Lycanroc_Dusk,Rockruff_Own Tempo,
+"SWORD,SHIELD",Wishiwashi_Solo,Wishiwashi_Solo,
+"SWORD,SHIELD",Mareanie,Mareanie,
+"SWORD,SHIELD",Toxapex,Mareanie,
+"SWORD,SHIELD",Mudbray,Mudbray,
+"SWORD,SHIELD",Mudsdale,Mudbray,
+"SWORD,SHIELD",Dewpider,Dewpider,
+"SWORD,SHIELD",Araquanid,Dewpider,
+"SWORD,SHIELD",Fomantis,Fomantis,
+"SWORD,SHIELD",Lurantis,Fomantis,
+"SWORD,SHIELD",Morelull,Morelull,
+"SWORD,SHIELD",Shiinotic,Morelull,
+"SWORD,SHIELD",Salandit,Salandit,
+"SWORD,SHIELD",Salazzle,Salandit,
+"SWORD,SHIELD",Stufful,Stufful,
+"SWORD,SHIELD",Bewear,Stufful,
+"SWORD,SHIELD",Bounsweet,Bounsweet,
+"SWORD,SHIELD",Steenee,Bounsweet,
+"SWORD,SHIELD",Tsareena,Bounsweet,
+"SWORD,SHIELD",Comfey,Comfey,
+"SWORD,SHIELD",Passimian,Passimian,
+"SWORD,SHIELD",Wimpod,Wimpod,
+"SWORD,SHIELD",Golisopod,Wimpod,
+"SWORD,SHIELD",Sandygast,Sandygast,
+"SWORD,SHIELD",Palossand,Sandygast,
+"SWORD,SHIELD",Pyukumuku,Pyukumuku,
+NONE,Minior_Red Core,Minior_Red Core,
+NONE,Minior_Orange Core,Minior_Orange Core,
+NONE,Minior_Yellow Core,Minior_Yellow Core,
+NONE,Minior_Green Core,Minior_Green Core,
+NONE,Minior_Blue Core,Minior_Blue Core,
+NONE,Minior_Indigo Core,Minior_Indigo Core,
+NONE,Minior_Violet Core,Minior_Violet Core,
+NONE,Komala,Komala,
+"SWORD,SHIELD",Turtonator,Turtonator,
+"SWORD,SHIELD",Togedemaru,Togedemaru,
+"SWORD,SHIELD",Mimikyu_Disguised,Mimikyu_Disguised,
+NONE,Bruxish,Bruxish,
+"SWORD,SHIELD",Drampa,Drampa,
+"SWORD,SHIELD",Dhelmise,Dhelmise,
+"SWORD,SHIELD",Jangmo-o,Jangmo-o,
+"SWORD,SHIELD",Hakamo-o,Jangmo-o,
+"SWORD,SHIELD",Kommo-o,Jangmo-o,
+"SWORD,SHIELD",Grookey,Grookey,
+"SWORD,SHIELD",Thwackey,Grookey,
+"SWORD,SHIELD",Rillaboom,Grookey,
+"SWORD,SHIELD",Scorbunny,Scorbunny,
+"SWORD,SHIELD",Raboot,Scorbunny,
+"SWORD,SHIELD",Cinderace,Scorbunny,
+"SWORD,SHIELD",Sobble,Sobble,
+"SWORD,SHIELD",Drizzile,Sobble,
+"SWORD,SHIELD",Inteleon,Sobble,
+"SWORD,SHIELD",Skwovet,Skwovet,
+"SWORD,SHIELD",Greedent,Skwovet,
+"SWORD,SHIELD",Rookidee,Rookidee,
+"SWORD,SHIELD",Corvisquire,Rookidee,
+"SWORD,SHIELD",Corviknight,Rookidee,
+"SWORD,SHIELD",Blipbug,Blipbug,
+"SWORD,SHIELD",Dottler,Blipbug,
+"SWORD,SHIELD",Orbeetle,Blipbug,
+"SWORD,SHIELD",Nickit,Nickit,
+"SWORD,SHIELD",Thievul,Nickit,
+"SWORD,SHIELD",Gossifleur,Gossifleur,
+"SWORD,SHIELD",Eldegoss,Gossifleur,
+"SWORD,SHIELD",Wooloo,Wooloo,
+"SWORD,SHIELD",Dubwool,Wooloo,
+"SWORD,SHIELD",Chewtle,Chewtle,
+"SWORD,SHIELD",Drednaw,Chewtle,
+"SWORD,SHIELD",Yamper,Yamper,
+"SWORD,SHIELD",Boltund,Yamper,
+"SWORD,SHIELD",Rolycoly,Rolycoly,
+"SWORD,SHIELD",Carkol,Rolycoly,
+"SWORD,SHIELD",Coalossal,Rolycoly,
+"SWORD,SHIELD",Applin,Applin,
+"SWORD,SHIELD",Flapple,Applin,
+"SWORD,SHIELD",Appletun,Applin,
+"SWORD,SHIELD",Silicobra,Silicobra,
+"SWORD,SHIELD",Sandaconda,Silicobra,
+"SWORD,SHIELD",Cramorant,Cramorant,
+"SWORD,SHIELD",Arrokuda,Arrokuda,
+"SWORD,SHIELD",Barraskewda,Arrokuda,
+"SWORD,SHIELD",Toxtricity_Amped,Toxel,
+"SWORD,SHIELD",Toxtricity_Low Key,Toxel,
+"SWORD,SHIELD",Sizzlipede,Sizzlipede,
+"SWORD,SHIELD",Centiskorch,Sizzlipede,
+"SWORD,SHIELD",Clobbopus,Clobbopus,
+"SWORD,SHIELD",Grapploct,Clobbopus,
+"SWORD,SHIELD",Sinistea_Phony,Sinistea_Phony,
+"SWORD,SHIELD",Sinistea_Antique,Sinistea_Phony,
+"SWORD,SHIELD",Polteageist_Phony,Sinistea_Phony,
+"SWORD,SHIELD",Polteageist_Antique,Sinistea_Phony,
+"SWORD,SHIELD",Hatenna,Hatenna,
+"SWORD,SHIELD",Hattrem,Hatenna,
+"SWORD,SHIELD",Hatterene,Hatenna,
+"SWORD,SHIELD",Impidimp,Impidimp,
+"SWORD,SHIELD",Morgrem,Impidimp,
+"SWORD,SHIELD",Grimmsnarl,Impidimp,
+"SWORD,SHIELD",Obstagoon,Zigzagoon_Galarian,
+"SWORD,SHIELD",Perrserker,Meowth_Galarian,
+"SWORD,SHIELD",Cursola,Corsola_Galarian,
+"SWORD,SHIELD",Sirfetch'd,Farfetch'd_Galarian,
+"SWORD,SHIELD",Mr. Rime,Mr. Mime_Galarian,
+"SWORD,SHIELD",Mr. Rime,Mime Jr.,Odd Incense
+"SWORD,SHIELD",Runerigus,Yamask_Galarian,
+"SWORD,SHIELD",Milcery,Milcery,
+"SWORD,SHIELD",Alcremie_Vanilla Cream/Strawberry,Milcery,
+"SWORD,SHIELD",Alcremie_Vanilla Cream/Berry,Milcery,
+"SWORD,SHIELD",Alcremie_Vanilla Cream/Love,Milcery,
+"SWORD,SHIELD",Alcremie_Vanilla Cream/Star,Milcery,
+"SWORD,SHIELD",Alcremie_Vanilla Cream/Clover,Milcery,
+"SWORD,SHIELD",Alcremie_Vanilla Cream/Flower,Milcery,
+"SWORD,SHIELD",Alcremie_Vanilla Cream/Ribbon,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Cream/Strawberry,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Cream/Berry,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Cream/Love,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Cream/Star,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Cream/Clover,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Cream/Flower,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Cream/Ribbon,Milcery,
+"SWORD,SHIELD",Alcremie_Matcha Cream/Strawberry,Milcery,
+"SWORD,SHIELD",Alcremie_Matcha Cream/Berry,Milcery,
+"SWORD,SHIELD",Alcremie_Matcha Cream/Love,Milcery,
+"SWORD,SHIELD",Alcremie_Matcha Cream/Star,Milcery,
+"SWORD,SHIELD",Alcremie_Matcha Cream/Clover,Milcery,
+"SWORD,SHIELD",Alcremie_Matcha Cream/Flower,Milcery,
+"SWORD,SHIELD",Alcremie_Matcha Cream/Ribbon,Milcery,
+"SWORD,SHIELD",Alcremie_Mint Cream/Strawberry,Milcery,
+"SWORD,SHIELD",Alcremie_Mint Cream/Berry,Milcery,
+"SWORD,SHIELD",Alcremie_Mint Cream/Love,Milcery,
+"SWORD,SHIELD",Alcremie_Mint Cream/Star,Milcery,
+"SWORD,SHIELD",Alcremie_Mint Cream/Clover,Milcery,
+"SWORD,SHIELD",Alcremie_Mint Cream/Flower,Milcery,
+"SWORD,SHIELD",Alcremie_Mint Cream/Ribbon,Milcery,
+"SWORD,SHIELD",Alcremie_Lemon Cream/Strawberry,Milcery,
+"SWORD,SHIELD",Alcremie_Lemon Cream/Berry,Milcery,
+"SWORD,SHIELD",Alcremie_Lemon Cream/Love,Milcery,
+"SWORD,SHIELD",Alcremie_Lemon Cream/Star,Milcery,
+"SWORD,SHIELD",Alcremie_Lemon Cream/Clover,Milcery,
+"SWORD,SHIELD",Alcremie_Lemon Cream/Flower,Milcery,
+"SWORD,SHIELD",Alcremie_Lemon Cream/Ribbon,Milcery,
+"SWORD,SHIELD",Alcremie_Salted Cream/Strawberry,Milcery,
+"SWORD,SHIELD",Alcremie_Salted Cream/Berry,Milcery,
+"SWORD,SHIELD",Alcremie_Salted Cream/Love,Milcery,
+"SWORD,SHIELD",Alcremie_Salted Cream/Star,Milcery,
+"SWORD,SHIELD",Alcremie_Salted Cream/Clover,Milcery,
+"SWORD,SHIELD",Alcremie_Salted Cream/Flower,Milcery,
+"SWORD,SHIELD",Alcremie_Salted Cream/Ribbon,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Swirl/Strawberry,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Swirl/Berry,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Swirl/Love,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Swirl/Star,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Swirl/Clover,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Swirl/Flower,Milcery,
+"SWORD,SHIELD",Alcremie_Ruby Swirl/Ribbon,Milcery,
+"SWORD,SHIELD",Alcremie_Caramel Swirl/Strawberry,Milcery,
+"SWORD,SHIELD",Alcremie_Caramel Swirl/Berry,Milcery,
+"SWORD,SHIELD",Alcremie_Caramel Swirl/Love,Milcery,
+"SWORD,SHIELD",Alcremie_Caramel Swirl/Star,Milcery,
+"SWORD,SHIELD",Alcremie_Caramel Swirl/Clover,Milcery,
+"SWORD,SHIELD",Alcremie_Caramel Swirl/Flower,Milcery,
+"SWORD,SHIELD",Alcremie_Caramel Swirl/Ribbon,Milcery,
+"SWORD,SHIELD",Alcremie_Rainbow Swirl/Strawberry,Milcery,
+"SWORD,SHIELD",Alcremie_Rainbow Swirl/Berry,Milcery,
+"SWORD,SHIELD",Alcremie_Rainbow Swirl/Love,Milcery,
+"SWORD,SHIELD",Alcremie_Rainbow Swirl/Star,Milcery,
+"SWORD,SHIELD",Alcremie_Rainbow Swirl/Clover,Milcery,
+"SWORD,SHIELD",Alcremie_Rainbow Swirl/Flower,Milcery,
+"SWORD,SHIELD",Alcremie_Rainbow Swirl/Ribbon,Milcery,
+"SWORD,SHIELD",Falinks,Falinks,
+"SWORD,SHIELD",Pincurchin,Pincurchin,
+"SWORD,SHIELD",Snom,Snom,
+"SWORD,SHIELD",Frosmoth,Snom,
+"SWORD,SHIELD",Stonjourner,Stonjourner,
+"SWORD,SHIELD",Eiscue_Ice Face,Eiscue_Ice Face,
+"SWORD,SHIELD",Indeedee_♂,Indeedee_♂,
+"SWORD,SHIELD",Indeedee_♂,Indeedee_♀,
+"SWORD,SHIELD",Indeedee_♀,Indeedee_♂,
+"SWORD,SHIELD",Indeedee_♀,Indeedee_♀,
+"SWORD,SHIELD",Morpeko_Full Belly,Morpeko_Full Belly,
+"SWORD,SHIELD",Cufant,Cufant,
+"SWORD,SHIELD",Copperajah,Cufant,
+"SWORD,SHIELD",Duraludon,Duraludon,
+"SWORD,SHIELD",Dreepy,Dreepy,
+"SWORD,SHIELD",Drakloak,Dreepy,
+"SWORD,SHIELD",Dragapult,Dreepy,

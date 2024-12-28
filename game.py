@@ -607,7 +607,7 @@ HARDWARE_MODELS: dict[str, HardwareModel] = {h.name: h for h in [
         frozendict({"DS": ("Wii",)}),
     ), wireless=frozenset({"DS"})),
     # Switch
-    HardwareModel("SWITCH", is_console=True, ports=(
+    HardwareModel("SWITCH", is_console=True, software=frozenset({"SWITCH"}), ports=(
         frozendict({"DS": ("SWITCH",)}),
     ), wireless=frozenset({"DS"})),
 
@@ -997,6 +997,8 @@ class Collection():
                     elif game2.name in ["SUN", "MOON", "ULTRASUN", "ULTRAMOON"]:
                         if cart2.console is None or cart1.console == cart2.console:
                             interactions["POKEMON"].add((cart1, cart2))
+                    elif game2.name == "HOME":
+                        interactions["POKEMON"].add((cart1, cart2))
                 elif game1.name == "TRANSPORTER":
                     if game2.name == "BANK":
                         if cart1.console == cart2.console:
@@ -1048,6 +1050,54 @@ class Collection():
                     if game2.name in ["LETSGOPIKACHU", "LETSGOEEVEE"]:
                         if self.connected(cart1, cart2):
                             interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "HOME":
+                        if cart1.console is None or cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
+                        # You can transfer to other LETSGO games via HOME
+                        for cart3 in self.cartridges:
+                            game3 = cart3.game
+                            if game3.name in ["LETSGOPIKACHU", "LETSGOEEVEE"]:
+                                if cart3.console == cart2.console:
+                                    interactions["POKEMON"].add((cart1, cart3))
+                elif game1.name in ["SWORD", "SHIELD"]:
+                    if game2.name in ["SWORD", "SHIELD"]:
+                        if self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "HOME":
+                        if cart1.console is None or cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
+                    elif game2.name in ["LETSGOPIKACHU", "LETSGOEEVEE", "SWORD_DLC", "SHIELD_DLC"]:
+                        if cart1.console is None or cart2.console is None or cart1.console == cart2.console:
+                            interactions["CONNECT"].add((cart1, cart2))
+                elif game1.name in ["BRILLIANTDIAMOND", "SHININGPEARL"]:
+                    if game2.name in ["BRILLIANTDIAMOND", "SHININGPEARL"]:
+                        if self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "HOME":
+                        if cart1.console is None or cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
+                    elif game2.name in ["LETSGOPIKACHU", "LETSGOEEVEE", "SWORD", "SHIELD", "LEGENDSARCEUS"]:
+                        if cart1.console is None or cart2.console is None or cart1.console == cart2.console:
+                            interactions["CONNECT"].add((cart1, cart2))
+                elif game1.name == "LEGENDSARCEUS":
+                    if game2.name == "LEGENDSARCEUS":
+                        if self.connected(cart1, cart2):
+                            interactions["TRADE"].add((cart1, cart2))
+                    elif game2.name == "HOME":
+                        if cart1.console is None or cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
+                    elif game2.name in ["SWORD", "SHIELD", "BRILLIANTDIAMOND", "SHININGPEARL"]:
+                        if cart1.console is None or cart2.console is None or cart1.console == cart2.console:
+                            interactions["CONNECT"].add((cart1, cart2))
+                elif game1.name == "HOME":
+                    if game2.gen == 8 and game2.core:
+                        if cart2.console is None or cart1.console == cart2.console:
+                            interactions["POKEMON"].add((cart1, cart2))
+                            interactions["CONNECT"].add((cart1, cart2))
+                elif game1.name == "POKEBALLPLUS":
+                    if game2.name in ["LETSGOPIKACHU", "LETSGOEEVEE", "SWORD", "SHIELD"]:
+                        interactions["POKEMON"].add((cart1, cart2))
+                        
        
         self.interactions = interactions
 

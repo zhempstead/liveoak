@@ -362,7 +362,8 @@ class GameSave():
                 item = ItemEntry(self.cartridge.id, row.ITEM) if row.ITEM else None
                 if len(post) != 1:
                     raise ValueError(f"Invalid evolution entry {post}")
-                reqs = set()
+                reqs, _ = self.parse_input(row.get("REQUIRED"))
+                reqs = set(reqs)
                 if other is not None:
                     reqs.add(other)
                 rules += self._evo_rules(pre, post[0], item, reqs)
@@ -427,7 +428,7 @@ class GameSave():
                 cons, _ = self.parse_input(row.get("CONSUMED"))
                 reqs, _ = self.parse_input(row.get("REQUIRED"))
                 output = self.parse_output(row.OUTPUT)
-                assert len(output) == 1, "misc doesn't support choice outputs"
+                assert len(output) == 1, f"misc doesn't support choice outputs like {output}"
                 repeats = float(row.REPEATS)
                 rules += self._multi_rules(cons, reqs, output[0], repeats)
 
